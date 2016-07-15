@@ -39,6 +39,7 @@ package com.map.images
 
 		public function MapTile()
 		{
+			_redBorder.visible = false;
 		}
 
 		/**

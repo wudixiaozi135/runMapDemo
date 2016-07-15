@@ -5,7 +5,7 @@
       <configuration name="GameMapDemo" pure-as="true" main-class="GameMapDemo" output-file="GameMapDemo.swf" output-folder="$MODULE_DIR$/bin" use-html-wrapper="true" wrapper-template-path="$MODULE_DIR$/html-template">
         <dependencies target-player="22.0">
           <entries>
-            <entry library-id="d24abb53-d8a8-44c2-b562-9f4ca6b56a9b">
+            <entry library-id="ac07a361-be8b-4163-86a9-960a5dd732d1">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -28,7 +28,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="d24abb53-d8a8-44c2-b562-9f4ca6b56a9b" />
+        <properties id="ac07a361-be8b-4163-86a9-960a5dd732d1" />
         <CLASSES>
           <root url="file://$MODULE_DIR$/lib" />
         </CLASSES>

@@ -2,10 +2,11 @@ package com.map.images
 {
 	import com.map.consDef.NpcAssetDef;
 	import com.map.data.MapMgImgInfo;
-	import com.tencent.morefun.naruto.mmefile.render.MmeAssetRender;
-	import com.tencent.morefun.naruto.mmefile.render.MmeAssetRenderEvent;
 
 	import flash.display.DisplayObjectContainer;
+
+	import tx.mme.MmeAssetRender;
+	import tx.mme.MmeAssetRenderEvent;
 
 	public class MapMme extends MmeAssetRender
 	{

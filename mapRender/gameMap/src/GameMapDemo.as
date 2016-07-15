@@ -12,9 +12,10 @@ package
 	import com.map.data.MapMgImgInfo;
 	import com.map.element.BaseMapElement;
 	import com.map.manager.LayerManager;
+	import com.map.player.datas.PlayerData;
+	import com.map.player.views.PlayerView;
+	import com.map.utils.TimerProvider;
 	import com.map.view.MapView;
-	import com.map.view.MyPlayer;
-	import com.tencent.morefun.naruto.plugin.ui.util.TimerProvider;
 
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
@@ -29,6 +30,8 @@ package
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 
+	import tx.mme.MmeAssetEx;
+
 	/*
 	 * 跑地图Demo
 	 * */
@@ -42,7 +45,7 @@ package
 		private var _paths:Array;
 
 		/**测试寻路玩家*/
-		private var _testPlayer:MyPlayer;
+		private var _testPlayer:PlayerView;
 
 		private var currSpeed:Point = new Point();
 		public static const SPEED:int = 12;
@@ -98,7 +101,7 @@ package
 			LayerManager.singleton.init(stage);
 			TimerProvider.initliazed(stage);
 
-			_testPlayer = new MyPlayer();
+			_testPlayer = getPlayer();
 			_mapView = new MapView();
 			addChild(_mapView);
 			_mapData = new MapData();
@@ -109,6 +112,31 @@ package
 
 			addEvent();
 			onStageResize(null);
+		}
+
+		private function getPlayer():PlayerView
+		{
+			var mmeAsset:MmeAssetEx = new MmeAssetEx();
+			var playerView:PlayerView = new PlayerView(mmeAsset);
+
+			var pd:PlayerData = new PlayerData();
+			pd.uin = 1;
+			pd.role = 1;
+			pd.svrId = 1;
+			pd.name = "xiaoding";
+			pd.ninja = 1;
+			pd.showNinja = 0;
+
+			pd.isCaptain = false;
+			pd.teamId = "11";
+			pd.isFighting = false;
+			pd.setPosition(x, y);
+			pd.vip = 1;
+
+			playerView.setData(pd);
+
+			playerView.inViewPoint();
+			return playerView;
 		}
 
 		private function addEvent():void
@@ -124,6 +152,10 @@ package
 
 			var point:Point = new Point(element.x, element.y);
 			_paths = _pathFinder.findByPixcel(point, new Point(_mapView.mouseX, _mapView.mouseY));
+
+			_testPlayer.moveTo(_paths);
+			return;
+
 			if (!_paths) return;
 
 			TimerProvider.addEnterFrameTask(enterFrame);

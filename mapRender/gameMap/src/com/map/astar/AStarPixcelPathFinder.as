@@ -3,7 +3,6 @@ package com.map.astar
 	import com.map.consDef.ShortenPathType;
 	import com.map.data.MapData;
 	import com.map.utils.MapGridUtil;
-	import com.tencent.morefun.naruto.util.MathUtil;
 
 	import flash.geom.Point;
 
@@ -255,7 +254,7 @@ package com.map.astar
 
 			//其实这样取的话inRangePixelPoint有可能到targetPixelPoint的距离就等于length，不一定在范围里面，而是在边上
 			inRangePixelPoint = pixcelPointArr[pixcelPointArr.indexOf(outRangePixelPoint) + 1];
-			resultArr.push(MathUtil.crossPointOfCircleAndLine(targetPixelPoint, length, outRangePixelPoint, inRangePixelPoint));
+//			resultArr.push(MathUtil.crossPointOfCircleAndLine(targetPixelPoint, length, outRangePixelPoint, inRangePixelPoint));
 
 
 			return resultArr;

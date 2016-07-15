@@ -1,8 +1,8 @@
 package com.map.controls
 {
 	import com.map.element.BaseMapElement;
+	import com.map.utils.TimerProvider;
 	import com.map.view.MapView;
-	import com.tencent.morefun.naruto.plugin.ui.util.TimerProvider;
 
 	import flash.display.Stage;
 	import flash.events.Event;
