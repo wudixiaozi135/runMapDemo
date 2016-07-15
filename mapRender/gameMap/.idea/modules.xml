@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/gameMap.iml" filepath="$PROJECT_DIR$/gameMap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../naruto.battle/naruto.battle.iml" filepath="$PROJECT_DIR$/../naruto.battle/naruto.battle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../naruto.include/naruto.include.iml" filepath="$PROJECT_DIR$/../naruto.include/naruto.include.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../naruto.map/naruto.map.iml" filepath="$PROJECT_DIR$/../naruto.map/naruto.map.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../naruto.motion/naruto.motion.iml" filepath="$PROJECT_DIR$/../naruto.motion/naruto.motion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../naruto.newplot/naruto.newplot.iml" filepath="$PROJECT_DIR$/../naruto.newplot/naruto.newplot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../naruto.player/naruto.player.iml" filepath="$PROJECT_DIR$/../naruto.player/naruto.player.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../naruto.prewar/naruto.prewar.iml" filepath="$PROJECT_DIR$/../naruto.prewar/naruto.prewar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../naruto.world/naruto.world.iml" filepath="$PROJECT_DIR$/../naruto.world/naruto.world.iml" />
+    </modules>
+  </component>
+</project>

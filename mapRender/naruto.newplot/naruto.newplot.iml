@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="Flex" version="4">
+  <component name="FlexBuildConfigurationManager" active="NewPlotPlugin">
+    <configurations>
+      <configuration name="NewPlotPlugin" pure-as="true" main-class="com.tencent.morefun.naruto.plugin.newplot.NewPlotPlugin" output-file="NewPlotPlugin.swf" output-folder="$MODULE_DIR$/PUBLISH/flash">
+        <dependencies target-player="22.0">
+          <entries>
+            <entry library-id="95f0c2ce-ee40-43fa-8b18-79b2f614b071">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="common" library-level="application">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="flex_sdk_4.6" />
+        </dependencies>
+        <compiler-options>
+          <map>
+            <entry key="compiler.locale" value="en_US" />
+          </map>
+        </compiler-options>
+        <packaging-air-desktop />
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
+    </configurations>
+    <compiler-options />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="flex_sdk_4.6" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="95f0c2ce-ee40-43fa-8b18-79b2f614b071" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/ui" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/ui" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" exported="" name="common" level="application" />
+  </component>
+</module>
