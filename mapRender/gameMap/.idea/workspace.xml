@@ -5,91 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e35c6acd-c93c-4256-b0f9-c5d9117ed2de" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/player.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/map/player/BasePlayer.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/map/player/BaseWalkablePlayer.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/map/player/datas/PlayerData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/map/player/datas/RankTitleCfgInfo.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/map/player/datas/SpecialMoveData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/map/player/def/MajorNinjaDef.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/map/player/def/MajorRoleFlagDef.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/map/player/def/NinjaAssetDef.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/map/player/def/TalentSkillTypeDef.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/map/player/events/PlayerDataEvent.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/map/player/events/WalkablePlayerEvent.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/map/player/views/AutoFindingAniView.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/map/player/views/PlayerView.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/map/player/views/SelfPlayerView.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/map/player/views/UserTitle.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/map/utils/TimerProvider.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/FileManager.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/ILoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/LoadManager.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/LoaderAssist.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/LoaderEvent.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/LoaderNotifier.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/MultiThreadLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/data/LoadTaskAssetInfo.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/def/FileTypeDef.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/def/LoadStatusDef.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/def/LoaderDef.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/events/LoadEvent.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/events/LoadNotifyEvent.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/loaders/IFileLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/loaders/PKGLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/loaders/RAWLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/loaders/SWCLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/loaders/SWFLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/loaders/TXTLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/loaders/XMLLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/loaders/ZIPLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/mission/ImageMission.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/mission/LibraryMission.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/mission/LoaderMission.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/mission/Mission.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/mission/SwfMission.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/mission/TextMission.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/mission/XmlMission.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/loader/pub.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/AdvancedRenderer.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/BaseInnerRenderer.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/FlaInnerRenderer.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/MmeAssetBitmap.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/MmeAssetError.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/MmeAssetEx.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/MmeAssetMultiRender.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/MmeAssetRender.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/MmeAssetRenderEvent.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/MmeAssetRenderPhantom.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/MmeAssetRenderReferPoint.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/SimpleInnerRenderer.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/datas/ActionData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/datas/AssetData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/datas/BaseElementData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/datas/BaseFrameData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/datas/ColorData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/datas/ElementData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/datas/FlaData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/datas/FlaFrameBitmapData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/datas/FlaFrameEventData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/datas/FrameData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/datas/LayerData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/datas/MmeData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/datas/PhantomData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/datas/PointElementData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/utils/DeleteUtil.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tx/mme/utils/registerAlias.as" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/naruto.core.swc" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/GameMapDemo.swf" afterPath="$PROJECT_DIR$/bin/GameMapDemo.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/libcore.swc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/library.swf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gameMap.iml" afterPath="$PROJECT_DIR$/gameMap.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameMapDemo.as" afterPath="$PROJECT_DIR$/src/GameMapDemo.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/map/astar/AStarPixcelPathFinder.as" afterPath="$PROJECT_DIR$/src/com/map/astar/AStarPixcelPathFinder.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/map/consDef/NpcAssetDef.as" afterPath="$PROJECT_DIR$/src/com/map/consDef/NpcAssetDef.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/map/controls/CameraControl.as" afterPath="$PROJECT_DIR$/src/com/map/controls/CameraControl.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/map/controls/MouseControl.as" afterPath="$PROJECT_DIR$/src/com/map/controls/MouseControl.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/map/images/MapMme.as" afterPath="$PROJECT_DIR$/src/com/map/images/MapMme.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/map/images/MapTile.as" afterPath="$PROJECT_DIR$/src/com/map/images/MapTile.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tx/loader/LoaderEvent.as" afterPath="$PROJECT_DIR$/src/tx/loader/LoaderEvent.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tx/mme/AdvancedRenderer.as" afterPath="$PROJECT_DIR$/src/tx/mme/AdvancedRenderer.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tx/mme/MmeAssetBitmap.as" afterPath="$PROJECT_DIR$/src/tx/mme/MmeAssetBitmap.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tx/mme/MmeAssetEx.as" afterPath="$PROJECT_DIR$/src/tx/mme/MmeAssetEx.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tx/mme/MmeAssetMultiRender.as" afterPath="$PROJECT_DIR$/src/tx/mme/MmeAssetMultiRender.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tx/mme/MmeAssetRender.as" afterPath="$PROJECT_DIR$/src/tx/mme/MmeAssetRender.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tx/mme/MmeAssetRenderPhantom.as" afterPath="$PROJECT_DIR$/src/tx/mme/MmeAssetRenderPhantom.as" />
     </list>
     <ignored path="mapDemo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -126,8 +51,8 @@
       <file leaf-file-name="MapTile.as" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/map/images/MapTile.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state relative-caret-position="422">
+              <caret line="32" column="46" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="46" />
               <folding>
                 <element signature="e#26#57#0" expanded="true" />
               </folding>
@@ -1237,7 +1162,7 @@
       <workItem from="1468480883408" duration="12000" />
       <workItem from="1468480968447" duration="16450000" />
       <workItem from="1468543914258" duration="14380000" />
-      <workItem from="1468566704772" duration="18813000" />
+      <workItem from="1468566704772" duration="18938000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1468566804992</created>
@@ -1260,15 +1185,22 @@
       <option name="project" value="LOCAL" />
       <updated>1468576008029</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="更新，">
+      <created>1468588343562</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1468588343562</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129138000" />
+    <option name="totallyTimeSpent" value="129263000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1282,13 +1214,13 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22712238" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22712238" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36344755" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18587747" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21079959" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1313,7 +1245,8 @@
     <MESSAGE value="update" />
     <MESSAGE value="地图移动平滑处理，" />
     <MESSAGE value="格式化，" />
-    <option name="LAST_COMMIT_MESSAGE" value="格式化，" />
+    <MESSAGE value="更新，" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新，" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1763,8 +1696,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/map/images/MapTile.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state relative-caret-position="422">
+          <caret line="32" column="46" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="46" />
           <folding>
             <element signature="e#26#57#0" expanded="true" />
           </folding>
