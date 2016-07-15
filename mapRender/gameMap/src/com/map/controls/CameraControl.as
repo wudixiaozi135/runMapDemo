@@ -143,7 +143,9 @@ package com.map.controls
 			_mapView.elementControl.update(_viewpoint);
 		}
 
-		/**启动渲染器*/
+		/**
+		 * 启动渲染器
+		 * */
 		public function startup():void
 		{
 			TimerProvider.addActiveEnterFrameTask(onEnterFrame, null, 1, 9);
@@ -161,7 +163,9 @@ package com.map.controls
 			unbindElement();
 		}
 
-		/**析构*/
+		/**
+		 * 析构
+		 * */
 		public function destroy():void
 		{
 			dispose();

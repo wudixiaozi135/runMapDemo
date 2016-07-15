@@ -16,18 +16,22 @@ package com.map.controls
 	import flash.geom.Rectangle;
 	import flash.utils.Dictionary;
 
+	/**
+	 * 地图控制器
+	 * */
 	public class MapControl
 	{
-		private static var tempRect:Rectangle = new Rectangle(); // 计算缩略图用的
+		private static var tempRect:Rectangle = new Rectangle(); 	//计算缩略图用的
 
-		public var mapData:MapData;
-		public var baseBitmap:Bitmap; // 缩略图
+		public var mapData:MapData;									//地图数据
+		public var baseBitmap:Bitmap;								//缩略图
+
 		private var _mapBgImgInfos:Dictionary;
 		private var _mapMgImgInfos:Dictionary;
 		private var _mapFgImgInfos:Dictionary;
 
-		private var _baseBitmapImgPixelWidth:Number; // 缩略图的单元宽度
-		private var _baseBitmapImgPixelHeight:Number; // 缩略图的单元高度
+		private var _baseBitmapImgPixelWidth:Number; 				//缩略图的单元宽度
+		private var _baseBitmapImgPixelHeight:Number; 				//缩略图的单元高度
 
 		private var _alphaBitmapData:BitmapData;
 		private var _layers:Vector.<Sprite>;
@@ -46,7 +50,9 @@ package com.map.controls
 			this._mapMmes = new Dictionary();
 		}
 
-		/**激活地图上动画元素*/
+		/**
+		 * 激活地图上动画元素
+		 * */
 		public function play():void
 		{
 			for each(var mmes:Vector.<MapMme> in _mapMmes)
@@ -58,7 +64,9 @@ package com.map.controls
 			}
 		}
 
-		/**停止地图上动画元素*/
+		/**
+		 * 停止地图上动画元素
+		 * */
 		public function stop():void
 		{
 			for each(var mmes:Vector.<MapMme> in _mapMmes)
@@ -70,7 +78,9 @@ package com.map.controls
 			}
 		}
 
-		/**析构*/
+		/**
+		 * 析构
+		 * */
 		public function dispose():void
 		{
 			for each(var tile:MapTile in _mapTiles)
@@ -106,12 +116,12 @@ package com.map.controls
 
 		/**
 		 *初始化地图数据
-		 *@param mapBgImgInfos 地图背景配置
-		 *@param mapMgImgInfos  地图Mme配置
-		 *@param mapFgImgInfos  地图前景配置
-		 *@param mapData  地图数据
-		 *@param baseBitmap 地图的一个缩略图
-		 *@param alphaBitmapData 地图的半透明图
+		 *@param mapBgImgInfos    地图背景配置
+		 *@param mapMgImgInfos    地图Mme配置
+		 *@param mapFgImgInfos    地图前景配置
+		 *@param mapData          地图数据
+		 *@param baseBitmap       地图的一个缩略图
+		 *@param alphaBitmapData  地图的半透明图
 		 * */
 		public function setData(mapBgImgInfos:Dictionary, mapMgImgInfos:Dictionary, mapFgImgInfos:Dictionary, mapData:MapData, baseBitmap:Bitmap, alphaBitmapData:BitmapData):void
 		{

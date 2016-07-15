@@ -2,7 +2,7 @@ package com.map.utils
 {
 	import flash.geom.ColorTransform;
 
-	/*
+	/***
 	 * 地图里元素的一天时间颜色的变化
 	 * */
 	public class MapTimeTypeUtil
@@ -11,7 +11,7 @@ package com.map.utils
 		{
 		}
 
-		/**
+		/***
 		 * @param type 1正常  2黄昏  3夜晚
 		 * */
 		public static function getColorTransform(type:int):ColorTransform

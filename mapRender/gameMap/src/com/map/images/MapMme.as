@@ -127,7 +127,5 @@ package com.map.images
 			_parent = null;
 			super.destroy();
 		}
-
-
 	}
 }

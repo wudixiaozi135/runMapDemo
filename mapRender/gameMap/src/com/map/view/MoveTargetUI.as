@@ -6,7 +6,7 @@ package com.map.view
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 
-	/*
+	/***
 	 * 地图上寻路到目标的UI
 	 * */
 	public class MoveTargetUI extends MovieClip

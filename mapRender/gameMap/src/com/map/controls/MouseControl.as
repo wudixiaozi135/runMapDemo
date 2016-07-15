@@ -8,7 +8,6 @@ package com.map.controls
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.display.Stage;
-	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 
@@ -108,11 +107,13 @@ package com.map.controls
 				this._mapView.showMoveTargetUI(_tempPoint.x - _mapView.moveTargetUi.width * .5, _tempPoint.y - _mapView.moveTargetUi.height * .5);
 
 				//用来测试寻路
-				this._mapView.dispatchEvent(new Event("testFindPath"));
+//				this._mapView.dispatchEvent(new Event("testFindPath"));
 			}
 		}
 
-		/**获取地图上鼠标下的场景元素*/
+		/**
+		 * 获取地图上鼠标下的场景元素
+		 * */
 		private function getUnderMouseElement():BaseMapElement
 		{
 			this._tempPoint.setTo(this._stage.mouseX, this._stage.mouseY);

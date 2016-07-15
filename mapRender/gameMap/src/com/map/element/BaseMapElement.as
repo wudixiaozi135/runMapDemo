@@ -91,7 +91,7 @@ package com.map.element
 			dispatch(MapElementEvent.CHANGE_XY);
 		}
 
-		/**
+		/***
 		 * 进入视野
 		 */
 		public function inViewPoint(needDispatchEvent:Boolean = true):void
@@ -100,7 +100,7 @@ package com.map.element
 			needDispatchEvent && dispatch(MapElementEvent.IN_VIEWPOINT);
 		}
 
-		/**
+		/***
 		 * 离开视野
 		 */
 		public function outViewPoint(needDispatchEvent:Boolean = true):void

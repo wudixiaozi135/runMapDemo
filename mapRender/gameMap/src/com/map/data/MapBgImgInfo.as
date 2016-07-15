@@ -1,7 +1,5 @@
 package com.map.data
 {
-
-
 	public class MapBgImgInfo
 	{
 		public var imgX:int;

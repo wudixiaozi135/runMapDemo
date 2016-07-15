@@ -78,7 +78,9 @@ package com.map.images
 			return this._cfg.url;
 		}
 
-		/**在地图可视范围内显示*/
+		/***
+		 * 在地图可视范围内显示
+		 */
 		public function inViewpoint():void
 		{
 			if (this._thumbBitmap && !this._thumbBitmap.parent)
@@ -111,7 +113,7 @@ package com.map.images
 			}
 		}
 
-		/**
+		/***
 		 * 渲染地图图片展示
 		 */
 		private function processImageRender(image:Loader, url:String, tween:Boolean = true):void
@@ -163,7 +165,9 @@ package com.map.images
 			}
 		}
 
-		/**销毁地图的马赛克效果图*/
+		/***
+		 * 销毁地图的马赛克效果图
+		 * */
 		private function destroyThumb():void
 		{
 			if (this._thumbBitmap)
@@ -181,7 +185,9 @@ package com.map.images
 			}
 		}
 
-		/**可视范围外显示*/
+		/***
+		 * 可视范围外显示
+		 * */
 		public function outViewpoint():void
 		{
 			if (this._thumbBitmap && this._thumbBitmap.parent)
@@ -199,7 +205,9 @@ package com.map.images
 			}
 		}
 
-		/**析构地图块*/
+		/***
+		 * 析构地图块
+		 * */
 		public function destroy():void
 		{
 			if (this.isDestroyed) return;

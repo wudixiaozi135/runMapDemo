@@ -4,12 +4,11 @@ package com.map.utils
 	import flash.display.Shape;
 	import flash.geom.Point;
 
-	/*
+	/***
 	 * 地图格子工具
 	 * */
 	public class MapGridUtil
 	{
-
 		private static var pointPool:Vector.<Point> = new Vector.<Point>();
 		private static var pointPoolIndex:int = -1;
 
@@ -144,7 +143,9 @@ package com.map.utils
 			return wb;
 		}
 
-		/**调整到格子中心*/
+		/***
+		 * 调整到格子中心
+		 * */
 		public static function adjustToGridCenter(gridWidth:int, gridHeight:int, mapPixelWidth:int, point:Point):Point
 		{
 			//如果是NPC，则它的坐标只能是某个网格的中心点

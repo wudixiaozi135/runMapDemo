@@ -15,22 +15,21 @@ package com.map.data
 		{
 		}
 
-
 		//////////// 地图数据中定义的  /////////////////
 		public var mapTileWidth:int;		//地图网格宽度 
 		public var mapTileHeight:int;		//地图网格高度 
-		public var mapPixelWidth:int; //地图的像素宽
-		public var mapPixelHeight:int; //地图的像素高
+		public var mapPixelWidth:int; 		//地图的像素宽
+		public var mapPixelHeight:int; 		//地图的像素高
 
-		public var imgPixelWidth:int;//背景图片的单元宽度
-		public var imgPixelHeight:int;//背景图片的单元高度
+		public var imgPixelWidth:int;		//背景图片的单元宽度
+		public var imgPixelHeight:int;		//背景图片的单元高度
 		public var tilePixelWidth:int;		//一个网格的象素宽 
 		public var tilePixelHeight:int;		//一个网格的象素高
 
-		public var walkableArray:Vector.<Vector.<Boolean>>; // 二维数组[ytile][xtile] = walkable
-		public var isSign:Vector.<Vector.<Boolean>>; // 二维数组[ytile][xtile]
-		public var sign:Vector.<Vector.<Point>>; // 二维数组[ytile][xtile]
-		public var block:Vector.<Vector.<int>>; // 二维数组[ytile][xtile]
+		public var walkableArray:Vector.<Vector.<Boolean>>; 	// 二维数组[ytile][xtile] = walkable
+		public var isSign:Vector.<Vector.<Boolean>>; 			// 二维数组[ytile][xtile]
+		public var sign:Vector.<Vector.<Point>>; 				// 二维数组[ytile][xtile]
+		public var block:Vector.<Vector.<int>>; 				// 二维数组[ytile][xtile]
 
 		private var _centerPoint:Point = new Point();
 
@@ -124,7 +123,13 @@ package com.map.data
 		}
 
 
-		//求两条直线的交点，其中k,b表示第一条直线的斜率和位移，startPoint和endPoint表示第二条直线经过的两个点
+		/**
+		 * 求两条直线的交点
+		 *@param k 第一条直线斜率
+		 * @param b 第一条直线位移
+		 * @param startPoint 第二条直线直线起点
+		 * @param endPoint   第二条直线直线末点
+		 * */
 		private function getCrossPoint(k:Number, b:Number, startPoint:Point, endPoint:Point):Point
 		{
 			var k2:Number = (endPoint.y - startPoint.y) / (endPoint.x - startPoint.x);
@@ -167,7 +172,12 @@ package com.map.data
 			pointPoolIndex = -1;
 		}
 
-		//根据起点网格和终点网格得出途中所经过的网格数组	
+		/***
+		 * 根据起点网格和终点网格得出途中所经过的网格数组
+		 * @param startTilePoint 起点
+		 * @param endTilePoint   终点
+		 * @return
+		 */
 		public function passedTile2(startTilePoint:Point, endTilePoint:Point):Array
 		{
 			var startPoint:Point = MapGridUtil.getPixelPoint(tilePixelWidth, tilePixelHeight, mapPixelWidth, startTilePoint.x, startTilePoint.y);

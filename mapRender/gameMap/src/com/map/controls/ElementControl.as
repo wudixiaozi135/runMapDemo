@@ -9,6 +9,9 @@ package com.map.controls
 	import flash.geom.ColorTransform;
 	import flash.geom.Rectangle;
 
+	/**
+	 *地图元素控制
+	 * */
 	public class ElementControl
 	{
 		private var _viewpoint:Rectangle;
@@ -19,6 +22,7 @@ package com.map.controls
 
 		/**
 		 * 地图元素控制
+		 * @param layers 地图元素控制层数组
 		 * */
 		public function ElementControl(layers:Vector.<Sprite>)
 		{
@@ -103,6 +107,11 @@ package com.map.controls
 			}
 		}
 
+		/**
+		 *添加地图上的元素
+		 * @param value 基础地图元素 BaseMapElement类型
+		 * @param layerIndex 详见MapLayerDef
+		 * */
 		public function addElement(value:BaseMapElement, layerIndex:int):void
 		{
 			var layer:Sprite = _layers[layerIndex];
@@ -201,6 +210,9 @@ package com.map.controls
 			}
 		}
 
+		/**
+		 * 删除地图层元素
+		 * */
 		private function removeElement(ele:BaseMapElement):void
 		{
 			if (ele.parent)
@@ -268,6 +280,9 @@ package com.map.controls
 			_bottomElements.length = 0;
 		}
 
+		/**
+		 * 析构
+		 * */
 		public function destroy():void
 		{
 			dispose();

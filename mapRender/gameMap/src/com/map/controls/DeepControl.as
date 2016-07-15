@@ -10,7 +10,7 @@ package com.map.controls
 	import flash.geom.Point;
 
 	/**
-	 * 地图深度控制
+	 * 地图深度控制，y轴排序
 	 * */
 	public class DeepControl
 	{

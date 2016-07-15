@@ -8,20 +8,24 @@ package com.map.view
 
 	import flash.display.Sprite;
 
-	/*
+	/***
 	 * 地图视图
 	 * */
 	public class MapView extends Sprite
 	{
-		private var _mapControl:MapControl;//地图控制
-		private var _cameraControl:CameraControl;//摄像机控制
-		private var _elementControl:ElementControl;//地图元素控制
-		private var _mouseControl:MouseControl;//地图场景鼠标事件控制
+		private var _mapControl:MapControl;			//地图控制
+		private var _cameraControl:CameraControl;	//摄像机控制
+		private var _elementControl:ElementControl;	//地图元素控制
+		private var _mouseControl:MouseControl;		//地图场景鼠标事件控制
 
-		/**层容器*/
+		/***
+		 * 层容器
+		 * */
 		public var layers:Vector.<Sprite>;
 
-		/**移动到目标显示UI*/
+		/***
+		 * 移动到目标显示UI
+		 * */
 		public var moveTargetUi:MoveTargetUI;
 
 		public function MapView()
@@ -69,13 +73,15 @@ package com.map.view
 			_mouseControl = new MouseControl(this, layers);
 		}
 
-		/**启动摄像机控制*/
+		/***
+		 * 启动摄像机控制
+		 * */
 		public function startup():void
 		{
 			_cameraControl.startup();
 		}
 
-		/*
+		/***
 		 * 消除函数，引用未置空
 		 * */
 		public function dispose():void
@@ -87,7 +93,7 @@ package com.map.view
 		}
 
 
-		/*
+		/***
 		 * 析构函数
 		 * */
 		public function destroy():void
@@ -104,7 +110,9 @@ package com.map.view
 			}
 		}
 
-		/**寻路目标UI显示*/
+		/***
+		 * 寻路目标UI显示
+		 * */
 		public function showMoveTargetUI(x:int, y:int):void
 		{
 			moveTargetUi.x = x;
@@ -114,7 +122,9 @@ package com.map.view
 			layers[MapLayerDef.MIDDLE_ELEMENT].addChild(moveTargetUi);
 		}
 
-		/**寻路到目的地时隐藏UI*/
+		/***
+		 * 寻路到目的地时隐藏寻路标志
+		 * */
 		public function hideMoveTargetUI():void
 		{
 			moveTargetUi.stop();

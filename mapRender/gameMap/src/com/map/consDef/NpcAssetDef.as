@@ -22,7 +22,6 @@ package  com.map.consDef
 					url = "assets/npc/functionIcon/" + id + ".png";
 					break;
 			}
-
 			return FileManager.getQualifiedUrl(url);
 		}
 	}
