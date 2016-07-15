@@ -8,6 +8,7 @@ package com.map.images
 	import flash.display.BitmapData;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Loader;
+	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.geom.Point;
@@ -33,6 +34,8 @@ package com.map.images
 		private var _thumbBitmap:Bitmap;
 		protected var isDestroyed:Boolean;
 		protected var hasStart:Boolean;
+
+		private var _redBorder:Shape = new Shape();
 
 		public function MapTile()
 		{
@@ -83,6 +86,14 @@ package com.map.images
 				this._parent.addChild(this._thumbBitmap);
 			}
 			this._parent.addChild(this);
+			this._parent.addChild(_redBorder);
+			_redBorder.graphics.clear();
+			_redBorder.graphics.lineStyle(2, 0xff0000);
+			_redBorder.graphics.drawRect(0, 0, width, height);
+			_redBorder.graphics.endFill();
+			_redBorder.x = x;
+			_redBorder.y = y;
+
 			if (this._frontMask && !this._frontMask.parent)
 			{
 				this._frontLayer.addChild(this._frontMask);
@@ -179,6 +190,7 @@ package com.map.images
 			}
 			if (this.parent)
 			{
+				this.parent.removeChild(_redBorder);
 				this.parent.removeChild(this);
 			}
 			if (this._frontMask && this._frontMask.parent)

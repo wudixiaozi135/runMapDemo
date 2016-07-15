@@ -39,11 +39,16 @@ package
 		private var _switchMap:TextField;
 		private var _currentMapId:int;
 		private var _pathFinder:AStarPixcelPathFinder;
-		private var _startIndex:int = 0;
 		private var _paths:Array;
 
 		/**测试寻路玩家*/
 		private var _testPlayer:MyPlayer;
+
+		private var currSpeed:Point = new Point();
+		public static const SPEED:int = 12;
+		private var currMoveToPixcel:Point;
+		private var currPos:Point = new Point();
+		private var currSpeedUp:int = 1;
 
 		public function GameMapDemo()
 		{
@@ -115,39 +120,83 @@ package
 		private function testFindPathHandler(event:Event):void
 		{
 			var element:BaseMapElement = this._testPlayer;
+			currPos.setTo(element.x, element.y);
+
 			var point:Point = new Point(element.x, element.y);
 			_paths = _pathFinder.findByPixcel(point, new Point(_mapView.mouseX, _mapView.mouseY));
 			if (!_paths) return;
 
-			_startIndex = 0;
 			TimerProvider.addEnterFrameTask(enterFrame);
 		}
 
 		private function enterFrame():void
 		{
-			if (!_paths || this._paths.length == 0)
+			var end:Boolean = false;
+			if (currMoveToPixcel)
 			{
-				TimerProvider.removeEnterFrameTask(enterFrame);
-				return;
-			}
-			var targetX:Number = this._paths[_startIndex].x;
-			var targetY:Number = this._paths[_startIndex].y;
-
-			var dx:Number = targetX - _testPlayer.x;
-			var dy:Number = targetY - _testPlayer.y;
-			var dist:Number = Math.sqrt(dx * dx + dy * dy);
-			if (dist <= _mapView.mapControl.mapData.tilePixelWidth)
-			{
-				this._startIndex++;
-				if (this._startIndex >= this._paths.length)
+				var dist:Number = (currPos.x - currMoveToPixcel.x) * (currPos.x - currMoveToPixcel.x) + (currPos.y - currMoveToPixcel.y) * (currPos.y - currMoveToPixcel.y);//    Point.distance(currPos,currMoveToPixcel);
+				if (dist < SPEED * currSpeedUp * 1.5 * SPEED * currSpeedUp * 1.5)
 				{
-					TimerProvider.removeEnterFrameTask(enterFrame);
+					end = true;
+				}
+				else
+				{
+					currPos.x += currSpeed.x * currSpeedUp;
+					currPos.y += currSpeed.y * currSpeedUp;
+					setXY(currPos.x, currPos.y);
 				}
 			}
-			else
+
+			if (end || currMoveToPixcel == null)
 			{
-				this._testPlayer.setXY(this._testPlayer.x + dx * .2, this._testPlayer.y + dy * .2);
+				//忽略跟自己当前的点一样的坐标
+				var tp:Point;
+				while (this._paths.length)
+				{
+					tp = this._paths.shift();
+					if (tp.x == this.x && tp.y == this.y)
+					{
+						tp = null;
+					}
+					else
+					{
+						break;
+					}
+				}
+
+				if (tp)
+				{
+					currMoveToPixcel = tp;
+					var dx:Number = currMoveToPixcel.x - currPos.x;
+					var dy:Number = currMoveToPixcel.y - currPos.y;
+
+					var angle:Number = Math.atan2(dy, dx);
+					currSpeed.x = Math.cos(angle) * SPEED;
+					currSpeed.y = Math.sin(angle) * SPEED;
+				}
+				else
+				{
+					if (currMoveToPixcel)
+					{
+						setXY(int(currMoveToPixcel.x), int(currMoveToPixcel.y));
+						currMoveToPixcel = null;
+					}
+					stopBaseMove();
+				}
 			}
+		}
+
+		private function stopBaseMove():void
+		{
+			this._paths.length = 0;
+			TimerProvider.removeEnterFrameTask(enterFrame);
+			currSpeed.x = currSpeed.y = 0;
+			this._mapView.hideMoveTargetUI();
+		}
+
+		private function setXY(x:int, y:int):void
+		{
+			this._testPlayer.setXY(x, y);
 		}
 
 		private function loaderConfig(mapId:int):void
