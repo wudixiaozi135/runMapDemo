@@ -38,7 +38,7 @@ package tx.mme
 		private var totalFrame:int = 0;
 		private var loop:Boolean = false;
 		private var frameRate:int = 24;
-		private var mmeAsset:MmeAssetEx;
+		private var mmeAsset:MmeAsset;
 		private var manualEnterFramePlayEnd:Boolean = false;
 		private var innerRenderer:BaseInnerRenderer;
 		
@@ -47,10 +47,10 @@ package tx.mme
 		/**
 		 * Mme资源播放器 构造方法
 		 * @param mmeAsset 资源缓存类，如果需要单独为某些资源缓存及释放资源，可以设置mmeAsset
-		 * @see MmeAssetEx
+		 * @see MmeAsset
 		 * @see MmeAssetBitmap
 		 */
-		public function MmeAssetRender(mmeAsset:MmeAssetEx=null)
+		public function MmeAssetRender(mmeAsset:MmeAsset=null)
 		{
 			setMmeAsset(mmeAsset);
 		}
@@ -399,7 +399,7 @@ package tx.mme
 		 */
 		public function load(appDomain:ApplicationDomain,url:String=null):void
 		{
-			if(MmeAssetEx.hasObject(MmeAssetEx.KEY_CONFIG,appDomain) || MmeAssetEx.hasObject(MmeAssetEx.KEY_CONFIG_AMF,appDomain))
+			if(MmeAsset.hasObject(MmeAsset.KEY_CONFIG,appDomain) || MmeAsset.hasObject(MmeAsset.KEY_CONFIG_AMF,appDomain))
 			{
 				var mmeData:MmeData = mmeAsset.getMmeData(appDomain, url);
 				loadMmeData(mmeData,appDomain);
@@ -661,12 +661,12 @@ package tx.mme
 			return this.frameRate;
 		}
 		
-		public function setMmeAsset(value:MmeAssetEx):void
+		public function setMmeAsset(value:MmeAsset):void
 		{
-			this.mmeAsset = value||MmeAssetEx.mmeAsset;
+			this.mmeAsset = value||MmeAsset.mmeAsset;
 		}
 		
-		public function getMmeAsset():MmeAssetEx
+		public function getMmeAsset():MmeAsset
 		{
 			return this.mmeAsset;
 		}

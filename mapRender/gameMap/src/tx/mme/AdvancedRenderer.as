@@ -24,7 +24,7 @@ package tx.mme
 		
 		private var updatePhantomCount:int = 0;
 		
-		public function AdvancedRenderer(render:MmeAssetRender, mmeData:MmeData, mmeAsset:MmeAssetEx, appDomain:ApplicationDomain)
+		public function AdvancedRenderer(render:MmeAssetRender, mmeData:MmeData, mmeAsset:MmeAsset, appDomain:ApplicationDomain)
 		{
 			super(render, mmeData, mmeAsset, appDomain);
 			

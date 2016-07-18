@@ -17,7 +17,7 @@ package com.map.player
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 
-	import tx.mme.MmeAssetEx;
+	import tx.mme.MmeAsset;
 	import tx.mme.MmeAssetRender;
 	import tx.mme.MmeAssetRenderEvent;
 	import tx.mme.datas.PointElementData;
@@ -29,20 +29,19 @@ package com.map.player
 		protected var currActionName:String = "idle_0";
 		protected var headPos:Point;
 		protected var nameTxt:TextField;
-		protected var mmeAsset:MmeAssetEx;
+		protected var mmeAsset:MmeAsset;
 		protected var isDisposed:Boolean;
 		protected var _bodyVisible:Boolean = true;
 		public var resNinjaId:int;
 
 		protected static const MOSUE_OVER_FILTER:GlowFilter = new GlowFilter(0xFFFFFF);
 
-		private static const SHADOW_BITMAP_DATA:BitmapData;//影子
+		private static const SHADOW_BITMAP_DATA:BitmapData=null;//影子
 		private var shadow:Bitmap;
 
-		public function BasePlayer(mmeAsset:MmeAssetEx)
+		public function BasePlayer(mmeAsset:MmeAsset)
 		{
 			super();
-
 			this.mmeAsset = mmeAsset;
 		}
 

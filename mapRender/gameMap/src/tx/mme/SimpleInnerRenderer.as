@@ -17,7 +17,7 @@ package tx.mme
 
 	public class SimpleInnerRenderer extends BaseInnerRenderer
 	{
-		protected var mmeAsset:MmeAssetEx;
+		protected var mmeAsset:MmeAsset;
 		protected var mmeData:MmeData;
 		protected var appDomain:ApplicationDomain;
 		protected var currActionIndex:int;
@@ -26,7 +26,7 @@ package tx.mme
 		
 		protected static var DEFAULT_COLOR_TRANSFORM:ColorTransform = new ColorTransform();
 		
-		public function SimpleInnerRenderer(render:MmeAssetRender, mmeData:MmeData, mmeAsset:MmeAssetEx, appDomain:ApplicationDomain)
+		public function SimpleInnerRenderer(render:MmeAssetRender, mmeData:MmeData, mmeAsset:MmeAsset, appDomain:ApplicationDomain)
 		{
 			super(render);
 			

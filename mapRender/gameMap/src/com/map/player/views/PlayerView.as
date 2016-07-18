@@ -12,7 +12,7 @@ package com.map.player.views
 	import flash.geom.Point;
 
 	import tx.loader.FileManager;
-	import tx.mme.MmeAssetEx;
+	import tx.mme.MmeAsset;
 	import tx.mme.MmeAssetRender;
 	import tx.mme.MmeAssetRenderEvent;
 
@@ -102,7 +102,7 @@ package com.map.player.views
 			</Keyframe>
 		</Motion>;
 
-		public function PlayerView(mmeAsset:MmeAssetEx)
+		public function PlayerView(mmeAsset:MmeAsset)
 		{
 			super(mmeAsset);
 			addEventListener(MapElementEvent.MOUSE_DOWN_ELEMENT, onMouseDown);

@@ -1,14 +1,14 @@
 package  com.map.consDef
 {
 	import tx.loader.FileManager;
-	import tx.mme.MmeAssetEx;
+	import tx.mme.MmeAsset;
 
 	public class NpcAssetDef
 	{
 		public static const OUTDOOR:String = "outdoor";
 		public static const FUNCTION_ICON:String = "functionIcon";
 
-		public static const MME_ASSET:MmeAssetEx = new MmeAssetEx();
+		public static const MME_ASSET:MmeAsset = new MmeAsset();
 
 		public static function getAsset(id:int, type:String):String
 		{

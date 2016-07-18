@@ -9,7 +9,7 @@ package com.map.player
 	import flash.events.Event;
 	import flash.geom.Point;
 
-	import tx.mme.MmeAssetEx;
+	import tx.mme.MmeAsset;
 	import tx.mme.MmeAssetRender;
 	import tx.mme.MmeAssetRenderEvent;
 
@@ -24,7 +24,7 @@ package com.map.player
 		protected var currMoveToPixcel:Point;
 		protected var currPos:Point = new Point();
 
-		public function BaseWalkablePlayer(mmeAsset:MmeAssetEx)
+		public function BaseWalkablePlayer(mmeAsset:MmeAsset)
 		{
 			super(mmeAsset);
 		}

@@ -30,7 +30,7 @@ package
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 
-	import tx.mme.MmeAssetEx;
+	import tx.mme.MmeAsset;
 
 	/*
 	 * 跑地图Demo
@@ -116,7 +116,7 @@ package
 
 		private function getPlayer():PlayerView
 		{
-			var mmeAsset:MmeAssetEx = new MmeAssetEx();
+			var mmeAsset:MmeAsset = new MmeAsset();
 			var playerView:PlayerView = new PlayerView(mmeAsset);
 
 			var pd:PlayerData = new PlayerData();

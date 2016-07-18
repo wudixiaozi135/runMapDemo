@@ -15,7 +15,7 @@ package tx.mme
 
 	public class FlaInnerRenderer extends BaseInnerRenderer
 	{
-		private var mmeAsset:MmeAssetEx;
+		private var mmeAsset:MmeAsset;
 		private var appDomain:ApplicationDomain;
 		
 		private var mc:MovieClip;
@@ -26,7 +26,7 @@ package tx.mme
 		private var frameBitmap:Bitmap;
 //		private var shape:Shape;
 		
-		public function FlaInnerRenderer(render:MmeAssetRender, mmeAsset:MmeAssetEx, appDomain:ApplicationDomain)
+		public function FlaInnerRenderer(render:MmeAssetRender, mmeAsset:MmeAsset, appDomain:ApplicationDomain)
 		{
 			this.mmeAsset = mmeAsset;
 			this.appDomain = appDomain;
@@ -47,14 +47,14 @@ package tx.mme
 					currTotalFrame = flaData.getTotalFrame(action) - 1;
 				}else
 				{
-					mc = MmeAssetEx.createObject(action, appDomain) as MovieClip;
+					mc = MmeAsset.createObject(action, appDomain) as MovieClip;
 					mc.gotoAndStop(mc.totalFrames); // 兼容
 					render.addChild(mc);
 					mc.gotoAndStop(1); // 兼容flash导出音效放在第一帧的情况
 					currTotalFrame = mc.totalFrames - 1;
 				}
 				
-				var datamc:MovieClip = MmeAssetEx.createObject(action+"_Data",appDomain) as MovieClip;
+				var datamc:MovieClip = MmeAsset.createObject(action+"_Data",appDomain) as MovieClip;
 				if(datamc)
 				{
 					events = createEvents(datamc);
@@ -128,7 +128,7 @@ package tx.mme
 				}
 			}else
 			{
-				var datamc:MovieClip = MmeAssetEx.createObject(actionName+"_Data",appDomain) as MovieClip;
+				var datamc:MovieClip = MmeAsset.createObject(actionName+"_Data",appDomain) as MovieClip;
 				if(datamc)
 				{
 					datamc.gotoAndStop(f+1);
@@ -165,7 +165,7 @@ package tx.mme
 				es = events;
 			}else
 			{
-				var datamc:MovieClip = MmeAssetEx.createObject(actionName+"_Data",appDomain) as MovieClip;
+				var datamc:MovieClip = MmeAsset.createObject(actionName+"_Data",appDomain) as MovieClip;
 				if(datamc)
 				{
 					es = createEvents(datamc);

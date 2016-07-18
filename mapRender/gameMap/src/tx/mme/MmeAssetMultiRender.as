@@ -15,7 +15,7 @@ package tx.mme
 		 * @param frameRate 帧频
 		 * 
 		 */		
-		public function MmeAssetMultiRender(layerNum:int, assets:MmeAssetEx = null)
+		public function MmeAssetMultiRender(layerNum:int, assets:MmeAsset = null)
 		{
 			super();
 			

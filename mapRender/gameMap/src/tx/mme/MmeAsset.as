@@ -20,7 +20,7 @@ package tx.mme
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 
-	public class MmeAssetEx
+	public class MmeAsset
 	{
 		{
 			registerAlias(MmeData);
@@ -45,7 +45,7 @@ package tx.mme
 		
 		
 		
-		public static const mmeAsset:MmeAssetEx = new MmeAssetEx();
+		public static const mmeAsset:MmeAsset = new MmeAsset();
 		public static function createObject(name:String,appDomain:ApplicationDomain):Object
 		{
 			try{
@@ -75,7 +75,7 @@ package tx.mme
 		private var assets:Dictionary;
 		private var isDestroy:Boolean;
 		
-		public function MmeAssetEx()
+		public function MmeAsset()
 		{
 		}
 		
