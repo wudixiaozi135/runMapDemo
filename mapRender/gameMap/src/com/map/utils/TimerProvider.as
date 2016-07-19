@@ -88,18 +88,15 @@ package com.map.utils
 				timeInfo.type = TYPE_ENTER_FRAME;
 				timeInfoMap[timeStep][TYPE_ENTER_FRAME] = timeInfo;
 			}
-			;
 			if (getTimeObj(timeStep, func, param, priority, type, repeatCount) == null)
 			{
 				funcList.push(new TimeObj(timeStep, func, lastTime, param, priority, type, repeatCount, skipCount, maxActiveFixTimes));
 				funcList.sort(sortOnPriority);
 			}
-			;
 			if (curTime != lastTime)
 			{
 				fixExecuteTimeList(timeStep);
 			}
-			;
 		}
 
 		private static function sortOnPriority(funcInfoA:TimeObj, funcInfoB:TimeObj):int
@@ -108,12 +105,10 @@ package com.map.utils
 			{
 				return (-1);
 			}
-			;
 			if (funcInfoA.priority < funcInfoB.priority)
 			{
 				return (1);
 			}
-			;
 			return (0);
 		}
 
@@ -129,19 +124,16 @@ package com.map.utils
 			{
 				return;
 			}
-			;
 			funcList = funcTimeMap[timeStep];
 			funcIndex = funcList.indexOf(timeObj);
 			if (funcIndex != -1)
 			{
 				funcList.splice(funcIndex, 1);
 			}
-			;
 			if ((((curExecuteFuncList == funcList)) && ((curExecuteIndex <= funcIndex))))
 			{
 				curExecuteIndex = (curExecuteIndex - 1);
 			}
-			;
 			if (funcList.length == 0)
 			{
 				timer = timeInfoMap[timeStep][TYPE_TIMER].timer;
@@ -150,7 +142,6 @@ package com.map.utils
 				delete funcTimeMap[timeStep];
 				delete timeInfoMap[timeStep];
 			}
-			;
 		}
 
 		public static function addActiveEnterFrameTask(func:Function, param:Object = null, skipCount:int = 0, priority:int = 0):void
@@ -185,9 +176,7 @@ package com.map.utils
 				{
 					obj.lastTime = changed;
 				}
-				;
 			}
-			;
 			onDeactiveTimerEvent(null);
 		}
 
@@ -212,7 +201,6 @@ package com.map.utils
 				executeTimeList = getExecuteList(time, TYPE_TIMER, fillFrame, (fillFrame == maxFillFrame));
 				executeTimeList = executeTimeList.concat(getExecuteList(time, TYPE_ENTER_FRAME, fillFrame, (fillFrame == maxFillFrame)));
 			}
-			;
 			totalExecuteTimeList.sort(sortOnExecuteTime);
 			var i:int;
 			while (i < totalExecuteTimeList.length)
@@ -223,10 +211,8 @@ package com.map.utils
 					timeInfo = timeInfoMap[cloneTimeInfo.timeStep][cloneTimeInfo.type];
 					executeTimeTask(cloneTimeInfo.timeStep, cloneTimeInfo.executeTime, cloneTimeInfo.fillIndex, cloneTimeInfo.type);
 				}
-				;
 				i++;
 			}
-			;
 			virtualTime = -1;
 			releaseTimeInfos(totalExecuteTimeList);
 			totalExecuteTimeList.splice(0, totalExecuteTimeList.length);
@@ -238,12 +224,10 @@ package com.map.utils
 			{
 				return (-1);
 			}
-			;
 			if (funcInfoA.executeTime > funcInfoB.executeTime)
 			{
 				return (1);
 			}
-			;
 			return (0);
 		}
 
@@ -283,7 +267,6 @@ package com.map.utils
 				{
 					cloneTimeInfo = new TimeInfo();
 				}
-				;
 				cloneTimeInfo.copy(timeInfo);
 				timeInfo.lastTime = (timeInfo.lastTime + timeInfo.timeStep);
 				cloneTimeInfo.executeTime = timeInfo.lastTime;
@@ -293,9 +276,7 @@ package com.map.utils
 					timeInfo.lastTime = (timeInfo.lastTime + timeInfo.timeStep);
 					cloneTimeInfo.executeTime = timeInfo.lastTime;
 				}
-				;
 			}
-			;
 			return (executeTimeList);
 		}
 
@@ -317,7 +298,6 @@ package com.map.utils
 					{
 						cloneTimeInfo = new TimeInfo();
 					}
-					;
 					cloneTimeInfo.copy(timeInfo);
 					cloneTimeInfo.fillIndex = fillIndex;
 					timeInfo.lastTime = (timeInfo.lastTime + timeInfo.timeStep);
@@ -329,11 +309,8 @@ package com.map.utils
 						timeInfo.lastTime = (timeInfo.lastTime + timeInfo.timeStep);
 						cloneTimeInfo.executeTime = timeInfo.lastTime;
 					}
-					;
 				}
-				;
 			}
-			;
 			return (executeTimeList);
 		}
 
@@ -356,11 +333,8 @@ package com.map.utils
 						removeTimeTask((1000 / oldFrameRate), funcObj.func, funcObj.param, funcObj.priority, TYPE_ENTER_FRAME);
 						addTimeTask((1000 / stage.frameRate), funcObj.func, funcObj.param, funcObj.priority, TYPE_ENTER_FRAME);
 					}
-					;
 				}
-				;
 			}
-			;
 		}
 
 		public static function get stageFrameRate():int
@@ -460,7 +434,6 @@ package com.map.utils
 									{
 										func(param);
 									}
-									;
 									timeObj.lastTime = (timeObj.lastTime + timeStep);
 									if (timeObj.repeatCount == 1)
 									{
@@ -471,22 +444,14 @@ package com.map.utils
 										{
 											timeObj.repeatCount = (timeObj.repeatCount - 1);
 										}
-										;
 									}
-									;
 								}
-								;
 							}
-							;
 						}
-						;
 					}
-					;
 				}
-				;
 				curExecuteIndex++;
 			}
-			;
 		}
 
 		private static function getTimeObj(timeStep:int, func:Function, param:Object = null, priority:int = 0, type:int = 0, repeatCount:int = 0):TimeObj
@@ -498,16 +463,13 @@ package com.map.utils
 			{
 				return (null);
 			}
-			;
 			for each (timeInfo in funcList)
 			{
 				if ((((((((((timeInfo.func == func)) && ((timeInfo.param == param)))) && ((timeInfo.type == type)))) && ((timeInfo.priority == priority)))) && ((timeInfo.repeatCount == repeatCount))))
 				{
 					return (timeInfo);
 				}
-				;
 			}
-			;
 			return (null);
 		}
 
@@ -517,7 +479,6 @@ package com.map.utils
 			{
 				return (timeInfoVector.pop());
 			}
-			;
 			return (null);
 		}
 
@@ -527,7 +488,7 @@ package com.map.utils
 		}
 
 	}
-}//package com.tencent.morefun.naruto.plugin.ui.util
+}
 
 import flash.utils.*;
 

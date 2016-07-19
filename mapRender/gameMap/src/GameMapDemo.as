@@ -42,7 +42,7 @@ package
 		private var _mapView:MapView;
 		private var _mapData:MapData;
 		private var _switchMap:TextField;
-		private var _currentMapId:int = 10005;
+		private var _currentMapId:int = 10006;
 		private var _pathFinder:AStarPixcelPathFinder;
 		private var _paths:Array;
 

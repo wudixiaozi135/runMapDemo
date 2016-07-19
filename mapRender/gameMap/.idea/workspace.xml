@@ -4,144 +4,44 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e35c6acd-c93c-4256-b0f9-c5d9117ed2de" name="Default" comment="更新，">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/lib/as3corelib.swc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/lib/zip.swc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/FileManager.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/ILoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/LoadManager.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/LoaderAssist.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/LoaderEvent.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/LoaderNotifier.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/MultiThreadLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/data/LoadTaskAssetInfo.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/data/LoadTaskInfo.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/data/PrintRecord.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/def/FileTypeDef.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/def/LoadStatusDef.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/def/LoaderDef.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/events/LoadEvent.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/events/LoadNotifyEvent.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/loaders/IFileLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/loaders/PKGLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/loaders/RAWLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/loaders/SWCLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/loaders/SWFLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/loaders/TXTLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/loaders/XMLLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/loaders/ZIPLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/mission/ImageMission.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/mission/LibraryMission.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/mission/LoaderMission.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/mission/Mission.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/mission/SwfMission.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/mission/TextMission.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/mission/XmlMission.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/pub.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/AdvancedRenderer.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/BaseInnerRenderer.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/FlaInnerRenderer.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAsset.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetBitmap.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetError.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetMultiRender.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetRender.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetRenderEvent.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetRenderPhantom.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetRenderReferPoint.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/SimpleInnerRenderer.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/ActionData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/AssetData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/BaseElementData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/BaseFrameData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/ColorData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/ElementData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/FlaData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/FlaFrameBitmapData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/FlaFrameEventData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/FrameData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/LayerData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/MmeData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/MmeElementData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/PhantomData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/PointElementData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/SoundData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/utils/ObjectUtils.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/utils/registerAlias.as" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/libcore.swc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/library.swf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/FileManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/ILoader.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/LoadManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/LoaderAssist.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/LoaderEvent.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/LoaderNotifier.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/MultiThreadLoader.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/data/LoadTaskAssetInfo.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/def/FileTypeDef.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/def/LoadStatusDef.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/def/LoaderDef.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/events/LoadEvent.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/events/LoadNotifyEvent.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/loaders/IFileLoader.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/loaders/PKGLoader.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/loaders/RAWLoader.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/loaders/SWCLoader.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/loaders/SWFLoader.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/loaders/TXTLoader.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/loaders/XMLLoader.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/loaders/ZIPLoader.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/mission/ImageMission.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/mission/LibraryMission.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/mission/LoaderMission.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/mission/Mission.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/mission/SwfMission.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/mission/TextMission.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/mission/XmlMission.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/loader/pub.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/AdvancedRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/BaseInnerRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/FlaInnerRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/MmeAsset.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/MmeAssetBitmap.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/MmeAssetError.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/MmeAssetMultiRender.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/MmeAssetRender.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/MmeAssetRenderEvent.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/MmeAssetRenderPhantom.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/MmeAssetRenderReferPoint.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/SimpleInnerRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/datas/ActionData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/datas/AssetData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/datas/BaseElementData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/datas/BaseFrameData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/datas/ColorData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/datas/ElementData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/datas/FlaData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/datas/FlaFrameBitmapData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/datas/FlaFrameEventData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/datas/FrameData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/datas/LayerData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/datas/MmeData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/datas/PhantomData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/datas/PointElementData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/utils/DeleteUtil.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/tx/mme/utils/registerAlias.as" afterPath="" />
+    <list default="true" id="e35c6acd-c93c-4256-b0f9-c5d9117ed2de" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/GameMapDemo.swf" afterPath="$PROJECT_DIR$/bin/GameMapDemo.swf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/LoaderEvent.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/LoaderEvent.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/data/LoadTaskAssetInfo.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/data/LoadTaskAssetInfo.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/def/FileTypeDef.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/def/FileTypeDef.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/def/LoadStatusDef.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/def/LoadStatusDef.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/events/LoadEvent.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/events/LoadEvent.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/loaders/PKGLoader.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/loaders/PKGLoader.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/loaders/SWCLoader.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/loaders/SWCLoader.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/loaders/TXTLoader.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/loaders/TXTLoader.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/loaders/XMLLoader.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/loaders/XMLLoader.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/loaders/ZIPLoader.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/loaders/ZIPLoader.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/AdvancedRenderer.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/AdvancedRenderer.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAsset.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAsset.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetBitmap.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetBitmap.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetError.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetError.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetMultiRender.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetMultiRender.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetRender.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetRender.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetRenderEvent.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetRenderEvent.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetRenderPhantom.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetRenderPhantom.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetRenderReferPoint.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/MmeAssetRenderReferPoint.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/ActionData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/ActionData.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/AssetData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/AssetData.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/BaseElementData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/BaseElementData.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/BaseFrameData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/BaseFrameData.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/ColorData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/ColorData.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/ElementData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/ElementData.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/FlaData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/FlaData.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/FlaFrameBitmapData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/FlaFrameBitmapData.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/FlaFrameEventData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/FlaFrameEventData.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/FrameData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/FrameData.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/LayerData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/LayerData.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/MmeData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/MmeData.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/PhantomData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/PhantomData.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/PointElementData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/PointElementData.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gameMap.iml" afterPath="$PROJECT_DIR$/gameMap.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameMapDemo.as" afterPath="$PROJECT_DIR$/src/GameMapDemo.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/map/consDef/NpcAssetDef.as" afterPath="$PROJECT_DIR$/src/com/map/consDef/NpcAssetDef.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/map/images/MapMme.as" afterPath="$PROJECT_DIR$/src/com/map/images/MapMme.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/map/images/MapTile.as" afterPath="$PROJECT_DIR$/src/com/map/images/MapTile.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/map/player/BasePlayer.as" afterPath="$PROJECT_DIR$/src/com/map/player/BasePlayer.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/map/player/BaseWalkablePlayer.as" afterPath="$PROJECT_DIR$/src/com/map/player/BaseWalkablePlayer.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/map/player/def/NinjaAssetDef.as" afterPath="$PROJECT_DIR$/src/com/map/player/def/NinjaAssetDef.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/map/player/views/PlayerView.as" afterPath="$PROJECT_DIR$/src/com/map/player/views/PlayerView.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../naruto.player/src/com/tencent/morefun/naruto/plugin/player/views/PlayerView.as" afterPath="$PROJECT_DIR$/../naruto.player/src/com/tencent/morefun/naruto/plugin/player/views/PlayerView.as" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/EventCenter.as" afterPath="$PROJECT_DIR$/src/utils/EventCenter.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/map/utils/TimerProvider.as" afterPath="$PROJECT_DIR$/src/com/map/utils/TimerProvider.as" />
     </list>
     <ignored path="mapDemo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -163,13 +63,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GameMapDemo.as" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GameMapDemo.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameMapDemo.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="270" column="13" selection-start-line="270" selection-start-column="13" selection-end-line="270" selection-end-column="13" />
+            <state relative-caret-position="380">
+              <caret line="165" column="20" selection-start-line="165" selection-start-column="20" selection-end-line="165" selection-end-column="20" />
               <folding>
                 <element signature="e#11#52#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TimerProvider.as" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/map/utils/TimerProvider.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="491" column="0" selection-start-line="491" selection-start-column="0" selection-end-line="491" selection-end-column="0" />
+              <folding>
+                <element signature="e#75#98#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -196,7 +108,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/map/tencent/morefun/framework/net/data/LoadTaskAssetInfo.as" />
         <option value="$PROJECT_DIR$/src/com/map/tencent/morefun/framework/apf/core/facade/Facade.as" />
         <option value="$PROJECT_DIR$/src/com/map/tencent/morefun/naruto/executer/Executer.as" />
         <option value="$PROJECT_DIR$/src/com/map/tencent/morefun/framework/apf/plugin/pluginmanager/PluginManager.as" />
@@ -241,12 +152,13 @@
         <option value="$PROJECT_DIR$/src/com/map/player/BaseWalkablePlayer.as" />
         <option value="$PROJECT_DIR$/src/com/map/player/BasePlayer.as" />
         <option value="$PROJECT_DIR$/src/com/map/player/views/PlayerView.as" />
-        <option value="$PROJECT_DIR$/src/GameMapDemo.as" />
         <option value="$PROJECT_DIR$/src/com/map/images/MapMme.as" />
         <option value="$PROJECT_DIR$/src/com/map/consDef/NpcAssetDef.as" />
         <option value="$PROJECT_DIR$/src/com/map/player/def/NinjaAssetDef.as" />
         <option value="$PROJECT_DIR$/src/com/map/images/MapTile.as" />
         <option value="$PROJECT_DIR$/src/com/map/astar/AStarPixcelPathFinder.as" />
+        <option value="$PROJECT_DIR$/src/GameMapDemo.as" />
+        <option value="$PROJECT_DIR$/src/com/map/utils/TimerProvider.as" />
       </list>
     </option>
   </component>
@@ -376,20 +288,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="astar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mapDemo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gameMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1094,7 +992,7 @@
       <workItem from="1468566704772" duration="19063000" />
       <workItem from="1468803967420" duration="36424000" />
       <workItem from="1468889527816" duration="19287000" />
-      <workItem from="1468918728712" duration="10761000" />
+      <workItem from="1468918728712" duration="11466000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1468566804992</created>
@@ -1145,11 +1043,18 @@
       <option name="project" value="LOCAL" />
       <updated>1468807883014</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="更新，">
+      <created>1468932361027</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1468932361027</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="195860000" />
+    <option name="totallyTimeSpent" value="196565000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
@@ -1173,7 +1078,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16926272" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20560747" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1219,30 +1124,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/tx/mme/data/MmeData.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2280">
-          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tx/mme/MmeAssetRenderEvent.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="22" column="62" selection-start-line="22" selection-start-column="62" selection-end-line="22" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tx/mme/AdvancedRenderer.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tx/mme/MmeAssetRender.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="482">
@@ -1615,14 +1496,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/map/astar/AStarPixcelPathFinder.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="257" column="0" selection-start-line="257" selection-start-column="0" selection-end-line="257" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../naruto.world/src/com/tencent/morefun/naruto/plugin/world/views/WorldMap.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
@@ -1631,12 +1504,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/map/astar/Node.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-62">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/map/astar/BinaryHeap.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/map/astar/AStarPixcelPathFinder.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4667">
+          <caret line="257" column="0" selection-start-line="257" selection-start-column="0" selection-end-line="257" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/GameMapDemo.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="270" column="13" selection-start-line="270" selection-start-column="13" selection-end-line="270" selection-end-column="13" />
+        <state relative-caret-position="380">
+          <caret line="165" column="20" selection-start-line="165" selection-start-column="20" selection-end-line="165" selection-end-column="20" />
           <folding>
             <element signature="e#11#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/map/utils/TimerProvider.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="491" column="0" selection-start-line="491" selection-start-column="0" selection-end-line="491" selection-end-column="0" />
+          <folding>
+            <element signature="e#75#98#0" expanded="true" />
           </folding>
         </state>
       </provider>
