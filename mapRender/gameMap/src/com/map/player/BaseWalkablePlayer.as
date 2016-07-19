@@ -5,13 +5,12 @@ package com.map.player
 	import com.map.player.datas.SpecialMoveData;
 	import com.map.player.events.WalkablePlayerEvent;
 	import com.map.utils.TimerProvider;
+	import com.tx.mme.MmeAsset;
+	import com.tx.mme.MmeAssetRender;
+	import com.tx.mme.MmeAssetRenderEvent;
 
 	import flash.events.Event;
 	import flash.geom.Point;
-
-	import tx.mme.MmeAsset;
-	import tx.mme.MmeAssetRender;
-	import tx.mme.MmeAssetRenderEvent;
 
 	public class BaseWalkablePlayer extends BasePlayer
 	{

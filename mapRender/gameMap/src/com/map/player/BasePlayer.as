@@ -6,6 +6,10 @@ package com.map.player
 	import com.map.player.def.MajorNinjaDef;
 	import com.map.player.def.NinjaAssetDef;
 	import com.map.player.events.PlayerDataEvent;
+	import com.tx.mme.MmeAsset;
+	import com.tx.mme.MmeAssetRender;
+	import com.tx.mme.MmeAssetRenderEvent;
+	import com.tx.mme.data.PointElementData;
 
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -16,11 +20,6 @@ package com.map.player
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
-
-	import tx.mme.MmeAsset;
-	import tx.mme.MmeAssetRender;
-	import tx.mme.MmeAssetRenderEvent;
-	import tx.mme.datas.PointElementData;
 
 	public class BasePlayer extends BaseMapElement
 	{
@@ -36,7 +35,7 @@ package com.map.player
 
 		protected static const MOSUE_OVER_FILTER:GlowFilter = new GlowFilter(0xFFFFFF);
 
-		private static const SHADOW_BITMAP_DATA:BitmapData=null;//影子
+		private static const SHADOW_BITMAP_DATA:BitmapData = null;//影子
 		private var shadow:Bitmap;
 
 		public function BasePlayer(mmeAsset:MmeAsset)

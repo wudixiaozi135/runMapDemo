@@ -7,14 +7,13 @@ package com.map.player.views
 	import com.map.player.datas.PlayerData;
 	import com.map.player.events.PlayerDataEvent;
 	import com.map.utils.TimerProvider;
+	import com.tx.loader.FileManager;
+	import com.tx.mme.MmeAsset;
+	import com.tx.mme.MmeAssetRender;
+	import com.tx.mme.MmeAssetRenderEvent;
 
 	import flash.display.MovieClip;
 	import flash.geom.Point;
-
-	import tx.loader.FileManager;
-	import tx.mme.MmeAsset;
-	import tx.mme.MmeAssetRender;
-	import tx.mme.MmeAssetRenderEvent;
 
 	public class PlayerView extends BaseWalkablePlayer
 	{

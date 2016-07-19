@@ -1,6 +1,6 @@
 package com.map.player.def
 {
-	import tx.loader.FileManager;
+	import com.tx.loader.FileManager;
 
 	public class NinjaAssetDef
 	{

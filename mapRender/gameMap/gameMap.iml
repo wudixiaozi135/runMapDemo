@@ -8,6 +8,9 @@
             <entry library-id="ac07a361-be8b-4163-86a9-960a5dd732d1">
               <dependency linkage="Merged" />
             </entry>
+            <entry module-name="gameLib" build-configuration-name="gameLib">
+              <dependency linkage="Merged" />
+            </entry>
           </entries>
           <sdk name="flex_sdk_4.6" />
         </dependencies>
@@ -37,5 +40,6 @@
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="module" module-name="gameLib" exported="" />
   </component>
 </module>

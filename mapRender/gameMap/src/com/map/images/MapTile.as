@@ -110,7 +110,7 @@ package com.map.images
 					_loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, arguments.callee);
 					processImageRender(_loader, url);
 				});
-				_loader.load(new URLRequest(url));
+				_loader.load(new URLRequest("http://res.huoying.qq.com/NarutoBeta1.0Build300/"+url));
 			}
 		}
 

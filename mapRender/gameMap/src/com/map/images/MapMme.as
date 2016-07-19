@@ -2,11 +2,10 @@ package com.map.images
 {
 	import com.map.consDef.NpcAssetDef;
 	import com.map.data.MapMgImgInfo;
+	import com.tx.mme.MmeAssetRender;
+	import com.tx.mme.MmeAssetRenderEvent;
 
 	import flash.display.DisplayObjectContainer;
-
-	import tx.mme.MmeAssetRender;
-	import tx.mme.MmeAssetRenderEvent;
 
 	public class MapMme extends MmeAssetRender
 	{

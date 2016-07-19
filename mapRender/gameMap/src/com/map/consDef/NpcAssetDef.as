@@ -1,7 +1,7 @@
 package  com.map.consDef
 {
-	import tx.loader.FileManager;
-	import tx.mme.MmeAsset;
+	import com.tx.loader.FileManager;
+	import com.tx.mme.MmeAsset;
 
 	public class NpcAssetDef
 	{

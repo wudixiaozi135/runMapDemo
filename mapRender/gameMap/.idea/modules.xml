@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../gameLib/gameLib.iml" filepath="$PROJECT_DIR$/../gameLib/gameLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/gameMap.iml" filepath="$PROJECT_DIR$/gameMap.iml" />
       <module fileurl="file://$PROJECT_DIR$/../naruto.battle/naruto.battle.iml" filepath="$PROJECT_DIR$/../naruto.battle/naruto.battle.iml" />
       <module fileurl="file://$PROJECT_DIR$/../naruto.include/naruto.include.iml" filepath="$PROJECT_DIR$/../naruto.include/naruto.include.iml" />

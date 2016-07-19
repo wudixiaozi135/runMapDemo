@@ -16,6 +16,7 @@ package
 	import com.map.player.views.PlayerView;
 	import com.map.utils.TimerProvider;
 	import com.map.view.MapView;
+	import com.tx.mme.MmeAsset;
 
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
@@ -30,17 +31,18 @@ package
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 
-	import tx.mme.MmeAsset;
+	import mx.utils.StringUtil;
 
 	/*
 	 * 跑地图Demo
 	 * */
+	[SWF(frameRate="30")]
 	public class GameMapDemo extends Sprite
 	{
 		private var _mapView:MapView;
 		private var _mapData:MapData;
 		private var _switchMap:TextField;
-		private var _currentMapId:int;
+		private var _currentMapId:int = 10005;
 		private var _pathFinder:AStarPixcelPathFinder;
 		private var _paths:Array;
 
@@ -52,6 +54,10 @@ package
 		private var currMoveToPixcel:Point;
 		private var currPos:Point = new Point();
 		private var currSpeedUp:int = 1;
+
+		private var version:String = "1.0.0.2";
+
+		private var _maps:Array = [10001, 10002, 10003, 10004, 10005];
 
 		public function GameMapDemo()
 		{
@@ -75,7 +81,7 @@ package
 			var code:String = ev.text;
 			if (code == "switchMap")
 			{
-				_currentMapId = _currentMapId == 10001 ? ++_currentMapId : --_currentMapId;
+				_currentMapId = _maps[int(Math.random() * _maps.length)];
 				_mapView.dispose();
 				loaderConfig(_currentMapId);
 			}
@@ -107,7 +113,6 @@ package
 			_mapData = new MapData();
 			_pathFinder = new AStarPixcelPathFinder();
 
-			_currentMapId = 10001;
 			loaderConfig(_currentMapId);
 
 			addEvent();
@@ -246,12 +251,27 @@ package
 			var alphaPath:String = "plugin.world.map.alpha" + _currentMapId;
 			var mapInfoPath:String = "plugin.world.map.data" + _currentMapId;
 
+			var versions:Array = [];
+
+			var url:String = "http://res.huoying.qq.com/{0}/assets/scene/map/";
+//			url = "assets/scene/map/";
+
+
 			var paths:Array = [];
+			var sceneMap:Object = new Object();
+			sceneMap[mapId] = {};
+			sceneMap[mapId]["bg"] = "NarutoBeta1.13Build301";
+			sceneMap[mapId]["mg"] = "NarutoBeta1.13Build301";
+			sceneMap[mapId]["fg"] = "NarutoBeta1.13Build301";
+			sceneMap[mapId]["sceneMap"] = "NarutoBeta2.04Build302";
+			sceneMap[mapId]["alphaMap"] = "NarutoBeta1.0Build300";
+			sceneMap[mapId]["MapInfo"] = "NarutoBeta1.0Build300";
+
 			if (!bulk.get(bgPath))
 			{
 				paths.push({
 					id: bgPath,
-					url: "assets/scene/map/" + mapId + "/_scene_bg.cfg",
+					url: StringUtil.substitute(url, sceneMap[mapId]["bg"]) + mapId + "/_scene_bg.cfg?version=" + version,
 					type: BulkLoader.TYPE_BINARY
 				});
 			}
@@ -259,7 +279,7 @@ package
 			{
 				paths.push({
 					id: mgPath,
-					url: "assets/scene/map/" + mapId + "/_scene_mg.cfg",
+					url: StringUtil.substitute(url, sceneMap[mapId]["mg"]) + mapId + "/_scene_mg.cfg?version=" + version,
 					type: BulkLoader.TYPE_BINARY
 				});
 			}
@@ -267,7 +287,7 @@ package
 			{
 				paths.push({
 					id: fgPath,
-					url: "assets/scene/map/" + mapId + "/_scene_fg.cfg",
+					url: StringUtil.substitute(url, sceneMap[mapId]["fg"]) + mapId + "/_scene_fg.cfg?version=" + version,
 					type: BulkLoader.TYPE_BINARY
 				});
 			}
@@ -275,7 +295,7 @@ package
 			{
 				paths.push({
 					id: basePath,
-					url: "assets/scene/map/" + mapId + "/sceneMap.jpg",
+					url: StringUtil.substitute(url, sceneMap[mapId]["sceneMap"]) + mapId + "/sceneMap.jpg?version=" + version,
 					type: BulkLoader.TYPE_IMAGE
 				});
 			}
@@ -283,15 +303,16 @@ package
 			{
 				paths.push({
 					id: alphaPath,
-					url: "assets/scene/map/" + mapId + "/alphaMap.png",
+					url: StringUtil.substitute(url, sceneMap[mapId]["alphaMap"]) + mapId + "/alphaMap.png?version=" + version,
 					type: BulkLoader.TYPE_IMAGE
 				});
 			}
+
 			if (!bulk.get(mapInfoPath))
 			{
 				paths.push({
 					id: mapInfoPath,
-					url: "assets/scene/map/" + mapId + "/MapInfo.map",
+					url: StringUtil.substitute(url, sceneMap[mapId]["MapInfo"]) + mapId + "/MapInfo.map?version=" + version,
 					type: BulkLoader.TYPE_BINARY
 				});
 			}
@@ -343,8 +364,8 @@ package
 			this._pathFinder.setMapData(_mapData);
 
 			var mapBgImgInfos:Dictionary = bgbytes.readObject();
-			var mapMgImgInfos:Dictionary = mgbytes.readObject();
 			var mapFgImgInfos:Dictionary = fgbytes.readObject();
+			var mapMgImgInfos:Dictionary = mgbytes.readObject();
 
 			var shrinkBitmap:Bitmap = getPluginAsset("plugin.world.map.base" + _currentMapId, BulkLoader.TYPE_IMAGE) as Bitmap;
 			var alphaBitmap:Bitmap = getPluginAsset("plugin.world.map.alpha" + _currentMapId, BulkLoader.TYPE_IMAGE) as Bitmap;
@@ -359,9 +380,18 @@ package
 			if (_currentMapId == 10001)
 			{
 				birthPosition.setTo(552, 367);
-			} else
+			} else if (_currentMapId == 10002)
 			{
 				birthPosition.setTo(378, 632);
+			} else if (_currentMapId == 10003)
+			{
+				birthPosition.setTo(1050, 620);
+			} else if (_currentMapId == 10004)
+			{
+				birthPosition.setTo(1065, 719);
+			} else
+			{
+				birthPosition.setTo(1065, 719);
 			}
 			_testPlayer.setXY(birthPosition.x, birthPosition.y);
 

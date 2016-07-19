@@ -143,7 +143,6 @@ package com.tencent.morefun.naruto.plugin.player.views
 		override protected function initUI():void
 		{
 			super.initUI();
-			
 			if(data == null){return ;}
 			updateDead();
 			updateCamp();
