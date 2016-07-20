@@ -213,7 +213,7 @@ package com.map.controls
 						checkInViewpointGridBg(x, y);
 
 						//屏蔽地图中的动画元素，否则现行的环境会报错
-//						checkInViewpointGridMg(x, y);
+						checkInViewpointGridMg(x, y);
 					}
 
 					if (ix == 0 && iy == 0)

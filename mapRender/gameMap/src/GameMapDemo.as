@@ -14,6 +14,7 @@ package
 	import com.map.manager.LayerManager;
 	import com.map.player.datas.PlayerData;
 	import com.map.player.views.PlayerView;
+	import com.map.utils.MapCfgParse;
 	import com.map.utils.TimerProvider;
 	import com.map.view.MapView;
 	import com.tx.mme.MmeAsset;
@@ -49,13 +50,7 @@ package
 		/**测试寻路玩家*/
 		private var _testPlayer:PlayerView;
 
-		private var currSpeed:Point = new Point();
-		public static const SPEED:int = 12;
-		private var currMoveToPixcel:Point;
-		private var currPos:Point = new Point();
-		private var currSpeedUp:int = 1;
-
-		private var version:String = "1.0.0.2";
+		private var version:String = "1.0.0.3";
 
 		private var _maps:Array = [10001, 10002, 10003, 10004, 10005];
 
@@ -93,16 +88,16 @@ package
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 
+			registerClassAlias("Matrix_Class_Alias", Matrix);
+			registerClassAlias("MapBgImgInfo_Class_Alias", MapBgImgInfo);
+			registerClassAlias("MapMgImgInfo_Class_Alias", MapMgImgInfo);
+			registerClassAlias("MapFgImgInfo_Class_Alias", MapFgImgInfo);
+
 			_switchMap = new TextField();
 			_switchMap.autoSize = "left";
 			_switchMap.addEventListener(TextEvent.LINK, onTextLink);
 			stage.addChild(_switchMap);
 			_switchMap.htmlText = "<u><a href='event:switchMap'><font color='#ff0000' size='25'>切换地图</font></a><u>";
-
-			registerClassAlias("Matrix_Class_Alias", Matrix);
-			registerClassAlias("MapBgImgInfo_Class_Alias", MapBgImgInfo);
-			registerClassAlias("MapMgImgInfo_Class_Alias", MapMgImgInfo);
-			registerClassAlias("MapFgImgInfo_Class_Alias", MapFgImgInfo);
 
 			LayerManager.singleton.init(stage);
 			TimerProvider.initliazed(stage);
@@ -153,83 +148,13 @@ package
 		private function testFindPathHandler(event:Event):void
 		{
 			var element:BaseMapElement = this._testPlayer;
-			currPos.setTo(element.x, element.y);
 
 			var point:Point = new Point(element.x, element.y);
 			_paths = _pathFinder.findByPixcel(point, new Point(_mapView.mouseX, _mapView.mouseY));
 
 			_testPlayer.moveTo(_paths);
-			return;
-
-			if (!_paths) return;
-
-			TimerProvider.addEnterFrameTask(enterFrame);
 		}
 
-		private function enterFrame():void
-		{
-			var end:Boolean = false;
-			if (currMoveToPixcel)
-			{
-				var dist:Number = (currPos.x - currMoveToPixcel.x) * (currPos.x - currMoveToPixcel.x) + (currPos.y - currMoveToPixcel.y) * (currPos.y - currMoveToPixcel.y);//    Point.distance(currPos,currMoveToPixcel);
-				if (dist < SPEED * currSpeedUp * 1.5 * SPEED * currSpeedUp * 1.5)
-				{
-					end = true;
-				}
-				else
-				{
-					currPos.x += currSpeed.x * currSpeedUp;
-					currPos.y += currSpeed.y * currSpeedUp;
-					setXY(currPos.x, currPos.y);
-				}
-			}
-
-			if (end || currMoveToPixcel == null)
-			{
-				//忽略跟自己当前的点一样的坐标
-				var tp:Point;
-				while (this._paths.length)
-				{
-					tp = this._paths.shift();
-					if (tp.x == this.x && tp.y == this.y)
-					{
-						tp = null;
-					}
-					else
-					{
-						break;
-					}
-				}
-
-				if (tp)
-				{
-					currMoveToPixcel = tp;
-					var dx:Number = currMoveToPixcel.x - currPos.x;
-					var dy:Number = currMoveToPixcel.y - currPos.y;
-
-					var angle:Number = Math.atan2(dy, dx);
-					currSpeed.x = Math.cos(angle) * SPEED;
-					currSpeed.y = Math.sin(angle) * SPEED;
-				}
-				else
-				{
-					if (currMoveToPixcel)
-					{
-						setXY(int(currMoveToPixcel.x), int(currMoveToPixcel.y));
-						currMoveToPixcel = null;
-					}
-					stopBaseMove();
-				}
-			}
-		}
-
-		private function stopBaseMove():void
-		{
-			this._paths.length = 0;
-			TimerProvider.removeEnterFrameTask(enterFrame);
-			currSpeed.x = currSpeed.y = 0;
-			this._mapView.hideMoveTargetUI();
-		}
 
 		private function setXY(x:int, y:int):void
 		{
@@ -254,8 +179,10 @@ package
 			var versions:Array = [];
 
 			var url:String = "http://res.huoying.qq.com/{0}/assets/scene/map/";
-//			url = "assets/scene/map/";
-
+			if (!GlobalData.isOnline)
+			{
+				url = "assets/scene/map/";
+			}
 
 			var paths:Array = [];
 			var sceneMap:Object = new Object();
@@ -267,11 +194,21 @@ package
 			sceneMap[mapId]["alphaMap"] = "NarutoBeta1.0Build300";
 			sceneMap[mapId]["MapInfo"] = "NarutoBeta1.0Build300";
 
+			if (!GlobalData.isOnline)
+			{
+				sceneMap[mapId]["bg"] = "";
+				sceneMap[mapId]["mg"] = "";
+				sceneMap[mapId]["fg"] = "";
+				sceneMap[mapId]["sceneMap"] = "";
+				sceneMap[mapId]["alphaMap"] = "";
+				sceneMap[mapId]["MapInfo"] = "";
+			}
+
 			if (!bulk.get(bgPath))
 			{
 				paths.push({
 					id: bgPath,
-					url: StringUtil.substitute(url, sceneMap[mapId]["bg"]) + mapId + "/_scene_bg.cfg?version=" + version,
+					url: StringUtil.substitute(url, sceneMap[mapId]["bg"]) + mapId + "/_scene_bg.xml?version=" + version,
 					type: BulkLoader.TYPE_BINARY
 				});
 			}
@@ -279,7 +216,7 @@ package
 			{
 				paths.push({
 					id: mgPath,
-					url: StringUtil.substitute(url, sceneMap[mapId]["mg"]) + mapId + "/_scene_mg.cfg?version=" + version,
+					url: StringUtil.substitute(url, sceneMap[mapId]["mg"]) + mapId + "/_scene_mg.xml?version=" + version,
 					type: BulkLoader.TYPE_BINARY
 				});
 			}
@@ -287,7 +224,7 @@ package
 			{
 				paths.push({
 					id: fgPath,
-					url: StringUtil.substitute(url, sceneMap[mapId]["fg"]) + mapId + "/_scene_fg.cfg?version=" + version,
+					url: StringUtil.substitute(url, sceneMap[mapId]["fg"]) + mapId + "/_scene_fg.xml?version=" + version,
 					type: BulkLoader.TYPE_BINARY
 				});
 			}
@@ -360,12 +297,26 @@ package
 			var mapDataBytes:ByteArray = getPluginAsset("plugin.world.map.data" + _currentMapId) as ByteArray;
 			mapDataBytes.position = 0;
 
+
 			this._mapData.setData(mapDataBytes);
 			this._pathFinder.setMapData(_mapData);
 
-			var mapBgImgInfos:Dictionary = bgbytes.readObject();
-			var mapFgImgInfos:Dictionary = fgbytes.readObject();
-			var mapMgImgInfos:Dictionary = mgbytes.readObject();
+
+			//读取加载cfg格式的
+//			var mapBgImgInfos:Dictionary = bgbytes.readObject();
+//			var mapFgImgInfos:Dictionary = fgbytes.readObject();
+//			var mapMgImgInfos:Dictionary = mgbytes.readObject();
+
+			
+			var mapBgImgInfos:Dictionary = new Dictionary();
+			MapCfgParse.parseXML(new XML(bgbytes), mapBgImgInfos, MapBgImgInfo);
+
+			var mapFgImgInfos:Dictionary = new Dictionary();
+			MapCfgParse.parseXML(new XML(fgbytes), mapFgImgInfos, MapFgImgInfo);
+
+			var mapMgImgInfos:Dictionary = new Dictionary();
+			MapCfgParse.parseXML(new XML(mgbytes), mapMgImgInfos, MapMgImgInfo);
+
 
 			var shrinkBitmap:Bitmap = getPluginAsset("plugin.world.map.base" + _currentMapId, BulkLoader.TYPE_IMAGE) as Bitmap;
 			var alphaBitmap:Bitmap = getPluginAsset("plugin.world.map.alpha" + _currentMapId, BulkLoader.TYPE_IMAGE) as Bitmap;
