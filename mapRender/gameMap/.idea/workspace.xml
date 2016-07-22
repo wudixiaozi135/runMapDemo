@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e35c6acd-c93c-4256-b0f9-c5d9117ed2de" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/GameMapDemo.swf" afterPath="$PROJECT_DIR$/bin/GameMapDemo.swf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/LoaderEvent.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/LoaderEvent.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/data/LoadTaskAssetInfo.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/data/LoadTaskAssetInfo.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/def/FileTypeDef.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/def/FileTypeDef.as" />
@@ -40,8 +39,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/PhantomData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/PhantomData.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/PointElementData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/PointElementData.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameMapDemo.as" afterPath="$PROJECT_DIR$/src/GameMapDemo.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GlobalData.as" afterPath="$PROJECT_DIR$/src/GlobalData.as" />
     </list>
     <ignored path="mapDemo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,8 +63,8 @@
       <file leaf-file-name="GameMapDemo.as" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GameMapDemo.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="535">
-              <caret line="348" column="44" selection-start-line="348" selection-start-column="44" selection-end-line="348" selection-end-column="44" />
+            <state relative-caret-position="459">
+              <caret line="344" column="13" selection-start-line="344" selection-start-column="13" selection-end-line="344" selection-end-column="13" />
               <folding>
                 <element signature="e#11#52#0" expanded="true" />
               </folding>
@@ -1020,7 +1017,7 @@
       <workItem from="1468975549924" duration="28637000" />
       <workItem from="1469012603134" duration="6785000" />
       <workItem from="1469062747898" duration="19432000" />
-      <workItem from="1469148073527" duration="5022000" />
+      <workItem from="1469148073527" duration="5235000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1468566804992</created>
@@ -1099,11 +1096,18 @@
       <option name="project" value="LOCAL" />
       <updated>1469150794122</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="更新，">
+      <created>1469153154914</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1469153154914</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="257141000" />
+    <option name="totallyTimeSpent" value="257354000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
@@ -1557,8 +1561,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameMapDemo.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="348" column="44" selection-start-line="348" selection-start-column="44" selection-end-line="348" selection-end-column="44" />
+        <state relative-caret-position="459">
+          <caret line="344" column="13" selection-start-line="344" selection-start-column="13" selection-end-line="344" selection-end-column="13" />
           <folding>
             <element signature="e#11#52#0" expanded="true" />
           </folding>
