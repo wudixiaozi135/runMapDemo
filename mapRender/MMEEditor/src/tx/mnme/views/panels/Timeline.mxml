@@ -1,0 +1,1029 @@
+<?xml version="1.0" encoding="utf-8"?>
+<panels:BasePanel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				 xmlns:s="library://ns.adobe.com/flex/spark" 
+				 xmlns:mx="library://ns.adobe.com/flex/mx" 
+				 xmlns:views="tx.mnme.views.*" 
+				 xmlns:panels="tx.mnme.views.panels.*" 
+				 xmlns:timeline="tx.mnme.views.panels.timeline.*"
+				 width="400" height="100" >
+	<fx:Script>
+		<![CDATA[
+			import com.tencent.morefun.naruto.tools.mmefile.events.ActionDataEvent;
+			import com.tencent.morefun.naruto.tools.mmefile.events.LayerDataEvent;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.ActionData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.FrameData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.LayerData;
+			import tx.mnme.commands.cmd_internal;
+			import tx.mnme.commands.timeline.ChangeLayerCommand;
+			import tx.mnme.commands.timeline.ConvertFrameCommand;
+			import tx.mnme.commands.timeline.DeleteFrameCommand;
+			import tx.mnme.commands.timeline.DeleteLayerCommand;
+			import tx.mnme.commands.timeline.InsertFrameCommand;
+			import tx.mnme.commands.timeline.InsertLayerCommand;
+			import tx.mnme.commands.timeline.SelectFrameCommand;
+			import tx.mnme.views.panels.timeline.TimelineBlock;
+			import tx.mnme.views.panels.timeline.TimelineLayer;
+			import tx.mnme.views.panels.timeline.TimelineLayerHead;
+			
+			import mx.controls.Alert;
+			import mx.events.CloseEvent;
+			import mx.events.FlexEvent;
+			
+			[Bindable]
+			private var currFrame:int = -1;
+			private var currLayerIndex:int = -1;
+			private var layers:Vector.<TimelineLayer> = new Vector.<TimelineLayer>;
+			private var heads:Vector.<TimelineLayerHead> = new Vector.<TimelineLayerHead>;
+			private var actionData:ActionData;
+			
+			private var timer:Timer;
+			private var timerLayerIndex:int;
+			private var timerFrame:int;
+			public var dirty:Boolean;
+			public static const WIDTH:int = 15000;
+			
+			private var currCopyFrameData:FrameData;
+			
+			public function destroy():void
+			{
+				timer.stop();
+				timer.removeEventListener(TimerEvent.TIMER,onTimer);
+				timer = null;
+				
+				currCopyFrameData = null;
+				
+				stage.removeEventListener(MouseEvent.MOUSE_UP,onLayerHead);
+				removeEventListener(Event.ENTER_FRAME,onLayerHead);
+				clearTimeout(layerHeadDelayTime);
+				
+				removeAllLayer(false);
+			}
+			
+			override protected function basePanelInit(event:FlexEvent):void
+			{
+				super.basePanelInit(event);
+				
+				timelineRuler.addEventListener(MouseEvent.MOUSE_DOWN,onRuler);
+				timelineRuler.addEventListener(MouseEvent.RIGHT_MOUSE_DOWN,onRuler);
+				contextMenu = new NativeMenu();
+				addContextMenuItem("插入帧");
+				addContextMenuItem("删除帧");
+				addContextMenuItem("转换为空白帧");
+				addContextMenuItem("转换为关键帧");
+				addContextMenuItem(null,true);
+				addContextMenuItem("复制帧");
+				addContextMenuItem("粘贴帧");
+				addContextMenuItem(null,true);
+				addContextMenuItem("添加层");
+				addContextMenuItem("删除层");
+				contextMenu.addEventListener(Event.DISPLAYING,onDisplayMenu);
+				contextMenu.addEventListener(Event.SELECT,onSelectMenu);
+				
+				scrollerLayer.verticalScrollBar.addEventListener(Event.CHANGE,onScrollerLayer);
+				scrollerLayer.horizontalScrollBar.addEventListener(Event.CHANGE,onScrollerLayer);
+				
+				timer = new Timer(40);
+				timer.addEventListener(TimerEvent.TIMER,onTimer);
+			}
+			
+			private function addContextMenuItem(name:String=null,isSeparator:Boolean=false):void
+			{
+				var item:NativeMenuItem = new NativeMenuItem(name, isSeparator);
+				item.name = name;
+				contextMenu.addItem(item);
+			}
+			
+			protected function onDisplayMenu(event:Event):void
+			{
+				contextMenu.getItemByName("删除帧").enabled = getSelectedFrameData()!=null;
+				contextMenu.getItemByName("删除层").enabled = layers.length>1 && currLayerIndex>=0 && currLayerIndex < layers.length;
+				contextMenu.getItemByName("复制帧").enabled = false;// getSelectedFrameData()!=null;
+				contextMenu.getItemByName("粘贴帧").enabled = false;//currCopyFrameData != null;
+			}
+			
+			private function onSelectMenu(e:Event):void
+			{
+				var item:NativeMenuItem = e.target as NativeMenuItem;
+				switch(item.label)
+				{
+					case "插入帧":
+						insertFrame(currLayerIndex,currFrame);
+						break;
+					case "删除帧":
+						deleteFrame(currLayerIndex,currFrame);
+						break;
+					case "转换为空白帧":
+						convertFrame(currLayerIndex,currFrame,true);
+						break;
+					case "转换为关键帧":
+						convertFrame(currLayerIndex,currFrame,false);
+						break;
+					
+					case "复制帧":
+//						copyFrame(currLayerIndex,currFrame);
+						break;
+					case "粘贴帧":
+//						pasteFrame(currLayerIndex,currFrame);
+						break;
+					
+					case "添加层":
+						insertLayer(layers.length);
+						break;
+					case "删除层":
+						deleteLayer(currLayerIndex);
+						break;
+				}
+			}
+			
+			protected function onClickLayerGroup(event:MouseEvent):void
+			{
+				var f:int = timelineRuler.mouseX/TimelineBlock.WIDTH;
+				var layer:TimelineLayer = event.target as TimelineLayer;
+				var li:int = layers.indexOf(layer);
+				
+				
+				
+				if(li != currLayerIndex || f != currFrame)
+				{
+					selectFrame(li,f,currLayerIndex,currFrame);
+				}else
+				{
+					dispatchEvent(new Event(Event.SELECT));
+				}
+			}
+			
+			protected function onRuler(event:Event):void
+			{
+				if(actionData == null)
+				{
+					return;
+				}
+				switch(event.type)
+				{
+					case MouseEvent.RIGHT_MOUSE_DOWN:
+						onClickLayerGroup(event as MouseEvent);
+						break;
+					case MouseEvent.MOUSE_DOWN:
+						if(timelineRuler.mouseY>30)//点击帧
+						{
+							onClickLayerGroup(event as MouseEvent);
+							return;
+						}
+						stage.addEventListener(MouseEvent.MOUSE_UP,onRuler);
+						timelineRuler.addEventListener(Event.ENTER_FRAME,onRuler);
+						needleNormalHeader.visible = false;
+						needleNormalBorder.visible = false;
+						needleDragBorder.visible = true;
+						
+						updateCurrentFrame(true);
+						break;
+					case MouseEvent.MOUSE_UP:
+						stage.removeEventListener(MouseEvent.MOUSE_UP,onRuler);
+						timelineRuler.removeEventListener(Event.ENTER_FRAME,onRuler);
+						needleNormalHeader.visible = true;
+						needleNormalBorder.visible = true;
+						needleDragBorder.visible = false;
+						
+//						if(currFrame!=actionData.cf)
+//						{
+							selectFrame(currLayerIndex,currFrame,actionData.cl,actionData.cf);
+//						}
+//						if(currLayerIndex != -1)
+//						{
+//							//layers[currLayerIndex].select(currFrame);
+//							setCurrentFrame(currFrame);
+//							dispatchEvent(new Event(Event.SELECT));
+//						}
+						break;
+					case Event.ENTER_FRAME:
+						updateCurrentFrame(true);
+						break;
+				}
+			}
+			
+			private function updateCurrentFrame(limitTotalFrame:Boolean=false):void
+			{
+				for each(var layer:TimelineLayer in layers)
+				{
+					layer.cleanSelectedBlock();
+				}
+				var f:int = timelineRuler.mouseX/TimelineBlock.WIDTH;
+				if(limitTotalFrame)
+				{
+					f = Math.max(0,Math.min(f,getTotalFrame()-1));
+				}
+				setCurrentFrame(f);
+			}
+			
+			public function setActionData(actionData:ActionData):void
+			{
+				if(this.actionData)
+				{
+					this.actionData.removeEventListener(ActionDataEvent.ADD_LAYER,onActionData);
+					this.actionData.removeEventListener(ActionDataEvent.REMOVE_LAYER,onActionData);
+				}
+				removeAllLayer();
+				
+				this.actionData = actionData;
+				
+				if(actionData)
+				{
+					actionData.addEventListener(ActionDataEvent.ADD_LAYER,onActionData);
+					actionData.addEventListener(ActionDataEvent.REMOVE_LAYER,onActionData);
+					setLayerDatas(actionData.layerDatas);
+//					if(actionData.layerDatas.length>0)
+//					{
+//						currLayerIndex = 0;
+//						heads[currLayerIndex].selected = true;
+//						layers[currLayerIndex].select(currFrame);
+//						dispatchEvent(new Event(Event.SELECT));
+//					}
+					
+					setCurrentFrame(actionData.cf);
+					setCurrentLayerIndex(actionData.cl);
+					dispatchEvent(new Event(Event.SELECT));
+				}
+				
+				dispatchEvent(new Event(Event.CHANGE));
+			}
+			
+			public function getActionData():ActionData
+			{
+				return actionData;
+			}
+			
+			private function onActionData(event:ActionDataEvent):void
+			{
+				switch(event.type)
+				{
+					case ActionDataEvent.ADD_LAYER:
+						addLayer(event.updateLayerData,event.layerIndex);
+						addLayerHead(event.updateLayerData,event.layerIndex);
+						break;
+					case ActionDataEvent.REMOVE_LAYER:
+						removeLayer(event.updateLayerData,event.layerIndex);
+						break;
+				}
+			}
+			
+			private function setLayerDatas(layerDatas:Vector.<LayerData>):void
+			{
+				for(var i:int=0;i<layerDatas.length;i++)
+				{
+					addLayer(layerDatas[i],i);
+					addLayerHead(layerDatas[i],i);
+				}
+			}
+			
+			private function removeAllLayer(updateNeedle:Boolean=true):void
+			{
+				if(this.actionData)
+				{
+					this.actionData.removeEventListener(ActionDataEvent.ADD_LAYER,onActionData);
+					this.actionData.removeEventListener(ActionDataEvent.REMOVE_LAYER,onActionData);
+					
+					for(var i:int=this.actionData.layerDatas.length-1;i>=0;i--)
+					{
+						var ld:LayerData = this.actionData.layerDatas[i];
+						removeLayer(ld,i);
+					}
+					currLayerIndex = -1;
+					currFrame = 0;
+					if(updateNeedle)
+					{
+						updateNeedlePos();
+					}
+				}
+			}
+			
+			private function onLayerData(e:LayerDataEvent):void
+			{
+				dispatchEvent(new Event(Event.CHANGE));
+			}
+			
+			
+			private function addLayer(layerData:LayerData,layerIndex:int):void
+			{
+				layerData.addEventListener(LayerDataEvent.UPDATE_VISIBLE,onLayerData);
+				layerData.addEventListener(LayerDataEvent.UPDATE_LOCK,onLayerData);
+				var layer:TimelineLayer = new TimelineLayer();
+				layer.addEventListener("changeFrame",onLayer);
+				layer.addEventListener("refreshFrame",onLayer);
+				layer.mouseChildren = false;
+				layer.setLayerData(layerData);
+				layers.splice(layerIndex,0,layer);
+				layerGroup.addElement(layer);
+			}
+			private function onLayer(e:Event):void
+			{
+				var layer:TimelineLayer = e.currentTarget as TimelineLayer;
+				switch(e.type)
+				{
+					case "changeFrame":
+						setCurrentFrame(layer.getFrame());
+						break;
+					case "refreshFrame":
+						dispatchEvent(new Event(Event.CHANGE));
+						break;
+				}
+				
+			}
+			
+			private function addLayerHead(layerData:LayerData,layerIndex:int):void
+			{
+				var head:TimelineLayerHead = new TimelineLayerHead();
+				head.addEventListener(MouseEvent.MOUSE_DOWN,onLayerHead);
+				head.setLayerData(layerData);
+//				head.text = "图层"+heads.length;
+				heads.push(head);
+				
+				heads.splice(layerIndex,0,head);
+				headGroup.addElement(head);
+				
+				resetLayerPos();
+			}
+			
+			private function removeLayer(layerData:LayerData,layerIndex:int):void
+			{
+				layerData.removeEventListener(LayerDataEvent.UPDATE_VISIBLE,onLayerData);
+				layerData.removeEventListener(LayerDataEvent.UPDATE_LOCK,onLayerData);
+				
+				var layer:TimelineLayer = layers.splice(layerIndex,1)[0];
+				layer.removeEventListener("changeFrame",onLayer);
+				layer.removeEventListener("refreshFrame",onLayer);
+				layer.destroy();
+				
+				heads.splice(layerIndex,1)[0].destroy();
+				
+				resetLayerPos();
+			}
+			
+			private var layerHeadDelayTime:uint;
+			private var layerHeadMouseDownPoint:Point;
+			private var dragLayerHead:TimelineLayerHead;
+			private const LH:int = 30;
+			
+			private function onLayerHead(event:Event):void
+			{
+				switch(event.type)
+				{
+					case MouseEvent.MOUSE_DOWN:
+						dragLayerHead = event.currentTarget as TimelineLayerHead;
+						setCurrentLayerIndex(heads.indexOf(dragLayerHead));
+						stage.addEventListener(MouseEvent.MOUSE_UP,onLayerHead);
+						layerHeadMouseDownPoint = new Point(mouseX,mouseY);
+						layerHeadDelayTime = setTimeout(function():void{
+							var p:Point = new Point(mouseX,mouseY);
+							if(Point.distance(p,layerHeadMouseDownPoint) < 5)
+							{
+								addEventListener(Event.ENTER_FRAME,onLayerHead);
+								dragLayerHead.alpha = 0.5;
+							}
+						},200);
+						break;
+					case MouseEvent.MOUSE_UP:
+						stage.removeEventListener(MouseEvent.MOUSE_UP,onLayerHead);
+						removeEventListener(Event.ENTER_FRAME,onLayerHead);
+						clearTimeout(layerHeadDelayTime);
+						dragLayerHead.alpha = 1;
+						if(dragLayerHead && headGroupRuler.visible)
+						{
+							var oi:int = heads.indexOf(dragLayerHead);
+							var ti:int = headGroupRuler.y / LH;
+							if(ti>oi)
+							{
+								ti-=1;
+							}
+							if(oi!=ti)
+							{
+								new ChangeLayerCommand(this,oi,ti).doCommand();
+							}
+							dragLayerHead = null;
+						}
+						headGroupRuler.visible = false;
+						break;
+					case Event.ENTER_FRAME:
+						headGroup.setElementIndex(headGroupRuler,headGroup.numElements-1);
+						headGroupRuler.visible = true;
+						var i:int = headGroup.mouseY / LH;
+						if(i > layers.length)
+						{
+							i = layers.length;
+						}
+						headGroupRuler.y = i*LH;
+						break;
+				}
+			}
+			
+			cmd_internal function doChangeLayer(oi:int,ti:int):void
+			{
+				actionData.layerDatas.splice(ti,0,actionData.layerDatas.splice(oi,1)[0]);
+				heads.splice(ti,0,heads.splice(oi,1)[0]);
+				layers.splice(ti,0,layers.splice(oi,1)[0]);
+				resetLayerPos();
+				setCurrentLayerIndex(ti);
+				dispatchEvent(new Event(Event.CHANGE));
+				this.dirty = true;
+			}
+			
+			cmd_internal function undoChangeLayer(oi:int,ti:int):void
+			{
+				cmd_internal::doChangeLayer(oi,ti);
+			}
+			
+			
+			private function resetLayerPos():void
+			{
+				for(var i:int=0;i<layers.length;i++)
+				{
+					layers[i].y = i * 30;
+					heads[i].y = i*30 +2;
+				}
+			}
+			
+			public function getSelectedFrameData():FrameData
+			{
+				for each(var layer:TimelineLayer in layers)
+				{
+					var fd:FrameData = layer.getSelectedFrameData();
+					if(fd)
+					{
+						return fd;
+					}
+				}
+				return null;
+			}
+			
+			public function getSelectedLayerData():LayerData
+			{
+				if(currLayerIndex!=-1)
+				{
+					return layers[currLayerIndex].getLayerData();
+				}
+				return null;
+			}
+			
+			public function getCurrentFrameDataByLayerIndex(layerIndex:int):FrameData
+			{
+				if(layerIndex!=-1 && layerIndex<layers.length)
+				{
+					return layers[layerIndex].getFrameData(currFrame);
+				}
+				return null;
+			}
+			
+			public function getLayerDataByIndex(index:int):LayerData
+			{
+				if(index!=-1)
+				{
+					return layers[index].getLayerData();
+				}
+				return null;
+			}
+			
+			public function getLayer(layerIndex:int):TimelineLayer
+			{
+				return layers[layerIndex];
+			}
+			
+			public function getCurrentLayerIndex():int
+			{
+				return currLayerIndex;
+			}
+			public function setCurrentLayerIndex(value:int):void
+			{
+				currLayerIndex = value;
+				for each(var head:TimelineLayerHead in heads)
+				{
+					head.selected = false;
+				}
+				for each(var layer:TimelineLayer in layers)
+				{
+					layer.cleanSelectedBlock();
+				}
+				if(currLayerIndex!=-1)
+				{
+					heads[currLayerIndex].selected = true;
+					layers[currLayerIndex].select(currFrame);
+				}
+			}
+			
+			private function selectFrame(li:int,f:int,oli:int,of:int):void
+			{
+				new SelectFrameCommand(this,li,f,oli,of).doCommand();
+			}
+			
+			cmd_internal function selectFrame(layerIndex:int,frame:int):void
+			{
+				if(actionData)
+				{
+					actionData.cf = frame;
+					actionData.cl = layerIndex;
+				}
+				setCurrentFrame(frame);
+				setCurrentLayerIndex(layerIndex);
+				
+				dispatchEvent(new Event(Event.SELECT));
+			}
+			
+			public function getCurrentFrame():int
+			{
+				return currFrame;
+			}
+			
+			public function unSelect():void
+			{
+//				for each(var head:TimelineLayerHead in heads)
+//				{
+//					head.selected = false;
+//				}
+				for each(var layer:TimelineLayer in layers)
+				{
+					layer.cleanSelectedBlock();
+				}
+			}
+			
+			public function setCurrentFrame(value:int):void
+			{
+				if(value < 0)
+				{
+					value = 0;
+				}
+				if(currFrame != value)
+				{
+					currFrame = value;
+					dispatchEvent(new Event(Event.CHANGE));
+				}
+				updateNeedlePos();
+			}
+			
+			override public function onKeyDown(event:KeyboardEvent):void
+			{
+				var layer:TimelineLayer;
+				switch(event.keyCode)
+				{
+					case Keyboard.F5:
+						if(event.shiftKey)
+						{
+							deleteFrame(currLayerIndex,currFrame);
+						}else{
+							insertFrame(currLayerIndex,currFrame);
+						}
+						break;
+					case Keyboard.F6:
+						convertFrame(currLayerIndex,currFrame,false);
+						break;
+					case Keyboard.F7:
+						convertFrame(currLayerIndex,currFrame,true);
+						break;
+					case Keyboard.F9:
+						if(event.shiftKey)
+						{
+							deleteLayer(currLayerIndex);
+						}else
+						{
+							insertLayer(layers.length);
+						}
+						break;
+					case Keyboard.COMMA:
+						if(currFrame>0)
+						{
+							selectFrame(currLayerIndex,currFrame-1,currLayerIndex,currFrame);
+//							gotoFrame(currFrame-1);
+							dispatchEvent(new Event("selectContent"));
+						}
+						break;
+					case Keyboard.PERIOD:
+						selectFrame(currLayerIndex,currFrame+1,currLayerIndex,currFrame);
+//						gotoFrame(currFrame+1);
+						dispatchEvent(new Event("selectContent"));
+						break;
+					case Keyboard.ENTER:
+						if(timer.running)
+						{
+							//timer.stop();
+							stopTimer();
+						}else
+						{
+							timerLayerIndex = currLayerIndex;
+							timerFrame = currFrame;
+							timer.start();
+						}
+						break;
+//					case Keyboard.LEFT:
+//						if(event.altKey)
+//						{
+//							gotoFrame(currFrame-1);
+//						}
+//						break;
+//					case Keyboard.RIGHT:
+//						if(event.altKey)
+//						{
+//							gotoFrame(currFrame+1);
+//						}
+//						break;
+				}
+			}
+			
+			private function gotoFrame(f:int):void
+			{
+				if(f==currFrame)
+				{
+					return;
+				}
+				for each(var layer:TimelineLayer in layers)
+				{
+					layer.cleanSelectedBlock();
+				}
+				setCurrentFrame(f);
+				if(currLayerIndex!=-1)
+				{
+					layers[currLayerIndex].select(currFrame);
+					dispatchEvent(new Event(Event.SELECT));
+				}
+			}
+			
+//			private function copyFrame(layerIndex:int, frameIndex:int):void
+//			{
+//				if(layerIndex!=-1)
+//				{
+//					var ofd:FrameData = layers[layerIndex].getSelectedFrameData();
+//					if(ofd)
+//					{
+//						currCopyFrameData = ofd.clone();
+//					}else
+//					{
+//						currCopyFrameData = null;
+//					}
+//				}
+//			}
+//			
+//			private function pasteFrame(layerIndex:int, frameIndex:int):void
+//			{
+//				if(layerIndex!=-1)
+//				{
+//					var ofd:FrameData = layers[layerIndex].getFrameDataAtAndBefor(frameIndex);
+//					if(ofd)
+//					{
+//						var ofdClone:FrameData = ofd.clone();
+//						//目标帧与当前帧一样，可以直接替换里面有内容
+//						if(ofd.index == frameIndex)
+//						{
+//							ofd.element = currCopyFrameData.element;
+//						}
+//					}else
+//					{
+//						throw new Error("粘贴帧出错，目标帧为空");
+//					}
+//					
+//				}
+//			}
+			
+			private function insertFrame(layerIndex:int,frameIndex:int):void
+			{
+				if(layerIndex!=-1)
+				{
+					var ofd:FrameData = layers[layerIndex].getFrameDataAtAndBefor(frameIndex);
+					if(ofd)
+					{
+						ofd = ofd.clone();
+					}
+					new InsertFrameCommand(this,layerIndex,frameIndex,ofd).doCommand();
+				}
+			}
+			
+			cmd_internal function doInsertFrame(layerIndex:int,frameIndex:int,oldFrameData:FrameData):void
+			{
+				getLayer(layerIndex).cmd_internal::doInsertFrame(frameIndex);
+				this.dirty = true;
+			}
+			
+			cmd_internal function undoInsertFrame(layerIndex:int,frameIndex:int,oldFrameData:FrameData):void
+			{
+				getLayer(layerIndex).cmd_internal::undoInsertFrame(frameIndex,oldFrameData);
+				this.dirty = dirty;
+			}
+			
+			private function deleteFrame(layerIndex:int,frameIndex:int):void
+			{
+				if(layerIndex!=-1)
+				{
+					var ofd:FrameData = layers[layerIndex].getFrameData(frameIndex)//getSelectedFrameData();
+					if(ofd)
+					{
+						new DeleteFrameCommand(this,layerIndex,frameIndex,ofd.clone()).doCommand();
+					}
+				}
+			}
+			
+			cmd_internal function doDeleteFrame(layerIndex:int,frameIndex:int):void
+			{
+				getLayer(layerIndex).cmd_internal::doDeleteFrame(frameIndex);
+				this.dirty = true;
+			}
+			cmd_internal function undoDeleteFrame(layerIndex:int,frameIndex:int,ofd:FrameData):void
+			{
+				getLayer(layerIndex).cmd_internal::undoDeleteFrame(frameIndex,ofd);
+				this.dirty = true;
+			}
+			
+			private function convertFrame(layerIndex:int,frameIndex:int,isNone:Boolean):void
+			{
+				var ofd:FrameData = layers[layerIndex].getFrameDataAtAndBefor(frameIndex);
+				if(ofd)
+				{
+					if(ofd.index == frameIndex)
+					{
+						return;
+					}
+					ofd = ofd.clone();
+				}
+				new ConvertFrameCommand(this,layerIndex,frameIndex,ofd,isNone).doCommand();
+			}
+			
+			cmd_internal function doConvertFrame(layerIndex:int,frameIndex:int,isNone:Boolean):void
+			{
+				if(layerIndex!=-1)
+				{
+					layers[layerIndex].convertFrame(frameIndex,isNone);
+					
+					dispatchEvent(new Event(Event.CHANGE));
+					this.dirty = true;
+				}
+			}
+			
+			cmd_internal function undoConvertFrame(layerIndex:int,frameIndex:int,oldFrameData:FrameData):void
+			{
+				var layer:TimelineLayer = getLayer(layerIndex);
+				layer.cmd_internal::removeFrameData(frameIndex);
+				var fd:FrameData;
+				if(oldFrameData)
+				{
+					fd = layer.getFrameData(oldFrameData.index);
+					fd.setLength(oldFrameData.length,false);
+					fd.setLength(oldFrameData.length);
+				}else
+				{
+					fd = layer.getFrameData(frameIndex-1);
+					if(fd)
+					{
+						layer.cmd_internal::removeFrameData(fd.index);
+					}
+				}
+				dispatchEvent(new Event(Event.CHANGE));
+				
+				this.dirty = true;
+			}
+			
+			private var insertLayerCount:int=0;
+			private function insertLayer(layerIndex:int):void
+			{
+				var ld:LayerData = new LayerData();
+				ld.name = "新建层" + (++insertLayerCount);
+				
+				var fd:FrameData = new FrameData();
+				fd.setIndex(0);
+				fd.setLength(1);
+				
+				ld.frameDatas = new Vector.<FrameData>;
+				ld.frameDatas.push(fd);
+				
+				new InsertLayerCommand(this,layerIndex,currLayerIndex,ld).doCommand();
+			}
+			
+			cmd_internal function doInsertLayer(layerIndex:int,layerData:LayerData):void
+			{
+				actionData.addLayer(layerData.clone(),layerIndex);
+				
+				rect.height = Math.max(3,layers.length)*30;
+				this.dirty = true;
+			}
+			
+			cmd_internal function undoInsertLayer(layerIndex:int,oldLayerIndex:int):void
+			{
+				cmd_internal::doDeleteLayer(layerIndex,oldLayerIndex);
+				this.dirty = true;
+			}
+			
+			private function deleteLayer(layerIndex:int):void
+			{
+				if(layerIndex!=-1)
+				{
+					var ld:LayerData = layers[layerIndex].getLayerData();
+					var this__:Timeline = this;
+					Alert.show("确定要删除图层 " + ld.name + "吗？","",Alert.OK|Alert.CANCEL,null,function(e:CloseEvent):void{
+						if(e.detail == Alert.OK)
+						{
+							new DeleteLayerCommand(this__,layerIndex,currFrame,ld.clone()).doCommand();
+						}
+					});
+				}
+			}
+			
+			cmd_internal function doDeleteLayer(layerIndex:int,afterLayerIndex:int=-1):void
+			{
+				var ld:LayerData = layers[layerIndex].getLayerData();
+				actionData.removeLayer(ld,layerIndex);
+				dispatchEvent(new Event(Event.CHANGE));
+				
+				rect.height = Math.max(3,layers.length)*30;
+				
+				setCurrentLayerIndex(afterLayerIndex);
+				
+				this.dirty = true;
+			}
+			
+			cmd_internal function undoDeleteLayer(layerIndex:int,layerData:LayerData):void
+			{
+				cmd_internal::doInsertLayer(layerIndex,layerData);
+				this.dirty = true;
+			}
+			
+			
+			public function insertSeqElementData(multFiles:Vector.<File>):void
+			{
+				if(currLayerIndex!=-1)
+				{
+					layers[currLayerIndex].insertSeqElementData(multFiles);
+				}
+			}
+			
+			protected function onScrollerLayer(event:Event):void
+			{
+				switch(event.currentTarget)
+				{
+					case scrollerLayer.verticalScrollBar:
+						scrollerHead.verticalScrollBar.value = scrollerLayer.verticalScrollBar.value;
+						break;
+					case scrollerLayer.horizontalScrollBar:
+						scrollerRuler.horizontalScrollBar.value = scrollerLayer.horizontalScrollBar.value;
+						updateNeedlePos();
+						break;
+				}
+				
+			}
+			
+			private function updateNeedlePos():void
+			{
+				needle.x = 100 + Math.max(0,currFrame*TimelineBlock.WIDTH) - scrollerRuler.horizontalScrollBar.value;
+				needle.visible = needle.x >= 100; 
+			}
+			
+			private function onTimer(e:TimerEvent):void
+			{
+				for each(var layer:TimelineLayer in layers)
+				{
+					layer.cleanSelectedBlock();
+				}
+				if(currFrame >= getTotalFrame()-1)
+				{
+					setCurrentFrame(0);
+				}else
+				{
+					setCurrentFrame(currFrame+1);
+				}
+			}
+			
+			public function stopTimer():void
+			{
+				if(timer.running)
+				{
+					timer.stop();
+					selectFrame(currLayerIndex,currFrame,timerLayerIndex,timerFrame);
+				}
+			}
+			
+			public function getTotalFrame():int
+			{
+				var tf:int = 0;
+				for each(var layer:TimelineLayer in layers)
+				{
+					if(tf<layer.getTotalFrame())
+					{
+						tf = layer.getTotalFrame();
+					}
+				}
+				return tf;
+			}
+			
+			
+			protected function headGroup_mouseWheelHandler(event:MouseEvent):void
+			{
+				scrollerLayer.verticalScrollBar.value -= event.delta*2;
+				scrollerHead.verticalScrollBar.value = scrollerLayer.verticalScrollBar.value;
+			}
+			
+			protected function cvt(ms:int):String
+			{
+				var str:String = '';
+				if(ms>=1000)
+				{
+					var s:int = ms/1000;
+					ms %= 1000;
+					if(s>=60)
+					{
+						var m:int = s/60;
+						s %= 60;
+						if(m>=60)
+						{
+							var h:int = m/60;
+							m %= 60;
+							str += h+'h'+m+'m'+s+'s'+ms+"ms";
+						}else
+						{
+							str += m+'m'+s+'s'+ms+"ms";
+						}
+					}else
+					{
+						str += s+'s'+ms+"ms";
+					}
+				}else
+				{
+					str += ms+"ms";
+				}
+				return str;
+			}
+			
+			protected function cbShowMultiFrame_changeHandler(event:Event):void
+			{
+//				if(cbShowMultiFrame.selected)
+//				{
+//					dispatchEvent(new Event("showMultiFrame"));
+//				}else
+//				{
+//					dispatchEvent(new Event("hideMultiFrame"));
+//				}
+				
+				dispatchEvent(new Event("change"));
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Metadata>
+		[Event(name="change", type="flash.events.Event")]
+		[Event(name="select", type="flash.events.Event")]
+		[Event(name="selectContent", type="flash.events.Event")]
+		[Event(name="showMulitFrame", type="flash.events.Event")]
+		[Event(name="hideMultiFrame", type="flash.events.Event")]
+	</fx:Metadata>
+	
+	<s:Scroller id="scrollerHead" x="0" width="100" top="0" bottom="13" verticalScrollPolicy="off">
+		<s:Group id="headGroup" x="0" width="100%" height="100%" mouseWheel="headGroup_mouseWheelHandler(event)">
+			<mx:UIComponent id="headGroupRuler" initialize="headGroupRuler.visible=false;headGroupRuler.graphics.lineStyle(2,0);headGroupRuler.graphics.lineTo(50,0);"/>
+		</s:Group>
+	</s:Scroller>
+	<s:Group bottom="0" width="100" height="13">
+		<s:Rect width="100%" height="100%">
+			<!--
+			<s:fill >
+				<s:LinearGradient rotation="90" >
+					<s:GradientEntry color="0xFFFFFF" ratio="0" />
+					<s:GradientEntry color="0xCACACA" ratio="1" />
+				</s:LinearGradient>
+			</s:fill>
+			-->
+		</s:Rect>
+		<s:Label right="20" bottom="0" text="{currFrame+1}" toolTip="当前帧:{(currFrame+1)+'\r时间:'+cvt(currFrame*1000/24)}" fontSize="11" color="#333333"/>
+		<s:CheckBox id="cbShowMultiFrame" right="-4" bottom="-1" toolTip="显示前后帧" change="cbShowMultiFrame_changeHandler(event)"/>
+	</s:Group>
+	<s:Scroller id="scrollerLayer" left="100" right="0" height="100%" verticalScrollPolicy="on" >
+		<s:Group id="layerGroup" left="0" right="0" top="0" mouseDown="onClickLayerGroup(event)" rightMouseDown="onClickLayerGroup(event)">
+			<s:Rect id="rect" width="{WIDTH}" height="0" minHeight="0">
+			</s:Rect>
+		</s:Group>  
+	</s:Scroller>
+	
+	<s:Scroller id="scrollerRuler" left="100" y="-30" right="0" horizontalScrollPolicy="off" mouseEnabled="false">
+		<s:Group id="rulerGroup" left="0" right="0" top="0" bottom="0" mouseEnabled="false">
+			<s:Rect width="{WIDTH}" height="30">
+			</s:Rect>
+			<timeline:TimelineRuler id="timelineRuler" />
+		</s:Group>
+	</s:Scroller>
+	
+	<s:Group id="needle" x="100" mouseEnabled="false">
+		<s:Rect id="needleNormalHeader" width="15" height="30" y="-30">
+			<s:stroke>
+				<s:SolidColorStroke weight="1" color="0xFF0000"/>
+			</s:stroke>
+			<s:fill>
+				<s:SolidColor alpha="0.4" color="0xFF0000"/>
+			</s:fill>
+		</s:Rect>
+		<s:Line id="needleNormalBorder" x="7.5" y="0" yTo="{height-37}">
+			<s:stroke>
+				<s:SolidColorStroke weight="1" color="0xFF0000"/>
+			</s:stroke>
+		</s:Line>
+		
+		<s:Line id="needleDragBorder" x="7.5" y="-30" yTo="{height-7}" visible="false">
+			<s:stroke>
+				<s:SolidColorStroke weight="2" color="0x0"/>
+			</s:stroke>
+		</s:Line>
+	</s:Group>
+</panels:BasePanel>
+

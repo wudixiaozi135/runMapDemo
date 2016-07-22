@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+					   xmlns:s="library://ns.adobe.com/flex/spark"
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   xmlns:views="tx.mnme.views.*"
+					   width="940" height="630" frameRate="24"
+					   title="MME动画编辑器 v1.0.0"
+					   showStatusBar="false"
+					   applicationComplete="init()"
+					   >
+	<fx:Style source="MMEEditor.css"/>
+		
+	<fx:Script>
+		<![CDATA[
+			import tx.mnme.Global;
+			import tx.mnme.KeyManager;
+			import tx.mnme.MotionEditor;
+			import tx.mnme.UpdateConfig;
+			import tx.mnme.UpdateManager;
+			
+			import mx.controls.Alert;
+			
+			/**
+			 * MME动画编辑器
+			 * @author	tencent, Fictiony
+			 * @version	2016/7/18
+			 */	
+			static private const REMOTE_PATH:String = "remote/";
+			
+//			private var um:UpdateManager = new UpdateManager(REMOTE_PATH "update.xml",true);
+			
+			new UpdateConfig("template/event.xml", REMOTE_PATH + "event.xml",
+				function(uc:UpdateConfig):void
+				{
+					Global.eventXML = uc.localXML;
+					uc.destroy();
+				}
+			);
+			
+			protected function init():void
+			{
+				loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR,onUncaughtError);
+					
+				Alert.yesLabel = "是";
+				Alert.noLabel = "否";
+				Alert.okLabel = "确定";
+				Alert.cancelLabel = "取消";
+				
+				KeyManager.setStage(stage);
+				
+				var mEditor:MotionEditor = new MotionEditor();
+				mEditor.init(this);
+			}
+			
+			public function get version():String
+			{
+				var appDesc:XML = XML(String(NativeApplication.nativeApplication.applicationDescriptor));
+				var ns:Namespace = appDesc.namespace();
+				return appDesc.ns::versionNumber.text();
+			}
+			
+			private function getDescTitle():String
+			{
+				var appDesc:XML = XML(String(NativeApplication.nativeApplication.applicationDescriptor));
+				var ns:Namespace = appDesc.namespace();
+				return appDesc.ns::name.text();
+			}
+			
+			public function setTitle(title:String):void
+			{
+				this.title = getDescTitle() + " -- " + title;
+			}
+			
+			protected function onUncaughtError(event:UncaughtErrorEvent):void
+			{
+				var message:String = event.error.getStackTrace();
+				if(!message){
+					if(event.error is Error){
+						message = Error(event.error).message;
+					}
+					else if(event.error is ErrorEvent){
+						message = ErrorEvent(event.error).text;
+					}
+					else{
+						message = event.error.toString();
+					}
+				}
+				Alert.show(message);
+			}
+			
+		]]>
+	</fx:Script>
+</s:WindowedApplication>

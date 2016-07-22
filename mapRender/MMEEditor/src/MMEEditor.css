@@ -1,0 +1,17 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace views "tx.mnme.views.*";
+		
+global
+{
+	fontFamily: Consolas;
+	fontSize: 13;
+}
+
+mx|ToolTip
+{
+	color:#333333;
+	backgroundColor:#FF9900;
+	backgroundAlpha:0.8;
+}

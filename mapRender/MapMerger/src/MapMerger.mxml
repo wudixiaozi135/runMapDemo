@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+					   xmlns:s="library://ns.adobe.com/flex/spark"
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   width="400" height="300"
+					   title="地图拼合工具 v1.0.2"
+					   showStatusBar="false"
+					   creationComplete="onCreate()">
+	<fx:Style source="MapMerger.css"/>
+	
+	<fx:Script>
+		<![CDATA[
+			import LibCore.utils.FileUtils;
+			import LibCore.utils.Functor;
+			import LibCore.utils.StringUtils;
+			
+			import mx.controls.Alert;
+			import mx.managers.DragManager;
+			
+			/**
+			 * RPC协议测试工具
+			 * @author	Fictiony
+			 * @version	2016/7/19
+			 */	
+			static private const CONFIG_FILE:FileFilter = new FileFilter("地图配置(*.xml)", "*.xml"); 
+			static private const PNG_FILE:FileFilter = new FileFilter("PNG图片(*.png)", "*.png");
+			static private const JPG_FILE:FileFilter = new FileFilter("JPG图片(*.jpg)", "*.jpg");
+			
+			[Bindable]
+			public var sliceW:int = 256;		//切片宽度
+			[Bindable]
+			public var sliceH:int = 256;		//切片高度
+			[Bindable]
+			public var jpgQuality:int = 80;		//导出JPG质量
+			
+			private var _configFile:File;		//配置文件对象
+			private var _pngFile:File;			//PNG文件对象
+			private var _jpgFile:File;			//PNG文件对象
+			private var _bitmap:BitmapData;		//拼合图片对象
+			private var _count:int;				//总图片数
+			private var _loadedCount:int;		//已加载图片数
+			
+			/**
+			 * 初始化
+			 */
+			private function onCreate():void
+			{
+				//设置文件对象
+				var dir:File = File.documentsDirectory;
+				_configFile = dir.resolvePath("config.xml");
+				_configFile.addEventListener(Event.SELECT, onSelectConfigFile);
+				_pngFile = dir.resolvePath("export.png");
+				_pngFile.addEventListener(Event.SELECT, onSelectPNGFile);
+				_jpgFile = dir.resolvePath("export.jpg");
+				_jpgFile.addEventListener(Event.SELECT, onSelectJPGFile);
+	
+				//设置事件
+				addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER, onDragEnter);
+				addEventListener(NativeDragEvent.NATIVE_DRAG_DROP, onDragDrop);
+			}
+
+			/**
+			 * 外部文件拖入处理
+			 */
+			private function onDragEnter( e:NativeDragEvent ):void  
+			{
+				if (e.clipboard.hasFormat(ClipboardFormats.FILE_LIST_FORMAT))  
+				{  
+					var files:Array = e.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
+					if (files.length == 1 && (files[0] as File).extension == "xml")
+					{
+						DragManager.acceptDragDrop(this);
+					}
+				}  
+			}  
+
+			/**
+			 * 外部文件拖放处理
+			 */
+			private function onDragDrop( e:NativeDragEvent ):void  
+			{
+				var files:Array = e.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
+				loadConfig((files[0] as File).url);
+			}  
+			
+			/**
+			 * 加载地图配置文件
+			 */
+			private function onLoadConfig():void
+			{
+				_configFile.browseForOpen("请选择地图配置文件", [CONFIG_FILE]);
+			}
+			
+			/**
+			 * 选择配置文件后的处理
+			 */
+			private function onSelectConfigFile( e:Event ):void
+			{
+				loadConfig(_configFile.url);
+			}
+			
+			/**
+			 * 加载地图配置
+			 */
+			private function loadConfig( url:String ):void
+			{
+				try
+				{
+					var cfg:XML = FileUtils.readXMLFile(new File(url));
+					var img:XMLList = cfg.imgList.img;
+					if (img.length() == 0)
+					{
+						throw new Error("未找到配置信息！");
+					}
+					parseImgList(img, url);
+				}
+				catch (e:Error)
+				{
+					Alert.show(e.toString(), "读取文件错误");
+				}
+			}
+			
+			/**
+			 * 解析地图图片列表
+			 */
+			private function parseImgList( imgList:XMLList, url:String ):void
+			{
+				var map:Object = {};
+				var w:int = 0;
+				var h:int = 0;
+				var x:int;
+				var y:int;
+				for each (var i:XML in imgList)
+				{
+					x = int(i.@imgX);
+					y = int(i.@imgY);
+					w = Math.max(w, x + 1);
+					h = Math.max(h, y + 1);
+					map[x + "," + y] = i.@url;
+				}
+				
+				//绘制预览图
+				var base_path:String = StringUtils.getPath(url) + "/";
+				_bitmap = new BitmapData(w * sliceW, h * sliceH, false, 0);
+				_count = 0;
+				_loadedCount = 0;
+				for (x = 0; x < w; x++)
+				{
+					for (y = 0; y < w; y++)
+					{
+						var url:String = map[x + "," + y];
+						if (!url) continue;
+						var path:String = StringUtils.getFilename(StringUtils.getPath(url));
+						path = base_path + (path ? path + "/" : "") + StringUtils.getFilename(url);
+						FileUtils.readImageFile(new File(path), Functor.createLeft(renderSlice, x * sliceW, y * sliceH, path));
+						_count++;
+					}
+				}
+				
+				c_preview.source = _bitmap;
+				c_preview.width = _bitmap.width;
+				c_preview.height = _bitmap.height;
+			}
+			
+			/**
+			 * 渲染地图切片
+			 */
+			private function renderSlice( image:DisplayObject, x:int, y:int, path:String ):void
+			{
+				_bitmap.draw(image, new Matrix(1,0,0,1,x,y));
+			}
+			
+			/**
+			 * 导出PNG图片文件
+			 */
+			private function onExportPNG():void
+			{
+				if (!_bitmap) return;
+				_pngFile.browseForSave("请指定导出图片文件路径");
+			}
+			
+			/**
+			 * 选择PNG文件后的处理
+			 */
+			private function onSelectPNGFile( e:Event ):void
+			{
+				writeFileLater(FileUtils.writePNGFile, _pngFile, _bitmap);
+			}
+			
+			/**
+			 * 导出JPG图片文件
+			 */
+			private function onExportJPG():void
+			{
+				if (!_bitmap) return;
+				_jpgFile.browseForSave("请指定导出图片文件路径");
+			}
+			
+			/**
+			 * 选择JPG文件后的处理
+			 */
+			private function onSelectJPGFile( e:Event ):void
+			{
+				writeFileLater(FileUtils.writeJPGFile, _jpgFile, _bitmap, jpgQuality);
+			}
+			
+			/**
+			 * 延后写入文件（以便显示提示信息）
+			 */
+			private function writeFileLater( writeFunc:Function, ...args ):void
+			{
+				c_panel.title = "正在生成文件，请稍候...";
+				setTimeout(function ():void
+				{
+					try
+					{
+						writeFunc.apply(null, args);
+						Alert.show("生成文件成功！", "提示");
+					}
+					catch (e:Error)
+					{
+						Alert.show(e.toString(), "错误");
+					}
+					c_panel.title = "工具栏";
+				}, 100);
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Image x="0" y="0" width="400" height="300" id="c_preview"/>
+	<s:Panel x="50" y="50" width="260" height="140" title="工具栏" id="c_panel"
+			 mouseDown="if (c_panel.mouseY &lt; 30) c_panel.startDrag()" mouseUp="c_panel.stopDrag()">
+		<s:Button x="20" y="12" width="100" label="载入地图配置" click="onLoadConfig()"/>
+		<s:Button x="20" y="42" width="100" label="导出PNG图片" click="onExportPNG()"/>
+		<s:Button x="20" y="72" width="100" label="导出JPG图片" click="onExportJPG()"/>
+		<s:TextInput x="190" y="12" width="50" text="{sliceW}"/>
+		<s:TextInput x="190" y="42" width="50" text="{sliceH}"/>
+		<s:TextInput x="190" y="72" width="50" text="{jpgQuality}"/>
+		<s:Label x="135" y="77" text="JPG质量"/>
+		<s:Label x="135" y="47" text="切片高度"/>
+		<s:Label x="135" y="17" text="切片宽度"/>
+	</s:Panel>
+</s:WindowedApplication>

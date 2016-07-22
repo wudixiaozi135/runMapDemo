@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="410" height="158" title="同步属性" 
+			   close="onClose(event)" initialize="titlewindow1_initializeHandler(event)">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.ElementData;
+			import tx.mnme.Global;
+			import tx.mnme.events.AttributeEvent;
+			import tx.mnme.views.panels.Attribute;
+			
+			import mx.events.CloseEvent;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			
+			import net.fixer.utils.IListUtil;
+			
+			private var okFun:Function;
+			
+			public function show():void
+			{
+				PopUpManager.addPopUp(this,Global.mainApp,true);
+				PopUpManager.centerPopUp(this);
+			}
+			
+			public function setData(filename:String,x:int,y:int,scalex:Number,scaley:Number,rotation:Number,alpha:Number,blend:String,okFun:Function):void
+			{
+				
+				if(initialized)
+				{
+					this.okFun = okFun;
+					ax.text = x.toString();
+					ay.text = y.toString();
+					aid.text = filename;
+					
+					ascalex.text = scalex.toString();
+					ascaley.text = scaley.toString();
+					arotation.text = rotation.toString();
+					aalpha.text = alpha.toString();
+					
+					cb.selectedIndex = IListUtil.indexOf(Attribute.BLEND_DMODES,"value",blend||"normal");
+				}else
+				{
+					var fun:Function = function(e:FlexEvent):void{
+						e.currentTarget.removeEventListener(FlexEvent.CREATION_COMPLETE,fun);
+						setData(filename,x,y,scalex,scaley,rotation,alpha,blend,okFun);
+					}
+					this.addEventListener(FlexEvent.CREATION_COMPLETE,fun);
+				}
+			}
+			
+			public function getAttributeEvent():AttributeEvent
+			{
+				var ae:AttributeEvent = new AttributeEvent(AttributeEvent.SYNC);
+				var data:ElementData = new ElementData();
+				ae.data = data;
+				
+				if(cb_pos.selected)
+				{
+					ae.syncPos = true;
+					data.x = int(ax.text);
+					data.y = int(ay.text);
+				}
+				if(cb_scale.selected)
+				{
+					ae.syncScale = true;
+					data.scaleX = Number(ascalex.text);
+					data.scaleY = Number(ascaley.text);
+				}
+				if(cb_rotation.selected)
+				{
+					ae.syncRotation = true;
+					data.rotation = Number(arotation.text);
+				}
+				if(cb_alpha.selected)
+				{
+					ae.syncAlpha = true;
+					data.alpha = Number(aalpha.text);
+				}
+				if(cb_blend.selected)
+				{
+					ae.syncBlend = true;
+					data.blendMode = cb.selectedItem["value"];
+				}
+				return ae;
+			}
+			
+			protected function onClose(event:CloseEvent):void
+			{
+				destroy();
+			}
+			
+			protected function onClick(event:MouseEvent):void
+			{
+				switch(event.target)
+				{
+					case ok:
+						okFun&&okFun();
+					case cancel:
+						break;
+				}
+				destroy();
+			}
+			
+			public function destroy():void
+			{
+				PopUpManager.removePopUp(this);
+				okFun = null;
+			}
+			
+			
+			private static const selectedCache:Object = {};
+			
+			protected function titlewindow1_initializeHandler(event:FlexEvent):void
+			{
+				if(selectedCache["cb_pos"])
+				{
+					cb_pos.selected = true;
+				}
+				if(selectedCache["cb_scale"])
+				{
+					cb_scale.selected = true;
+				}
+				if(selectedCache["cb_rotation"])
+				{
+					cb_rotation.selected = true;
+				}
+				if(selectedCache["cb_alpha"])
+				{
+					cb_alpha.selected = true;
+				}
+				if(selectedCache["cb_blend"])
+				{
+					cb_blend.selected = true;
+				}
+			}
+			
+			protected function cbChangeHandler(event:Event):void
+			{
+				var cb:CheckBox = event.currentTarget as CheckBox;
+				selectedCache[cb.id] = cb.selected;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:Label x="12" y="11" text="x:"/>
+	<s:TextInput id="ax" x="25" y="4" width="42" enabled="false" restrict="-0987654321"/>
+	<s:Label x="12" y="37" text="y:"/>
+	<s:TextInput id="ay" x="25" y="30" width="42" enabled="false" restrict="-0987654321"/>
+	<s:Label x="76" y="11" text="scaleX:"/>
+	<s:TextInput id="ascalex" x="119" y="4" width="42" enabled="false" restrict="-0987654321."/>
+	<s:Label x="76" y="36" text="scaleY:"/>
+	<s:TextInput id="ascaley" x="119" y="30" width="42" enabled="false" restrict="-0987654321."/>
+	<s:Label x="170" y="11" text="rotation:"/>
+	<s:TextInput id="arotation" x="217" y="4" width="46" enabled="false" restrict="-0987654321."/>
+	<s:Label x="178" y="36" text="alpha:"/>
+	<s:TextInput id="aalpha" x="217" y="30" width="46" enabled="false" restrict="0987654321."/>
+	
+	<s:Label x="271" y="11" text="name:" width="90"/>
+	<s:TextInput id="aid" x="308" y="4" width="90" enabled="false"/>
+	<s:Label x="272" y="36" text="blend:"/>
+	
+	<s:DropDownList id="cb" x="308" y="29" width="91"
+					dataProvider="{Attribute.BLEND_DMODES}" />
+	<s:CheckBox id="cb_pos" x="26" y="63" label="position" selected="false" change="cbChangeHandler(event)"/>
+	<s:CheckBox id="cb_scale" x="101" y="63" label="scale" selected="false" change="cbChangeHandler(event)"/>
+	<s:CheckBox id="cb_rotation" x="158" y="63" label="rotation" selected="false" change="cbChangeHandler(event)"/>
+	<s:CheckBox id="cb_alpha" x="226" y="63" label="alpha" selected="false" change="cbChangeHandler(event)"/>
+	<s:CheckBox id="cb_blend" x="286" y="63" label="blend" selected="false" change="cbChangeHandler(event)"/>
+	<s:Button id="ok" x="109" y="97" label="确定" click="onClick(event)"/>
+	<s:Button id="cancel" x="216" y="97" label="取消" click="onClick(event)"/>
+</s:TitleWindow>

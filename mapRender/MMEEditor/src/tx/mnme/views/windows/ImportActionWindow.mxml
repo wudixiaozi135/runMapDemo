@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="600" height="400"
+			   title="导入MME" xmlns:f="net.fixer.flex.compnonents.*" close="onClose()" creationComplete="titlewindow1_creationCompleteHandler(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.tencent.morefun.naruto.tools.mmefile.MmeFile;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.ActionData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.ElementData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.FrameData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.LayerData;
+			import tx.mnme.utils.ImageCopyer;
+			import tx.mnme.utils.MmeReader;
+			
+			import mx.collections.ArrayCollection;
+			import mx.events.CloseEvent;
+			import mx.events.CollectionEvent;
+			import mx.events.CollectionEventKind;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			
+			private var mmeFile:MmeFile;
+			private var currMmeFile:MmeFile;
+			[Bindable]
+			private var dgData:ArrayCollection = new ArrayCollection();
+			
+			
+			protected function titlewindow1_creationCompleteHandler(event:FlexEvent):void
+			{
+				dgData.addEventListener(CollectionEvent.COLLECTION_CHANGE,onDGDataChange);
+			}
+			
+			protected function onDGDataChange(event:CollectionEvent):void
+			{
+				switch(event.kind)
+				{
+					case CollectionEventKind.UPDATE:
+						
+						updateCBAll();
+						
+						break;
+				}
+			}
+			
+			public function setCurrMmeFile(currMmeFile:MmeFile):void
+			{
+				this.currMmeFile = currMmeFile;
+			}
+			
+			protected function tdir_changeHandler(event:Event):void
+			{
+				var mmeReader:MmeReader = new MmeReader();
+				mmeReader.doneFun = onMmeReaderDone;
+				mmeReader.read(tdir.path);
+			}
+			
+			private function onMmeReaderDone(mmeReader:MmeReader):void
+			{
+				mmeFile = mmeReader.mmeFile;
+				
+				dgData.removeAll();
+				
+				for each(var ad:ActionData in mmeFile.data.actionDatas)
+				{
+					var state:String = isExisted(ad)?"U":"";
+					
+					dgData.addItem({state:state,selected:false,name:ad.name,data:ad});
+					
+					
+				}
+			}
+			
+			private function isExisted(ad:ActionData):Boolean
+			{
+				for each(var tmp:ActionData in currMmeFile.data.actionDatas)
+				{
+					if(tmp.name == ad.name)
+					{
+						return true;
+					}
+				}
+				return false;
+			}
+			
+			protected function ok_clickHandler(event:MouseEvent):void
+			{
+				var imgs:Array = [];
+				var d:Object;
+				for each(d in dgData)
+				{
+					if(d.selected)
+					{
+						for each(var ld:LayerData in ActionData(d.data).layerDatas)
+						{
+							for each(var fd:FrameData in ld.frameDatas)
+							{
+								if(fd.element is ElementData)
+								{
+									var fn:String = ElementData(fd.element).filename;
+									if(imgs.indexOf(fn) == -1)
+									{
+										imgs.push(fn);
+									}
+								}
+							}
+						}
+						
+						for each(var tmp:ActionData in currMmeFile.data.actionDatas)
+						{
+							if(tmp.name == ActionData(d.data).name)
+							{
+								currMmeFile.data.removeActionData(tmp);
+								break;
+							}
+						}
+						
+					}
+				}
+				for each(d in dgData)
+				{
+					if(d.selected)
+					{
+						currMmeFile.data.addActionData(ActionData(d.data).clone());
+					}
+				}
+				
+				ok.enabled = false;
+				
+				//copy imgs
+				
+				var imageCopyer:ImageCopyer = new ImageCopyer();
+				imageCopyer.doneFun = onImageCopyerDone;
+				imageCopyer.copy(mmeFile.tempDirectory.resolvePath("images"),currMmeFile.tempDirectory.resolvePath("images"),imgs);
+			}
+			
+			private function onImageCopyerDone(imageCopyer:ImageCopyer):void
+			{
+				onClose();
+			}
+			
+			protected function onClose():void
+			{
+				PopUpManager.removePopUp(this);
+				
+				if(mmeFile)
+				{
+					if(mmeFile.tempDirectory && mmeFile.tempDirectory.exists)
+					{
+						mmeFile.tempDirectory.deleteDirectoryAsync(true);
+					}
+					mmeFile = null;
+				}
+				currMmeFile = null;
+				dgData.removeAll();
+				dgData = null;
+			}
+			
+			private var is_cbAll_changeHandler:Boolean = false;
+			protected function cbAll_changeHandler(event:Event):void
+			{
+				is_cbAll_changeHandler = true;
+				for(var i:int=0;i<dgData.length;i++)
+				{
+					var obj:Object = dgData.getItemAt(i);
+					obj.selected = cbAll.selected;
+					dgData.itemUpdated(obj);
+				}
+				is_cbAll_changeHandler = false;
+			}
+			
+			private function updateCBAll():void
+			{
+				if(is_cbAll_changeHandler)return;
+				for each(var obj:Object in dgData.source)
+				{
+					if(obj.selected==false)
+					{
+						cbAll.selected = false;
+						return;
+					}
+				}
+				cbAll.selected = true;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	
+	<f:FileSelector id="tdir" y="10" left="10" right="10" isSelectFile="true" fileFilters="MME文件(*.mme),*.mme"
+					selectButtonLabel="MME文件" selectTitle="选择MME文件" change="tdir_changeHandler(event)"/>
+	
+	<s:DataGrid id="dg" top="40" left="10" right="10" bottom="60" dataProvider="{dgData}"  >
+		<s:columns>
+			<mx:ArrayList>
+				<s:GridColumn dataField="state" headerText="" width="30" resizable="false">
+				</s:GridColumn>
+				<s:GridColumn dataField="selected" headerText="" width="30" resizable="false" sortable="false" editable="true" >
+					<s:itemRenderer>
+						<fx:Component>
+							<s:GridItemRenderer>
+								<fx:Script>
+									<![CDATA[
+										import com.tencent.morefun.naruto.tools.mmefile.timeline.ActionData;
+										
+										override public function set data(value:Object):void
+										{
+											super.data = value;
+											//cb.selected = value.selected;
+											if(value)
+											{
+												cb.selected = value.selected;
+											}
+										}
+										
+										protected function cb_changeHandler(event:Event):void
+										{
+											data.selected = cb.selected;
+											grid.dataGrid.dataProvider.itemUpdated(data);
+										}
+										
+									]]>
+								</fx:Script>
+								<s:CheckBox id="cb" change="cb_changeHandler(event)" horizontalCenter="0" verticalCenter="0"/>
+							</s:GridItemRenderer>
+						</fx:Component>
+					</s:itemRenderer>
+				</s:GridColumn>
+				<s:GridColumn dataField="name" headerText="动作名称">
+				</s:GridColumn>
+				
+			</mx:ArrayList>
+		</s:columns>
+	</s:DataGrid>
+	<s:CheckBox id="cbAll" x="50" y="43" change="cbAll_changeHandler(event)"/>
+	
+	<mx:ProgressBar id="pb" left="10" right="10" bottom="20"
+					label=""
+					minimum="0"
+					mode="manual"
+					/>
+	
+	<s:Button id="ok" bottom="10" horizontalCenter="-50" label="确定" click="ok_clickHandler(event)"/>
+	<s:Button bottom="10" horizontalCenter="50" label="取消" click="onClose()"/>
+</s:TitleWindow>

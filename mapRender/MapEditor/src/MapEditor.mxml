@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+					   xmlns:s="library://ns.adobe.com/flex/spark"
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   width="1108" height="678"
+					   title="地图编辑器 v1.0.0"
+					   showStatusBar="false"
+					   creationComplete="onCreate()" >
+	<fx:Style source="MapEditor.css"/>
+	
+	<fx:Script>
+		<![CDATA[
+			import tx.sce.controller.LayerController;
+			import tx.sce.controller.LibraryController;
+			import tx.sce.controller.ProjectController;
+			import tx.sce.data.DataCollect;
+			import tx.sce.manager.ControlManager;
+			import tx.sce.proxy.EditAreaProxy;
+			import tx.sce.proxy.ItemEditProxy;
+			import tx.sce.proxy.LayersProxy;
+			import tx.sce.proxy.LibraryProxy;
+			import tx.sce.proxy.MenuBarProxy;
+
+			/**
+			 * 地图编辑器
+			 * @author	tencent, Fictiony
+			 * @version	2016/7/18
+			 */	
+			private var dataCollect:DataCollect;
+			
+			private var ctrlManager:ControlManager;
+			
+			private var libraryCtrl:LibraryController;
+			private var projectCtrl:ProjectController;
+			private var layerCtrl:LayerController;	
+			
+			private var libraryProxy:LibraryProxy;
+			private var menuBarProxy:MenuBarProxy;
+			private var editAreaProxy:EditAreaProxy;
+			private var layersProxy:LayersProxy;
+			private var itemEditProxy:ItemEditProxy;
+
+			/**
+			 * 初始化
+			 */
+			protected function onCreate():void
+			{
+				dataCollect = new DataCollect();
+				
+				projectCtrl = new ProjectController(dataCollect);
+				libraryCtrl = new LibraryController(dataCollect);
+				layerCtrl = new LayerController(dataCollect);
+				
+				ctrlManager = new ControlManager(dataCollect);
+				
+				libraryProxy = new LibraryProxy(this);
+				menuBarProxy = new MenuBarProxy(this);
+				editAreaProxy = new EditAreaProxy(this);
+				layersProxy = new LayersProxy(this);
+				itemEditProxy = new ItemEditProxy(this);
+				
+				//Proxy
+				libraryProxy.linkToManager(ctrlManager);
+				menuBarProxy.linkToManager(ctrlManager);
+				editAreaProxy.linkToManager(ctrlManager);
+				layersProxy.linkToManager(ctrlManager);
+				itemEditProxy.linkToManager(ctrlManager);
+				
+				//Controller
+				projectCtrl.linkToManager(ctrlManager);
+				libraryCtrl.linkToManager(ctrlManager);
+				layerCtrl.linkToManager(ctrlManager);
+			}
+		]]>
+	</fx:Script>
+	
+	<mx:HDividedBox left="0" right="0" top="0" bottom="0" liveDragging="true">
+		<mx:VDividedBox id="leftBox" width="80%" height="100%" liveDragging="true">
+		</mx:VDividedBox>
+		<mx:VDividedBox id="rightBox" width="20%" height="100%" liveDragging="true">
+		</mx:VDividedBox>
+	</mx:HDividedBox>
+</s:WindowedApplication>

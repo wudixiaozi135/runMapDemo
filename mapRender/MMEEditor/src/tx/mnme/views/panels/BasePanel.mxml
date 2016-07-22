@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 creationComplete="basePanelInit(event)" dropShadowVisible="false">
+	<fx:Script>
+		<![CDATA[
+			import mx.core.UIComponent;
+			import mx.events.FlexEvent;
+			
+			public var notifyKeyDown:Boolean = false;
+			public var notifyKeyUp:Boolean = true;
+			
+			protected function basePanelInit(event:FlexEvent):void
+			{
+				UIComponent(titleDisplay).parent.height=20;
+				UIComponent(titleDisplay).top = -5;
+			}
+			public function onKeyDown(event:KeyboardEvent):void
+			{
+				
+			}
+			public function onKeyUp(event:KeyboardEvent):void
+			{
+				
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+</s:Panel>

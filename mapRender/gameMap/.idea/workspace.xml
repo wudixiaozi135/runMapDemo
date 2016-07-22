@@ -4,9 +4,727 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e35c6acd-c93c-4256-b0f9-c5d9117ed2de" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GlobalData.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/map/utils/MapCfgParse.as" />
+    <list default="true" id="e35c6acd-c93c-4256-b0f9-c5d9117ed2de" name="Default" comment="更新，">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEDecoder/bin/MMEDecoder.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEDecoder/bin/ext/7z.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEDecoder/bin/ext/7z.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEDecoder/release/MMEDecoder.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEDecoder/src/ext/7z.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEDecoder/src/ext/7z.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/bin/MMEEditor.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/bin/ext/7z.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/bin/ext/7z.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/bin/ext/Robocopy.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/release/MMEEditor.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/ext/7z.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/ext/7z.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/ext/Robocopy.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/icons/114.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/icons/128.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/icons/16.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/icons/32.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/icons/36.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/icons/48.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/icons/57.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/icons/72.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/icons/doc/114.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/icons/doc/128.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/icons/doc/16.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/icons/doc/32.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/icons/doc/36.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/icons/doc/48.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/icons/doc/57.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/icons/doc/72.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/MapEditor.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/7z.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/7z.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/03af3ba543c99096dbbeeadf00d12d19.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/05e68acaa99ca080377b9f5daedb5d6c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/084ca2aedff1d611d4299bdda2273897.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/09140b9c04d59b6ccb0c4f12dc546c73.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/09339b38c68bd1641813a4a7d609b1b8.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/0d66b526cd144c401fde01f7c3aa4b46.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/0d7d27ee755436243df901a0a56d64bb.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/0ec2385d9a2217044d6f3ca1dbb4aa9b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/0eec32d83d7677072d9e128875c3a34b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/0f54832deeb410a90285b01d1121e39d.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/0f91c519b346e52e4ed869d98b96e9b2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/0faaab62d4364affc93233f9a0b5fb12.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/13ee08774e43650fa8b4089c9a9211ca.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/1754cd03df4a76afa981ec06d39fd29b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/1baa59f388f49fccbc9a4971b39e48a5.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/1e02bb770e486e7a3a5bc804baa5369f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/1f4421261b0788e20e4a46e285aeace2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/201eabe3e38ae71b4d5508853f959fb6.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/237d1eedc20a5f239ba0c469d6fe64e0.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/23bca6cb3292c149a017fce306bfac06.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/24152bd8295e71cf285a2e67d347a887.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/246bbb8343a78abed19fd301878f1cbf.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/26ce52f237dab17304d672f2131438b9.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/29c2f865e4441fa84bff7ac12ee29127.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/2da153e633aba509045900902c413584.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/33ad7d81ab42247bba42221789042330.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/33fecff5867c92cf9f12632e6e30a462.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/34806dcda079e08fec83a0f1f62068eb.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/396308ab0aace170f4a12630f3d9f906.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/3b9809b29551dccfa5a304552f464fa4.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/3baceec3150babffe6ea25ce2b3f2d12.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/3e7edbc52ed4dbda023e2117beacbf76.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/3e9952b88642b2b4c6147ad6464c30e3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/409709e1272272789769c350bef16459.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/417f0ac6b9688337b421553b2d1977df.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/422f32f36c597ec0a9e2155d49ed6f86.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/42d727d8a94507edcb56ca72f1fbd46c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/445f05d36c551032743a73f7bc99f8ec.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/4b2cff27732ce3e200745ff142b13adf.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/4e6d6efc048054d019340a34dfe1fc14.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/547d77ddfad32c0d5254b871d1d82fe3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/54890b04ba0c96399a7f8832400c4d4f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/5588d53ca5a30fb1c28bc046b63e1903.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/575125d563200cd55ca92af540d7b383.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/577a6b6696f76f8dfb2d4a3d9238553b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/5886c48a50786ca674171b7ef0c6e24a.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/5972d01f637fb6b5773b42078481870d.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/59d5ee1cc9eae2d76f8be4d72ec97968.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/5a6dccd38e6500b7e6fde4288f20b12f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/5a792db8a83837a13970dbd3221aad92.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/643f71b1a4e34374bc5ed08fcc914a8d.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/644fb3d32d37a6e39832d570e56c55c4.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/65e9be46b9f638a608786bdfb6ff9d21.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/6a07c63a4c17aab43172ce95ef50e2b0.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/6b90f2e7998061255a88f659aafa7529.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/6c67dbb52e1433ac35894401f215cd0c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/6c8d92324a50b0eedce5b2d13dbbc8ec.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/6f264a4e04994fc5fb155ca4f4386a23.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/717382e366da57e2e4931cf7ca766d3f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/71afe92507e97953fb2211844f9e9c19.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/7235d3f44e915b0200eeaa880f42cf71.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/73c8bc5c87e69f5039231cb650cbf86c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/74028afc0dc472bbc3aff2f9307642b3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/75ac0f38c172fa17ac6972dd2313a1f7.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/77120bdf0e41c77fadecb9f1aab0130b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/771ec42d23e2ab5add5fc729b7c5407b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/775ae4d11a05420b877b4f2961a39cfc.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/7950ce2dcd584a17463d2eeee2712048.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/7a1785a2a198e965b22f8d206e7ea021.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/7a4f381634a92dbebc229acb0a5f1b2c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/7fbb806ae71bbf0254c1b7b9750b8c29.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/8017d79d5a0b2310f6705585097cdc30.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/80fe8040c1eff4819d9ead3ecd707528.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/820787362e66513b0f6a44c25d3af269.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/877eb79a80f6b50e1c6ed399d8da51b4.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/885464da4b9b5c3f0f4b849c1b2950af.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/887b092ab823d5063ed04fdebb37094a.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/8c958e1749983d3a1f7c1a9885f8ea32.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/8dbf2f1dd9e1b9bd3eba27666a61242c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/8e49ebf1acd385f4d53e71c9264dfbfb.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/93b28b86823ecea960cbe8036c552416.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/93dd7f10773baac28f1a9d58fb5682be.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/94b5bed87eade0fd83d0e3b124a6a051.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/976b604d8dbed106af19a34079d45848.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/97a4e060f20c21f0cc86cd389d9ab750.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/998648077976b2df8587dabf912f2a2e.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/9bf01ed866696007c4882bcb9bebdd41.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/9cfc47ed3db7377bed8968ed172f27e5.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/9e9e7b0eb145ed13c560fffe8da01766.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/9ed19e1857f118fabd520c55b1e7e38f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/9f59aee213e9499f621ef1d950b228a9.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/9ff782b2abb358c2d77bf1bf3016d87b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/a141c3f8b39d10f56658783161a86994.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/a2c882fea777c386e31b5545631c799e.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/a3073b9c7362c460c9e211e146cc0a8f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/a4b19b3a6c451daa5919082eef23b918.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/a4b70ac9fb27ab50e1e154fa70d16b73.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/a4ebea13155722b8c5f91040804faee6.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/a5bcc62917f9c49693357a56660a2ba1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/a98665045461aa812f073449011e862e.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/a9e28db758833fd823b016920b8ef551.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/aa9a2e9a1560a24893ae8f8efd91c221.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/aad08dc38e1e7bb10a30b915ab0931b4.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/ab7d9b913b41ed752d84eeca7e66f4cc.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/ad35702da9ad953f10e84f003213efa1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/aed99c3f4b4a6671d00ccb5e06bc6890.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/b266d3c44484de1129d55c711e36d421.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/b807eccc7de5f976c6d505f739b6313a.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/b9b3ee69080991e2e41c8984f99f6b82.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/be14c4bdc9211c4b83ac6d03b9eb2405.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/be4c9e585f5630a3d78caa78e1cdc1df.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/be784945566cb268be7b0e95d13fd3e7.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/bedaf56bcd969d2d1193156a20622d6e.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/bf8f2d3e46b546528eb2605d40e24185.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/c2ffeae32d50b91f09bfbb328ba30b3a.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/c3c5092e1d3b0b03bf934d7490e96ba9.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/c803eeb4643bc45a5ddccce8202c2464.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/c9f7de05fb0beb7ad729f70cf6ada88d.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/ca33e5e6b231266abe5520f98008a515.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/d06e83efe8c15137df8c639c5660becd.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/d15ea449db4975e937e56098b4d966fd.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/d1faa66fb8d01bf73e028d0c886941a6.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/d37939175eea033b02cc802d34e92a5d.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/d5d3ac10b6a49bf81a0f668fa45df8ec.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/dbdbd06c5d2e4ad89d07f9d567b8354d.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/dcf5f5304080539762388bcfdabdc37f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/dd07afbc4c355fabe896dc43f76c3759.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/df0efda41daf4c9db45ddf5c4b5c0392.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/e73a9f072bf47ec276aa1beaea9193ab.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/e871aa6cae35116665859d576a0071d9.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/e9a56fa910bd859d7ba6e15dd38bd118.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/e9ada1fe545de76fad754bf0662e977f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/ec1ac542bf98ca93e012e0b132af1010.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/ef82e0a8545815775fd6e67cb91c3588.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/f0b1617ffd640f3c24fbdcd73386d22e.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/f2d4bcfc9f2cb0f197dc40091138523e.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/f35e92406ffc5d3159436a58c6a9291b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/f4728b97b42e8e871c1cdd73853f4c66.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/f764f54de1213fcd6ab8a7eee1115b98.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/faf20fb7a401bed7e0c12cc77a8b444a.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/fe1a3472a9ab89f558597f754efa6334.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/fe56543a1bf498125a54d6f01e7a7d3f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/ff0d46130ac1003fdbe826d994473513.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/ImgItem/ffee0646c38e02f724fc189da69ff08b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/MapInfo.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/defaultMap.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/miniMap.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/sceneMap.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/03af3ba543c99096dbbeeadf00d12d19.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/05e68acaa99ca080377b9f5daedb5d6c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/084ca2aedff1d611d4299bdda2273897.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/09140b9c04d59b6ccb0c4f12dc546c73.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/09339b38c68bd1641813a4a7d609b1b8.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/0d66b526cd144c401fde01f7c3aa4b46.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/0d7d27ee755436243df901a0a56d64bb.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/0ec2385d9a2217044d6f3ca1dbb4aa9b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/0eec32d83d7677072d9e128875c3a34b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/0f54832deeb410a90285b01d1121e39d.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/0f91c519b346e52e4ed869d98b96e9b2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/0faaab62d4364affc93233f9a0b5fb12.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/13ee08774e43650fa8b4089c9a9211ca.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/1754cd03df4a76afa981ec06d39fd29b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/1baa59f388f49fccbc9a4971b39e48a5.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/1e02bb770e486e7a3a5bc804baa5369f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/1f4421261b0788e20e4a46e285aeace2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/201eabe3e38ae71b4d5508853f959fb6.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/237d1eedc20a5f239ba0c469d6fe64e0.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/23bca6cb3292c149a017fce306bfac06.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/24152bd8295e71cf285a2e67d347a887.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/246bbb8343a78abed19fd301878f1cbf.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/26ce52f237dab17304d672f2131438b9.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/29c2f865e4441fa84bff7ac12ee29127.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/2da153e633aba509045900902c413584.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/33ad7d81ab42247bba42221789042330.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/33fecff5867c92cf9f12632e6e30a462.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/34806dcda079e08fec83a0f1f62068eb.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/396308ab0aace170f4a12630f3d9f906.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/3b9809b29551dccfa5a304552f464fa4.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/3baceec3150babffe6ea25ce2b3f2d12.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/3e7edbc52ed4dbda023e2117beacbf76.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/3e9952b88642b2b4c6147ad6464c30e3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/409709e1272272789769c350bef16459.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/417f0ac6b9688337b421553b2d1977df.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/422f32f36c597ec0a9e2155d49ed6f86.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/42d727d8a94507edcb56ca72f1fbd46c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/445f05d36c551032743a73f7bc99f8ec.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/4b2cff27732ce3e200745ff142b13adf.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/4e6d6efc048054d019340a34dfe1fc14.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/547d77ddfad32c0d5254b871d1d82fe3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/54890b04ba0c96399a7f8832400c4d4f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/5588d53ca5a30fb1c28bc046b63e1903.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/575125d563200cd55ca92af540d7b383.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/577a6b6696f76f8dfb2d4a3d9238553b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/5886c48a50786ca674171b7ef0c6e24a.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/5972d01f637fb6b5773b42078481870d.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/59d5ee1cc9eae2d76f8be4d72ec97968.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/5a6dccd38e6500b7e6fde4288f20b12f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/5a792db8a83837a13970dbd3221aad92.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/643f71b1a4e34374bc5ed08fcc914a8d.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/644fb3d32d37a6e39832d570e56c55c4.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/65e9be46b9f638a608786bdfb6ff9d21.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/6a07c63a4c17aab43172ce95ef50e2b0.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/6b90f2e7998061255a88f659aafa7529.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/6c67dbb52e1433ac35894401f215cd0c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/6c8d92324a50b0eedce5b2d13dbbc8ec.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/6f264a4e04994fc5fb155ca4f4386a23.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/717382e366da57e2e4931cf7ca766d3f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/71afe92507e97953fb2211844f9e9c19.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/7235d3f44e915b0200eeaa880f42cf71.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/73c8bc5c87e69f5039231cb650cbf86c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/74028afc0dc472bbc3aff2f9307642b3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/75ac0f38c172fa17ac6972dd2313a1f7.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/77120bdf0e41c77fadecb9f1aab0130b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/771ec42d23e2ab5add5fc729b7c5407b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/775ae4d11a05420b877b4f2961a39cfc.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/7950ce2dcd584a17463d2eeee2712048.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/7a1785a2a198e965b22f8d206e7ea021.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/7a4f381634a92dbebc229acb0a5f1b2c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/7fbb806ae71bbf0254c1b7b9750b8c29.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/8017d79d5a0b2310f6705585097cdc30.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/80fe8040c1eff4819d9ead3ecd707528.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/820787362e66513b0f6a44c25d3af269.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/877eb79a80f6b50e1c6ed399d8da51b4.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/885464da4b9b5c3f0f4b849c1b2950af.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/887b092ab823d5063ed04fdebb37094a.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/8c958e1749983d3a1f7c1a9885f8ea32.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/8dbf2f1dd9e1b9bd3eba27666a61242c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/8e49ebf1acd385f4d53e71c9264dfbfb.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/93b28b86823ecea960cbe8036c552416.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/93dd7f10773baac28f1a9d58fb5682be.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/94b5bed87eade0fd83d0e3b124a6a051.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/976b604d8dbed106af19a34079d45848.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/97a4e060f20c21f0cc86cd389d9ab750.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/998648077976b2df8587dabf912f2a2e.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/9bf01ed866696007c4882bcb9bebdd41.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/9cfc47ed3db7377bed8968ed172f27e5.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/9e9e7b0eb145ed13c560fffe8da01766.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/9ed19e1857f118fabd520c55b1e7e38f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/9f59aee213e9499f621ef1d950b228a9.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/9ff782b2abb358c2d77bf1bf3016d87b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/a141c3f8b39d10f56658783161a86994.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/a2c882fea777c386e31b5545631c799e.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/a3073b9c7362c460c9e211e146cc0a8f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/a4b19b3a6c451daa5919082eef23b918.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/a4b70ac9fb27ab50e1e154fa70d16b73.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/a4ebea13155722b8c5f91040804faee6.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/a5bcc62917f9c49693357a56660a2ba1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/a98665045461aa812f073449011e862e.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/a9e28db758833fd823b016920b8ef551.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/aa9a2e9a1560a24893ae8f8efd91c221.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/aad08dc38e1e7bb10a30b915ab0931b4.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/ab7d9b913b41ed752d84eeca7e66f4cc.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/ad35702da9ad953f10e84f003213efa1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/aed99c3f4b4a6671d00ccb5e06bc6890.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/b266d3c44484de1129d55c711e36d421.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/b807eccc7de5f976c6d505f739b6313a.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/b9b3ee69080991e2e41c8984f99f6b82.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/be14c4bdc9211c4b83ac6d03b9eb2405.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/be4c9e585f5630a3d78caa78e1cdc1df.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/be784945566cb268be7b0e95d13fd3e7.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/bedaf56bcd969d2d1193156a20622d6e.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/bf8f2d3e46b546528eb2605d40e24185.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/c2ffeae32d50b91f09bfbb328ba30b3a.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/c3c5092e1d3b0b03bf934d7490e96ba9.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/c803eeb4643bc45a5ddccce8202c2464.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/c9f7de05fb0beb7ad729f70cf6ada88d.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/ca33e5e6b231266abe5520f98008a515.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/d06e83efe8c15137df8c639c5660becd.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/d15ea449db4975e937e56098b4d966fd.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/d1faa66fb8d01bf73e028d0c886941a6.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/d37939175eea033b02cc802d34e92a5d.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/d5d3ac10b6a49bf81a0f668fa45df8ec.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/dbdbd06c5d2e4ad89d07f9d567b8354d.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/dcf5f5304080539762388bcfdabdc37f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/dd07afbc4c355fabe896dc43f76c3759.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/df0efda41daf4c9db45ddf5c4b5c0392.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/e73a9f072bf47ec276aa1beaea9193ab.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/e871aa6cae35116665859d576a0071d9.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/e9a56fa910bd859d7ba6e15dd38bd118.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/e9ada1fe545de76fad754bf0662e977f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/ec1ac542bf98ca93e012e0b132af1010.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/ef82e0a8545815775fd6e67cb91c3588.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/f0b1617ffd640f3c24fbdcd73386d22e.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/f2d4bcfc9f2cb0f197dc40091138523e.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/f35e92406ffc5d3159436a58c6a9291b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/f4728b97b42e8e871c1cdd73853f4c66.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/f764f54de1213fcd6ab8a7eee1115b98.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/faf20fb7a401bed7e0c12cc77a8b444a.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/fe1a3472a9ab89f558597f754efa6334.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/fe56543a1bf498125a54d6f01e7a7d3f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/ff0d46130ac1003fdbe826d994473513.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/ImgItem/ffee0646c38e02f724fc189da69ff08b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/MapInfo.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/defaultMap.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/miniMap.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/sceneMap.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/lib/arrowButton.swc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/release/MapEditor.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/res/eye3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/res/lock2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/ext/7z.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/ext/7z.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapMerger/bin/MapMerger.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapMerger/release/MapMerger.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/011b160ea294864c380edcee6c896a9b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/017c8005e0d9ef504eaaa1830c3e6472.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/01a46256b00c411855ad620b03620372.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/027711f2fb8de49405efd52dbb05ecc8.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/03f7ea04c5a349087ea0524da9750a46.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/049c4d03b18aaf740ca6c27445475d43.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/0587692e3d2f0d3038c4e4a77ce30d4a.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/0647312aafc199cb829094e6654a3318.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/0840eefeb8ee77deaa20c58531d80192.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/0ca6042f04da641b6a8bd7ab55825ed7.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/0d2072272f88c0752edc038cc7905482.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/11c8b0bec111558154333ccaea8888da.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/131f2681cacf92bdddfc2c393d863aaf.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/179af0f248302295e98dba3fd8cc4f13.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/190e0f38b89417211208466f3da30f76.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/1981852f3a9a1cdeb6aff008c8e17673.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/1be23ceb3c85b220d78c9d2aecac39f5.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/1e7aae368a5aa827f71893233291c7e2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/1f5e1bdcaf0fb1cf4e838b4f911a9372.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/1f6b6cee11047feabbba924fe8c205a1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/22ce67302e0259d6b1c054c7916536e6.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/23a15065163ce3fb54425f033c50b373.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/257c51d487292e1b1aab98a767c00208.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/27ec244ef0f905710c08f543a900a3e1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/2852f1fc2c73c7b8ffc49d04e1c7fcd2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/2c74fb4bbda7a16b6388c77cc46ba446.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/32b9ab4035aba9ecb65213facd9db550.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/378f616c576662449a4c6c3c9036fbb3.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/3c34dfbd96ede8e14772bffed7d64682.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/3cb7aa76a272c68a79aef33e099e3ff4.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/3d3f683d88bafb34a0447940eab4a65a.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/3e98fa0b21d7477dae6b2c435e98ae8f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/3fcf9d74a7dfa5d548dc29a75ff437dc.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/408846ab32d15361689279d5de4888f0.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/445a77b5c9ea66aea4467e904669e08b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/449c3b26ee7f16d329f02f21a487632c.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/44ba939422721fc07d1fcaed76fc57ae.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/4608c6f43e05f77262dad037c866de04.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/47370c8169efb94556aa56dd1d14e946.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/4c13b14a3a4313fd51b8346e8dff7736.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/4d7e7ccababaafa34c0587732582ac9b.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/4dfc91724fb32d4205b9604a212ed1f2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/4fc0c9f97a795a4d1f7ea6888de67c61.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/50d24587b5e4113b88fe3fdc478df544.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/512cb5eab0b2b9d1780858032cc4f05b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/514c36b73d1fd9030f8d150e4337e4ae.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/51f09a5be2b5a81220b2fa5aa0eb1cfe.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/526e1b6a5a20a018ddfd0993c5225861.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/526fa875391e61ab7539044aa1d2af39.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/535ba948faa740821d4d693f5a156c9f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/54ab04212200a7aa9b3f6194da9af289.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/54de39191f56fa47a602e17d292adfae.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/55e072836d32e1cde7ccb4294b8f743a.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/5746febbe4b1da3165ca5e89cf167e9a.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/57ed35cf88f21a280cca9c49fa815f27.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/59b521f20ee957f1dcdc3907d7f130c7.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/5b0d946af00d2cc9c1dd3107ce098702.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/5e2543d03efd87da660080fdab924951.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/5ffe2aa7b72dd011c88e8af82f41abc9.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/634e564673a26229df3ace402cd66c33.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/6622439a446389b62e91c9c9ceec2d62.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/66877edc837bb6fd2cb401dee2b051b5.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/6d8225b83b130e048e28f8c3932b8883.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/7009c4f2de14054d901e0807d731036b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/711afdf9fa50e57b18d08e0c33a7dcf4.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/71c36f40bdfe2c5d419f9884ac522d31.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/73691127ecff897c26b8d5a0583de728.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/73b33145147098165561cc699e7dc23b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/73b7517dc8628473ab7ae691c4a671b8.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/742b0a167acb7d754d894170bb755e82.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/7459a8555704b9046fd7d054c84f4ba3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/74b752e66f91c700d021c793f2a9cc72.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/7679b3ad00d8d246b49a240c65c52178.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/767ebe70199de26fff12ae3af7249d30.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/771e17c34a33f4e09951dc32e7b10d61.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/773c9327f196bab94d1682e38a58aaa2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/78599aa4d507f2e7b81113e5754d39fc.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/7915d2db54da8fcb4dc96019e22f9d24.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/7a9449f4603289da55bc53ca4bb6b76e.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/7cfa3112deb267990d007d81c4cb43a7.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/806df2ae30eca42cb4c1042dcb030a85.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/82c63ef9154ef0475afc865433f201dc.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/856e64283f244ccd5be9d3f5a21c5754.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/8670ad1ec78af04a25c62a31ee2f51d3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/872f284b2827f09346d69f5e0e91cfe1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/8762e4213d228fe8fb80b6407f4fd7ae.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/881410e67715345c40cb5e18254331bf.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/8b182aa0ea257692bc7965b65943a95c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/8b1b1b80b9d29550281df2c7b0d51004.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/8c217c1bea0a18e459bbefbcbc3e45ff.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/8ed2d7318b92d74b8e9b417567dc8ae0.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/906ed4f827fc715df5cf42146808016c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/913d8580c83fed08c52dbc4c3dc641e5.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/95df3ed95e42856de41d959dbaeb4311.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/96ea7c5e52dff4aa1e8109b9d275b2fe.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/9a90eb9a0c9dbbcbef27e82193030e43.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/9d0fa7265752d9c41dd7b9456e45c2ef.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/9dfeef4168a87cff1dff3c4792fcaf7d.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/a106238b7ff9eb15bab636f92c34f454.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/a1bf144df94921d1d1654189c1dc7ced.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/a29caa58dc4be766bdf83a89b1e1b1a3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/a56d9ca4c015030e15f4f86d6e340c45.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/a58d19b5af9e55293f1796a8289223ee.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/a6110060c39b6208719940225aac09ff.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/a84a4441ad69330b866363633ba29457.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/a8b8dd27847f5cc11d5c767dddc0e4b3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/a9200f6600844edbd11d3d742e9304e3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/a9425677c1431a1264877bf7fa83ad09.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/a967075c7645eaaf9e14ae5fefe60741.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/aa30271377fd5866e01e3e8300777bca.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/b1a3a1c6f9bb0700cf5908a28b71c6e3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/b1f34d98eb8225290a9ae976ceaff24f.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/b1fc60569a5fe858c1da114a06cbe6d4.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/b25c84b98e53433528e4eb9f154fd78a.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/b49745de2f493d8c113132c8345be5ed.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/b60a67ff3b11f65e68b3dc820e5df69b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/b82ebe969c0b8859ba091b4e9880d5fd.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/b9d98f3ffc05f9d81196fc5f12ec9731.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/baef9f45dfcf48bf8e149f71cb0db869.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/bc2005f3f3d0102785658a72dc87d4dc.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/bca07d62838f57175d87dc32d05631f5.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/bd46cc58554631213b212c3a6e5bd40a.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/be82e1e83856aacb03ffbce3b6879a40.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/bedcf100d90d1c8e7a42b9c191c853e3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/bf6fb0fb3c8d1c0ad4ca8e3296fda16a.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/bf88a30968d01e028ecaba2cec789287.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/c399803b25227c1a3d6aa84772641a8b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/c88080a2b2d3cef96fab13202a571313.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/c91b584057c20ce1ece8ed4879b756ad.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/c9613ddf7082c907b4b065746a57b13b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/cb515a48ed5cb92c4a323e8adb9a44c4.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/cb662503a9bd0bc55a9a1299065be1ce.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/cb6f845d1f709ffd4c2abfe0ab8cf122.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/cbb1c8d5481b722a7ddf86644e2887d7.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/cd7243f6bbdbf9e66993455041b19e82.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/ce51aec950f64ebb25fc73b891c953c0.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/d46c73bcbf48299ac33a3152f66231e8.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/d70a10c2724ac12c5942eaff4539f8f8.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/d863751cae88b82f02d3d00feb19a12b.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/d97e0c33f4bb5bacce327392a13a5617.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/d9c1882fef755a617f925695454ab1f1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/dbac80e921a89a6ff55dff1d773c12be.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/dbbde73c3b0c01aa64cfc1479b500140.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/ddbcca0ce394232f0c37f02df61eb84d.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/ddd75e27721e8f786f38439c92a0ca50.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/e08d769b7f05af73316b0d68eab3633f.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/e3c1d327a3e0f8d641d9d1fe745826a2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/e4cd472c2cdf12b9e8fc3ed7e545dd75.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/e5813254dcf082201b38f5043d4c8b4c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/e644fffd9aed54ee156d04ad1072db9b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/e69975d583ebcc005946cddc69fa59fb.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/e6aa2da59d2690e124755cd82f81a88c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/e95d84140d2388e5a20a76610c8eae2b.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/eb0ecfb7766b41e2acbd4ed9fcf865b9.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/ef2e04f84480cb1443da8cd6f02e5d7d.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/f1bed2878f415ade7c07e011ed697d1c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/f74f3016b78f7895d42a609c83653b5c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/f85937d0280cadc96556cd31362e8a14.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/fd8accb61adb57f1a9fe104da37223c6.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/fed77fbaf1118fe367f22b3beeff61ad.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/ImgItem/ffdfbec446c67308dfc1ba8d61389c50.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/MapInfo.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/alphaMap.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/sceneMap.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/sceneMap.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../lib/game/naruto.core - 副本.zip" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../lib/game/naruto.core - 副本/library.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../toolLibs/common/MonsterDebugger.swc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../toolLibs/common/TheMiner.swc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../toolLibs/common/core.swc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../toolLibs/common/libcore.swc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../toolLibs/game/Common.swc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../toolLibs/tools/MmeAssetRender.swc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../toolLibs/tools/MmeFile.swc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../toolLibs/tools/fixer.swc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../toolLibs/tools/swfexport.swc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEDecoder/.actionScriptProperties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEDecoder/.flexProperties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEDecoder/.project" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEDecoder/.settings/org.eclipse.core.resources.prefs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEDecoder/bin/MMEDecoder-app.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEDecoder/src/MMEDecoder-app.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEDecoder/src/MMEDecoder.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEDecoder/src/MMEDecoder.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEDecoder/src/MmeUtils.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/.actionScriptProperties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/.flexProperties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/.project" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/bin/MMEEditor-app.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/bin/template/effect.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/bin/template/event.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/bin/template/normal.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/bin/template/role.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/MMEEditor-app.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/MMEEditor.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/MMEEditor.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/template/effect.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/template/event.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/template/normal.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/template/role.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/BitmapDataCache.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/Global.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/KeyManager.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/MotionEditor.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/UpdateConfig.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/UpdateManager.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/AddMultiLibraryItemToArea.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/BaseCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/CommandManager.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/actionlist/AddActionCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/actionlist/AssignRelevanceActionCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/actionlist/BaseActionCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/actionlist/CreateActionFromLayerCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/actionlist/DeleteActionsCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/actionlist/HideActionCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/actionlist/HideActionData.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/actionlist/ImportActionCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/actionlist/MergeActionCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/actionlist/ModifyActionCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/actionlist/SelectActionCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/area/AddItemCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/area/BaseAreaCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/area/ChangeAttributeCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/area/DelItemCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/area/DeleteCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/area/SelectItemCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/attribute/DisperseAlignCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/attribute/ModifyFrameAttribute.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/attribute/SyncAttributeCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/cmd_internal.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/library/AddFolderCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/library/BaseLibraryCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/library/DeleteItemCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/library/DeleteItemData.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/library/ImportFilesCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/library/ModifyFolderCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/library/SetExportItemCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/library/SetNotExportItemCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/library/SwapItemCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/library/SwapItemData.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/timeline/BaseTimelineCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/timeline/ChangeLayerCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/timeline/ConvertFrameCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/timeline/DeleteFrameCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/timeline/DeleteLayerCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/timeline/InsertFrameCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/timeline/InsertLayerCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/commands/timeline/SelectFrameCommand.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/events/ActionListEvent.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/events/ActiveAreaEvent.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/events/AttributeEvent.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/events/DirtyEvent.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/events/DisperseAlignEvent.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/events/FrameAttributeEvent.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/events/LibraryEvent.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/events/MmeAttributeEvent.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/file/ExportControl.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/file/FileControl.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/file/MmeFileCreater.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/utils/EqualUtil.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/utils/ImageCopyer.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/utils/ImageRecursiveCopyer.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/utils/MmeReader.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/CheckBoxList.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/Editor.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/ActionList.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/ActiveArea.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/Attribute.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/BasePanel.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/FrameAttribute.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/Library.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/LibraryTreeItemRenderer.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/MmeAttribute.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/Timeline.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/activearea/BaseItem.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/activearea/ImageItem.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/activearea/MmeRenderItem.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/activearea/PointItem.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/timeline/HideCheckBoxSkin.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/timeline/LockCheckBoxSkin.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/timeline/TimelineBlock.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/timeline/TimelineLayer.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/timeline/TimelineLayerHead.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/timeline/TimelineNeedle.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/panels/timeline/TimelineRuler.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/windows/CreateActionFromLayerWindow.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/windows/DisperseAlignWindow.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/windows/DocumentWindow.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/windows/EventWindow.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/windows/ImportActionByConfigWindow.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/windows/ImportActionWindow.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/windows/InputWindow.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/windows/MergeActionWindow.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/windows/PreviewNativeWidnow.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/windows/ProgressWindow.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/windows/ReplaceResourcesWindow.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/windows/SelectLayerWindow.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/tx/mnme/views/windows/SyncWindow.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MMEEditor/src/utils/FileUtils.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/.actionScriptProperties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/.flexProperties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/.idea/compiler.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/.idea/copyright/profiles_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/.idea/encodings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/.idea/flexCompiler.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/.project" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/MapEditor.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/MapEditor-app.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/MapEditor-descriptor.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/MapEditor.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/role/npc/scene/npccfg_scene1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/_scene_bg.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/_scene_fg.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/_scene_info.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/_scene_mg.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/1/npccfg_scene10006.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/_scene_bg.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/_scene_fg.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/_scene_info.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/_scene_mg.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/bin/ext/naruto/assets/scene/map/10006/npccfg_scene10006.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/MapEditor-app.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/MapEditor.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/MapEditor.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/command/Command.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/controller/Controller.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/controller/LayerController.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/controller/LibraryController.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/controller/ProjectController.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/data/CommandRecord.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/data/DataCollect.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/data/InteractRelateData.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/data/LayerData.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/data/LibraryData.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/data/ProjectData.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/event/CommandEvent.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/event/UpdateEvent.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/manager/ControlManager.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/proxy/EditAreaProxy.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/proxy/ItemEditProxy.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/proxy/LayersProxy.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/proxy/LibraryProxy.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/proxy/MenuBarProxy.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/proxy/Proxy.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/tools/Global.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/tools/MapGridUtil.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/tools/MyInputWindow.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/tools/MyZip.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/updateMsg/UpdateMsg.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/view/EditAreaView.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/view/ExportProgressView.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/view/EyeCheckBoxSkin.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/view/InputWindow.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/view/ItemEditView.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/view/LayersView.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/view/LibraryView.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/view/LockCheckBoxSkin.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/view/MyMxTreeItemRenderer.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/view/NpcRender.as" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapEditor/src/tx/sce/view/ZoomLabel.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapMerger/.actionScriptProperties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapMerger/.flexProperties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapMerger/.project" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapMerger/.settings/org.eclipse.core.resources.prefs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapMerger/bin/MapMerger-app.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapMerger/src/MapMerger-app.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapMerger/src/MapMerger.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../MapMerger/src/MapMerger.mxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/arrowButton.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/_scene_bg.cfg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/_scene_bg.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/_scene_fg.cfg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/_scene_fg.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/_scene_mg.cfg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/assets/scene/map/10006/_scene_mg.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../lib/game/naruto.core - 副本/catalog.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/history/history.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/history/history.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/history/historyFrame.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/GameMapDemo.swf" afterPath="$PROJECT_DIR$/bin/GameMapDemo.swf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/LoaderEvent.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/LoaderEvent.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/data/LoadTaskAssetInfo.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/loader/data/LoadTaskAssetInfo.as" />
@@ -41,10 +759,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/MmeData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/MmeData.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/PhantomData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/PhantomData.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/PointElementData.as" afterPath="$PROJECT_DIR$/../gameLib/src/com/tx/mme/data/PointElementData.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameMapDemo.as" afterPath="$PROJECT_DIR$/src/GameMapDemo.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/map/controls/MapControl.as" afterPath="$PROJECT_DIR$/src/com/map/controls/MapControl.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/map/images/MapTile.as" afterPath="$PROJECT_DIR$/src/com/map/images/MapTile.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/map/astar/AStarPixcelPathFinder.as" afterPath="$PROJECT_DIR$/src/com/map/astar/AStarPixcelPathFinder.as" />
     </list>
     <ignored path="mapDemo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,11 +784,45 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GameMapDemo.as" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameMapDemo.as" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GameMapDemo.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="314" column="80" selection-start-line="314" selection-start-column="80" selection-end-line="314" selection-end-column="80" />
+            <state relative-caret-position="202">
+              <caret line="40" column="43" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
+              <folding>
+                <element signature="e#11#52#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AStarPixcelPathFinder.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/map/astar/AStarPixcelPathFinder.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="411">
+              <caret line="81" column="35" selection-start-line="81" selection-start-column="35" selection-end-line="81" selection-end-column="35" />
+              <folding>
+                <element signature="e#25#64#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MapGridUtil.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/map/utils/MapGridUtil.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="516">
+              <caret line="84" column="29" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AStarPathFinder.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/map/astar/AStarPathFinder.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2033">
+              <caret line="111" column="17" selection-start-line="111" selection-start-column="17" selection-end-line="111" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -79,30 +831,20 @@
       <file leaf-file-name="MapData.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/map/data/MapData.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="289" column="0" selection-start-line="289" selection-start-column="0" selection-end-line="289" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MapCfgParse.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/map/utils/MapCfgParse.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
-              <caret line="47" column="25" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
+            <state relative-caret-position="98">
+              <caret line="260" column="45" selection-start-line="260" selection-start-column="45" selection-end-line="260" selection-end-column="45" />
               <folding>
-                <element signature="e#75#108#0" expanded="true" />
+                <element signature="e#24#57#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapControl.as" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/map/controls/MapControl.as">
+      <file leaf-file-name="MapViewExecuter.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../naruto.map/src/com/tencent/morefun/naruto/plugin/map/executer/MapViewExecuter.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="331" column="23" selection-start-line="331" selection-start-column="23" selection-end-line="331" selection-end-column="23" />
+            <state relative-caret-position="133">
+              <caret line="317" column="12" selection-start-line="317" selection-start-column="12" selection-end-line="317" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -129,10 +871,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/tx/loader/loaders/RAWLoader.as" />
-        <option value="$PROJECT_DIR$/src/tx/loader/loaders/SWFLoader.as" />
-        <option value="$PROJECT_DIR$/../naruto.player/src/com/tencent/morefun/naruto/plugin/player/views/PlayerView.as" />
-        <option value="$PROJECT_DIR$/src/com/map/data/MapData.as" />
         <option value="$PROJECT_DIR$/src/tx/loader/LoaderEvent.as" />
         <option value="$PROJECT_DIR$/src/tx/loader/def/LoaderDef.as" />
         <option value="$PROJECT_DIR$/src/tx/mme/BaseInnerRenderer.as" />
@@ -172,7 +910,6 @@
         <option value="$PROJECT_DIR$/src/com/map/images/MapMme.as" />
         <option value="$PROJECT_DIR$/src/com/map/consDef/NpcAssetDef.as" />
         <option value="$PROJECT_DIR$/src/com/map/player/def/NinjaAssetDef.as" />
-        <option value="$PROJECT_DIR$/src/com/map/astar/AStarPixcelPathFinder.as" />
         <option value="$PROJECT_DIR$/src/com/map/utils/TimerProvider.as" />
         <option value="$PROJECT_DIR$/src/com/map/images/MapTile.as" />
         <option value="$PROJECT_DIR$/src/GlobalData.as" />
@@ -180,6 +917,11 @@
         <option value="$PROJECT_DIR$/src/com/map/data/MapBgImgInfo.as" />
         <option value="$PROJECT_DIR$/src/com/map/utils/MapCfgParse.as" />
         <option value="$PROJECT_DIR$/src/GameMapDemo.as" />
+        <option value="$PROJECT_DIR$/src/com/map/data/MapData.as" />
+        <option value="$PROJECT_DIR$/src/com/map/astar/AStarPathFinder.as" />
+        <option value="$PROJECT_DIR$/src/com/map/utils/MapGridUtil.as" />
+        <option value="$PROJECT_DIR$/src/com/map/astar/AStarPixcelPathFinder.as" />
+        <option value="$PROJECT_DIR$/../MapEditor/src/tx/sce/view/NpcRender.as" />
       </list>
     </option>
   </component>
@@ -227,7 +969,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -242,72 +984,18 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="gameMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mapDemo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gameMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mapDemo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gameMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="map" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mapDemo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gameMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="map" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
+              <option name="myItemId" value="MapEditor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../gameLib/bin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../MapEditor/lib" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -340,7 +1028,7 @@
       <recent name="E:\workspace\2016_as3_project\mapRender\gameMap\src\com\map\utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Flash App.gameMap">
+  <component name="RunManager" selected="Flash App.MapEditor">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -971,13 +1659,49 @@
       <option name="usbDebugPort" value="7936" />
       <method />
     </configuration>
-    <list size="6">
+    <configuration default="false" name="MapEditor" type="FlashRunConfigurationType" factoryName="Flash App" nameIsGenerated="true">
+      <option name="BCName" value="MapEditor" />
+      <option name="IOSSimulatorSdkPath" value="" />
+      <option name="adlOptions" value="" />
+      <option name="airProgramParameters" value="" />
+      <option name="appDescriptorForEmulator" value="Android" />
+      <option name="debugTransport" value="USB" />
+      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="emulator" value="NexusOne" />
+      <option name="emulatorAdlOptions" value="" />
+      <option name="fastPackaging" value="true" />
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="launchUrl" value="false" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="mobileRunTarget" value="Emulator" />
+      <option name="moduleName" value="MapEditor" />
+      <option name="overriddenMainClass" value="" />
+      <option name="overriddenOutputFileName" value="" />
+      <option name="overrideMainClass" value="false" />
+      <option name="runTrusted" value="true" />
+      <option name="screenDpi" value="0" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="url" value="http://" />
+      <option name="usbDebugPort" value="7936" />
+      <method />
+    </configuration>
+    <list size="7">
       <item index="0" class="java.lang.String" itemvalue="Flash App.gameMap" />
       <item index="1" class="java.lang.String" itemvalue="Flash App.BattlePlugin (naruto.battle)" />
       <item index="2" class="java.lang.String" itemvalue="Flash App.NewPlotPlugin (naruto.newplot)" />
       <item index="3" class="java.lang.String" itemvalue="Flash App.PlayerPlugin (naruto.player)" />
       <item index="4" class="java.lang.String" itemvalue="Flash App.PrewarPlugin (naruto.prewar)" />
       <item index="5" class="java.lang.String" itemvalue="Flash App.WorldPlugin (naruto.world)" />
+      <item index="6" class="java.lang.String" itemvalue="Flash App.MapEditor" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
@@ -1005,7 +1729,9 @@
       <workItem from="1468889527816" duration="19287000" />
       <workItem from="1468918728712" duration="12166000" />
       <workItem from="1468975549924" duration="28637000" />
-      <workItem from="1469012603134" duration="2152000" />
+      <workItem from="1469012603134" duration="6785000" />
+      <workItem from="1469062747898" duration="19432000" />
+      <workItem from="1469148073527" duration="2608000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1468566804992</created>
@@ -1070,19 +1796,26 @@
       <option name="project" value="LOCAL" />
       <updated>1468933028033</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="更新，">
+      <created>1469014836630</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1469014836630</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="228054000" />
+    <option name="totallyTimeSpent" value="254727000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20664589" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20872274" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -1092,12 +1825,12 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21940464" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21940464" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1682243" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21287642" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1105,7 +1838,7 @@
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34439835" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24972437" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12772585" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2938733" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1135,7 +1868,7 @@
           <option name="timeStamp" value="102" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="256" />
+      <option name="time" value="295" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1144,85 +1877,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/map/player/views/PlayerView.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="115" column="23" selection-start-line="115" selection-start-column="23" selection-end-line="115" selection-end-column="23" />
-          <folding>
-            <element signature="e#32#67#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/map/consDef/NpcAssetDef.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/map/images/MapMme.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1311">
-          <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
-          <folding>
-            <element signature="e#26#61#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/map/player/def/NinjaAssetDef.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/map/player/def/TalentSkillTypeDef.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../naruto.world/src/com/tencent/morefun/naruto/plugin/world/views/WorldMap.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="59" column="32" selection-start-line="59" selection-start-column="32" selection-end-line="59" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/map/astar/Node.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-62">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/map/astar/BinaryHeap.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/map/player/BaseWalkablePlayer.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2679">
-          <caret line="151" column="20" selection-start-line="151" selection-start-column="20" selection-end-line="151" selection-end-column="20" />
-          <folding>
-            <element signature="e#26#57#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../naruto.include/src/serverProto/npc/NpcType.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../naruto.player/src/com/tencent/morefun/naruto/plugin/player/base/JumpRopeSimulator.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -1321,13 +1975,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/map/utils/MapGridUtil.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../naruto.player/src/com/tencent/morefun/naruto/plugin/player/views/SelfPlayerView.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -1367,9 +2014,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="212">
           <caret line="109" column="61" selection-start-line="109" selection-start-column="61" selection-end-line="109" selection-end-column="61" />
-          <folding>
-            <element signature="e#26#57#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1377,9 +2021,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="237">
           <caret line="148" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
-          <folding>
-            <element signature="e#75#98#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1387,13 +2028,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="864">
           <caret line="102" column="24" selection-start-line="102" selection-start-column="24" selection-end-line="102" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../naruto.map/src/com/tencent/morefun/naruto/plugin/map/executer/MapViewExecuter.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="52" column="40" selection-start-line="52" selection-start-column="40" selection-end-line="52" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -1460,19 +2094,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/map/astar/AStarPixcelPathFinder.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="247" column="13" selection-start-line="247" selection-start-column="13" selection-end-line="247" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/map/data/MapMgImgInfo.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
           <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1480,7 +2105,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1488,41 +2112,154 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/map/controls/MapControl.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="325" column="11" selection-start-line="325" selection-start-column="11" selection-end-line="325" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/map/utils/MapCfgParse.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="47" column="25" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
+        <state relative-caret-position="201">
+          <caret line="35" column="17" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/map/controls/MouseControl.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1330">
+          <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/map/consDef/ShortenPathType.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/map/astar/AStarPathFinder.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2033">
+          <caret line="111" column="17" selection-start-line="111" selection-start-column="17" selection-end-line="111" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/map/utils/MapGridUtil.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="516">
+          <caret line="84" column="29" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/map/astar/AStarPixcelPathFinder.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="81" column="35" selection-start-line="81" selection-start-column="35" selection-end-line="81" selection-end-column="35" />
           <folding>
-            <element signature="e#75#108#0" expanded="true" />
+            <element signature="e#25#64#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/map/data/MapData.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="289" column="0" selection-start-line="289" selection-start-column="0" selection-end-line="289" selection-end-column="0" />
+        <state relative-caret-position="98">
+          <caret line="260" column="45" selection-start-line="260" selection-start-column="45" selection-end-line="260" selection-end-column="45" />
+          <folding>
+            <element signature="e#24#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../naruto.map/src/com/tencent/morefun/naruto/plugin/map/executer/MapViewExecuter.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="317" column="12" selection-start-line="317" selection-start-column="12" selection-end-line="317" selection-end-column="12" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../toolLibs/common/playerglobal.swc!/library.swf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="4780" column="63" selection-start-line="4780" selection-start-column="63" selection-end-line="4780" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../toolLibs/common/libcore.swc!/library.swf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="5387" column="13" selection-start-line="5387" selection-start-column="13" selection-end-line="5387" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../MapEditor/src/tx/sce/data/LayerData.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../toolLibs/tools/MmeAssetRender.swc!/library.swf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="364" column="32" selection-start-line="364" selection-start-column="32" selection-end-line="364" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../MapEditor/src/tx/sce/tools/Global.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="39" column="58" selection-start-line="39" selection-start-column="58" selection-end-line="39" selection-end-column="58" />
+          <folding>
+            <element signature="e#24#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../MapEditor/src/tx/sce/view/NpcRender.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="37" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
+          <folding>
+            <element signature="e#23#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../MapEditor/src/MapEditor.mxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="28" column="48" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
+          <folding>
+            <marker date="1469084268728" expanded="false" signature="411:801" ph="..." />
+            <marker date="1469084268728" expanded="true" signature="806:885" ph="/** 地图编辑器 ...*/" />
+            <marker date="1469084268728" expanded="true" signature="1333:1353" ph="/** 初始化 ...*/" />
+            <marker date="1469084268728" expanded="true" signature="1395:2274" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameMapDemo.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="314" column="80" selection-start-line="314" selection-start-column="80" selection-end-line="314" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/map/controls/MapControl.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="331" column="23" selection-start-line="331" selection-start-column="23" selection-end-line="331" selection-end-column="23" />
-          <folding />
+        <state relative-caret-position="202">
+          <caret line="40" column="43" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
+          <folding>
+            <element signature="e#11#52#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1579,7 +2316,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>GameMapDemo|gameMap</last-edited>
+          <last-edited>MapEditor|MapEditor</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1603,6 +2340,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
+          <last-edited>arrowButton</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

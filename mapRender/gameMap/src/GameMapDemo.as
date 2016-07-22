@@ -307,7 +307,7 @@ package
 //			var mapFgImgInfos:Dictionary = fgbytes.readObject();
 //			var mapMgImgInfos:Dictionary = mgbytes.readObject();
 
-			
+
 			var mapBgImgInfos:Dictionary = new Dictionary();
 			MapCfgParse.parseXML(new XML(bgbytes), mapBgImgInfos, MapBgImgInfo);
 
@@ -347,7 +347,7 @@ package
 			_testPlayer.setXY(birthPosition.x, birthPosition.y);
 
 			this._mapView.cameraControl.bindElement(_testPlayer);
-			this._mapView.elementControl.setTimeType(3);
+			this._mapView.elementControl.setTimeType(1);
 			this._mapView.cameraControl.setCenterPos(stage.stageWidth * .5, stage.stageHeight * .5);
 			this._mapView.cameraControl.setData(LayerManager.singleton.stage);
 			this._mapView.startup();

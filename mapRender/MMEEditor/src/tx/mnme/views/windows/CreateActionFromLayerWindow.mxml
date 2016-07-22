@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="400" height="300"
+			   close="onClose(event)" xmlns:views="tx.mnme.views.*"
+			   title="由层生成动作">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.ActionData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.LayerData;
+			import tx.mnme.Global;
+			
+			import mx.collections.ArrayList;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			
+			public var okFun:Function;
+			
+			public static function show(okFun:Function,lds:Vector.<LayerData>):CreateActionFromLayerWindow
+			{
+				var slw:CreateActionFromLayerWindow = new CreateActionFromLayerWindow();
+				slw.okFun = okFun;
+				if(slw.initialized)
+				{
+					onInit(null);
+				}else
+				{
+					slw.addEventListener(FlexEvent.INITIALIZE,onInit);
+				}
+				
+				function onInit(e:FlexEvent):void
+				{
+					slw.removeEventListener(FlexEvent.INITIALIZE,onInit);
+					var arr:Array = [];
+					for(var i:int=0;i<lds.length;i++)
+					{
+						var ld:LayerData = lds[i] as LayerData;
+						slw.list2.addItem(ld,false);
+						arr.push(ld);
+					}
+					slw.list2.selectedItems = arr;
+					slw.list2.updateSelectedItems();
+					slw.list2_changeHandler(null);
+				}
+				
+				PopUpManager.addPopUp(slw,Global.mainApp,true);
+				PopUpManager.centerPopUp(slw);
+				
+				return slw;
+			}
+			
+			protected function cloneLayerDatas():Vector.<LayerData>
+			{
+				var lds:Vector.<LayerData> = new Vector.<LayerData>;
+				for(var i:int=0;i<list2.selectedItems.length;i++)
+				{
+					lds.push((list2.selectedItems[i] as LayerData).clone());
+				}
+				return lds;
+			}
+				
+			protected function onClose(event:Event):void
+			{
+				PopUpManager.removePopUp(this);
+			}
+			
+			protected function ok_clickHandler(event:MouseEvent):void
+			{
+				if(list2.selectedItems.length>0 && aname.text != "")
+				{
+					okFun && okFun(this,aname.text,cloneLayerDatas());
+//					okFun = null;
+//					onClose(null);
+				}
+			}
+			
+			protected function list2_changeHandler(event:Event):void
+			{
+				lab.text = list2.selectedItems.join(",");
+			}
+			
+			public function destroy():void
+			{
+				onClose(null);
+				okFun = null;
+			}
+		]]>
+	</fx:Script>
+	<s:Label top="15" left="10" text="新动作名称："/>
+	<s:TextInput id="aname" top="10" right="10" left="90"/>
+	<s:Label id="lab" x="10" y="42"/>
+	
+	<views:CheckBoxList id="list2"
+						change="list2_changeHandler(event)"
+						left="10" right="10" top="59" bottom="39"
+						borderColor="0x666666">
+	</views:CheckBoxList>
+	
+	<s:Button id="ok" label="确定" horizontalCenter="-40" bottom="10" click="ok_clickHandler(event)"/>
+	<s:Button id="cancel" label="取消" horizontalCenter="40" bottom="10" click="onClose(event)"/>
+	
+</s:TitleWindow>

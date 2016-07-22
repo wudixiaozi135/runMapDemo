@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="arrowButton">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../MapEditor/lib/arrowButton.swc!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

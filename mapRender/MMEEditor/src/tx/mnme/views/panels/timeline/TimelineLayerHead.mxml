@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 left="0" 
+		 right="0" 
+		 height="28" creationComplete="init(event)">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.LayerData;
+			import tx.mnme.views.windows.InputWindow;
+			
+			import mx.core.IVisualElementContainer;
+			import mx.events.FlexEvent;
+			private var _selected:Boolean;
+			private var layerData:LayerData;
+			
+//			[Bindable]
+//			public var text:String = "图层0";
+
+			public function get selected():Boolean
+			{
+				return _selected;
+			}
+
+			public function set selected(value:Boolean):void
+			{
+				_selected = value;
+				label.setStyle("backgroundColor",value?0x9999DD:0xDEDEDE);
+			}
+			
+			
+			public function setLayerData(layerData:LayerData):void
+			{
+				this.layerData = layerData;
+				
+				cb_visible.selected = !layerData.visible;
+				cb_lock.selected = layerData.lock;
+			}
+			
+			public function destroy():void
+			{
+				if(parent is IVisualElementContainer)
+				{
+					(parent as IVisualElementContainer).removeElement(this);
+				}
+			}
+
+			protected function onClick(event:MouseEvent):void
+			{
+				InputWindow.show("修改图层名称",layerData.name,null,function(w:InputWindow):void{
+					if(w.value)
+					{
+						label.text = layerData.name = w.value;
+					}
+				},localToGlobal(new Point(width,y)));
+			}
+			
+			protected function init(event:FlexEvent):void
+			{
+				label.text = layerData.name;
+				cb_visible.selected = !layerData.visible;
+			}
+			
+			protected function cb_changeHandler(event:Event):void
+			{
+				switch(event.currentTarget)
+				{
+					case cb_visible:
+						layerData.setVisible(!cb_visible.selected);
+						break;
+					case cb_lock:
+						layerData.setLock(cb_lock.selected);
+						break;
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	<s:Label id="label" left="0" right="0" top="0" bottom="0" paddingRight="30" backgroundColor="#DEDEDE" verticalAlign="middle" textAlign="center" doubleClickEnabled="true" doubleClick="onClick(event)"/>
+	<s:CheckBox id="cb_visible" skinClass="tx.mnme.views.panels.timeline.HideCheckBoxSkin" selected="false" toolTip="隐藏图层" y="4" right="0" change="cb_changeHandler(event)"/>
+	<s:CheckBox id="cb_lock" skinClass="tx.mnme.views.panels.timeline.LockCheckBoxSkin" selected="false" toolTip="锁住图层" y="4" right="15" change="cb_changeHandler(event)"/>
+</s:Group>

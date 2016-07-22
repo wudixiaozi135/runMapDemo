@@ -42,6 +42,7 @@ package com.map.astar
 		{
 			MapGridUtil.resetPoint();
 			MapData.resetPoint();
+			//获取网格坐标
 			var beginTilePoint:Point = MapGridUtil.getTilePoint(mapData.tilePixelWidth, mapData.tilePixelHeight, mapData.mapPixelWidth, beginPoint.x, beginPoint.y);
 			var endTilePoint:Point = MapGridUtil.getTilePoint(mapData.tilePixelWidth, mapData.tilePixelHeight, mapData.mapPixelWidth, endPoint.x, endPoint.y);
 

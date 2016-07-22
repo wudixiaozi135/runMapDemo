@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<panels:BasePanel xmlns:fx="http://ns.adobe.com/mxml/2009"
+				  xmlns:s="library://ns.adobe.com/flex/spark"
+				  xmlns:mx="library://ns.adobe.com/flex/mx"
+				  xmlns:views="tx.mnme.views.*"
+				  xmlns:panels="tx.mnme.views.panels.*"
+				  xmlns:f="net.fixer.flex.compnonents.*"
+				  width="610" height="300" enabled="false">
+	<fx:Script>
+		<![CDATA[
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.BaseElementData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.ElementData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.PointElementData;
+			import tx.mnme.events.AttributeEvent;
+			import tx.mnme.events.DisperseAlignEvent;
+			import tx.mnme.views.panels.activearea.BaseItem;
+			import tx.mnme.views.panels.activearea.ImageItem;
+			import tx.mnme.views.panels.activearea.PointItem;
+			import tx.mnme.views.windows.DisperseAlignWindow;
+			import tx.mnme.views.windows.SyncWindow;
+			
+			import mx.collections.ArrayList;
+			import mx.events.FlexEvent;
+			
+			import spark.events.DropDownEvent;
+			import spark.events.IndexChangeEvent;
+			
+			import net.fixer.utils.IListUtil;
+			
+			public static const BLEND_DMODES:ArrayList = new ArrayList([
+				{label:"一般",value:BlendMode.NORMAL},
+				{label:"图层",value:BlendMode.LAYER},
+				{label:"变暗",value:BlendMode.DARKEN},
+				{label:"正片叠底",value:BlendMode.MULTIPLY},
+				{label:"变亮",value:BlendMode.LIGHTEN},
+				{label:"淲色",value:BlendMode.SCREEN},
+				{label:"叠加",value:BlendMode.OVERLAY},
+				{label:"强光",value:BlendMode.HARDLIGHT},
+				{label:"增加",value:BlendMode.ADD},
+				{label:"减去",value:BlendMode.SUBTRACT},
+				{label:"差值",value:BlendMode.DIFFERENCE},
+				{label:"反相",value:BlendMode.INVERT},
+				{label:"Alpha",value:BlendMode.ALPHA},
+				{label:"擦除",value:BlendMode.ERASE}
+			]);
+			private var data:BaseElementData;
+			
+			public function setData(item:BaseItem,enabled:Boolean=true):void
+			{
+				if(item is ImageItem || item is PointItem)
+				{
+					data = item.getData().clone();
+					
+					ax.value = data.x;
+					ay.value = data.y;
+					aname.editable = false;
+					
+					if(data is ElementData)
+					{
+						aname.text = ElementData(data).filename;
+						ascalex.value = ElementData(data).scaleX;
+						ascaley.value = ElementData(data).scaleY;
+						arotation.value = ElementData(data).rotation;
+						aalpha.value = ElementData(data).alpha;
+						
+						colorSelector.selectedColor = ElementData(data).color.color;
+						colorSelector.empty = ElementData(data).color.empty;
+						
+						
+						cb.selectedIndex = IListUtil.indexOf(BLEND_DMODES,"value",ElementData(data).blendMode||'normal');
+						
+						ascalex.enabled = true;
+						ascaley.enabled = true;
+						arotation.enabled = true;
+						aalpha.enabled = true;
+						cb.enabled = true;
+						colorSelector.enabled = true;
+					}else
+					{
+						if(data is PointElementData)
+						{
+							aname.editable = true;
+							aname.text = PointElementData(data).name; 
+						}
+						ascalex.value = 1;
+						ascaley.value = 1;
+						arotation.value = 0;
+						aalpha.value = 1;
+						
+						cb.selectedIndex = -1;
+						
+						ascalex.enabled = false;
+						ascaley.enabled = false;
+						arotation.enabled = false;
+						aalpha.enabled = false;
+						cb.enabled = false;
+						colorSelector.enabled = false;
+					}
+					
+					this.enabled = enabled;
+				}
+			}
+			
+			public function disable():void
+			{
+				enabled = false;
+				
+				aname.text = "";
+				ax.value = 0;
+				ay.value = 0;
+			}
+			
+			protected function onChange(event:Event):void
+			{
+				var ae:AttributeEvent;
+				switch(event.currentTarget)
+				{
+					case ax:
+					case ay:
+						ae = new AttributeEvent(AttributeEvent.CHANGE_POS);
+						ae.oldData = data.clone();
+						data.x = ax.value;
+						data.y = ay.value;
+						break;
+					case ascalex:
+					case ascaley:
+						ae = new AttributeEvent(AttributeEvent.CHANGE_SCALE);
+						ae.oldData = data.clone();
+						ElementData(data).scaleX = ascalex.value;
+						ElementData(data).scaleY = ascaley.value;
+						break;
+					case arotation:
+						ae = new AttributeEvent(AttributeEvent.CHANGE_ROTATION);
+						ae.oldData = data.clone();
+						ElementData(data).rotation = arotation.value;
+						break;
+					case aalpha:
+						ae = new AttributeEvent(AttributeEvent.CHANGE_ALPHA);
+						ae.oldData = data.clone();
+						ElementData(data).alpha = aalpha.value;
+						break;
+					case colorSelector:
+						ae = new AttributeEvent(AttributeEvent.CHANGE_COLOR);
+						ae.oldData = data.clone();
+						ElementData(data).color.color = colorSelector.selectedColor;
+						ElementData(data).color.empty = colorSelector.empty;
+						break;
+					case aname:
+						if(aname.editable)
+						{
+							ae = new AttributeEvent(AttributeEvent.CHANGE_NAME);
+							ae.oldData = data.clone();
+							PointElementData(data).name = aname.text;
+						}else
+						{
+							return;
+						}
+						break;
+					default:
+						return;
+				}
+				ae.data = data.clone();
+				dispatchEvent(ae);
+			}
+			
+			override protected function basePanelInit(event:FlexEvent):void
+			{
+				super.basePanelInit(event);
+				
+				contextMenu = new NativeMenu();
+//				contextMenu.addItem(new NativeMenuItem("复制坐标"));
+//				contextMenu.addItem(new NativeMenuItem("粘贴坐标"));
+				contextMenu.addItem(new NativeMenuItem("同步"));
+				contextMenu.addItem(new NativeMenuItem("分散对齐"));
+				contextMenu.addEventListener(Event.SELECT,onSelectMenu);
+//				contextMenu.addEventListener(Event.DISPLAYING,onDisplayMenu);
+			}
+//			protected function onDisplayMenu(event:Event):void
+//			{
+//				var cv:String = Clipboard.generalClipboard.getData(ClipboardFormats.TEXT_FORMAT) as String;
+//				var nmi:NativeMenuItem = contextMenu.getItemAt(1);
+//				nmi.enabled = cv && cv.split("MME.SPLIT").length==2;
+//			}
+			private function onSelectMenu(e:Event):void
+			{
+				var ae:AttributeEvent;
+				var cv:String;
+				var item:NativeMenuItem = e.target as NativeMenuItem;
+				switch(item.label)
+				{
+//					case "复制坐标":
+//						cv = ax.text + "MME.SPLIT" + ay.text;
+//						Clipboard.generalClipboard.setData(ClipboardFormats.TEXT_FORMAT,cv);
+//						break;
+//					case "粘贴坐标":
+//						cv = Clipboard.generalClipboard.getData(ClipboardFormats.TEXT_FORMAT) as String;
+//						if(cv)
+//						{
+//							var xy:Array = cv.split("MME.SPLIT");
+//							ax.text = xy[0];
+//							ay.text = xy[1];
+//							
+//							ae = new AttributeEvent(AttributeEvent.CHANGE_POS);
+//							ae.x = int(ax.text);
+//							ae.y = int(ay.text);
+//							dispatchEvent(ae);
+//						}
+//						break;
+					case "同步":
+//						ae = new AttributeEvent(AttributeEvent.SYNC_POS);
+//						ae.x = int(ax.text);
+//						ae.y = int(ay.text);
+//						dispatchEvent(ae);
+						var sw:SyncWindow = new SyncWindow();
+						var blend:String = cb.selectedItem["value"];
+						sw.setData(aname.text,ax.value,ay.value,ascalex.value,ascaley.value,arotation.value,aalpha.value,blend,function():void{
+							dispatchEvent(sw.getAttributeEvent());
+						});
+						sw.show();
+						break;
+					case "分散对齐":
+						var daw:DisperseAlignWindow = new DisperseAlignWindow();
+						var dae:DisperseAlignEvent = new DisperseAlignEvent(DisperseAlignEvent.GET_BEGIN_END_FRAME);
+						dispatchEvent(dae);
+						daw.setData(dae.endFrame,function():void{
+							dispatchEvent(daw.getEvent());
+						});
+						daw.show();
+						
+						break;
+				}
+			}
+			
+			
+			
+			protected function combobox1_changeHandler(event:IndexChangeEvent):void
+			{
+				
+				var ae:AttributeEvent = new AttributeEvent(AttributeEvent.CHANGE_BLEND_MODE);
+				ae.oldData = data.clone();
+				if(cb.selectedItem)
+				{
+					ElementData(data).blendMode = cb.selectedItem["value"];
+				}else
+				{
+					ElementData(data).blendMode = "normal";
+				}
+				ae.data = data.clone();
+				
+				dispatchEvent(ae);
+			}
+			
+			protected function cb_openHandler(event:DropDownEvent):void
+			{
+				var h:Number = BLEND_DMODES.length * 22.1;
+				var dh:Number = cb.scroller.height - h;
+				cb.scroller.height = h;
+				cb.scroller.parent.y += dh;
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Metadata>
+		[Event(name="sync", type="tx.mnme.events.AttributeEvent")]
+		[Event(name="changePos", type="tx.mnme.events.AttributeEvent")]
+		[Event(name="changeScale", type="tx.mnme.events.AttributeEvent")]
+		[Event(name="changeRotation", type="tx.mnme.events.AttributeEvent")]
+		[Event(name="changeBlendMode", type="tx.mnme.events.AttributeEvent")]
+		[Event(name="changeAlpha", type="tx.mnme.events.AttributeEvent")]
+		[Event(name="changeColor", type="tx.mnme.events.AttributeEvent")]
+		[Event(name="changeName", type="tx.mnme.events.AttributeEvent")]
+		
+		[Event(name="disperseAlign", type="tx.mnme.events.DisperseAlignEvent")]
+		[Event(name="getBeginEndFrame", type="tx.mnme.events.DisperseAlignEvent")]
+	</fx:Metadata>
+	
+	<s:Label x="12" y="10" text="X"/>
+	<f:NumericSlider id="ax" x="25" y="4" width="45" change="onChange(event)" maximum="10000"
+					 minimum="-1000" sliderWidth="10" stepSize="1" tabIndex="0"/>
+	<s:Label x="12" y="36" text="Y"/>
+	<f:NumericSlider id="ay" x="25" y="30" width="45" change="onChange(event)" maximum="1000"
+					 minimum="-1000" sliderWidth="10" stepSize="1" tabIndex="1"/>
+	<s:Label x="79" y="11" text="X缩放"/>
+	<f:NumericSlider id="ascalex" x="118" y="4" width="45" change="onChange(event)" fixed="2"
+					 maximum="1000" minimum="-1000" sliderWidth="10" stepSize="0.01" tabIndex="2"/>
+	<s:Label x="79" y="36" text="Y缩放"/>
+	<f:NumericSlider id="ascaley" x="118" y="30" width="45" change="onChange(event)" fixed="2"
+					 maximum="1000" minimum="-1000" sliderWidth="10" stepSize="0.01" tabIndex="3"/>
+	<s:Label x="184" y="10" text="旋转"/>
+	<f:NumericSlider id="arotation" x="216" y="4" width="45" change="onChange(event)" fixed="0"
+					 maximum="2000" minimum="-2000" sliderWidth="10" stepSize="1" tabIndex="4"/>
+	<s:Label x="172" y="35" text="透明度"/>
+	<f:NumericSlider id="aalpha" x="216" y="30" width="45" change="onChange(event)" fixed="1"
+					 maximum="1" minimum="0" sliderWidth="10" stepSize="0.1" tabIndex="5" value="1"/>
+	
+	<s:Label x="294" y="10" text="名称"/>
+	<s:Label x="268" y="35" tabIndex="6" text="叠加模式"/>
+	<!--<s:Label id="aid" x="311" y="11"/>-->
+	<s:TextInput id="aname" y="5" right="10" width="272" change="onChange(event)" editable="false"/>
+	<s:DropDownList id="cb" x="326" y="30" width="80" 
+					dataProvider="{BLEND_DMODES}" 
+					open="cb_openHandler(event)"  
+					change="combobox1_changeHandler(event)"/>
+	<s:Label x="415" y="35" text="调色"/>
+	<f:ColorSelector id="colorSelector" x="447" y="30" change="onChange(event)"/>
+</panels:BasePanel>

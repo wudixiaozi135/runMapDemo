@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<actions backgroundColor="FFFFFF">
+	<action name="动作0">
+		<layer name="图层0">
+			<frame index="0" length="1"></frame>
+		</layer>
+	</action>
+</actions>

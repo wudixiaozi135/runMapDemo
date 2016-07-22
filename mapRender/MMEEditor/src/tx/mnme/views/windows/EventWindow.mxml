@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="400" height="300" close="onClose(event)" title="事件窗口">
+	<fx:Declarations>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import tx.mnme.Global;
+			
+			import mx.collections.ArrayCollection;
+			import mx.events.CloseEvent;
+			import mx.managers.PopUpManager;
+			
+			public var okFun:Function;
+			
+			[Bindable]
+			private var data:ArrayCollection = new ArrayCollection();
+			
+			public static function show(event:String,okFun:Function):void
+			{
+				var w:EventWindow = new EventWindow();
+				w.okFun = okFun;
+				w.setValue(event);
+				PopUpManager.addPopUp(w,Global.mainApp,true);
+				PopUpManager.centerPopUp(w);
+			}
+			
+			protected function onClose(event:CloseEvent):void
+			{
+				destroy();
+			}
+			
+			public function destroy():void
+			{
+				PopUpManager.removePopUp(this);
+				okFun = null;
+				data.removeAll();
+				data = null;
+			}
+			
+			protected function onOkBtn(event:MouseEvent):void
+			{
+				okFun(this);
+				destroy();
+			}
+			
+			protected function onCancelBtn(event:MouseEvent):void
+			{
+				destroy();
+			}
+			
+			public function setValue(str:String):void
+			{
+				var objs:Array = str.split(",");
+				for each(var ostr:String in objs)
+				{
+					var arr:Array = ostr.split(":");
+					var event:String = arr.shift();
+					var param:String = arr.join(":");
+					data.addItem({"event":event,"param":param});
+				}
+			}
+			
+			public function getValue():String
+			{
+				var str:String = "";
+				for each(var obj:Object in data)
+				{
+					str = (str?str+",":"") + 
+						obj["event"] + 
+						(obj["param"]?":"+obj["param"]:"");
+				}
+				return str;
+			}
+			
+			protected function onAdd(event:MouseEvent):void
+			{
+				data.addItem({event:"",param:""});
+			}
+			protected function onDel(event:MouseEvent):void
+			{
+				if(dg.selectedIndex!=-1)
+				{
+					data.removeItemAt(dg.selectedIndex);
+				}
+			}
+		]]>
+	</fx:Script>
+	
+	<s:DataGrid id="dg" left="0" right="-0" top="0" bottom="25" dataProvider="{data}" editable="true">
+		<s:columns>
+			<mx:ArrayList>
+				<s:GridColumn dataField="event" headerText="event" editable="false">
+					<s:itemRenderer>
+						<fx:Component>
+							<s:GridItemRenderer>
+								<fx:Declarations>
+									<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+								</fx:Declarations>
+								<fx:Script>
+									<![CDATA[
+										import tx.mnme.Global;
+										
+										import mx.collections.XMLListCollection;
+										
+										import spark.events.IndexChangeEvent;
+										
+										protected function changeHandler(event:IndexChangeEvent):void
+										{
+											if(cbEvent.selectedItem is String)
+											{
+												data["event"] = cbEvent.selectedItem;
+											}else if(cbEvent.selectedItem is XML)
+											{
+												data["event"] = String(cbEvent.selectedItem.@n);
+											}else
+											{
+												data["event"] = "";
+											}
+										}
+										
+										override public function set data(value:Object):void
+										{
+											super.data = value;
+											
+											cbEvent.selectedItem = value["event"];
+										}
+										
+										[Bindable]
+										private var events:XMLListCollection = new XMLListCollection(Global.eventXML.e);
+										
+									]]>
+								</fx:Script>
+								<s:ComboBox left="2" right="2" top="2" bottom="2" id="cbEvent" dataProvider="{events}" change="changeHandler(event)" labelField="@n">
+								</s:ComboBox>
+								
+							</s:GridItemRenderer>
+						</fx:Component>
+					</s:itemRenderer>
+				</s:GridColumn>
+				<s:GridColumn dataField="param" headerText="param" editable="true"></s:GridColumn>
+			</mx:ArrayList>
+		</s:columns>
+	</s:DataGrid>
+	<s:Button id="okBtn" bottom="2" label="ok" horizontalCenter="-40" click="onOkBtn(event)"/>
+	<s:Button id="cancelBtn" bottom="2" label="cancel" horizontalCenter="40" click="onCancelBtn(event)"/>
+	<mx:LinkButton x="0" bottom="2" label="＋" click="onAdd(event)"/>
+	<mx:LinkButton x="31" bottom="2" label="－" click="onDel(event)"/>
+</s:TitleWindow>

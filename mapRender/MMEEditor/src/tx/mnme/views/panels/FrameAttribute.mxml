@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<panels:BasePanel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				 xmlns:s="library://ns.adobe.com/flex/spark" 
+				 xmlns:mx="library://ns.adobe.com/flex/mx" 
+				 xmlns:views="tx.mnme.views.*" 
+				 xmlns:panels="tx.mnme.views.panels.*"
+				 xmlns:f="net.fixer.flex.compnonents.*"
+				 width="558" height="210" enabled="false" >
+	<fx:Script>
+		<![CDATA[
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.ColorData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.PhantomData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.SoundData;
+			import tx.mnme.KeyManager;
+			import tx.mnme.events.AttributeEvent;
+			import tx.mnme.events.FrameAttributeEvent;
+			import tx.mnme.views.windows.EventWindow;
+			
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			
+			import spark.components.supportClasses.DropDownController;
+			import spark.events.DropDownEvent;
+			import spark.events.IndexChangeEvent;
+			import spark.events.TextOperationEvent;
+			
+			private var sound:Object;
+			
+			public function setData(event:String,useTween:Boolean,phantom:PhantomData,enabled:Boolean=true, sound:Object = null):void
+			{
+				this.sound = sound;
+				
+				eb.text = event;
+				cbTween.selected = useTween;
+				
+				if(phantom)
+				{
+					cbPhantomType.selectedItem = phantom.type?phantom.type:"";
+					cp.selectedColor = phantom.color.color;
+					cp.empty = phantom.color.empty;
+					nsInterval.value = phantom.interval;
+					nsDAlpha.value = phantom.dAlpha;
+				}else
+				{
+					cbPhantomType.selectedItem = "";
+					cp.empty = true;
+					nsInterval.value = 1;
+					nsDAlpha.value = 1;
+				}
+				
+				
+				checkPhantom();
+			
+				this.enabled = enabled;
+			}
+			
+			public function disable():void
+			{
+				enabled = false;
+			}
+			
+			protected function changeHandler(event:Event):void
+			{				
+				var ae:FrameAttributeEvent = new FrameAttributeEvent(Event.CHANGE);
+				ae.event = eb.text;
+				ae.useTween = cbTween.selected;
+				
+				ae.phantom.type = cbPhantomType.selectedItem;
+				ae.phantom.color.color = cp.selectedColor;
+				ae.phantom.interval = nsInterval.value;
+				ae.phantom.dAlpha = nsDAlpha.value;
+				if (sound)
+				{					
+					ae.sound.id = parseInt(sound.id);
+					ae.sound.name = String(sound.name);
+				}
+				
+				dispatchEvent(ae);
+				
+				checkPhantom();
+			}
+			
+			protected function checkPhantom():void
+			{
+				switch(cbPhantomType.selectedItem)
+				{
+					case null:
+					case "":
+					case PhantomData.TYPE_OFF:
+						cp.enabled = nsInterval.enabled = nsDAlpha.enabled = false;
+						break;
+					default:
+						cp.enabled = nsInterval.enabled = nsDAlpha.enabled = true;
+						break;
+				}
+					
+			}
+			
+			protected function eb_clickHandler(event:MouseEvent):void
+			{
+				EventWindow.show(eb.text, function(ew:EventWindow):void
+				{
+					eb.text = ew.getValue();
+					changeHandler(null);
+				});
+			}		
+		]]>
+	</fx:Script>
+	<fx:Metadata>
+		[Event(name="change", type="tx.mnme.events.FrameAttributeEvent")]
+	</fx:Metadata>
+	
+	<s:Label x="11" y="10" text="渐变"/>
+	<s:CheckBox x="43" y="6" id="cbTween" change="changeHandler(event)"/>
+	<s:Label x="79" y="10" text="事件"/>
+	<s:Label id="eb" y="5" left="110" right="10" backgroundAlpha="0.3" backgroundColor="#DDDDDD"
+			 click="eb_clickHandler(event)" paddingBottom="3" paddingLeft="4" paddingRight="4"
+			 paddingTop="5"/>
+	<s:Group x="8" y="30" width="538">
+		<s:Label x="4" y="6" text="幻影"/>
+		<s:DropDownList id="cbPhantomType" x="35" y="0" width="130" height="23"
+						change="changeHandler(event)">
+			<mx:ArrayList>
+				<fx:String></fx:String>
+				<fx:String>on</fx:String>
+				<fx:String>onAndSpanning</fx:String>
+				<fx:String>off</fx:String>
+			</mx:ArrayList>
+		</s:DropDownList>
+		<s:Label x="177" y="6" text="调色"/>
+		<f:ColorSelector id="cp" selectedColor="0xFF000000" x="209" y="1" enabled="false" change="changeHandler(event)"/>
+		<s:Label x="262" y="6" text="间隔帧数"/>
+		<f:NumericSlider id="nsInterval" x="320" y="0" width="40" change="changeHandler(event)"
+						 enabled="false" maximum="999" minimum="1" sliderWidth="10" stepSize="1"/>
+		<s:Label x="372" y="6" text="透明度变化"/>
+		<f:NumericSlider id="nsDAlpha" x="443" y="0" width="40" change="changeHandler(event)"
+						 enabled="false" maximum="99" minimum="1" sliderWidth="10" stepSize="1"/>
+	</s:Group>
+	
+</panels:BasePanel>

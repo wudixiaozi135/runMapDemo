@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<panels:BasePanel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				 xmlns:s="library://ns.adobe.com/flex/spark" 
+				 xmlns:mx="library://ns.adobe.com/flex/mx" 
+				 xmlns:views="tx.mnme.views.*" 
+				 width="400" height="300" enabled="false" xmlns:panels="tx.mnme.views.panels.*">
+	<fx:Script>
+		<![CDATA[
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.MmeElementData;
+			import tx.mnme.events.AttributeEvent;
+			import tx.mnme.events.MmeAttributeEvent;
+			import tx.mnme.views.panels.activearea.MmeRenderItem;
+			
+			import mx.collections.ArrayCollection;
+			
+			import spark.events.IndexChangeEvent;
+			import spark.events.TextOperationEvent;
+			
+			private var data:MmeElementData;
+			
+			public function setData(item:MmeRenderItem,enabled:Boolean=true):void
+			{
+				if(item==null)
+				{
+					return;
+				}
+				data = item.getData() as MmeElementData;
+				
+				ax.text = data.x.toString();
+				ay.text = data.y.toString();
+				aurl.text = MmeElementData(data).url;
+				cb.selectedItem = MmeElementData(data).action||"";
+				
+				this.enabled = enabled;
+			}
+			
+			public function setActions(arr:Array):void
+			{
+				cb.dataProvider = new ArrayCollection(arr);
+			}
+			
+			public function disable():void
+			{
+				enabled = false;
+				
+				aurl.text = "";
+				ax.text = "";
+				ay.text = "";
+				
+				cb.dataProvider = null;
+			}
+			
+			protected function onChange(event:TextOperationEvent):void
+			{
+				var ae:MmeAttributeEvent;
+				switch(event.currentTarget)
+				{
+					case ax:
+					case ay:
+						ae = new MmeAttributeEvent(MmeAttributeEvent.CHANGE_POS);
+						ae.oldData = data.clone();
+						data.x = int(ax.text);
+						data.y = int(ay.text);
+						break;
+					case aurl:
+						ae = new MmeAttributeEvent(MmeAttributeEvent.CHANGE_URL);
+						ae.oldData = data.clone();
+						MmeElementData(data).url = aurl.text;
+						break;
+					default:
+						return;
+				}
+				
+				ae.data = data.clone();
+				dispatchEvent(ae);
+			}
+			
+			protected function onCbChange(event:IndexChangeEvent):void
+			{
+				var ae:MmeAttributeEvent = new MmeAttributeEvent(MmeAttributeEvent.CHANGE_ACTION);
+				ae.oldData = data.clone();
+				data.action = cb.selectedItem;
+				ae.data = data.clone();
+				dispatchEvent(ae);
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Metadata>
+		[Event(name="changePos", type="tx.mnme.events.MmeAttributeEvent")]
+		[Event(name="changeUrl", type="tx.mnme.events.MmeAttributeEvent")]
+		[Event(name="changeAction", type="tx.mnme.events.MmeAttributeEvent")]
+	</fx:Metadata>
+	
+	<s:Label x="11" y="10" text="X"/>
+	<s:TextInput id="ax" x="22" y="4" width="42" change="onChange(event)" restrict="-0987654321"/>
+	<s:Label x="71" y="10" text="Y"/>
+	<s:TextInput id="ay" x="82" y="4" width="42" change="onChange(event)" restrict="-0987654321"/>
+	<s:ComboBox id="cb" x="130" y="4" width="160" change="onCbChange(event)"/>
+	<s:Label x="300" y="10" text="URL"/>
+	<s:TextInput id="aurl" left="325" y="4" right="10" change="onChange(event)"/>
+	
+</panels:BasePanel>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<actions backgroundColor="FFFFFF">
+	<action name="基本特效">
+		<layer name="特效上层">
+			<frame index="0" length="1"></frame>
+		</layer>
+		<layer name="特效下层">
+			<frame index="0" length="1"></frame>
+		</layer>
+	</action>
+</actions>

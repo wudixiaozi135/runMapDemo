@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+					   xmlns:s="library://ns.adobe.com/flex/spark"
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   width="800" height="600"
+					   title="MME动画解析工具 v1.0.4"
+					   showStatusBar="false"
+					   creationComplete="onCreate()"
+					   resize="onResize()">
+	<fx:Style source="MMEDecoder.css"/>
+	
+	<fx:Script>
+		<![CDATA[
+			import LibCore.mme.MmeAsset;
+			import LibCore.mme.MmeAssetRender;
+			import LibCore.mme.MmeAssetRenderEvent;
+			import LibCore.mme.data.ActionData;
+			import LibCore.mme.data.AssetData;
+			import LibCore.mme.data.MmeData;
+			import LibCore.utils.FileUtils;
+			import LibCore.utils.ProcessUtils;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.core.UIComponent;
+			import mx.managers.DragManager;
+			
+			/**
+			 * MME动画解析工具
+			 * @author	Fictiony
+			 * @version	2016/7/19
+			 */	
+			static private const MME_FILE:FileFilter = new FileFilter("MME源文件(*.mme)", "*.mme");
+			static private const ANIM_FILE:FileFilter = new FileFilter("动画文件(*.swf,*.mme)", "*.swf;*.mme");
+			static private const XML_FILE:FileFilter = new FileFilter("配置文件(*.xml)", "*.xml");
+
+			private var _container:UIComponent;		//动画容器
+			private var _animOffset:Point;			//动画偏移（相对中心点）
+			private var _dragOffset:Point;			//拖拽偏移（鼠标位置相对于动画偏移的坐标差）
+			private var _animRender:LibCore.mme.MmeAssetRender;	//动画渲染器
+			private var _assetImage:Bitmap;			//资源图片显示对象
+			private var _animFile:File;				//动画文件对象
+			private var _mmeFile:File;				//MME源文件对象
+			private var _actionFile:File;			//动作配置文件对象
+			private var _actionFile2:File;			//替换动作配置文件对象
+			private var _libraryFile:File;			//库配置文件对象
+			private var _assetsDir:File;			//资源图片目录对象
+			
+			[Bindable]
+			private var _actions:ArrayCollection;	//动画所含动作列表
+			[Bindable]
+			private var _assets:ArrayCollection;	//动画所含资源列表
+
+			/**
+			 * 初始化
+			 */
+			private function onCreate():void
+			{
+				//允许多开
+				ProcessUtils.allowMultipleProcess();
+				
+				//添加容器
+				_container = new UIComponent;
+				addElementAt(_container, 0);
+				_animOffset = new Point;
+				refreshContainerPos();
+
+				//添加显示对象
+				_animRender = new MmeAssetRender(new MmeAsset);
+				_container.addChild(_animRender);
+				_animRender.addEventListener(MmeAssetRenderEvent.READY, onAnimLoaded);
+				_animRender.addEventListener(MmeAssetRenderEvent.LOAD_ERROR, onAnimLoaded);
+				_assetImage = new Bitmap;
+				_container.addChild(_assetImage);
+
+				//添加十字线
+				var cross_line:Sprite = new Sprite;
+				cross_line.graphics.beginFill(0, 0);
+				cross_line.graphics.drawRect(-2000, -2000, 4000, 4000);
+				cross_line.graphics.endFill();
+				cross_line.graphics.lineStyle(1, 0, 0.2);
+				cross_line.graphics.moveTo(-2000, 0);
+				cross_line.graphics.lineTo(2000, 0);
+				cross_line.graphics.moveTo(0, -2000);
+				cross_line.graphics.lineTo(0, 2000);
+				_container.addChild(cross_line);
+				
+				//设置文件对象
+				var dir:File = File.documentsDirectory;
+				_animFile = dir.resolvePath("anim.swf");
+				_animFile.addEventListener(Event.SELECT, onSelectAnimFile);
+				_mmeFile = dir.resolvePath("anim.mme");
+				_mmeFile.addEventListener(Event.SELECT, onSelectMmeFile);
+				_actionFile = dir.resolvePath("action.xml");
+				_actionFile.addEventListener(Event.SELECT, onSelectActionFile);
+				_actionFile2 = dir.resolvePath("action.xml");
+				_actionFile2.addEventListener(Event.SELECT, onSelectSwapActionFile);
+				_libraryFile = dir.resolvePath("library.xml");
+				_libraryFile.addEventListener(Event.SELECT, onSelectLibraryFile);
+				_assetsDir = dir.resolvePath("images");
+				_assetsDir.addEventListener(Event.SELECT, onSelectAssetsFolder);
+
+				//设置动作和资源列表
+				_actions = new ArrayCollection;
+				_assets = new ArrayCollection;
+
+				//设置事件
+				_container.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+				addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+				addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+				addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER, onDragEnter);
+				addEventListener(NativeDragEvent.NATIVE_DRAG_DROP, onDragDrop);
+			}
+			
+			/**
+			 * 场景大小变化处理
+			 */
+			private function onResize():void
+			{
+				refreshContainerPos();
+			}
+
+			/**
+			 * 鼠标按下处理
+			 */
+			private function onMouseDown( e:MouseEvent ):void
+			{
+				_dragOffset = new Point(this.mouseX - _animOffset.x, this.mouseY - _animOffset.y);
+			}
+
+			/**
+			 * 鼠标放开处理
+			 */
+			private function onMouseUp( e:MouseEvent ):void
+			{
+				_dragOffset = null;
+			}
+
+			/**
+			 * 鼠标移动处理
+			 */
+			private function onMouseMove( e:MouseEvent ):void
+			{
+				if (_dragOffset)
+				{
+					_animOffset.x = this.mouseX - _dragOffset.x;
+					_animOffset.y = this.mouseY - _dragOffset.y;
+					refreshContainerPos();
+				}
+				else
+				{
+					c_tab.visible = c_tab.mouseX > 0;
+				}
+			}
+
+			/**
+			 * 刷新容器位置
+			 */
+			private function refreshContainerPos():void
+			{
+				if (!_container) return;
+				_container.x = int(this.width / 2) + _animOffset.x;
+				_container.y = int(this.height / 2) + _animOffset.y;
+			}
+			
+			/**
+			 * 外部文件拖入处理
+			 */
+			private function onDragEnter( e:NativeDragEvent ):void  
+			{
+				if (e.clipboard.hasFormat(ClipboardFormats.FILE_LIST_FORMAT))  
+				{  
+					var files:Array = e.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
+					if (files.length == 1 && ["swf", "mme"].indexOf((files[0] as File).extension.toLowerCase()) >= 0)
+					{
+						DragManager.acceptDragDrop(this);
+					}
+				}  
+			}  
+
+			/**
+			 * 外部文件拖放处理
+			 */
+			private function onDragDrop( e:NativeDragEvent ):void  
+			{
+				var files:Array = e.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
+				loadAnim(files[0] as File);
+			}  
+			
+			/**
+			 * 加载动画文件
+			 */
+			private function onLoadAnim():void
+			{
+				_animFile.browseForOpen("请选择动画文件", [ANIM_FILE]);
+			}
+			
+			/**
+			 * 选择动画文件后的处理
+			 */
+			private function onSelectAnimFile( e:Event ):void
+			{
+				loadAnim(_animFile);
+			}
+
+			/**
+			 * 加载新动画
+			 */
+			private function loadAnim( f:File ):void
+			{
+				_actions.removeAll();
+				_assets.removeAll();
+				_animRender.unload();
+				_assetImage.bitmapData = null;
+				switch (f.extension)
+				{
+					case "swf":
+						_animRender.loadUrlAndAutoPlay(f.url);
+						break;
+					case "mme":
+						MmeUtils.readMmeFile(f, _animRender,
+							function on( success:Boolean, errMsg:String ):void
+							{
+								MmeUtils.deleteTempDir();
+								if (success)
+								{
+									onAnimLoaded();
+								}
+								else
+								{
+									Alert.show(errMsg, "错误");
+								}
+							}
+						);
+						break;
+				}
+			}
+			
+			/**
+			 * 动画加载完成后的处理
+			 */
+			private function onAnimLoaded( e:MmeAssetRenderEvent=null ):void
+			{
+				if (e && e.type == MmeAssetRenderEvent.LOAD_ERROR)
+				{
+					Alert.show("加载失败！", "错误");
+				}
+				else
+				{
+					var data:MmeData = _animRender.getMmeData();
+					if (!data) return;
+					
+					//记录动作列表
+					_actions.removeAll();
+					for each (var action:ActionData in data.actionDatas)
+					{
+						_actions.addItem(action.name);
+					}
+	
+					//记录资源列表
+					_assets.removeAll();
+					for each (var asset:AssetData in data.assetDatas)
+					{
+						_assets.addItem(asset.id + " - " + asset.assetName);
+					}
+				}
+			}
+			
+			/**
+			 * 导出动作配置文件
+			 */
+			private function onExportAction():void
+			{
+				if (!_animRender.getMmeData()) return;
+				_actionFile.browseForSave("请指定导出动作配置文件路径");
+			}
+			
+			/**
+			 * 选择动作配置文件后的处理
+			 */
+			private function onSelectActionFile( e:Event ):void
+			{
+				writeFileLater(FileUtils.writeXMLFile, _actionFile, _animRender.getMmeData().encode());
+			}
+			
+			/**
+			 * 导出库配置文件
+			 */
+			private function onExportLibrary():void
+			{
+				if (!_animRender.getMmeData()) return;
+				_libraryFile.browseForSave("请指定导出库配置文件路径");
+			}
+			
+			/**
+			 * 选择库配置文件后的处理
+			 */
+			private function onSelectLibraryFile( e:Event ):void
+			{
+				writeFileLater(FileUtils.writeXMLFile, _libraryFile, _animRender.getMmeData().encodeLibrary());
+			}
+			
+			/**
+			 * 导出资源图片文件
+			 */
+			private function onExportAssets():void
+			{
+				if (!_animRender.getMmeData()) return;
+				_assetsDir.browseForDirectory("请指定导出资源图片文件目录");
+			}
+			
+			/**
+			 * 选择资源图片文件夹后的处理
+			 */
+			private function onSelectAssetsFolder( e:Event ):void
+			{
+				writeFileLater(MmeUtils.exportAssets, _assetsDir, _animRender);
+			}
+			
+			/**
+			 * 导出MME动画文件
+			 */
+			private function onExportMME():void
+			{
+				if (!_animRender.getMmeData()) return;
+				_mmeFile.browseForSave("请指定导出MME动画文件路径");
+			}
+			
+			/**
+			 * 选择MME动画文件后的处理
+			 */
+			private function onSelectMmeFile( e:Event ):void
+			{
+				writeFileLater(function ():String
+				{
+					try
+					{
+						MmeUtils.writeMmeFile(_mmeFile, _animRender,
+							function ( success:Boolean, errMsg:String ):void
+							{
+								MmeUtils.deleteTempDir();
+								c_hint.text = "";
+								if (success)
+								{
+									Alert.show("生成文件成功！", "提示");
+								}
+								else
+								{
+									Alert.show(errMsg, "错误");
+								}
+							}
+						);
+					}
+					catch (e:Error)
+					{
+						MmeUtils.deleteTempDir();
+						throw e;
+					}
+					return "more";
+				});
+			}
+			
+			/**
+			 * 延后写入文件（以便显示提示信息）
+			 */
+			private function writeFileLater( writeFunc:Function, ...args ):void
+			{
+				c_hint.text = "正在生成文件，请稍候...";
+				setTimeout(function ():void
+				{
+					try
+					{
+						if (writeFunc.apply(null, args) == "more") return;
+						Alert.show("生成文件成功！", "提示");
+					}
+					catch (e:Error)
+					{
+						Alert.show(e.toString(), "错误");
+					}
+					c_hint.text = "";
+				}, 100);
+			}
+			
+			/**
+			 * 替换动作配置文件
+			 */
+			private function onSwapAction():void
+			{
+				if (!_animRender.getMmeData()) return;
+				_actionFile2.browseForOpen("请选择要替换的动作配置文件", [XML_FILE]);
+			}
+			
+			/**
+			 * 选择替换动作配置文件后的处理
+			 */
+			private function onSelectSwapActionFile( e:Event ):void
+			{
+				var xml:XML = FileUtils.readXMLFile(_actionFile2);
+				_animRender.getMmeData().decode(xml);
+				onAnimLoaded();
+			}
+			
+			/**
+			 * 切换列表分页处理
+			 */
+			private function onChangeList():void
+			{
+				c_tab.width = c_tab.selectedChild.width;
+				c_tab.setStyle("tabOffset", c_tab.width - 150);
+				var list:List = [c_actions, c_assets][c_tab.selectedIndex];
+				list.selectedIndex = -1;
+			}
+			
+			/**
+			 * 切换动作处理
+			 */
+			private function onChangeAction():void
+			{
+				if (c_actions.selectedIndex < 0) return;
+				_assetImage.visible = false;
+				_animRender.visible = true;
+				_animRender.play(c_actions.selectedItem as String, 0, true);
+			}
+			
+			/**
+			 * 切换资源处理
+			 */
+			private function onChangeAsset():void
+			{
+				if (c_assets.selectedIndex < 0) return;
+				_animRender.visible = false;
+				_assetImage.visible = true;
+				var id:int = int((c_assets.selectedItem as String).split(" - ").shift());
+				var asset:AssetData = _animRender.getMmeData().assetDatas[id];
+				_assetImage.bitmapData = asset.bitmap || _animRender.getMmeAsset().getAsset(asset.className, _animRender.getAppDomain());
+				_assetImage.x = asset.x;
+				_assetImage.y = asset.y;
+			}
+		]]>
+	</fx:Script>
+	
+	<s:BorderContainer left="0" right="0" height="36">
+		<s:HGroup left="0" right="0" top="0" bottom="0" paddingLeft="8" paddingTop="6">
+			<s:Button label="加载动画" click="onLoadAnim()"/>
+			<mx:VRule width="8" height="22"/>
+			<s:Button label="导出MME源文件" click="onExportMME()"/>
+			<s:Button label="替换动作配置" click="onSwapAction()"/>
+			<mx:VRule width="8" height="22"/>
+			<s:Button label="导出动作配置" click="onExportAction()"/>
+			<s:Button label="导出库配置" click="onExportLibrary()"/>
+			<s:Button label="导出资源图片" click="onExportAssets()"/>
+		</s:HGroup>
+	</s:BorderContainer>
+	<s:Label id="c_hint" y="40" left="8" right="200"/>
+	<mx:TabNavigator right="0" top="13" bottom="0" width="150"
+					 id="c_tab" change="onChangeList()">
+		<s:NavigatorContent width="150" height="100%" label="动作">
+			<s:List id="c_actions" left="-1" right="0" top="-11" bottom="-1"
+					change="onChangeAction()" dataProvider="{_actions}"/>
+		</s:NavigatorContent>
+		<s:NavigatorContent width="240" height="100%" label="资源">
+			<s:List id="c_assets" left="-1" right="0" top="-11" bottom="-1"
+					change="onChangeAsset()" dataProvider="{_assets}"/>
+		</s:NavigatorContent>
+	</mx:TabNavigator>
+</s:WindowedApplication>

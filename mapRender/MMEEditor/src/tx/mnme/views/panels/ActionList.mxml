@@ -1,0 +1,965 @@
+<?xml version="1.0" encoding="utf-8"?>
+<panels:BasePanel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				 xmlns:s="library://ns.adobe.com/flex/spark" 
+				 xmlns:mx="library://ns.adobe.com/flex/mx"
+				 xmlns:views="tx.mnme.views.*"
+				 xmlns:panels="tx.mnme.views.panels.*"
+				 width="400" height="300" >
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.tencent.morefun.naruto.tools.mmefile.events.MmeDataEvent;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.ActionData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.ElementData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.FrameData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.LayerData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.MmeData;
+			import tx.mnme.commands.actionlist.AddActionCommand;
+			import tx.mnme.commands.actionlist.AssignRelevanceActionCommand;
+			import tx.mnme.commands.actionlist.CreateActionFromLayerCommand;
+			import tx.mnme.commands.actionlist.DeleteActionsCommand;
+			import tx.mnme.commands.actionlist.HideActionCommand;
+			import tx.mnme.commands.actionlist.HideActionData;
+			import tx.mnme.commands.actionlist.ImportActionCommand;
+			import tx.mnme.commands.actionlist.MergeActionCommand;
+			import tx.mnme.commands.actionlist.ModifyActionCommand;
+			import tx.mnme.commands.actionlist.SelectActionCommand;
+			import tx.mnme.commands.cmd_internal;
+			import tx.mnme.events.ActionListEvent;
+			import tx.mnme.views.windows.CreateActionFromLayerWindow;
+			import tx.mnme.views.windows.InputWindow;
+			import tx.mnme.views.windows.MergeActionWindow;
+			import tx.mnme.views.windows.SelectLayerWindow;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.CloseEvent;
+			import mx.events.FlexEvent;
+			
+			import spark.events.GridSelectionEvent;
+			
+			[Bindable]
+			private var data:ArrayCollection = new ArrayCollection();
+			
+			private var mmeData:MmeData;
+			
+			public var dirty:Boolean;
+			
+			public function setMmeData(mmeData:MmeData):void
+			{
+				this.mmeData = mmeData;
+				this.mmeData.addEventListener(MmeDataEvent.ADD,onMmeData);
+				this.mmeData.addEventListener(MmeDataEvent.REMOVE,onMmeData);
+				setActionDatas(mmeData.actionDatas);
+			}
+			
+			protected function onMmeData(e:MmeDataEvent):void
+			{
+				switch(e.type)
+				{
+					case MmeDataEvent.ADD:
+						data.addItem(e.actionData);
+						break;
+					case MmeDataEvent.REMOVE:
+						var i:int = data.getItemIndex(e.actionData);
+						data.removeItemAt(i);
+						break;
+				}
+			}
+			
+			public function destroy():void
+			{
+				data = null;
+				mmeData.removeEventListener(MmeDataEvent.ADD,onMmeData);
+				mmeData.removeEventListener(MmeDataEvent.REMOVE,onMmeData);
+				mmeData = null;
+			}
+				
+			
+			private function setActionDatas(actionDatas:Vector.<ActionData>):void
+			{
+				for each(var ad:ActionData in actionDatas)
+				{
+					data.addItem(ad);
+				}
+//				dg.selectedIndex = 0;
+			}
+			
+			private function removeActionDataByName(name:String):void
+			{
+				for each(var ad:ActionData in data)
+				{
+					if(ad.name == name)
+					{
+						removeActionData(ad);
+						break;
+					}
+				}
+			}
+			
+			private function removeActionData(actionData:ActionData):void
+			{
+				if(dg.selectedIndex==-1)
+				{
+					dg.selectedIndex = 0;
+				}
+				
+				mmeData.removeActionData(actionData);
+				
+				var e:ActionListEvent = new ActionListEvent(ActionListEvent.REMOVE);
+				e.actionData = actionData;
+				dispatchEvent(e);
+			}
+			
+			public function getSelectedActionData():ActionData
+			{
+				return dg.selectedItem as ActionData;
+			}
+			
+			private function actionNameIsExsited(name:String):Boolean
+			{
+				for each(var ad:ActionData in mmeData.actionDatas)
+				{
+					if(ad.name == name)
+					{
+						return true;
+					}
+				}
+				return false;
+			}
+			
+			protected function onAdd(event:MouseEvent):void
+			{
+				var this__:ActionList = this;
+				
+				InputWindow.show("请输入动作名称","",null,function(w:InputWindow):void{
+					var value:String = w.value;
+					if(value)
+					{
+						if(actionNameIsExsited(value))
+						{
+							Alert.show("增加失败，动作名称已存在","",Alert.OK);
+						}else
+						{
+							new AddActionCommand(this__,value).doCommand();
+						}
+					}
+				},null);
+			}
+			
+			cmd_internal function doAddAction(name:String):void
+			{
+				var ad:ActionData = new ActionData();
+				ad.name = name;
+				ad.layerDatas = new Vector.<LayerData>;
+				
+				var ld:LayerData = new LayerData();
+				ld.name = "图层0";
+				ld.frameDatas = new Vector.<FrameData>;
+				
+				var fd:FrameData = new FrameData();
+				fd.setIndex(0);
+				fd.setLength(1);
+				
+				ld.frameDatas.push(fd);
+				ad.layerDatas.push(ld);
+				
+//				data.addItem(ad);
+				
+				mmeData.addActionData(ad);
+				this.dirty = true;
+			}
+			
+			cmd_internal function undoAddAction(name:String):void
+			{
+				for(var i:int=mmeData.actionDatas.length-1;i>=0;i--)
+				{
+					var ad:ActionData = mmeData.actionDatas[i]
+					if(ad.name == name)
+					{
+						var di:int = data.getItemIndex(ad);
+//						data.removeItemAt(di);
+						mmeData.removeActionData(ad);
+						break;
+					}
+				}
+				
+				this.dirty = true;
+			}
+				
+			
+			override protected function basePanelInit(event:FlexEvent):void
+			{
+				super.basePanelInit(event);
+				
+				dg.contextMenu = new NativeMenu();
+				dg.contextMenu.addEventListener(Event.SELECT,onSelectMenu);
+				dg.contextMenu.addEventListener(Event.DISPLAYING,onDisplayMenu);
+				function addItem(label:String,enabled:Boolean=false):void
+				{
+					var item:NativeMenuItem = new NativeMenuItem(label,label==null);
+					item.name = label;
+					item.enabled = enabled;
+					dg.contextMenu.addItem(item);
+				}
+				
+				addItem("增加新动作",true);
+				addItem("修改动作名称",true);
+				addItem("删除选中动作",true);
+				addItem(null);
+				addItem("合并选中动作",true);
+				addItem("由层生成动作",true);
+				addItem("从文件夹导入动作",true);
+				addItem(null);
+				addItem("设为不导出",true);
+				addItem("设为导出",true);
+				addItem(null);
+				addItem("指定关联动作",true);
+				addItem("更新关联动作",true);
+				var v:Vector.<int> = new Vector.<int>;
+				v.push(0);
+				dg.sortByColumns(v);
+				
+				
+				dg.selectedIndex = 0;
+				dg_selectionChangeHandler(null);
+			}
+			
+			private function onDisplayMenu(e:Event):void
+			{
+//				for each(var obj:Object in data)
+//				{
+//					trace(obj.name)
+//				}
+				if(dg.selectionLength==1)
+				{
+					dg.contextMenu.getItemByName("修改动作名称").enabled = true;
+					dg.contextMenu.getItemByName("由层生成动作").enabled = true;
+					dg.contextMenu.getItemByName("指定关联动作").enabled = true;
+					var ad:ActionData = dg.selectedItem as ActionData;
+					dg.contextMenu.getItemByName("更新关联动作").enabled = ad.relevanceNames && ad.relevanceNames.length>0;
+				}else
+				{
+					dg.contextMenu.getItemByName("修改动作名称").enabled = false;
+					dg.contextMenu.getItemByName("由层生成动作").enabled = false;
+					dg.contextMenu.getItemByName("指定关联动作").enabled = false;
+					dg.contextMenu.getItemByName("更新关联动作").enabled = false;
+				}
+				dg.contextMenu.getItemByName("删除选中动作").enabled = dg.selectionLength>0;
+				dg.contextMenu.getItemByName("合并选中动作").enabled = dg.selectionLength>0;
+				
+			}
+			
+			private function onSelectMenu(e:Event):void
+			{
+				var item:NativeMenuItem = e.target as NativeMenuItem;
+				switch(item.label)
+				{
+					case "增加新动作":
+						onAdd(null);
+						break;
+					case "删除选中动作":
+						doDeleteActions();
+						break;
+					case "修改动作名称":
+						modifyActionName();
+						break;
+					case "合并选中动作":
+						doMergeAction();
+						break;
+					case "由层生成动作":
+						doCreateActionFromLayer();
+						break;
+					case "从文件夹导入动作":
+						doImportAction();
+						break;
+					case "设为不导出":
+						doHideAction(true);
+						break;
+					case "设为导出":
+						doHideAction(false);
+						break;
+					case "指定关联动作":
+						doAssignRelevanceAction();
+						break;
+					case "更新关联动作":
+						doUpdateRelevanceAction();
+						break;
+				}
+			}
+			
+			private function doDeleteActions():void
+			{
+				if(dg.selectionLength>0)
+				{
+					var this__:ActionList = this;
+					Alert.show("确定要删除这"+dg.selectionLength+"个动作吗？","提示",Alert.OK|Alert.CANCEL,null,function(closeEvent:CloseEvent):void{
+						if(closeEvent.detail == Alert.OK)
+						{
+							var arr:Array = [];
+							for each(var ad:ActionData in dg.selectedItems)
+							{
+								//removeActionData(ad);
+								arr.push(ad.clone());
+							}
+							new DeleteActionsCommand(this__,arr,dg.selectedIndex).doCommand();
+						}
+					});
+				}
+			}
+			
+			cmd_internal function doDeleteActions(ads:Array):void
+			{
+				for(var i:int=data.length-1;i>=0;i--)
+				{
+					var ad:ActionData = data.getItemAt(i) as ActionData;
+					for each(var ad2:ActionData in ads)
+					{
+						if(ad2.name == ad.name)
+						{
+							removeActionData(ad);
+							break;
+						}
+					}
+				}
+				this.dirty = true;
+				
+				dg.selectedIndex = 0;
+				dg_selectionChangeHandler(null);
+			}
+			
+			
+			
+			cmd_internal function undoDeleteActions(ads:Array,selectedIndex:int):void
+			{
+				for each(var ad:ActionData in ads)
+				{
+					mmeData.addActionData(ad);
+				}
+				this.dirty = true;
+				
+				dg.selectedIndex = selectedIndex;
+				dg_selectionChangeHandler(null);
+			}
+			
+			private function doHideAction(isHide:Boolean):void
+			{
+				var datas:Vector.<HideActionData> = new Vector.<HideActionData>;
+				for each(var ad:ActionData in dg.selectedItems)
+				{
+					var data:HideActionData = new HideActionData();
+					data.name = ad.name;
+					data.isHide = ad.hide;
+					datas.push(data);
+				}
+				
+				if(datas.length>0)
+				{
+					new HideActionCommand(this,datas,isHide).doCommand();
+				}
+			}
+			cmd_internal function doHideAction(datas:Vector.<HideActionData>,isHide:Boolean):void
+			{
+				for each(var d:HideActionData in datas)
+				{
+					var i:int = getItemIndexByName(d.name);
+					var ad:ActionData = data.getItemAt(i) as ActionData;
+					ad.hide = isHide;
+					dg.dataProvider.itemUpdated(ad);
+				}
+				this.dirty = true;
+			}
+			
+			cmd_internal function undoHideAction(datas:Vector.<HideActionData>):void
+			{
+				for each(var d:HideActionData in datas)
+				{
+					var i:int = getItemIndexByName(d.name);
+					var ad:ActionData = data.getItemAt(i) as ActionData;
+					ad.hide = d.isHide;
+					dg.dataProvider.itemUpdated(ad);
+				}
+				this.dirty = true;
+			}
+			
+			private function getItemIndexByName(name:String):int
+			{
+				for(var i:int=0;i<data.length;i++)
+				{
+					var ad:ActionData = data.getItemAt(i) as ActionData;
+					if(name == ad.name)
+					{
+						return i;
+					}
+				}
+				return -1;
+			}
+			
+			protected function doUpdateRelevanceAction():void
+			{
+				var cad:ActionData = dg.selectedItem as ActionData;
+				var indices:Vector.<int> = new Vector.<int>;
+				for(var i:int=0;i<cad.relevanceNames.length;i++)
+				{
+					var index:int = getItemIndexByName(cad.relevanceNames[i]);
+					if(index!=-1)
+					{
+						indices.push(index);
+					}else
+					{
+						Alert.show("关联动作和实际动作不匹配");
+						return;
+					}
+				}
+				
+				
+				var nad:ActionData = (data.getItemAt(indices[0]) as ActionData).clone();
+//				nad.relevanceNames = new Vector.<String>;
+//				nad.relevanceNames.push(nad.name);
+				removeFrameEndEvent(nad);
+				for(i=1;i<indices.length;i++)
+				{
+					var fc:int = getFrameCount(nad);
+					var ad:ActionData = data.getItemAt(indices[i]) as ActionData;
+//					nad.relevanceNames.push(ad.name);
+					for(var j:int=0;j<ad.layerDatas.length;j++)
+					{
+						while(nad.layerDatas.length <= j)
+						{
+							nad.layerDatas.push(new LayerData());
+						}
+						var fc2:int = getFrameCount2(nad.layerDatas[j].frameDatas);
+						if(fc2 < fc)
+						{
+							var fillfd:FrameData = new FrameData();
+							fillfd.setIndex(fc2);
+							fillfd.setLength(fc-fc2);
+							nad.layerDatas[j].frameDatas.push(fillfd);
+						}
+						for each(var fd:FrameData in ad.layerDatas[j].frameDatas)
+						{
+							var nfd:FrameData = fd.clone();
+							if(i<indices.length-1 && nfd.event == "frameEnd")
+							{
+								nfd.setEvent(null,false);
+							}
+							nfd.setIndex(nfd.index+fc,false);
+							nad.layerDatas[j].frameDatas.push(nfd);
+						}
+					}
+				}
+				dg.selectedIndex = -1;
+				cad.layerDatas = nad.layerDatas;
+				dg.selectedItem = cad;
+//				this.indices.length = 0;
+//				if(dg.selectedIndex!=-1)
+//				{
+//					this.indices.push(dg.selectedIndex);
+//				}
+			}
+			
+			protected function doAssignRelevanceAction():void
+			{
+				var ads:Vector.<ActionData> = new Vector.<ActionData>;
+				var cad:ActionData = dg.selectedItem as ActionData;
+				var sds:Array = [];
+				for(var i:int=0;i<data.length;i++)
+				{
+					var ad:ActionData = data.getItemAt(i) as ActionData;
+					if(ad != cad)
+					{
+						ads.push(ad);
+					}
+					if(cad.relevanceNames)
+					{
+						var ii:int = cad.relevanceNames.indexOf(ad.name);
+						if(ii!=-1)
+						{
+							sds[ii] = ad;
+						}
+					}
+				}
+				
+				var this__:ActionList = this;
+				SelectLayerWindow.showActionDatas(function(ads2:Vector.<ActionData>):void{
+					var newRelevanceNames:Vector.<String> = new Vector.<String>;
+					for each(ad in ads2)
+					{
+						newRelevanceNames.push(ad.name);
+					}
+					new AssignRelevanceActionCommand(this__,cad.name,cad.relevanceNames,newRelevanceNames).doCommand();
+				},ads,sds);
+			}
+			
+			cmd_internal function doAssignRelevanceAction(actionName:String,relevanceNames:Vector.<String>):void
+			{
+				var ad:ActionData = getActionByName(actionName);
+				ad.relevanceNames = relevanceNames && relevanceNames.concat();
+				data.itemUpdated(ad);
+				
+				this.dirty = true;
+			}
+			
+			cmd_internal function undoAssignRelevanceAction(actionName:String,oldRelevanceNames:Vector.<String>):void
+			{
+				cmd_internal::doAssignRelevanceAction(actionName,oldRelevanceNames);
+				
+				this.dirty = true;
+			}
+			
+			protected function doCreateActionFromLayer():void
+			{
+//				InputWindow.show("由层生成动作","",null,function(w:InputWindow):void
+//				{
+//					if(actionNameIsExsited(w.value))
+//					{
+//						Alert.show("操作失败，动作名称已存在","",Alert.OK);
+//					}else
+//					{
+//						SelectLayerWindow.show(function(lds:Vector.<LayerData>):void{
+//							var newActionData:ActionData = new ActionData();
+//							newActionData.name = w.value;
+//							newActionData.layerDatas = lds.concat();
+//							mmeData.addActionData(newActionData);
+//							data.addItem(newActionData);
+//						},(dg.selectedItem as ActionData).layerDatas);
+//					}
+//				},localToGlobal(new Point(-215,0)));
+				
+				var this__:ActionList = this;
+				CreateActionFromLayerWindow.show(function(w:CreateActionFromLayerWindow,name:String,lds:Vector.<LayerData>):void{
+					if(actionNameIsExsited(name))
+					{
+						Alert.show("动作名称已存在","",Alert.OK);
+					}else
+					{
+						new CreateActionFromLayerCommand(this__,name,lds).doCommand();
+						w.destroy();
+					}
+				},(dg.selectedItem as ActionData).layerDatas);
+			}
+			
+			cmd_internal function doCreateActionFromLayer(name:String,lds:Vector.<LayerData>):void
+			{
+				var newActionData:ActionData = new ActionData();
+				newActionData.name = name;
+				newActionData.layerDatas = lds.concat();
+				mmeData.addActionData(newActionData);
+				
+				this.dirty = true;
+			}
+			
+			cmd_internal function undoCreateActionFromLayer(name:String):void
+			{
+				removeActionDataByName(name);
+				this.dirty = true;
+			}
+			
+			protected function doImportAction():void
+			{
+				var file:File = new File("/");
+				file.addEventListener(Event.SELECT,onSelectImportAction);
+				file.browseForDirectory("选择文件夹");
+			}
+			
+			protected function onSelectImportAction(e:Event):void
+			{
+				var file:File = e.currentTarget as File;
+				file.removeEventListener(Event.SELECT,onSelectImportAction);
+				
+				execImportAction(file);
+			}
+			
+			protected function execImportAction(file:File):void
+			{
+				if(actionNameIsExsited(file.name))
+				{
+					Alert.show("导入失败，动作名称已存在","提示");
+					return;
+				}
+				var ale:ActionListEvent = new ActionListEvent(ActionListEvent.CAN_IMPORT_FOLDER);
+				ale.folder = file;
+				dispatchEvent(ale);
+				if(!ale.isDefaultPrevented())
+				{
+					new ImportActionCommand(this,file).doCommand();
+				}
+			}
+			
+			cmd_internal function doImportAction(file:File):void
+			{
+				var ale:ActionListEvent = new ActionListEvent(ActionListEvent.IMPORT_FOLDER);
+				ale.folder = file;
+				dispatchEvent(ale);
+				
+				var ad:ActionData = new ActionData();
+				ad.name = file.name;
+				
+				var ld:LayerData = new LayerData();
+				ld.name = file.name;
+				
+				ad.layerDatas.push(ld);
+				
+				var fdi:int = 0;
+				for each(var f:File in file.getDirectoryListing())
+				{
+					if(f.isDirectory)
+					{
+						continue;
+					}
+					if(f.extension != "png" && f.extension != "jpg")
+					{
+						continue;
+					}
+					
+					var fd:FrameData = new FrameData();
+					fd.setIndex(fdi++);
+					fd.setLength(1);
+					var ed:ElementData = new ElementData();
+					ed.filename = f.name;
+					fd.setElement(ed);
+					ld.frameDatas.push(fd);
+				}
+				
+				mmeData.addActionData(ad);
+				
+				this.dirty = true;
+			}
+			
+			cmd_internal function undoImportAction(file:File):void
+			{
+				var ad:ActionData = getActionByName(file.name);
+				mmeData.removeActionData(ad);
+				
+				var ale:ActionListEvent = new ActionListEvent(ActionListEvent.UN_IMPORT_FOLDER);
+				ale.folder = file;
+				dispatchEvent(ale);
+				
+				this.dirty = true;
+			}
+			
+			protected function modifyActionName():void
+			{
+				if(dg.selectionLength==0)
+				{
+					return;
+				}
+				var this__:ActionList = this;
+				InputWindow.show("修改动作名称",dg.selectedItem["name"],null,function(w:InputWindow):void{
+					//data.getItemAt(dg.selectedIndex)
+					if(w.value == dg.selectedItem["name"] || !actionNameIsExsited(w.value))
+					{
+						new ModifyActionCommand(this__,dg.selectedItem["name"],w.value).doCommand();
+					}else
+					{
+						Alert.show("修改失败，动作名称已存在","",Alert.OK);
+					}
+					
+				},localToGlobal(new Point(-215,0)));
+			}
+			
+			cmd_internal function doModifyActionName(oldName:String,newName:String):void
+			{
+				for each(var ad:ActionData in data)
+				{
+					if(ad.name == oldName)
+					{
+						ad.name = newName;
+						break;
+					}
+				}
+				data.refresh();
+				
+				this.dirty = true;
+			}
+			
+			cmd_internal function undoModifyActionName(oldName:String,newName:String):void
+			{
+				cmd_internal::doModifyActionName(newName,oldName);
+			}
+			
+			private function doMergeAction():void
+			{
+				if(dg.selectionLength>0)
+				{
+					var this__:ActionList = this;
+					MergeActionWindow.show(function(w:MergeActionWindow,name:String,sourceNames:Array):void{
+						if(actionNameIsExsited(name))
+						{
+							Alert.show("动作名称已存在","",Alert.OK);
+						}else
+						{
+							new MergeActionCommand(this__,name,sourceNames).doCommand();
+							w.destroy();
+						}
+					},mmeData.actionDatas,[dg.selectedItem]);
+					
+//					InputWindow.show("合并动作",ans.join("_"),null,function(w:InputWindow):void
+//					{
+//						if(actionNameIsExsited(w.value))
+//						{
+//							Alert.show("修改失败，动作名称已存在","",Alert.OK);
+//						}else
+//						{
+//							mergeAction(w.value,indices);
+//						}
+//					},localToGlobal(new Point(-215,0)));
+				}
+			}
+			
+			private function getActionByName(name:String):ActionData
+			{
+				for each(var ad:ActionData in data)
+				{
+					if(ad.name == name)
+					{
+						return ad;
+					}
+				}
+				return null;
+			}
+			
+			cmd_internal function doMergeAction(value:String,sourceNames:Array):void
+			{
+				var nad:ActionData = getActionByName(sourceNames[0]).clone();
+				nad.relevanceNames = new Vector.<String>;
+				nad.relevanceNames.push(nad.name);
+				removeFrameEndEvent(nad);
+				
+				for(var i:int=1;i<sourceNames.length;i++)
+				{
+					var fc:int = getFrameCount(nad);
+					var ad:ActionData = getActionByName(sourceNames[i]);
+					nad.relevanceNames.push(ad.name);
+					for(var j:int=0;j<ad.layerDatas.length;j++)
+					{
+						while(nad.layerDatas.length <= j)
+						{
+							nad.layerDatas.push(new LayerData());
+						}
+						var fc2:int = getFrameCount2(nad.layerDatas[j].frameDatas);
+						if(fc2 < fc)
+						{
+							var fillfd:FrameData = new FrameData();
+							fillfd.setIndex(fc2);
+							fillfd.setLength(fc-fc2);
+							nad.layerDatas[j].frameDatas.push(fillfd);
+						}
+						for each(var fd:FrameData in ad.layerDatas[j].frameDatas)
+						{
+							var nfd:FrameData = fd.clone();
+							if(i<sourceNames.length-1 && nfd.event == "frameEnd")
+							{
+								nfd.setEvent(null,false);
+							}
+							nfd.setIndex(nfd.index+fc,false);
+							nad.layerDatas[j].frameDatas.push(nfd);
+						}
+					}
+				}
+				
+				nad.name = value;
+				
+				mmeData.actionDatas.push(nad);
+				data.addItem(nad);
+				
+				this.dirty = true;
+			}
+			
+			cmd_internal function undoMergeAction(name:String):void
+			{
+				removeActionDataByName(name);
+				
+				this.dirty = true;
+			}
+			
+			private function removeFrameEndEvent(ad:ActionData):void
+			{
+				for each(var ld:LayerData in ad.layerDatas)
+				{
+					for each(var fd:FrameData in ld.frameDatas)
+					{
+						if(fd.event == "frameEnd")
+						{
+							fd.setEvent(null,false);
+						}
+					}
+				}
+			}
+			
+			private function getFrameCount(ad:ActionData):int
+			{
+				var c:int=0;
+				for each(var ld:LayerData in ad.layerDatas)
+				{
+					var c2:int = getFrameCount2(ld.frameDatas);
+					if(c < c2)
+					{
+						c = c2;
+					}
+				}
+				return c;
+			}
+			private function getFrameCount2(frameDatas:Vector.<FrameData>):int
+			{
+				var c:int = 0;
+				for each(var fd:FrameData in frameDatas)
+				{
+					if(c<fd.index+fd.length)
+					{
+						c = fd.index + fd.length;
+					}
+				}
+				return c;
+			}
+				
+//			private var indices:Vector.<int> = new Vector.<int>;
+//			private var lastIndex:int = -1;
+			
+			protected function dg_valueCommitHandler(event:FlexEvent):void
+			{
+				var e:ActionListEvent = new ActionListEvent(ActionListEvent.SELECT);
+				e.actionData = dg.selectedItem as ActionData;
+				dispatchEvent(e);
+			}
+			
+			protected function dg_selectionChangeHandler(event:GridSelectionEvent):void
+			{
+				var e:ActionListEvent = new ActionListEvent(ActionListEvent.SELECT);
+				e.actionData = dg.selectedItem as ActionData;
+				e.isManual = true;
+				dispatchEvent(e);
+			}
+			
+			protected function dg_selectionChangingHandler(event:GridSelectionEvent):void
+			{
+				new SelectActionCommand(this,dg.selectedIndex,event.selectionChange.rowIndex).doCommand();
+			}
+			
+			cmd_internal function doSelectAction(index:int):void
+			{
+				dg.selectedIndex = index;
+				dg_selectionChangeHandler(null);
+			}
+			
+//			protected function dg_selectionChangeHandler(event:GridSelectionEvent):void
+//			{
+//				switch(event.kind)
+//				{
+//					case "addRow":
+//						indices.push(event.selectionChange.rowIndex);
+//						break;
+//					case "removeRow":
+//						indices.splice(indices.indexOf(event.selectionChange.rowIndex),1);
+//						break;
+//					case "setRow":
+//						indices.length = 0;
+//						indices.push(event.selectionChange.rowIndex);
+//						break;
+//					case "setRows":
+//						if(lastIndex == dg.selectedIndices[0])
+//						{
+//							indices = dg.selectedIndices.concat();
+//						}else
+//						{
+//							indices = dg.selectedIndices.reverse();
+//						}
+//						break;
+//				}
+//				if(indices.length==1)
+//				{
+//					lastIndex = indices[0];
+//				}
+//				trace(indices.join(",,"))
+////				dg_valueCommitHandler(null);
+//			}
+			
+			protected function dg_nativeDragHandler(event:NativeDragEvent):void
+			{
+				var files:Array;
+				var file:File;
+				switch(event.type)
+				{
+					case NativeDragEvent.NATIVE_DRAG_ENTER:
+						files = event.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
+						for each(file in files)
+						{
+							if(!file.isDirectory)
+							{
+								break;
+							}
+						}
+						if(files)
+						{
+							NativeDragManager.acceptDragDrop(dg);
+						}
+						break;
+					case NativeDragEvent.NATIVE_DRAG_DROP:
+						files = event.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
+						for each(file in files)
+						{
+							if(!file.isDirectory)
+							{
+								break;
+							}
+							
+							execImportAction(file);
+						}
+						break;
+				}
+			}
+			
+			
+		]]>
+	</fx:Script>
+	<fx:Metadata>
+		[Event(name="select", type="tx.mnme.events.ActionListEvent")]
+		[Event(name="remove", type="tx.mnme.events.ActionListEvent")]
+		[Event(name="importFolder", type="tx.mnme.events.ActionListEvent")]
+		[Event(name="canImportFolder", type="tx.mnme.events.ActionListEvent")]
+		[Event(name="unImportFolder", type="tx.mnme.events.ActionListEvent")]
+	</fx:Metadata>
+	<s:DataGrid id="dg" dataProvider="{data}"
+				left="0" right="0" top="0" bottom="0"
+				selectionChange="dg_selectionChangeHandler(event);"
+				selectionChanging="dg_selectionChangingHandler(event)"
+				selectionMode="multipleRows"
+				nativeDragEnter="dg_nativeDragHandler(event)"
+				nativeDragDrop="dg_nativeDragHandler(event)"
+				>
+		<s:columns>
+			<mx:ArrayList>
+				<s:GridColumn dataField="name" headerText="动作名称">
+					<s:itemRenderer>
+						<fx:Component>
+							<s:GridItemRenderer>
+								<fx:Script>
+									<![CDATA[
+										import com.tencent.morefun.naruto.tools.mmefile.timeline.ActionData;
+										
+										override public function set data(value:Object):void
+										{
+											var ad:ActionData = value as ActionData;
+											lab.text = ad.name;
+											lab.setStyle("color",ad.hide?0x999999:0x0);
+											if(ad.relevanceNames && ad.relevanceNames.length>0)
+											{
+												lab.toolTip = "关联动作：" + ad.relevanceNames.join(",");
+											}else
+											{
+												lab.toolTip = null;
+											}
+										}
+									]]>
+								</fx:Script>
+								<s:Label id="lab" left="2" right="2" top="2" bottom="2" height="20" textAlign="left" paddingLeft="2" verticalAlign="middle" />
+							</s:GridItemRenderer>
+						</fx:Component>
+					</s:itemRenderer>
+				</s:GridColumn>
+			</mx:ArrayList>
+		</s:columns>
+	</s:DataGrid>
+</panels:BasePanel>

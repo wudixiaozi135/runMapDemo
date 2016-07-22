@@ -1,0 +1,875 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:views="tx.mnme.views.*"
+		 width="400" height="300" initialize="init(event)"
+		 mouseDown="onMouseDown(event)" rightMouseDown="onMouseDown(event)" middleMouseDown="onMouseDown(event)" xmlns:panels="tx.mnme.views.panels.*">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.tencent.morefun.naruto.tools.mmefile.MmeFile;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.ActionData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.BaseElementData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.ElementData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.FrameData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.LayerData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.MmeElementData;
+			import com.tencent.morefun.naruto.tools.mmefile.timeline.PointElementData;
+			import tx.mnme.BitmapDataCache;
+			import tx.mnme.commands.cmd_internal;
+			import tx.mnme.commands.area.AddItemCommand;
+			import tx.mnme.commands.attribute.DisperseAlignCommand;
+			import tx.mnme.commands.attribute.ModifyFrameAttribute;
+			import tx.mnme.commands.attribute.SyncAttributeCommand;
+			import tx.mnme.events.ActionListEvent;
+			import tx.mnme.events.ActiveAreaEvent;
+			import tx.mnme.events.AttributeEvent;
+			import tx.mnme.events.DisperseAlignEvent;
+			import tx.mnme.events.FrameAttributeEvent;
+			import tx.mnme.events.LibraryEvent;
+			import tx.mnme.events.MmeAttributeEvent;
+			import tx.mnme.views.panels.BasePanel;
+			import tx.mnme.views.panels.activearea.ImageItem;
+			import tx.mnme.views.panels.activearea.MmeRenderItem;
+			import tx.mnme.views.panels.activearea.PointItem;
+			
+			import mx.controls.Alert;
+			import mx.events.DragEvent;
+			import mx.events.FlexEvent;
+			import mx.managers.DragManager;
+			
+			protected var mmeFile:MmeFile;
+			
+			protected var dirty:Boolean = false;
+			
+			public var backgroundColor:uint = 0xFFFFFFFF;
+			
+			protected function init(event:FlexEvent):void
+			{
+				stage.addEventListener(KeyboardEvent.KEY_DOWN,onKey);
+				stage.addEventListener(KeyboardEvent.KEY_UP,onKey);
+				
+				showAttribute(null);
+//				attributeGroup.removeElement(frameAttribute);
+			}
+			
+			public function setResource(mmeFile:MmeFile):void
+			{
+				this.mmeFile = mmeFile;
+				
+				lib.refRes(mmeFile.tempDirectory,mmeFile.data.library);
+//				if(mmeFile.actionDatas.length>0)
+//				{
+//					timeline.setActionData(mmeFile.actionDatas[0]);
+//				}
+				action.setMmeData(mmeFile.data);
+//				area.setBackgroundColor(mmeFile.data.backgroundColor);
+//				lib.setStyle("backgroundColor",mmeFile.data.backgroundColor);
+			}
+			public function getResource():MmeFile
+			{
+				return mmeFile;
+			}
+			
+//			public function save():void
+//			{
+//				if(isDirty)
+//				{
+//					var fileStream:FileStream = new FileStream();
+//					fileStream.open(file,FileMode.UPDATE);
+//					
+//					
+//					var bytes:ByteArray = new MmeFileEncode().encode(mmeFile);
+//					
+//					//zip.serialize(fileStream);
+//					
+//					fileStream.close();
+//				}
+//			}
+			
+			
+			public function destroy():void
+			{
+				stage.removeEventListener(KeyboardEvent.KEY_DOWN,onKey);
+				stage.removeEventListener(KeyboardEvent.KEY_UP,onKey);
+				
+				lib.destroy();
+				action.destroy();
+				area.destroy();
+				timeline.destroy();
+				
+				
+				mmeFile.destroy();
+				mmeFile = null;
+				if(parent is Group)
+				{
+					(parent as Group).removeElement(this);
+				}
+			}
+			
+			protected function onLibrary(event:LibraryEvent):void
+			{
+				function checkFrameData():Boolean
+				{
+					var fd:FrameData = timeline.getSelectedFrameData();
+					if(fd)
+					{
+						if(fd.element == null)
+						{
+//							if(fd.length!=1)
+//							{
+//								fd.setLength(1);
+//							}
+							return true;
+						}
+					}
+					Alert.show("请选择空针，再进行此操作","提示");
+					return false;
+				}
+				switch(event.type)
+				{
+					case LibraryEvent.ADD_MULTI_TO_ACTIVE_AREA:
+						if(checkFrameData())
+						{
+							fd = timeline.getSelectedFrameData();
+							
+							var file:File = event.multFiles.shift();
+							var eleData:ElementData = new ElementData();
+							eleData.filename = file.name;
+							
+							new AddItemCommand(area,timeline,timeline.getCurrentLayerIndex(),timeline.getCurrentFrame(),file,eleData).doCommand();
+
+							if(event.multFiles.length>0)
+							{
+								if(fd.length>1)
+								{
+									fd.setLength(1);
+									timeline.setCurrentFrame(fd.index);
+								}
+								timeline.insertSeqElementData(event.multFiles);
+							}
+						}
+						break;
+					case LibraryEvent.DRAG_TO_ACTIVE_AREA:
+						var pos:Point = new Point(area.ui.mouseX,area.ui.mouseY);
+//					case LibraryEvent.ADD_TO_ACTIVE_AREA:
+					case LibraryEvent.ADD_MME_TO_ACTION_AREA:
+						var isMme:Boolean = event.type == LibraryEvent.ADD_MME_TO_ACTION_AREA;
+						var fd:FrameData = timeline.getSelectedFrameData();
+						if(fd)
+						{
+							if(fd.element == null)
+							{
+//								var repos:Function = function(baseItem:BaseItem,ed:ElementData):void{
+//									baseItem.setPosition(-baseItem.width*0.5,-baseItem.height*0.5,true);
+//								};
+								if(isMme)
+								{
+									var mmeEleData:MmeElementData = new MmeElementData();
+									var renderItem:MmeRenderItem = new MmeRenderItem(timeline.getCurrentLayerIndex(),mmeEleData);
+									area.addItemAt(renderItem,true,true,renderItem.layerIndex);
+									fd.setElement(mmeEleData);
+									
+//									setTimeout(repos,100,renderItem,mmeEleData);
+								}else
+								{
+									eleData = new ElementData();
+									eleData.filename = event.file.name;
+									
+									var imgItem:ImageItem = new ImageItem(timeline.getCurrentLayerIndex(),event.file,eleData);
+									if(pos)
+									{
+										imgItem.setPosition(pos.x-1000,pos.y-1000,true);
+									}
+									area.addItemAt(imgItem,true,true,imgItem.layerIndex);
+									fd.setElement(eleData);
+									
+//									setTimeout(repos,100,imgItem,eleData);
+								}
+								
+							}else
+							{
+								Alert.show("请选择空针，再进行此操作","提示");
+							}
+						}else
+						{
+							Alert.show("请选择空针，再进行此操作","提示");
+						}
+						break;
+					case LibraryEvent.REMOVE_FILE:
+						BitmapDataCache.disposeByName(event.file.name);
+						break;
+//					case LibraryEvent.DRAG_FILE:
+//						fd = timeline.getSelectedFrameData();
+//						if(fd==null || fd.element!=null)
+//						{
+//							break;
+//						}
+//						
+//						if(dragImgItem==null)
+//						{
+//							eleData = new ElementData();
+//							eleData.filename = event.file.filename;
+//							dragImgItem = new ImageItem(timeline.getCurrentLayerIndex(),event.file,eleData);
+//							dragImgItem.initDisplay();
+//							ui.addChild(dragImgItem);
+//						}else
+//						{
+//							dragImgItem.x = int(ui.mouseX);
+//							dragImgItem.y = int(ui.mouseY);
+//							if(ui.mouseX > width - lib.width)
+//							{
+//								dragImgItem.scaleX = dragImgItem.scaleY = 0.5;
+//							}else
+//							{
+//								dragImgItem.scaleX = dragImgItem.scaleY = 1;
+//							}
+//						}
+//						break;
+//					case LibraryEvent.DRAG_FILE_DONE:
+//						if(dragImgItem)
+//						{
+//							if(dragImgItem.scaleX == 1)
+//							{
+//								var p:Point = new Point(dragImgItem.x,dragImgItem.y);
+//								p = area.ui.globalToLocal(p);
+//								dragImgItem.x = p.x;
+//								dragImgItem.y = p.y;
+//								area.addItemAt(dragImgItem,false,true,dragImgItem.layerIndex);
+//								
+//								fd = timeline.getSelectedFrameData();
+//								fd.setElement(dragImgItem.getData());
+//							}else
+//							{
+//								dragImgItem.destroy();
+//							}
+//							dragImgItem = null;
+//						}
+//						break;
+				}
+			}
+			
+//			cmd_internal function doAddMultiLibraryItemToArea(layerIndex:int,frameIndex:int,file:File,eleData:ElementData):void
+//			{
+//				var fd:FrameData = timeline.getLayer(layerIndex).getFrameData(frameIndex);
+//				fd.setElement(eleData);
+//				
+//				var imgItem:ImageItem = new ImageItem(layerIndex,file,eleData);
+//				area.addItemAt(imgItem,true,true,layerIndex);
+//				
+//				this.dirty = true;
+//			}
+//			
+//			cmd_internal function undoAddMultiLibraryItemToArea(layerIndex:int,frameIndex:int):void
+//			{
+//				var fd:FrameData = timeline.getLayer(layerIndex).getFrameData(frameIndex);
+//				fd.setElement(null);
+//				
+//				area.removeItemAt(layerIndex);
+//				
+//				this.dirty = true;
+//			}
+			
+			protected function showAttribute(target:BasePanel):void
+			{
+				attribute.visible = false;
+				mmeAttribute.visible = false;
+				frameAttribute.visible = false;
+				
+				switch(target)
+				{
+					case attribute:
+						attribute.visible = true;
+						area.bottom = 80;
+						break;
+					case mmeAttribute:
+						mmeAttribute.visible = true;
+//						area.bottom = 50;
+						break;
+					case frameAttribute:
+						frameAttribute.visible = true;
+//						area.bottom = 50;
+						break;
+//					default:
+//						area.bottom = 0;
+//						break;
+				}
+			}
+			
+			private var dragImgItem:ImageItem;
+			
+			protected function onArea(event:ActiveAreaEvent):void
+			{
+				var fd:FrameData;
+				switch(event.type)
+				{
+					case ActiveAreaEvent.SELECT:
+						if(event.baseItem is ImageItem || event.baseItem is PointItem)
+						{
+							attribute.setData(event.baseItem,true);
+							showAttribute(attribute);
+						}else if(event.baseItem is MmeRenderItem)
+						{
+							mmeAttribute.setData(event.baseItem as MmeRenderItem,true);
+							mmeAttribute.setActions((event.baseItem as MmeRenderItem).getActions());
+							showAttribute(mmeAttribute);
+						}
+						timeline.setCurrentLayerIndex(event.baseItem.layerIndex);
+						break;
+					case ActiveAreaEvent.UPDATE_ATTRIBUTE:
+						attribute.setData(event.baseItem,true);
+						mmeAttribute.setData(event.baseItem as MmeRenderItem);
+						break;
+					case ActiveAreaEvent.UNSELECT:
+						attribute.disable();
+						mmeAttribute.disable();
+//						timeline.unSelect();
+						break;
+					case ActiveAreaEvent.DELETE:
+						fd = timeline.getSelectedFrameData();
+						if(fd)
+						{
+							fd.setElement(null);
+						}
+						break;
+					case ActiveAreaEvent.UN_DELETE:
+						fd = timeline.getSelectedFrameData();
+						if(fd)
+						{
+							fd.setElement(event.baseItem.getData());
+						}
+						break;
+					case ActiveAreaEvent.GET_LIBRARY_FILE:
+						(event.baseItem as ImageItem).file = mmeFile.tempDirectory.resolvePath("images/"+(event.baseItem.getData() as ElementData).filename);
+//						(event.baseItem as ImageItem).file = lib.getLibraryFileByName(event.baseItem.getData().filename);
+						break;
+					case ActiveAreaEvent.CAN_SELECT_ELEMENT:
+						var cld:LayerData = timeline.getLayerDataByIndex(event.baseItem.layerIndex);
+						if(!cld.lock)
+						{
+							var sfd:FrameData = timeline.getCurrentFrameDataByLayerIndex(event.baseItem.layerIndex);
+							if(sfd &&sfd.element == event.baseItem.getData())
+							{
+								if(sfd.index == timeline.getCurrentFrame() || sfd.useTween==false)
+								{
+									event.canSelectElement = true;
+								}
+							}
+						}
+						break;
+					case ActiveAreaEvent.CHANGE_BACKGROUND_COLOR:
+						this.backgroundColor = area.getBackgroundColor();
+						lib.setStyle("backgroundColor",this.backgroundColor);
+						break;
+					
+					
+					case ActiveAreaEvent.ADD_POINT_ITEM:
+						sfd = timeline.getSelectedFrameData();
+						if(sfd.element == null)
+						{
+							var pos:Point = new Point(area.ui.mouseX,area.ui.mouseY);
+							var ped:PointElementData = new PointElementData();
+							ped.x = pos.x - 1000;
+							ped.y = pos.y - 1000;
+							sfd.setElement(ped);
+							var pItem:PointItem = new PointItem(ped,timeline.getCurrentLayerIndex(),pos.x,pos.y);
+							
+							area.addItemAt(pItem,true,false,timeline.getCurrentLayerIndex());
+						}
+						break;
+				}
+			}
+			
+			protected function onMouseDown(event:MouseEvent):void
+			{
+				timeline.stopTimer();
+				var obj:DisplayObject = event.target as DisplayObject;
+				while(obj)
+				{
+					if(obj == attribute || obj == frameAttribute || obj == action || obj == mmeAttribute)
+					{
+						if(focusManager.getFocus())
+						{
+							area.notifyKeyDown = false;
+							timeline.notifyKeyDown = false;
+						}
+						return;
+					}else if(obj == area)
+					{
+						area.notifyKeyDown = true;
+						timeline.notifyKeyDown = true;
+						frameAttribute.disable();
+						break;
+					}else if(obj == timeline)
+					{
+						area.notifyKeyDown = true;
+						timeline.notifyKeyDown = true;
+						attribute.disable();
+						mmeAttribute.disable();
+						break;
+					}else if(obj == lib || obj == action)
+					{
+						area.notifyKeyDown = false;
+						timeline.notifyKeyDown = false;
+						attribute.disable();
+						mmeAttribute.disable();
+						return;
+					}else
+					{
+						obj = obj.parent as Sprite;
+					}
+				}
+				focusManager.deactivate();
+			}
+			
+			protected function onKey(event:KeyboardEvent):void
+			{
+				switch(event.type)
+				{
+					case KeyboardEvent.KEY_DOWN:
+						if(area.notifyKeyDown)
+						{
+							area.onKeyDown(event);
+						}
+						if(timeline.notifyKeyDown)
+						{
+							timeline.onKeyDown(event);
+						}
+						break;
+					case KeyboardEvent.KEY_UP:
+						if(area.notifyKeyUp)
+						{
+							area.onKeyUp(event);
+						}
+						if(timeline.notifyKeyUp)
+						{
+							timeline.onKeyUp(event);
+						}
+						break;
+				}
+				
+			}
+			
+			protected function onTimeline(event:Event):void
+			{
+				switch(event.type)
+				{
+					case Event.CHANGE:
+						if(timeline.getActionData())
+						{
+							area.rerefItem(timeline.getCurrentFrame(),timeline.getActionData().layerDatas,timeline.cbShowMultiFrame.selected);
+						}
+						break;
+					case Event.SELECT:
+//						area.selectItemByTimeline(timeline.getCurrentFrame(),timeline.getCurrentLayerIndex(),timeline.getSelectedFrameData());
+						var sfd:FrameData = timeline.getSelectedFrameData();
+						if(sfd)
+						{
+							frameAttribute.setData(sfd.event,sfd.useTween,sfd.phantom, true, sfd.sound);
+						}else
+						{
+							frameAttribute.setData("",false,null,false);
+						}
+						showAttribute(frameAttribute);
+						break;
+					case "selectContent":
+						area.selectContent(timeline.getCurrentLayerIndex());
+						break;
+				}
+			}
+			
+			protected function onAttribute(event:AttributeEvent):void
+			{
+				switch(event.type)
+				{
+					case AttributeEvent.CHANGE_POS:
+					case AttributeEvent.CHANGE_BLEND_MODE:
+					case AttributeEvent.CHANGE_SCALE:
+					case AttributeEvent.CHANGE_ROTATION:
+					case AttributeEvent.CHANGE_ALPHA:
+					case AttributeEvent.CHANGE_COLOR:
+					case AttributeEvent.CHANGE_NAME:
+						area.changeSelectedItemAttribute(event);
+						break;
+					case AttributeEvent.SYNC:
+						var li:int = timeline.getCurrentLayerIndex();
+//						var ld:LayerData = timeline.getSelectedLayerData();
+						var ld:LayerData = timeline.getLayerDataByIndex(li);
+						if(ld)
+						{
+							var oldElementDatas:Vector.<ElementData> = new Vector.<ElementData>;
+							for(var i:int=0;i<ld.frameDatas.length;i++)
+							{
+								if(ld.frameDatas[i] && ld.frameDatas[i].element)
+								{
+									oldElementDatas.push(ld.frameDatas[i].element.clone() as ElementData)
+								}else
+								{
+									oldElementDatas.push(null);
+								}
+							}
+							if(oldElementDatas.length>0)
+							{
+								new SyncAttributeCommand(this,li,event,oldElementDatas).doCommand();
+							}
+						}
+						
+						break;
+				}
+			}
+			
+			cmd_internal function doSync(layerIndex:int,event:AttributeEvent):void
+			{
+				var ld:LayerData = timeline.getLayerDataByIndex(layerIndex);
+				for each(var fd:FrameData in ld.frameDatas)
+				{
+					if(fd.element)
+					{
+						if(event.syncPos)
+						{
+							fd.element.x = event.data.x
+							fd.element.y = event.data.y;
+						}
+						if(fd.element is ElementData)
+						{
+							if(event.syncScale)
+							{
+								ElementData(fd.element).scaleX = ElementData(event.data).scaleX;
+								ElementData(fd.element).scaleY = ElementData(event.data).scaleY;
+							}
+							if(event.syncRotation)
+							{
+								ElementData(fd.element).rotation = ElementData(event.data).rotation;
+							}
+							if(event.syncAlpha)
+							{
+								ElementData(fd.element).alpha = ElementData(event.data).alpha;
+							}
+							if(event.syncBlend)
+							{
+								ElementData(fd.element).blendMode = ElementData(event.data).blendMode;
+							}
+						}
+					}
+				}
+				this.dirty = true;
+			}
+			
+			cmd_internal function undoSync(layerIndex:int,event:AttributeEvent,oldElementDatas:Vector.<ElementData>):void
+			{
+				var ld:LayerData = timeline.getLayerDataByIndex(layerIndex);
+				for(var i:int=0;i<ld.frameDatas.length;i++)
+				{
+					var fd:FrameData = ld.frameDatas[i];
+					if(fd.element)
+					{
+						if(event.syncPos)
+						{
+							fd.element.x = oldElementDatas[i].x
+							fd.element.y = oldElementDatas[i].y;
+						}
+						if(fd.element is ElementData)
+						{
+							if(event.syncScale)
+							{
+								ElementData(fd.element).scaleX = oldElementDatas[i].scaleX;
+								ElementData(fd.element).scaleY = oldElementDatas[i].scaleY;
+							}
+							if(event.syncRotation)
+							{
+								ElementData(fd.element).rotation = oldElementDatas[i].rotation;
+							}
+							if(event.syncAlpha)
+							{
+								ElementData(fd.element).alpha = oldElementDatas[i].alpha;
+							}
+							if(event.syncBlend)
+							{
+								ElementData(fd.element).blendMode = oldElementDatas[i].blendMode;
+							}
+						}
+					}
+				}
+				
+				this.dirty = true;
+			}
+			
+			protected function onAttribute2(event:DisperseAlignEvent):void
+			{
+				switch(event.type)
+				{
+					case DisperseAlignEvent.DISPERSE_ALIGN:
+						var li:int = timeline.getCurrentLayerIndex();
+						var ld:LayerData = timeline.getLayerDataByIndex(li);
+//						var ld:LayerData = timeline.getSelectedLayerData();
+						if(ld)
+						{
+							var eds:Vector.<BaseElementData> = new Vector.<BaseElementData>;
+							var oldeds:Vector.<BaseElementData> = new Vector.<BaseElementData>;
+							for(var i:int=0;i<ld.frameDatas.length;i++)
+							{
+								if(ld.frameDatas[i].index >= event.beginFrame -1 && ld.frameDatas[i].index+ld.frameDatas[i].length <= event.endFrame)
+								{
+									if(ld.frameDatas[i].element)
+									{
+										eds.push(ld.frameDatas[i].element.clone());
+										oldeds.push(ld.frameDatas[i].element.clone());
+									}else
+									{
+										eds.push(null);
+										oldeds.push(null);
+									}
+								}
+							}
+							if(eds.length>2)
+							{
+								var step:Point = new Point();
+								if(event.x)
+								{
+									step.x = (eds[eds.length-1].x - eds[0].x)/(eds.length-1);
+								}
+								if(event.y)
+								{
+									step.y = (eds[eds.length-1].y - eds[0].y)/(eds.length-1);
+								}
+								for(i=1;i<eds.length-1;i++)
+								{
+									if(event.x)
+									{
+										eds[i].x = eds[0].x + step.x*i;
+									}
+									if(event.y)
+									{
+										eds[i].y = eds[0].y + step.y*i;
+									}
+								}
+								
+								new DisperseAlignCommand(this,li,event,oldeds,eds).doCommand();
+							}
+						}
+						break;
+					case DisperseAlignEvent.GET_BEGIN_END_FRAME:
+						event.beginFrame = 1;
+						event.endFrame = timeline.getTotalFrame();
+						break;
+				}
+			}
+			
+			cmd_internal function doDisperseAlgin(li:int,event:DisperseAlignEvent,eds:Vector.<BaseElementData>):void
+			{
+				var li:int = timeline.getCurrentLayerIndex();
+				var ld:LayerData = timeline.getLayerDataByIndex(li);
+				
+				for(var i:int=0;i<ld.frameDatas.length;i++)
+				{
+					var fd:FrameData = ld.frameDatas[i];
+					
+					if( ld.frameDatas[i].index <= event.beginFrame-1 && event.beginFrame-1 < ld.frameDatas[i].index + ld.frameDatas[i].length )
+					{
+						for(var j:int=0;j<eds.length;j++)
+						{
+							fd = ld.frameDatas[i+j];
+							if(fd.element)
+							{
+								if(event.x)
+								{
+									fd.element.x = eds[j].x;
+								}
+								if(event.y)
+								{
+									fd.element.y = eds[j].y;
+								}
+							}
+						}
+						
+						break;
+					}
+				}
+				this.dirty = true;
+			}
+			
+			protected function onFrameAttribute(event:FrameAttributeEvent):void
+			{
+				var cli:int = timeline.getCurrentLayerIndex();
+				var cf:int = timeline.getCurrentFrame();
+				
+				var sfd:FrameData = timeline.getLayer(cli).getFrameData(cf);
+				if(sfd)
+				{
+					new ModifyFrameAttribute(timeline,cli,cf,sfd.event,sfd.useTween,sfd.phantom.clone(),sfd.sound.clone(),
+						event.event,event.useTween,event.phantom.clone(), event.sound.clone()).doCommand();
+					dirty = true;
+				}
+			}
+			
+			protected function onMmeAttribute(event:MmeAttributeEvent):void
+			{
+				var mmeItem:MmeRenderItem = area.getSelectedItem() as MmeRenderItem;
+				if(!mmeItem)
+				{
+					return;
+				}
+				switch(event.type)
+				{
+					case MmeAttributeEvent.CHANGE_POS:
+					case MmeAttributeEvent.CHANGE_ACTION:
+					case MmeAttributeEvent.CHANGE_URL:
+						area.changeSelectedItemAttribute(event);
+						break;
+				}
+			}
+			
+			protected function onActionPanel(event:ActionListEvent):void
+			{
+				switch(event.type)
+				{
+					case ActionListEvent.SELECT:
+						BitmapDataCache.dispose();
+						
+						timeline.setActionData(event.actionData);
+						break;
+					case ActionListEvent.REMOVE:
+						if(event.actionData == timeline.getActionData())
+						{
+							timeline.setActionData(null);
+						}
+						break;
+					case ActionListEvent.CAN_IMPORT_FOLDER:
+						if(!lib.canImportFolder(event.folder))
+						{
+							event.preventDefault();
+						}
+						break;
+					case ActionListEvent.IMPORT_FOLDER:
+						lib.importFolder(event.folder);
+						break;
+					case ActionListEvent.UN_IMPORT_FOLDER:
+						lib.unImportFolder(event.folder);
+						break;
+				}
+			}
+			
+			public function getCurrActionName():String
+			{
+				if(timeline.getActionData())
+				{
+					return timeline.getActionData().name;
+				}
+				return null;
+			}
+			
+			protected function area_dragEnterHandler(event:DragEvent):void
+			{
+				if(event.dragInitiator == lib.tree)
+				{
+					DragManager.acceptDragDrop(area);
+				}
+			}
+			
+			
+			
+			
+			
+			public function clearAllDirty():void
+			{
+				dirty = area.dirty = timeline.dirty = lib.dirty = action.dirty = false;
+			}
+			
+			public function get isDirty():Boolean
+			{
+				return dirty || area.dirty || timeline.dirty || lib.dirty || action.dirty;
+			}
+			
+			public function set isDirty(value:Boolean):void
+			{
+				dirty = value;
+			}
+				
+			protected function lib_getUsedImageNamesHandler(event:LibraryEvent):void
+			{
+				var rs:Vector.<String> = new Vector.<String>;
+				for each(var ad:ActionData in mmeFile.data.actionDatas)
+				{
+					for each(var ld:LayerData in ad.layerDatas)
+					{
+						for each(var fd:FrameData in ld.frameDatas)
+						{
+							if(fd.element is ElementData)
+							{
+								if(rs.indexOf((fd.element as ElementData).filename) == -1)
+								{
+									rs.push((fd.element as ElementData).filename);
+								}
+							}
+						}
+					}
+				}
+				event.rsUsedImageNames = rs;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<mx:HDividedBox width="100%" height="100%">
+		<mx:VDividedBox height="100%" minWidth="520" width="99%">
+			<panels:Timeline id="timeline" title="时间轴" width="100%" height="131" minHeight="131"
+							change="onTimeline(event)"
+							select="onTimeline(event)"
+							selectContent="onTimeline(event)"
+							/>
+			<panels:ActiveArea id="area" title="舞台" width="100%" height="100%"
+							   select="onArea(event)"
+							   unselect="onArea(event)"
+							   updateAttribute="onArea(event)"
+							   delete="onArea(event)"
+							   unDelete="onArea(event)"
+							   getLibraryFile="onArea(event)"
+							   canSelectElement="onArea(event)"
+							   dragEnter="area_dragEnterHandler(event)"
+							   changeBackgroundColor="onArea(event)"
+							   addPointItem="onArea(event)"
+							   />
+			<s:Group height="80" minHeight="80" maxHeight="80" width="100%">
+				<panels:Attribute id="attribute" title="属性面板" width="100%" height="100%"
+								  changePos="onAttribute(event)"
+								  changeScale="onAttribute(event)"
+								  changeRotation="onAttribute(event)"
+								  changeBlendMode="onAttribute(event)"
+								  changeAlpha="onAttribute(event)"
+								  changeColor="onAttribute(event)"
+								  changeName="onAttribute(event)"
+								  sync="onAttribute(event)"
+								  getBeginEndFrame="onAttribute2(event)"
+								  disperseAlign="onAttribute2(event)"
+								  />
+				<panels:FrameAttribute  id="frameAttribute" title="帧属性面板" width="100%" height="100%"
+										change="onFrameAttribute(event)"/>
+				<panels:MmeAttribute id="mmeAttribute" title="MME属性面板" width="100%" height="100%"
+									 changePos="onMmeAttribute(event)"
+									 changeUrl="onMmeAttribute(event)"
+									 changeAction="onMmeAttribute(event)"
+									 />
+			</s:Group>
+		</mx:VDividedBox>
+		<mx:VDividedBox width="1%" minWidth="200" height="100%">
+			<panels:Library id="lib" title="资源库" width="100%" height="70%" minHeight="300"
+						   addMultiToActiveArea="onLibrary(event)"
+						   addToActiveArea="onLibrary(event)"
+						   addMmeToActiveArea="onLibrary(event)"
+						   removeFile="onLibrary(event)"
+						   dragToActiveArea="onLibrary(event)"
+						   getUsedImageNames="lib_getUsedImageNamesHandler(event)"
+						   />
+			<panels:ActionList id="action" title="动作列表" width="100%" height="30%" minHeight="150"
+							  select="onActionPanel(event)"
+							  remove="onActionPanel(event)"
+							  importFolder="onActionPanel(event)"
+							  canImportFolder="onActionPanel(event)"
+							  unImportFolder="onActionPanel(event)"
+							  />
+		</mx:VDividedBox>
+	</mx:HDividedBox>
+</s:Group>

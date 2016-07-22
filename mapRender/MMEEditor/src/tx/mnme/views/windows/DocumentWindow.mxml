@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:f="net.fixer.flex.compnonents.*"
+			   width="400" height="180" initialize="init(event)" title="文档设置"
+			   close="onClose(event)">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.tencent.morefun.naruto.tools.mmefile.MmeFile;
+			import tx.mnme.Global;
+			import tx.mnme.views.Editor;
+			
+			import mx.collections.ArrayList;
+			import mx.events.CloseEvent;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			
+			import spark.events.IndexChangeEvent;
+			
+			public var mmeFile:MmeFile;
+			public var docFile:File;
+			public var editor:Editor;
+			
+			public static function show(docFile:File,mmeFile:MmeFile,editor:Editor):void
+			{
+				var dw:DocumentWindow = new DocumentWindow();
+				dw.mmeFile = mmeFile;
+				dw.docFile = docFile;
+				dw.editor = editor;
+				PopUpManager.addPopUp(dw,Global.mainApp,true);
+				PopUpManager.centerPopUp(dw);
+			}
+			
+			protected function init(event:FlexEvent):void
+			{
+				fs.path = mmeFile.data.external;
+				if(docFile)
+				{
+					fs.referPath = docFile.nativePath;
+				}
+				frameRate.text = mmeFile.data.frameRate.toString();
+				compressType.selectedIndex =  mmeFile.data.compressTypeIsJPG ? 1:0;
+				checkState();
+			}
+			
+			private function checkState():void
+			{
+				currentState = compressType.selectedIndex==0 ? "png" : "jpg";
+			}
+			
+			protected function compressType_changeHandler(event:IndexChangeEvent):void
+			{
+				checkState();
+			}
+			
+			protected function onInit(event:FlexEvent):void
+			{
+				switch(event.currentTarget)
+				{
+					case compressJpgParam:
+						compressJpgParam.value = mmeFile.data.compressParamJPG;
+						break;
+					case compressPngParam:
+						compressPngParam.selectedIndex = 0;
+						break;
+				}
+			}
+			
+			protected function onClose(event:CloseEvent):void
+			{
+				destroy();
+			}
+			
+			public function destroy():void
+			{
+				mmeFile = null;
+				PopUpManager.removePopUp(this);
+				this.removeAllElements();
+			}
+			
+			protected function onClick(event:MouseEvent):void
+			{
+				switch(event.currentTarget)
+				{
+					case okBtn:
+						editor.isDirty = true;
+						mmeFile.data.external = fs.path;
+						mmeFile.data.compressType = compressType.selectedItem["value"];
+						if(mmeFile.data.compressTypeIsPNG)
+						{
+							mmeFile.data.compressParamPNG = int(compressPngParam.selectedItem["value"]);
+						}else
+						{
+							mmeFile.data.compressParamJPG = compressJpgParam.value;
+						}
+						destroy();
+						break;
+					case cancelBtn:
+						destroy();
+						break;
+				}
+			}
+			
+			private static const COMPRESS_TYPES:ArrayList = new ArrayList([
+				{value:"PNG",label:"PNG"},
+				{value:"JPG",label:"JPEG+Alpha"}
+			]);
+			
+			private static const COMPRESS_PNG_PARAMS:ArrayList = new ArrayList([
+				{value:"32",label:"PNG32"},
+				{value:"24",label:"PNG24"},
+				{value:"8",label:"PNG8"}
+			]);
+		]]>
+	</fx:Script>
+	
+	
+	<s:states>
+		<mx:State name="png"/>
+		<mx:State name="jpg"/>
+	</s:states>
+	
+	
+	
+	<s:Label x="28" y="21" text="帧频："/>
+	<s:TextInput id="frameRate" x="72" y="16" enabled="false" text="24"
+				 width.jpg="110"
+				 width.png="110"/>
+	
+	
+	<s:Label x="28" y="51" text="压缩："/>
+	<s:DropDownList id="compressType" x="72" y="45" dataProvider="{COMPRESS_TYPES}" change="compressType_changeHandler(event)" />
+	
+	<s:Label includeIn="png" x="200" y="51" text="格式："/>
+	<s:DropDownList id="compressPngParam" x="245" y="45" dataProvider="{COMPRESS_PNG_PARAMS}" enabled="true" includeIn="png" initialize="onInit(event)"/>
+	
+	
+	<s:Label includeIn="jpg" x="200" y="51" text="质量："/>	
+	<f:NumericSlider id="compressJpgParam" includeIn="jpg" x="245" y="44" width="110" maximum="100" minimum="10" initialize="onInit(event)"
+							   sliderWidth="10" stepSize="1" value="80"/>
+	
+	<f:FileSelector id="fs" left="30" right="30" y="80" selectButtonLabel="共享资源" fileFilters="共享资源,*.swf" selectTitle="选择共享资源" />
+	
+	<s:Button id="okBtn" bottom="10" horizontalCenter="-50" label="确定" click="onClick(event)"/>
+	<s:Button id="cancelBtn" bottom="10" horizontalCenter="50" label="取消" click="onClick(event)"/>
+	
+	
+	
+</s:TitleWindow>

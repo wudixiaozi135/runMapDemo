@@ -1,0 +1,74 @@
+<SceneMiddlegroundConfig>
+    <imgList>
+        <img id="1" imgX="9" imgY="3" offsetX="144" offsetY="270" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="2"
+             startFrame="4" url="assets/scene/map/10001/ImgItem/131f2681cacf92bdddfc2c393d863aaf.swf"/>
+        <img id="1" imgX="9" imgY="4" offsetX="144" offsetY="14" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="2"
+             startFrame="4" url="assets/scene/map/10001/ImgItem/131f2681cacf92bdddfc2c393d863aaf.swf"/>
+        <img id="2" imgX="10" imgY="4" offsetX="182" offsetY="166" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="2"
+             startFrame="8" url="assets/scene/map/10001/ImgItem/514c36b73d1fd9030f8d150e4337e4ae.swf"/>
+        <img id="3" imgX="4" imgY="6" offsetX="223" offsetY="115"
+             matrix="0.9086775779724121, 0.010471528396010399, -0.010878419503569603, 0.9439861178398132" alpha="1"
+             subLayerIndex="2" startFrame="4"
+             url="assets/scene/map/10001/ImgItem/c88080a2b2d3cef96fab13202a571313.swf"/>
+        <img id="3" imgX="5" imgY="6" offsetX="-33" offsetY="115"
+             matrix="0.9086775779724121, 0.010471528396010399, -0.010878419503569603, 0.9439861178398132" alpha="1"
+             subLayerIndex="2" startFrame="4"
+             url="assets/scene/map/10001/ImgItem/c88080a2b2d3cef96fab13202a571313.swf"/>
+        <img id="4" imgX="4" imgY="9" offsetX="177" offsetY="270" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="0"
+             startFrame="0" url="assets/scene/map/10001/ImgItem/d97e0c33f4bb5bacce327392a13a5617.swf"/>
+        <img id="4" imgX="4" imgY="10" offsetX="177" offsetY="14" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="0"
+             startFrame="0" url="assets/scene/map/10001/ImgItem/d97e0c33f4bb5bacce327392a13a5617.swf"/>
+        <img id="5" imgX="3" imgY="8" offsetX="242" offsetY="254" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="2"
+             startFrame="0" url="assets/scene/map/10001/ImgItem/711afdf9fa50e57b18d08e0c33a7dcf4.swf"/>
+        <img id="5" imgX="3" imgY="9" offsetX="242" offsetY="-2" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="2"
+             startFrame="0" url="assets/scene/map/10001/ImgItem/711afdf9fa50e57b18d08e0c33a7dcf4.swf"/>
+        <img id="5" imgX="4" imgY="8" offsetX="-14" offsetY="254" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="2"
+             startFrame="0" url="assets/scene/map/10001/ImgItem/711afdf9fa50e57b18d08e0c33a7dcf4.swf"/>
+        <img id="5" imgX="4" imgY="9" offsetX="-14" offsetY="-2" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="2"
+             startFrame="0" url="assets/scene/map/10001/ImgItem/711afdf9fa50e57b18d08e0c33a7dcf4.swf"/>
+        <img id="6" imgX="6" imgY="9" offsetX="160" offsetY="47" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="0"
+             startFrame="1" url="assets/scene/map/10001/ImgItem/b1fc60569a5fe858c1da114a06cbe6d4.swf"/>
+        <img id="7" imgX="6" imgY="9" offsetX="141" offsetY="37" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="2"
+             startFrame="5" url="assets/scene/map/10001/ImgItem/50d24587b5e4113b88fe3fdc478df544.swf"/>
+        <img id="8" imgX="1" imgY="10" offsetX="7" offsetY="65" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="0"
+             startFrame="4" url="assets/scene/map/10001/ImgItem/1981852f3a9a1cdeb6aff008c8e17673.swf"/>
+        <img id="9" imgX="6" imgY="8" offsetX="68" offsetY="60" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="2"
+             startFrame="1" url="assets/scene/map/10001/ImgItem/55e072836d32e1cde7ccb4294b8f743a.swf"/>
+        <img id="10" imgX="6" imgY="8" offsetX="81" offsetY="25" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="2"
+             startFrame="4" url="assets/scene/map/10001/ImgItem/55e072836d32e1cde7ccb4294b8f743a.swf"/>
+        <img id="11" imgX="5" imgY="8" offsetX="264" offsetY="38" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="2"
+             startFrame="2" url="assets/scene/map/10001/ImgItem/b1fc60569a5fe858c1da114a06cbe6d4.swf"/>
+        <img id="11" imgX="6" imgY="8" offsetX="8" offsetY="38" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="2"
+             startFrame="2" url="assets/scene/map/10001/ImgItem/b1fc60569a5fe858c1da114a06cbe6d4.swf"/>
+        <img id="12" imgX="7" imgY="3" offsetX="250" offsetY="232" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="0"
+             startFrame="1" url="assets/scene/map/10001/ImgItem/6d8225b83b130e048e28f8c3932b8883.swf"/>
+        <img id="12" imgX="8" imgY="3" offsetX="-6" offsetY="232" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="0"
+             startFrame="1" url="assets/scene/map/10001/ImgItem/6d8225b83b130e048e28f8c3932b8883.swf"/>
+        <img id="13" imgX="7" imgY="3" offsetX="236" offsetY="211" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="0"
+             startFrame="4" url="assets/scene/map/10001/ImgItem/e69975d583ebcc005946cddc69fa59fb.swf"/>
+        <img id="14" imgX="2" imgY="5" offsetX="250" offsetY="212" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="0"
+             startFrame="2" url="assets/scene/map/10001/ImgItem/d863751cae88b82f02d3d00feb19a12b.swf"/>
+        <img id="14" imgX="3" imgY="5" offsetX="-6" offsetY="212" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="0"
+             startFrame="2" url="assets/scene/map/10001/ImgItem/d863751cae88b82f02d3d00feb19a12b.swf"/>
+        <img id="15" imgX="6" imgY="3" offsetX="58" offsetY="36" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="0"
+             startFrame="2" url="assets/scene/map/10001/ImgItem/4d7e7ccababaafa34c0587732582ac9b.swf"/>
+        <img id="16" imgX="6" imgY="2" offsetX="101" offsetY="312"
+             matrix="-0.9055900573730469, 1.8981341385132386e-22, -7.656329963198674e-15, 0.9535961747169495" alpha="1"
+             subLayerIndex="0" startFrame="3"
+             url="assets/scene/map/10001/ImgItem/59b521f20ee957f1dcdc3907d7f130c7.swf"/>
+        <img id="16" imgX="6" imgY="3" offsetX="101" offsetY="56"
+             matrix="-0.9055900573730469, 1.8981341385132386e-22, -7.656329963198674e-15, 0.9535961747169495" alpha="1"
+             subLayerIndex="0" startFrame="3"
+             url="assets/scene/map/10001/ImgItem/59b521f20ee957f1dcdc3907d7f130c7.swf"/>
+        <img id="17" imgX="0" imgY="3" offsetX="152" offsetY="188" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="0"
+             startFrame="4" url="assets/scene/map/10001/ImgItem/b1f34d98eb8225290a9ae976ceaff24f.swf"/>
+        <img id="18" imgX="0" imgY="3" offsetX="144" offsetY="158" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="0"
+             startFrame="1" url="assets/scene/map/10001/ImgItem/449c3b26ee7f16d329f02f21a487632c.swf"/>
+        <img id="19" imgX="2" imgY="8" offsetX="90" offsetY="212" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="0"
+             startFrame="2" url="assets/scene/map/10001/ImgItem/6d8225b83b130e048e28f8c3932b8883.swf"/>
+        <img id="20" imgX="2" imgY="8" offsetX="106" offsetY="187" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="0"
+             startFrame="8" url="assets/scene/map/10001/ImgItem/e69975d583ebcc005946cddc69fa59fb.swf"/>
+        <img id="21" imgX="3" imgY="9" offsetX="193" offsetY="78" matrix="1, 0, 0, 1" alpha="1" subLayerIndex="0"
+             startFrame="2" url="assets/scene/map/10001/ImgItem/378f616c576662449a4c6c3c9036fbb3.swf"/>
+    </imgList>
+</SceneMiddlegroundConfig>

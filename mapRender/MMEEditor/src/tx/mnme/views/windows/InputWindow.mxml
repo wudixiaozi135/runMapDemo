@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="215" height="108" creationComplete="init(event)" close="onClose(event)">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import tx.mnme.Global;
+			
+			import mx.events.CloseEvent;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			[Bindable]
+			public var value:String;
+			private var okFun:Function;
+			
+			public static function show(title:String,defaultValue:String,parent:Sprite,okFun:Function,pos:Point):void
+			{
+				var my:InputWindow = new InputWindow();
+				my.title = title;
+				my.okFun = okFun;
+				my.value = defaultValue;
+				
+				if(!parent)
+				{
+					parent = Global.mainApp;
+				}
+				PopUpManager.addPopUp(my,parent,true);
+				if(pos)
+				{
+					my.x = pos.x;
+					my.y = pos.y;
+				}else
+				{
+					PopUpManager.centerPopUp(my);
+				}
+			}
+			
+			protected function onClick(event:MouseEvent):void
+			{
+				switch(event.target)
+				{
+					case ok:
+						doOk();
+					case cancel:
+						onClose(null);
+						break;
+				}
+			}
+			
+			
+			protected function doOk():void
+			{
+				value = txt.text;
+				okFun && okFun(this);
+				okFun = null;
+			}
+			
+			protected function init(event:FlexEvent):void
+			{
+				txt.selectAll();
+				focusManager.setFocus(txt);
+			}
+			
+			protected function onClose(event:CloseEvent):void
+			{
+				PopUpManager.removePopUp(this);
+			}
+			
+			protected function txt_keyDownHandler(event:KeyboardEvent):void
+			{
+				switch(event.keyCode)
+				{
+					case Keyboard.ENTER:
+						doOk();
+					case Keyboard.ESCAPE:
+						onClose(null);
+						break;
+				}
+			}
+			
+		]]>
+	</fx:Script>
+		
+	<s:TextInput id="txt" y="11" left="10" right="10" text="{value}" keyDown="txt_keyDownHandler(event)"/>
+	<s:Button id="ok" x="24" y="44" label="确定" click="onClick(event)"/>
+	<s:Button id="cancel" x="120" y="44" label="取消" click="onClick(event)"/>
+</s:TitleWindow>

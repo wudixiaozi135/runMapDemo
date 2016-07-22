@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="600" height="400" backgroundColor="#D9D4D4" title="编辑窗口">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<s:Scroller x="10" y="10" width="443" height="295" horizontalScrollPolicy="auto"
+				verticalScrollPolicy="auto">
+		<s:Group id="view" width="100%" height="100%">
+			<s:Group id="smallCanvas">
+				<mx:UIComponent id="editImg"/>
+				<mx:UIComponent id="gridLayer"/>
+			</s:Group>
+		</s:Group>
+	</s:Scroller>
+	<s:Button id="okButton" x="218" y="329" label="确定"/>
+	<s:Button id="cancelButton" x="311" y="329" label="取消"/>
+	<s:Label x="461" y="27" text="roleID:"/>
+	<s:TextInput id="roleId" x="506" y="19" width="73" height="23"/>
+</s:TitleWindow>

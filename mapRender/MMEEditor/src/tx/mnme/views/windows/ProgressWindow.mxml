@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="350" height="160" enabled="true" initialize="init(event)">
+	<fx:Script>
+		<![CDATA[
+			import tx.mnme.Global;
+			
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			
+			private static var instance:ProgressWindow;
+			public static function getInstance():ProgressWindow
+			{
+				return instance || (instance = new ProgressWindow());
+			}
+			
+			private var showing:Boolean = false;
+			public function isShowing():Boolean
+			{
+				return showing;
+			}
+			
+			public function show(title:String):void
+			{
+				showing = true;
+				this.title = title;
+				PopUpManager.addPopUp(this,Global.mainApp,true);
+				PopUpManager.centerPopUp(this);
+			}
+			
+			public function hide():void
+			{
+				showing = false;
+				PopUpManager.removePopUp(this);
+			}
+			
+			protected function init(event:FlexEvent):void
+			{
+				this.closeButton.visible = false;
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<mx:ProgressBar label="{title}" y="48" left="10" right="10" indeterminate="true"/>
+</s:TitleWindow>

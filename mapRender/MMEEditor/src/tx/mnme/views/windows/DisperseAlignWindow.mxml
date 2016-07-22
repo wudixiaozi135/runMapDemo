@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="248" height="160" title="分散对齐" 
+			   close="onClose(event)">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import tx.mnme.Global;
+			import tx.mnme.events.AttributeEvent;
+			import tx.mnme.events.DisperseAlignEvent;
+			
+			import mx.events.CloseEvent;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			
+			private var okFun:Function;
+			private var tf:int;
+			
+			public function show():void
+			{
+				PopUpManager.addPopUp(this,Global.mainApp,true);
+				PopUpManager.centerPopUp(this);
+			}
+			
+			public function setData(tf:int,okFun:Function):void
+			{
+				this.tf = tf;
+				if(initialized)
+				{
+					this.okFun = okFun;
+					abf.text = "1";
+					aef.text = tf.toString();
+				}else
+				{
+					var fun:Function = function(e:FlexEvent):void{
+						e.currentTarget.removeEventListener(e.type,fun);
+						
+						setData(tf,okFun);
+					}
+					this.addEventListener(FlexEvent.CREATION_COMPLETE,fun);
+				}
+			}
+			
+			protected function onClose(event:CloseEvent):void
+			{
+				destroy();
+			}
+			
+			protected function onClick(event:MouseEvent):void
+			{
+				switch(event.target)
+				{
+					case ok:
+						if(checkErr())
+						{
+							return;
+						}
+						okFun&&okFun();
+					case cancel:
+						break;
+				}
+				destroy();
+			}
+			
+			private function checkErr():Boolean
+			{
+				var bf:int = int(abf.text);
+				var ef:int = int(aef.text);
+				if(bf <1 || ef > tf || ef - bf <2)
+				{
+					err.text = "起始帧 或 末尾帧设置有误！！！";
+					return true;
+				}
+				if(cb_x.selected==false && cb_y.selected ==false)
+				{
+					err.text = "同步属性至少选择一项";
+					return true;
+				}
+				return false;
+			}
+			
+			public function destroy():void
+			{
+				PopUpManager.removePopUp(this);
+				okFun = null;
+			}
+			
+			public function getEvent():DisperseAlignEvent
+			{
+				var dae:DisperseAlignEvent = new DisperseAlignEvent(DisperseAlignEvent.DISPERSE_ALIGN);
+				dae.beginFrame = int(abf.text);
+				dae.endFrame = int(aef.text);
+				dae.x = cb_x.selected;
+				dae.y = cb_y.selected;
+				return dae;
+			}
+			
+			
+		]]>
+	</fx:Script>
+	
+	<s:Label x="22" y="21" text="起始帧:"/>
+	<s:TextInput id="abf" x="66" y="16" width="60" restrict="0987654321"/>
+	<s:Label x="22" y="50" text="末尾帧:"/>
+	<s:TextInput id="aef" x="66" y="45" width="60" restrict="0987654321"/>
+	
+	<s:CheckBox id="cb_x" x="147" y="18" label="x" selected="true"/>
+	<s:CheckBox id="cb_y" x="147" y="47" label="y" selected="true"/>
+	<s:Button id="ok" x="53" y="92" label="确定" click="onClick(event)"/>
+	<s:Button id="cancel" x="131" y="92" label="取消" click="onClick(event)"/>
+	
+	<s:Label id="err" y="72" width="100%" color="#FF0000" horizontalCenter="0" textAlign="center"/>
+</s:TitleWindow>

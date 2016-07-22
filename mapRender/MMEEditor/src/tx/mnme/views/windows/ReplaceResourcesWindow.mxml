@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   title="替换资源"
+			   close="onClose(event)"
+			   initialize="init(event)"
+			   width="400" height="160" xmlns:f="net.fixer.flex.compnonents.*">
+	<fx:Script>
+		<![CDATA[
+			import com.tencent.morefun.naruto.tools.mmefile.MmeFile;
+			import tx.mnme.BitmapDataCache;
+			
+			import flash.utils.setTimeout;
+			
+			import mx.events.CloseEvent;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			
+			private var mmeFile:MmeFile;
+			private var waitFiles:Array;
+			private var waitFilesIndex:int = -1;
+			
+			private var targetFiles:Array;
+			
+			protected function onClose(event:CloseEvent):void
+			{
+				PopUpManager.removePopUp(this);
+			}
+			
+			public function setMmeFile(mmeFile:MmeFile):void
+			{
+				this.mmeFile = mmeFile;
+			}
+			
+			protected function init(event:FlexEvent):void
+			{
+				var imgFile:File = this.mmeFile.tempDirectory.resolvePath("images");
+				if(!imgFile.exists)
+				{
+					imgFile.createDirectory();
+				}
+				waitFiles = imgFile.getDirectoryListing();
+				
+				pb.maximum = waitFiles.length;
+				updateProgressBarLabel(false);
+			}
+			
+			protected function start():void
+			{
+				var tdirFile:File = new File(tdir.path);
+				if(!tdirFile.exists || !tdirFile.isDirectory)
+				{
+					return;
+				}
+				
+				startBtn.enabled = false;
+				updateProgressBarLabel(false);
+				
+				
+				targetFiles = [];
+				calculateTargetFiles(tdirFile);
+				
+				waitFilesIndex = 0;
+				setTimeout(next,1);
+			}
+			
+			private function calculateTargetFiles(tdirFile:File):void
+			{
+				var fs:Array = tdirFile.getDirectoryListing();
+				for each(var f:File in fs)
+				{
+					if(f.isDirectory)
+					{
+						calculateTargetFiles(f);
+					}else
+					{
+						targetFiles.push(f);
+					}
+				}
+			}
+			
+			private function next():void
+			{
+				if(waitFilesIndex < waitFiles.length)
+				{
+					var wf:File = waitFiles[waitFilesIndex];
+					
+					for each(var tf:File in targetFiles)
+					{
+						if(wf.name == tf.name)
+						{
+							pb.setProgress(pb.value+1,pb.maximum);
+							
+							updateProgressBarLabel(false);
+							
+							tf.copyToAsync(wf,true);
+							
+							break;
+						}
+					}
+					
+					waitFilesIndex++;
+					setTimeout(next,1);
+				}else
+				{
+					updateProgressBarLabel(true);
+					startBtn.enabled = true;
+					
+					BitmapDataCache.dispose();
+				}
+			}
+			
+			private function updateProgressBarLabel(over:Boolean=false):void
+			{
+				pb.label = "待替换"+pb.maximum+"个,已替换"+pb.value+"个.";
+				if(over)
+				{
+					pb.label += "替换结束";
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<f:FileSelector id="tdir" y="10" left="10" right="10" isSelectFile="false"
+					selectButtonLabel="替换目录" selectTitle="选择替换目录"/>
+	<mx:ProgressBar id="pb" left="10" right="10" verticalCenter="0"
+					label="待替换x个,已替换x个.[替换结束]"
+					minimum="0"
+					mode="manual"
+					/>
+	<s:Button id="startBtn" bottom="10" label="开始替换" horizontalCenter="0" click="start()"/>
+	
+</s:TitleWindow>

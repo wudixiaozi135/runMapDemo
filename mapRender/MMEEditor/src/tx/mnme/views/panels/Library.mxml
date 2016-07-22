@@ -1,0 +1,1399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<panels:BasePanel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				 xmlns:s="library://ns.adobe.com/flex/spark" 
+				 xmlns:mx="library://ns.adobe.com/flex/mx" 
+				 xmlns:views="tx.mnme.views.*" 
+				 width="400" height="300" creationComplete="init(event)" 
+				 xmlns:flexlib="http://code.google.com/p/flexlib/" 
+				 xmlns:panels="tx.mnme.views.panels.*"
+				 resize="onResizeHandler(event)"
+				 >
+	<fx:Script>
+		<![CDATA[
+			import tx.mnme.commands.cmd_internal;
+			import tx.mnme.commands.library.AddFolderCommand;
+			import tx.mnme.commands.library.DeleteItemCommand;
+			import tx.mnme.commands.library.DeleteItemData;
+			import tx.mnme.commands.library.ImportFilesCommand;
+			import tx.mnme.commands.library.ModifyFolderCommand;
+			import tx.mnme.commands.library.SetExportItemCommand;
+			import tx.mnme.commands.library.SetNotExportItemCommand;
+			import tx.mnme.commands.library.SwapItemCommand;
+			import tx.mnme.commands.library.SwapItemData;
+			import tx.mnme.events.LibraryEvent;
+			import tx.mnme.views.windows.InputWindow;
+			
+			import flash.utils.setTimeout;
+			
+			import mx.collections.XMLListCollection;
+			import mx.controls.Alert;
+			import mx.controls.treeClasses.TreeItemRenderer;
+			import mx.core.UIComponent;
+			import mx.events.CloseEvent;
+			import mx.events.DragEvent;
+			import mx.events.FlexEvent;
+			import mx.events.ListEvent;
+			import mx.events.ResizeEvent;
+			import mx.managers.DragManager;
+			
+			import spark.components.Group;
+			import spark.events.TextOperationEvent;
+			
+			[Bindable]
+			protected var data:XMLListCollection;
+			
+			private var tmpDir:File;
+			private var loader:Loader;
+			public var dirty:Boolean;
+			
+			public function refRes(tmpDir:File,xml:XML):void
+			{
+				this.tmpDir = tmpDir;
+				data = new XMLListCollection(xml.item);
+				//data.filterFunction = filterFun;
+			}
+			
+			public function destroy():void
+			{
+				data = null;
+				tmpDir = null;
+				if(loader)
+				{
+					loader.contentLoaderInfo.removeEventListener(Event.COMPLETE,onLoader);
+					loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR,onLoader);
+					loader.contentLoaderInfo.removeEventListener(SecurityErrorEvent.SECURITY_ERROR,onLoader);
+					loader = null;
+				}
+				
+				if(parent is Group)
+				{
+					(parent as Group).removeElement(this);
+				}
+			}
+			
+			protected function init(event:FlexEvent):void
+			{
+				loader = new Loader();
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE,onLoader);
+				loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,onLoader);
+				loader.contentLoaderInfo.addEventListener(SecurityErrorEvent.SECURITY_ERROR,onLoader);
+				var ui:UIComponent = new UIComponent();
+				ui.addChild(loader);
+				addElementAt(ui,0);
+			}
+			
+			protected function onLoader(event:Event):void
+			{
+				switch(event.type)
+				{
+					case Event.COMPLETE:
+						onResizeHandler(null);
+						break;
+					case IOErrorEvent.IO_ERROR:
+					case SecurityErrorEvent.SECURITY_ERROR:
+						break;
+				}
+			}
+			
+			protected function onAdd(event:MouseEvent):void
+			{
+				var file:File = new File();
+				file.addEventListener(FileListEvent.SELECT_MULTIPLE,onSelectMultiple);
+				file.browseForOpenMultiple("请选择图片",[new FileFilter("Images", "*.jpg;*.png")]);
+			}
+			
+			protected function onSelectMultiple(event:FileListEvent):void
+			{
+				if(event)
+				{
+					event.currentTarget.removeEventListener(FileListEvent.SELECT_MULTIPLE,onSelectMultiple);
+				}
+				addFilesToLib(event.files);
+			}
+			
+			private function addFilesToLib(addFiles:Array):void
+			{
+				var exists:Vector.<String> = new Vector.<String>;
+				var files:Vector.<File> = new Vector.<File>;
+				var items:XML = new XML("<items/>")
+				function findFiles(files2:Array,item:XML):void
+				{
+					for each(var file:File in files2)
+					{
+						if(file.isDirectory)
+						{
+							if(existedFolder(file.name))
+							{
+								exists.push(file.name);
+							}else
+							{
+								var subItem:XML = new XML("<item name='"+file.name+"' isBranch='true'/>");
+								item.appendChild(subItem);
+								findFiles(file.getDirectoryListing(),subItem);
+							}
+						}else if(file.extension == "jpg" || file.extension == "png")
+						{
+							var f:File = tmpDir.resolvePath("images/"+file.name);
+							if(f.exists)
+							{
+								exists.push(file.name);
+							}else
+							{
+								item.appendChild(new XML("<item name='"+file.name+"'/>"));
+								files.push(file);
+							}
+						}
+					}
+				}
+				findFiles(addFiles,items);
+				
+				var this__:Library = this;
+				function func():void
+				{
+					var itemParent:XML = tree.selectedItem as XML;
+					var parentName:String;
+					if(itemParent && String(itemParent.@isBranch)=="true")
+					{
+						parentName = itemParent.@name;
+					}
+					new ImportFilesCommand(this__,files,items.copy(),parentName).doCommand();
+				}
+				if(exists.length>0)
+				{
+					if(exists.length>10)
+					{
+						exists.length = 10;
+					}
+					Alert.show("文件已存在,是否忽略？\n"+exists.join("\n"),"",Alert.YES|Alert.CANCEL,null,function(ce:CloseEvent):void{
+						if(ce.detail == Alert.YES)
+						{
+							func();
+						}
+					});
+				}else
+				{
+					func();
+				}
+			}
+			
+			cmd_internal function doImportFiles(files:Vector.<File>,items:XML,parentName:String):void
+			{
+				var itemParent:XML;
+				if(parentName)
+				{
+					itemParent = getFolderItem(parentName);
+				}
+				
+				if(itemParent)
+				{
+					itemParent.appendChild(items.item);
+				}else
+				{
+					for each(var item:XML in items.item)
+					{
+						data.addItem(item);
+					}
+				}
+				copyToImages(files);
+				
+				this.dirty = true;
+			}
+			
+			cmd_internal function undoImportFiles(files:Vector.<File>,items:XML,parentName:String):void
+			{
+				var itemParent:XML;
+				if(parentName)
+				{
+					itemParent = getFolderItem(parentName);
+				}
+				
+				var i:int;
+				var name0:String;
+				var itemslist:XMLList;
+				
+				if(itemParent)
+				{
+					var children:XMLList = itemParent.elements();
+					for(i=children.length()-1;i>=0;i--)
+					{
+						name0 = children[i].@name;
+						
+						itemslist = items.item.(@name == name0);
+						if(itemslist.length()>0)
+						{
+							delete children[i];
+						}
+					}
+				}else
+				{
+					for(i=data.length-1;i>=0;i--)
+					{
+						name0 = data.getItemAt(i).@name;
+						itemslist = items.item.(@name == name0);
+						if(itemslist.length()>0)
+						{
+							data.removeItemAt(i);
+						}
+					}
+				}
+				
+				this.dirty = true;
+				
+				
+				for each(var file:File in files)
+				{
+					var f:File = tmpDir.resolvePath("images/"+file.name);
+					if(f.exists)
+					{
+						f.deleteFileAsync();
+					}
+				}
+			}
+			
+			override protected function basePanelInit(event:FlexEvent):void
+			{
+				super.basePanelInit(event);
+				tree.contextMenu = new NativeMenu();
+				tree.contextMenu.addEventListener(Event.SELECT,onSelectMenu);
+				tree.contextMenu.addEventListener(Event.DISPLAYING,onDisplayMenu);
+				function addItem(label:String,enabled:Boolean=false):void
+				{
+					var item:NativeMenuItem = new NativeMenuItem(label,label==null);
+					item.name = label;
+					item.enabled = enabled;
+					tree.contextMenu.addItem(item);
+				}
+				
+				addItem("增加文件夹",true);
+				addItem("修改文件夹");
+				addItem(null);
+				addItem("将选中添加到舞台");
+				addItem("将MME添加到舞台",true);
+				addItem(null);
+				addItem("展开所有",true);
+				addItem("收起所有",true);
+				addItem(null);
+				addItem("选中未使用的图片",true)
+				addItem("删除选中");
+				addItem(null);
+				addItem("设为不导出");
+				addItem("设为导出");
+				addItem(null);
+				addItem("导入",true);
+			}
+			
+			private function onDisplayMenu(event:Event):void
+			{
+				tree.contextMenu.getItemByName("修改文件夹").enabled = canModifyFolder();
+				
+				tree.contextMenu.getItemByName("将选中添加到舞台").enabled = canAddImageToActive();
+				tree.contextMenu.getItemByName("删除选中").enabled = canDeleteImage();
+				
+				tree.contextMenu.getItemByName("设为不导出").enabled = canSetNotExportImage();
+				tree.contextMenu.getItemByName("设为导出").enabled = canSetExportImage();
+			}
+			
+			
+			private function onSelectMenu(e:Event):void
+			{
+				var item:NativeMenuItem = e.target as NativeMenuItem;
+				switch(item.label)
+				{
+					case "增加文件夹":
+						doAddFolder();
+						break;
+					case "修改文件夹":
+						doModifyFolder();
+						break;
+					
+					case "将选中添加到舞台":
+						doAddImageToActive();
+						break;
+					case "将MME添加到舞台":
+						dispatchEvent(new LibraryEvent(LibraryEvent.ADD_MME_TO_ACTION_AREA,null));
+						break;
+					
+					case "展开所有":
+						doExpandAll();
+						break;
+					case "收起所有":
+						doShrinkAll();
+						break;
+					
+					case "选中未使用的图片":
+						doSelectNotUse();
+						break;
+					case "删除选中":
+						doDeleteImage();
+						break;
+					
+					case "设为不导出":
+						doSetNotExportImage();
+						break;
+					case "设为导出":
+						doSetExportImage();
+						break;
+					
+					case "导入":
+						onAdd(null);
+						break;
+				}
+			}
+			
+			private function canSetNotExportImage():Boolean
+			{
+				for each(var item:XML in tree.selectedItems)
+				{
+					if(String(item.@isBranch) != "true")
+					{
+						if(String(item.@notExport) != "true")
+						{
+							return true;
+						}
+					}
+				}
+				return false;
+			}
+			
+			private function canSetExportImage():Boolean
+			{
+				for each(var item:XML in tree.selectedItems)
+				{
+					if(String(item.@isBranch) != "true")
+					{
+						if(String(item.@notExport) == "true")
+						{
+							return true;
+						}
+					}
+				}
+				return false;
+			}
+			
+			private function doSetNotExportImage():void
+			{
+				var names:Vector.<String> = new Vector.<String>();
+				for each(var item:XML in tree.selectedItems)
+				{
+					if(String(item.@isBranch) != "true")
+					{
+						if(String(item.@notExport) != "true")
+						{
+							names.push(item.@name);
+						}
+					}
+				}
+				if(names.length > 0)
+				{
+					new SetNotExportItemCommand(this,names).doCommand();
+				}
+			}
+			private function doSetExportImage():void
+			{
+				var names:Vector.<String> = new Vector.<String>();
+				for each(var item:XML in tree.selectedItems)
+				{
+					if(String(item.@isBranch) != "true")
+					{
+						if(String(item.@notExport) == "true")
+						{
+							names.push(item.@name);
+						}
+					}
+				}
+				if(names.length > 0)
+				{
+					new SetExportItemCommand(this,names).doCommand();
+				}
+			}
+			
+			cmd_internal function doSetNotExportItem(names:Vector.<String>):void
+			{
+				for each(var name:String in names)
+				{
+					for each(var item:XML in data)
+					{
+						if(String(item.@name) == name)
+						{
+							item.@notExport = "true";
+							break;
+						}
+					}
+				}
+			}
+			
+			cmd_internal function doSetExportItem(names:Vector.<String>):void
+			{
+				for each(var name:String in names)
+				{
+					for each(var item:XML in data)
+					{
+						if(String(item.@name) == name)
+						{
+							delete item.@notExport;
+							break;
+						}
+					}
+				}
+			}
+			
+			private function doExpandAll():void
+			{
+				for(var i:int=0;i<XMLListCollection(tree.dataProvider).length;i++)
+				{
+					var itemNode:XML = XMLListCollection(tree.dataProvider).getItemAt(i) as XML;
+					recursionItemNode(itemNode,function(node:XML):void{
+						tree.expandItem(node,true);
+					},true)
+				}
+			}
+			
+			private function doShrinkAll():void
+			{
+				for(var i:int=0;i<XMLListCollection(tree.dataProvider).length;i++)
+				{
+					var itemNode:XML = XMLListCollection(tree.dataProvider).getItemAt(i) as XML;
+					recursionItemNode(itemNode,function(node:XML):void{
+						tree.expandItem(node,false);
+					},true);
+				}
+			}
+			
+			private function recursionItemNode(itemNode:XML, doFun:Function, isFolder:Boolean=false):void
+			{
+				var isBranch:Boolean = String(itemNode.@isBranch) == "true";
+				if(isBranch)
+				{
+					if(isFolder)
+					{
+						doFun(itemNode);
+					}
+					for each(var childNode:XML in itemNode.item)
+					{
+						recursionItemNode(childNode,doFun,isFolder);
+					}
+				}else
+				{
+					if(!isFolder)
+					{
+						doFun(itemNode);
+					}
+				}
+			}
+			
+			private function doSelectNotUse():void
+			{
+				keyTxt.text="";
+				updateKeyTxt();
+				doExpandAll();
+				var le:LibraryEvent = new LibraryEvent(LibraryEvent.GET_USED_IMAGE_NAMES,null);
+				dispatchEvent(le);
+				var len:int = XMLListCollection(tree.dataProvider).length;
+				var idxs:Array = [];
+				for(var i:int=0;i<len;i++)
+				{
+					var itemNode:XML = XMLListCollection(tree.dataProvider).getItemAt(i) as XML;
+					recursionItemNode(itemNode,function(node:XML):void{
+						var name:String = node.@name;
+						if(le.rsUsedImageNames.indexOf(name)==-1)
+						{
+							var idx:int = tree.getItemIndex(node);
+							if(idxs.indexOf(idx)==-1)
+							{
+								idxs.push(idx);
+							}
+						}
+					});
+				}
+				setTimeout(function():void{
+					tree.selectedIndices = idxs;
+				},0);
+				Alert.show("已选中"+idxs.length+"个图片资源");
+			}
+			
+			private function canDeleteImage():Boolean
+			{
+				return tree.selectedItems && tree.selectedItems.length>0;
+			}
+			
+			private function doDeleteImage():void
+			{
+				var dids:Vector.<DeleteItemData> = new Vector.<DeleteItemData>;
+				
+				for each(var item:XML in tree.selectedItems)
+				{
+					var did:DeleteItemData = new DeleteItemData();
+					dids.push(did);
+					did.item = item;
+					
+					
+					var index:int = data.getItemIndex(item);
+					
+					did.index = index;
+					
+					
+					if(index == -1)
+					{
+						for each(var item2:XML in data)
+						{
+							var isBranch:Boolean = String(item2.@isBranch) == "true";
+							if(isBranch)
+							{
+								var name1:String = item.@name;
+								var xmllist:XMLList = item2..item.(@name==name1);
+								if(xmllist.length()>0)
+								{
+									did.parentName = xmllist[0].parent().@name;
+									did.index = xmllist[0].childIndex();
+									
+//									var old:Number = tree.verticalScrollPosition;
+									deleteItem(xmllist[0],did.fileNames);
+//									delete xmllist[0];
+//									setTimeout(function():void{
+//										tree.verticalScrollPosition = Math.min(old,tree.maxVerticalScrollPosition);
+//									},1);
+									break;
+								}
+							}
+						}
+					}else
+					{
+//						var item1:XML = data.removeItemAt(index) as XML;
+						deleteItem(item,did.fileNames);
+					}
+					
+				}
+				
+				function compare(a:DeleteItemData,b:DeleteItemData):int
+				{
+					if(a.parentName == b.parentName)
+					{
+						if(a.index > b.index)
+						{
+							return -1;
+						}else if(a.index < b.index)
+						{
+							return 1;
+						}else
+						{
+							return 0;
+						}
+					}else if(a.parentName > b.parentName)
+					{
+						return -1;
+					}else(a.parentName < b.parentName)
+					{
+						return 1;
+					}
+				}
+				
+				function deleteItem(item:XML,fileNames:Array):void
+				{
+					var isBranch:Boolean = String(item.@isBranch) == "true";
+					if(isBranch)
+					{
+						var elements:XMLList = item.item;
+						for(var i:int=elements.length()-1;i>=0;i--)
+						{
+							deleteItem(elements[i],fileNames);
+						}
+					}else
+					{
+						var fileName:String = item.@name;
+						fileNames.push(fileName);
+					}
+				}
+				
+				
+				if(dids.length>0)
+				{
+					dids = dids.sort(compare);
+					var recycleDir:File = File.createTempDirectory();
+					
+					new DeleteItemCommand(this,dids,recycleDir).doCommand();
+				}
+				
+			}
+			
+			cmd_internal function doDeleteItem(dids:Vector.<DeleteItemData>,recycleDir:File):void
+			{
+				var old:Number = tree.verticalScrollPosition;
+				var fileNames:Array = [];
+				var fn:String;
+				
+				for(var i:int=0;i<dids.length;i++)
+				{
+					if(dids[i].parentName)
+					{
+						var parentItem:XML = getFolderItem(dids[i].parentName);
+						var name0:String = dids[i].item.@name;
+						var xmllist:XMLList = parentItem..item.(@name==name0);
+						delete xmllist[0];
+					}else
+					{
+						data.removeItemAt(dids[i].index);
+					}
+					for each(fn in dids[i].fileNames)
+					{
+						fileNames.push(fn);
+					}
+				}
+				
+				setTimeout(function():void{
+					tree.verticalScrollPosition = Math.min(old,tree.maxVerticalScrollPosition);
+				},1);
+				
+				
+				
+				//删除文件到回收站
+				
+				var source:String = tmpDir.nativePath + File.separator + "images";
+				var target:String = recycleDir.nativePath;
+				var log:String = "/LOG+:"+tmpDir.resolvePath("log.txt").nativePath;
+				
+				var np:NativeProcess = new NativeProcess();
+				var npsi:NativeProcessStartupInfo = new NativeProcessStartupInfo();
+				
+				npsi.executable = File.applicationDirectory.resolvePath("ext/robocopy.exe");
+				npsi.arguments = new Vector.<String>;
+//				npsi.arguments.push(source+" "+target + " " + fileNames.join(" ") + " /MOV " +log);
+				npsi.arguments.push(source);
+				npsi.arguments.push(target);
+				for each(fn in fileNames)
+				{
+					npsi.arguments.push(fn);
+				}
+				npsi.arguments.push("/MOV");
+				np.start(npsi);
+				
+				this.dirty = true;
+			}
+			
+			cmd_internal function undoDeleteItem(dids:Vector.<DeleteItemData>,recycleDir:File):void
+			{
+				
+				//从回收站恢复删除 
+				var fileNames:Array = [];
+				var fn:String;
+				for(var i:int=dids.length-1;i>=0;i--)
+				{
+					for each(fn in dids[i].fileNames)
+					{
+						fileNames.push(fn);
+					}
+					if(dids[i].parentName)
+					{
+						var parentItem:XML = getFolderItem(dids[i].parentName);
+						var item0:XML = parentItem.children()[dids[i].index];
+						
+						parentItem.insertChildBefore(item0,dids[i].item);
+					}else
+					{
+						data.addItemAt(dids[i].item,dids[i].index);
+					}
+				}
+				
+				var source:String = recycleDir.nativePath;
+				var target:String = tmpDir.nativePath + File.separator + "images";
+				
+				var np:NativeProcess = new NativeProcess();
+				var npsi:NativeProcessStartupInfo = new NativeProcessStartupInfo();
+				
+				npsi.executable = File.applicationDirectory.resolvePath("ext/robocopy.exe");
+				npsi.arguments = new Vector.<String>;
+				npsi.arguments.push(source);
+				npsi.arguments.push(target);
+				for each(fn in fileNames)
+				{
+					npsi.arguments.push(fn);
+				}
+				npsi.arguments.push("/MOV");
+				np.start(npsi);
+				
+				this.dirty = true;
+			}
+			
+			
+//			private function recycleFile(name:String,recycleName:String):void
+//			{
+//				var file:File = tmpDir.resolvePath("images/"+name);
+//				if(file.exists)
+//				{
+//					file.deleteFile();
+//				}
+//				dispatchEvent(new LibraryEvent(LibraryEvent.REMOVE_FILE,file));
+//			}
+			
+			private function canAddImageToActive():Boolean
+			{
+				for each(var item:XML in tree.selectedItems)
+				{
+					var isBranch:Boolean = String(item.@isBranch)=="true";
+					if(!isBranch)
+					{
+						return true;
+					}
+				}
+				return false;
+			}
+			
+			private function doAddImageToActive():void
+			{
+				var le:LibraryEvent = new LibraryEvent(LibraryEvent.ADD_MULTI_TO_ACTIVE_AREA,null);
+				le.multFiles = new Vector.<File>;
+				
+				for(var i:int= tree.selectedItems.length-1;i>=0;i--)
+				{
+					var item:XML = tree.selectedItems[i] as XML;
+					
+					var isBranch:Boolean = String(item.@isBranch)=="true";
+					if(!isBranch)
+					{
+						var name:String = item.@name;
+						var file:File = tmpDir.resolvePath("images/"+name);
+						le.multFiles.push(file);
+					}
+				}
+				
+				if(le.multFiles.length>0)
+				{
+					dispatchEvent(le);
+				}
+			}
+			
+			private function canModifyFolder():Boolean
+			{
+				var item:XML = tree.selectedItem as XML;
+				if(item && String(item.@isBranch)=="true")
+				{
+					return true;
+				}
+				return false;
+			}
+			
+			private function doModifyFolder():void
+			{
+				var item:XML = tree.selectedItem as XML;
+				if(item==null)
+				{
+					return;
+				}
+				var this__:Library = this;
+				var dv:String = item.@name;
+				InputWindow.show("修改文件夹",dv,null,function(iw:InputWindow):void{
+					if(iw.value != dv)
+					{
+						if(existedFolder(iw.value))
+						{
+							Alert.show(iw.value + " 已存在","修改文件夹失败!");
+						}else
+						{
+							new ModifyFolderCommand(this__,iw.value,dv).doCommand();
+						}
+					}
+				},null);
+			}
+			
+			cmd_internal function doModifyFolder(newName:String,oldName:String):void
+			{
+				var item:XML = getFolderItem(oldName);
+				item.@name = newName;
+				
+				this.dirty = true;
+			}
+			
+			cmd_internal function undoModifyFolder(newName:String,oldName:String,dirty:Boolean):void
+			{
+				cmd_internal::doModifyFolder(oldName,newName);
+				this.dirty = dirty;
+			}
+			
+			private function doAddFolder():void
+			{
+				var dv:String = "新建文件夹";
+				while(true)
+				{
+					if(existedFolder(dv))
+					{
+						var i:int = int(dv.substr(5));
+						dv = "新建文件夹"+(i+1);
+					}else
+					{
+						break;
+					}
+				}
+				var this__:Library = this;
+				InputWindow.show("增加文件夹",dv,null,function(iw:InputWindow):void{
+					if(existedFolder(iw.value))
+					{
+						Alert.show(iw.value + " 已存在","增加文件夹失败!");
+					}else
+					{
+						var itemParent:XML = tree.selectedItem as XML;
+						if(itemParent && String(itemParent.@isBranch)!="true")
+						{
+							itemParent = tree.selectedItem.parent();
+						}
+						var parentName:String;
+						if(itemParent)
+						{
+							parentName = itemParent.@name;
+						}
+						new AddFolderCommand(this__,iw.value,parentName).doCommand();
+					}
+				},null);
+			}
+			
+			cmd_internal function doAddFolder(name:String,parentName:String):void
+			{
+				var itemParent:XML;
+				if(parentName)
+				{
+					itemParent = getFolderItem(parentName);
+				}
+				if(itemParent)
+				{
+					itemParent.appendChild(new XML("<item name='"+name+"' isBranch='true'/>"));
+				}else
+				{
+					data.addItem(new XML("<item name='"+name+"' isBranch='true'/>"));
+				}
+				
+				this.dirty = true;
+			}
+			
+			cmd_internal function undoAddFolder(name1:String,parentName:String):void
+			{
+				for(var i:int=0;i<data.length;i++)
+				{
+					var item:XML = data.getItemAt(i) as XML;
+					if(String(item.@name) == name1)
+					{
+						data.removeItemAt(i);
+						return;
+					}
+				}
+				var xmllist:XMLList = data.source..item.(@name==name1);
+				if(xmllist.length()>0)
+				{
+					delete xmllist[0];
+				}
+				
+				this.dirty = true;
+			}
+			
+			public function canImportFolder(folder:File):Boolean
+			{
+				if(existedFolder(folder.name))
+				{
+					Alert.show("文件夹 "+folder.name+" 已存在,导入失败");
+					return false;
+				}
+				
+				var existed:Array = [];
+				for each(var file:File in folder.getDirectoryListing())
+				{
+					if(file.isDirectory)
+					{
+						continue;
+					}
+					if(file.extension != "png" && file.extension != "jpg")
+					{
+						continue;
+					}
+					var f:File = tmpDir.resolvePath("images/"+file.name);
+					if(f.exists)
+					{
+						existed.push(file.name);
+						if(existed.length>=10)
+						{
+							break;
+						}
+					}
+				}
+				if(existed.length>0)
+				{
+					Alert.show("图片已存在:\r"+existed.join("\r"));
+					return false;
+				}
+				return true;
+			}
+			
+			public function importFolder(folder:File):Boolean
+			{
+				
+//				var existed:Array = [];
+				var files:Vector.<File> = new Vector.<File>;
+				for each(var file:File in folder.getDirectoryListing())
+				{
+					if(file.isDirectory)
+					{
+						continue;
+					}
+					if(file.extension != "png" && file.extension != "jpg")
+					{
+						continue;
+					}
+					var f:File = tmpDir.resolvePath("images/"+file.name);
+					if(f.exists)
+					{
+//						existed.push(file.name);
+					}else
+					{
+						files.push(file);
+					}
+				}
+//				if(existed.length > 0)
+//				{
+//					Alert.show("图片已存在:\r"+existed.join("\n"),"提示");
+//					return false;
+//				}
+				
+				var itemParent:XML = new XML("<item name='"+folder.name+"' isBranch='true'/>");
+				data.addItem(itemParent);
+				
+				for each(file in files)
+				{
+					itemParent.appendChild(new XML("<item name='"+file.name+"'/>"));
+					
+//					var toFile:File = tmpDir.resolvePath("images/"+file.name);
+//					file.copyTo(toFile,true);
+//					copyToImages(file);
+				}
+				
+				copyToImages(files);
+				
+				return true;
+			}
+			
+			public function unImportFolder(folder:File):void
+			{
+				var old:Number = tree.verticalScrollPosition;
+				
+				var itemFolder:XML = getFolderItem(folder.name);
+				var xmllist:XMLList = itemFolder.item;
+				for(var i:int=xmllist.length()-1;i>=0;i--)
+				{
+					var item:XML = xmllist[i];
+					var name:String = item.@name;
+					var file:File = tmpDir.resolvePath("images/"+name);
+					if(file.exists)
+					{
+						file.deleteFileAsync();
+					}
+				}
+				var index:int = data.getItemIndex(itemFolder);
+				data.removeItemAt(index);
+				
+				setTimeout(function():void{
+					tree.verticalScrollPosition = Math.min(old,tree.maxVerticalScrollPosition);
+				},1);
+			
+			}
+			
+			private function copyToImages(files:Vector.<File>):void
+			{
+				var source:String = files[0].parent.nativePath + File.separator;
+				
+				var np:NativeProcess = new NativeProcess();
+				var npsi:NativeProcessStartupInfo = new NativeProcessStartupInfo();
+				npsi.executable = File.applicationDirectory.resolvePath("ext/robocopy.exe");
+				npsi.arguments = new Vector.<String>;
+				npsi.arguments.push(source);
+				npsi.arguments.push(tmpDir.resolvePath("images").nativePath);
+				for each(var file:File in files)
+				{
+					npsi.arguments.push(file.nativePath.replace(source,""));
+				}
+				np.start(npsi);
+			}
+			
+			private function getFolderItem(name1:String):XML
+			{
+				for each(var item:XML in data)
+				{
+					var name:String = item.@name;
+					if(name==name1)
+					{
+						return item;
+					}
+				}
+				var xmllist:XMLList = data.source..item.(@name==name1);
+				if(xmllist.length()>0)
+				{
+					return xmllist[0];
+				}
+				return null;
+			}
+			
+			private function existedFolder(name1:String):Boolean
+			{
+				return getFolderItem(name1)!=null;
+			}
+			
+			cmd_internal function doSwapItem(sourceItems:Array,targetItems:Array):void
+			{
+				sourceItems = sourceItems.concat();
+				targetItems = targetItems.concat();
+				
+				var i:int;
+				var a:Object;
+				var b:Object;
+				
+				for(i=0;i<sourceItems.length;i++)
+				{
+					sourceItems[i]["target"] = targetItems[i];
+				}
+				sourceItems = sourceItems.sortOn(["parentName","index"],[Array.DESCENDING,Array.DESCENDING|Array.NUMERIC]);
+				for(i=0;i<sourceItems.length;i++)
+				{
+					a = sourceItems[i];
+					b = sourceItems[i].target;
+					if(a.parentName)
+					{
+						var aParent:XML = getFolderItem(a.parentName);
+						b.item = aParent.children()[a.index]
+						delete aParent.children()[a.index];
+					}else
+					{
+						b.item = data.removeItemAt(a.index);
+					}
+					
+//					if(b.parentName)
+//					{
+//						var bParent:XML = getFolderItem(b.parentName);
+//						var item0:XML = bParent.children()[b.index];
+//						bParent.insertChildBefore(item0,item);
+//					}else
+//					{
+//						if(b.index < data.length)
+//						{
+//							data.addItemAt(item,b.index);
+//						}else
+//						{
+//							data.addItem(item);
+//						}
+//						
+//					}
+				}
+				
+				targetItems = targetItems.sortOn(["parentName","index"],[0,Array.NUMERIC]);
+				
+				for(i=0;i<targetItems.length;i++)
+				{
+					b = targetItems[i];
+					
+					if(b.parentName)
+					{
+						var bParent:XML = getFolderItem(b.parentName);
+						var item0:XML = bParent.children()[b.index];
+						bParent.insertChildBefore(item0,b.item);
+					}else
+					{
+						if(b.index < data.length)
+						{
+							data.addItemAt(b.item,b.index);
+						}else
+						{
+							data.addItem(b.item);
+						}
+					}
+				}
+				
+				this.dirty = true;
+			}
+			
+			cmd_internal function undoSwapItem(sourceItems:Array,targetItems:Array):void
+			{
+				cmd_internal::doSwapItem(targetItems,sourceItems);
+			}
+			
+			protected function tree_dragCompleteHandler(event:DragEvent):void
+			{
+				if(event.relatedObject == tree)
+				{
+					if(event.action == DragManager.MOVE)
+					{
+						var items:Array = event.dragSource.dataForFormat("treeItems") as Array;
+						for each(var it:XML in items)
+						{
+							var index:int = it.childIndex();
+							var parentName:String = it.parent().@name;
+							swapItemData.addTargetItem(index,parentName);
+						}
+						
+						new SwapItemCommand(this,swapItemData).doCommand();
+						swapItemData = null;
+					}
+					if(event.action == DragManager.COPY)
+					{
+						event.preventDefault();
+					}
+				}else if(event.relatedObject!=null)
+				{
+					if(event.action == DragManager.MOVE)
+					{
+						event.preventDefault();
+					}
+					var item:XML = tree.selectedItem as XML;
+					if(item && String(item.@isBranch)!="true")
+					{
+						var gp:Point = localToGlobal(new Point());
+						if(event.stageX < gp.x - 10)
+						{
+							var file:File = tmpDir.resolvePath("images/"+item.@name);
+							dispatchEvent(new LibraryEvent(LibraryEvent.DRAG_TO_ACTIVE_AREA,file));
+						}
+					}
+				}else
+				{
+					if(event.action == DragManager.MOVE)
+					{
+						event.preventDefault();
+					}
+				}
+			}
+			
+			private var swapItemData:SwapItemData;
+			
+			protected function tree_dragDropHandler(event:DragEvent):void
+			{
+				if(event.dragInitiator == tree)
+				{
+					if(event.action == DragManager.MOVE)
+					{
+						swapItemData = new SwapItemData();
+						
+						var items:Array = event.dragSource.dataForFormat("treeItems") as Array;
+						for each(var item:XML in items)
+						{
+							var index:int = item.childIndex();
+							var parentName:String = item.parent().@name;
+							swapItemData.addSourceItem(index,parentName);
+						}
+					}else if(event.action == DragManager.COPY)
+					{
+						event.preventDefault();
+						tree.hideDropFeedback(event);
+					}
+				}
+			}
+			
+			protected function tree_changeHandler(event:ListEvent):void
+			{
+				var item:XML = tree.selectedItem as XML;
+				if(item)
+				{
+					var file:File = tmpDir.resolvePath("images/"+item.@name);
+					if(file.exists)
+					{
+						if(loader.name != file.name)
+						{
+							loader.name = file.name;
+							loader.scaleX = loader.scaleY = 1;
+							loader.load(new URLRequest(file.nativePath));
+						}
+						return;
+					}
+				}
+				loader.unload();
+				loader.name = "";
+			}
+			
+			protected function treeNativeDragHandler(event:NativeDragEvent):void
+			{
+				switch(event.type)
+				{
+					case NativeDragEvent.NATIVE_DRAG_ENTER:
+						if(event.relatedObject == null)
+						{
+							tree.dragEnabled = false;
+							tree.dropEnabled = false;
+							tree.dragMoveEnabled = false;
+							
+							var arr:Array = event.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
+							for each(var f:File in arr)
+							{
+								if(f.isDirectory || f.extension == "jpg" || f.extension == "png")
+								{
+									NativeDragManager.acceptDragDrop(tree);
+									break;
+								}
+							}
+						}
+						break;
+					case NativeDragEvent.NATIVE_DRAG_DROP:
+						if(event.target == tree && event.relatedObject == null)
+						{
+							
+							arr = event.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
+							var files:Array = [];
+							for each(f in arr)
+							{
+								if(f.isDirectory || f.extension == "jpg" || f.extension == "png")
+								{
+									files.push(f);
+								}
+							}
+							if(files.length>0)
+							{
+								addFilesToLib(files);
+							}
+							tree.dragEnabled = true;
+							tree.dropEnabled = true;
+							tree.dragMoveEnabled = true;
+						}
+						break;
+					case NativeDragEvent.NATIVE_DRAG_EXIT:
+						if(event.target == tree && event.relatedObject == null)
+						{
+							tree.dragEnabled = true;
+							tree.dropEnabled = true;
+							tree.dragMoveEnabled = true;
+						}
+						break;	
+				}
+			}
+			
+			protected function tree_clickHandler(event:MouseEvent):void
+			{
+				return;
+				if(event.shiftKey || event.controlKey)
+				{
+					return;
+				}
+				if(event.target.parent is TreeItemRenderer)
+				{
+					
+				}else
+				{
+					tree.selectedIndex = -1;
+				}
+			}
+			
+			protected function onResizeHandler(event:ResizeEvent):void
+			{
+				if(loader)
+				{
+					loader.scaleX = loader.scaleY = 1;
+					if(loader.width>this.width)
+					{
+						loader.scaleX = loader.scaleY = this.width/loader.width;
+					}
+					if(loader.height>160)
+					{
+						loader.scaleX = loader.scaleY = loader.scaleY * 160/loader.height;
+					}
+					loader.x = (this.width - loader.width)*0.5;
+					loader.y = (160 - loader.height)*0.5;
+				}
+			}
+			
+			private function filterFun(item:XML):Boolean
+			{
+				if(keyTxt.text=="")
+				{
+					return true;
+				}
+				
+				var name:String = item.@name;
+				if(name.indexOf(keyTxt.text)!=-1)
+				{
+					return true;
+				}
+				
+				var isBranch:Boolean = String(item.@isBranch) == "true";
+				if(isBranch)
+				{
+					for each(var subItem:XML in item.item)
+					{
+						var subName:String = subItem.@name;
+						if(subName.indexOf(keyTxt.text)!=-1)
+						{
+							return true;
+						}
+					}
+				}
+				
+				return false;
+			}
+				
+			
+			protected function keyTxt_changeHandler(event:TextOperationEvent):void
+			{
+				updateKeyTxt();
+			}
+			
+			protected function linkbutton1_clickHandler(event:MouseEvent):void
+			{
+				keyTxt.text = "";
+				updateKeyTxt();
+			}
+			
+			private function updateKeyTxt():void
+			{
+				var openItems:Array = [];
+				for(var i:int=0;i<data.length;i++)
+				{
+					var item:XML = data.getItemAt(i) as XML;
+					var children:XMLListCollection = tree.dataDescriptor.getChildren(item) as XMLListCollection;
+					if(children)
+					{
+						if(keyTxt.text)
+						{
+							children.filterFunction = filterFun;
+							openItems.push(item);
+						}else
+						{
+							children.filterFunction = null;
+						}
+					}
+				}
+				if(keyTxt.text)
+				{
+					data.filterFunction = filterFun;
+				}else
+				{
+					data.filterFunction = null;
+				}
+				data.refresh();
+//				tree.dataProvider = data;
+				tree.openItems = openItems;
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<fx:Metadata>
+		[Event(name ="addMultiToActiveArea",type ="tx.mnme.events.LibraryEvent")]
+		[Event(name ="addToActiveArea",type ="tx.mnme.events.LibraryEvent")]
+		[Event(name ="addMmeToActiveArea",type ="tx.mnme.events.LibraryEvent")]
+		[Event(name ="removeFile",type ="tx.mnme.events.LibraryEvent")]
+		[Event(name ="dragToActiveArea",type ="tx.mnme.events.LibraryEvent")]
+		[Event(name ="getUsedImageNames",type ="tx.mnme.events.LibraryEvent")]
+	</fx:Metadata>
+	
+	<mx:Tree id="tree" dataProvider="{data}" left="0" right="0" top="182" bottom="0" labelField="@name" horizontalScrollPolicy="auto"
+		dragEnabled="true"
+		dropEnabled="true"
+		dragMoveEnabled="true"
+		allowMultipleSelection="true"
+		change="tree_changeHandler(event)"
+		click="tree_clickHandler(event)"
+		
+		dragDrop="tree_dragDropHandler(event)"
+		dragComplete="tree_dragCompleteHandler(event)"
+		
+		nativeDragEnter="treeNativeDragHandler(event)"
+		nativeDragDrop="treeNativeDragHandler(event)"
+		nativeDragExit="treeNativeDragHandler(event)"
+		
+		itemRenderer="tx.mnme.views.panels.LibraryTreeItemRenderer"
+		>
+	</mx:Tree>
+	<s:TextInput id="keyTxt" left="0" right="0" top="160" height="22" change="keyTxt_changeHandler(event)"/>
+	<mx:LinkButton right="0" top="160" height="22" label="X" click="linkbutton1_clickHandler(event)"/>
+</panels:BasePanel>
+
