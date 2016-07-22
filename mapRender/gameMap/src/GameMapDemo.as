@@ -43,7 +43,7 @@ package
 		private var _mapView:MapView;
 		private var _mapData:MapData;
 		private var _switchMap:TextField;
-		private var _currentMapId:int = 10006;
+		private var _currentMapId:int = 30021;
 		private var _pathFinder:AStarPixcelPathFinder;
 		private var _paths:Array;
 
@@ -208,7 +208,7 @@ package
 			{
 				paths.push({
 					id: bgPath,
-					url: StringUtil.substitute(url, sceneMap[mapId]["bg"]) + mapId + "/_scene_bg.xml?version=" + version,
+					url: StringUtil.substitute(url, sceneMap[mapId]["bg"]) + mapId + "/_scene_bg.cfg?version=" + version,
 					type: BulkLoader.TYPE_BINARY
 				});
 			}
@@ -216,7 +216,7 @@ package
 			{
 				paths.push({
 					id: mgPath,
-					url: StringUtil.substitute(url, sceneMap[mapId]["mg"]) + mapId + "/_scene_mg.xml?version=" + version,
+					url: StringUtil.substitute(url, sceneMap[mapId]["mg"]) + mapId + "/_scene_mg.cfg?version=" + version,
 					type: BulkLoader.TYPE_BINARY
 				});
 			}
@@ -224,7 +224,7 @@ package
 			{
 				paths.push({
 					id: fgPath,
-					url: StringUtil.substitute(url, sceneMap[mapId]["fg"]) + mapId + "/_scene_fg.xml?version=" + version,
+					url: StringUtil.substitute(url, sceneMap[mapId]["fg"]) + mapId + "/_scene_fg.cfg?version=" + version,
 					type: BulkLoader.TYPE_BINARY
 				});
 			}
@@ -303,20 +303,24 @@ package
 
 
 			//读取加载cfg格式的
-//			var mapBgImgInfos:Dictionary = bgbytes.readObject();
-//			var mapFgImgInfos:Dictionary = fgbytes.readObject();
-//			var mapMgImgInfos:Dictionary = mgbytes.readObject();
+			var mapBgImgInfos:Dictionary;
+			var mapFgImgInfos:Dictionary;
+			var mapMgImgInfos:Dictionary;
 
+			if(GlobalData.isOnline){
+				mapBgImgInfos=bgbytes.readObject();
+				mapFgImgInfos=fgbytes.readObject();
+				mapMgImgInfos=mgbytes.readObject();
+			}else{
+				mapBgImgInfos = new Dictionary();
+				MapCfgParse.parseXML(new XML(bgbytes), mapBgImgInfos, MapBgImgInfo);
 
-			var mapBgImgInfos:Dictionary = new Dictionary();
-			MapCfgParse.parseXML(new XML(bgbytes), mapBgImgInfos, MapBgImgInfo);
+				mapFgImgInfos = new Dictionary();
+				MapCfgParse.parseXML(new XML(fgbytes), mapFgImgInfos, MapFgImgInfo);
 
-			var mapFgImgInfos:Dictionary = new Dictionary();
-			MapCfgParse.parseXML(new XML(fgbytes), mapFgImgInfos, MapFgImgInfo);
-
-			var mapMgImgInfos:Dictionary = new Dictionary();
-			MapCfgParse.parseXML(new XML(mgbytes), mapMgImgInfos, MapMgImgInfo);
-
+				mapMgImgInfos = new Dictionary();
+				MapCfgParse.parseXML(new XML(mgbytes), mapMgImgInfos, MapMgImgInfo);
+			}
 
 			var shrinkBitmap:Bitmap = getPluginAsset("plugin.world.map.base" + _currentMapId, BulkLoader.TYPE_IMAGE) as Bitmap;
 			var alphaBitmap:Bitmap = getPluginAsset("plugin.world.map.alpha" + _currentMapId, BulkLoader.TYPE_IMAGE) as Bitmap;
@@ -340,7 +344,11 @@ package
 			} else if (_currentMapId == 10004)
 			{
 				birthPosition.setTo(1065, 719);
-			} else
+			}else if(_currentMapId==30021)
+			{
+				birthPosition.setTo(354, 400);
+			}
+			else
 			{
 				birthPosition.setTo(1065, 719);
 			}

@@ -5,7 +5,7 @@ package
 {
 	public class GlobalData
 	{
-		public static var isOnline:Boolean = false;
+		public static var isOnline:Boolean = true;
 		public function GlobalData()
 		{
 		}
