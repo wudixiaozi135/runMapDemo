@@ -5,7 +5,10 @@ package
 {
 	public class GlobalData
 	{
-		public static var isOnline:Boolean = true;
+		public static var isOnline:Boolean = false;
+		/**显否显示地图网格*/
+		public static var isShowGrid:Boolean = false;
+
 		public function GlobalData()
 		{
 		}

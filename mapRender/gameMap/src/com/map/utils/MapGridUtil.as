@@ -44,6 +44,8 @@ package com.map.utils
 		 */
 		public static function getPixelPoint(tileWidth:int, tileHeight:int, mapPixelWidth:int, tx:int, ty:int):Point
 		{
+			return getPixelPointEx(tileWidth,tileHeight,tx,ty);
+
 			var tileEdge:Number = Math.sqrt(tileWidth * tileWidth + tileHeight * tileHeight) / 2;
 			var tan:Number = tileHeight / tileWidth;
 			var sin:Number = (tileHeight / 2) / tileEdge;
@@ -55,6 +57,18 @@ package com.map.utils
 			return new Point(x, y);
 		}
 
+		public static function getPixelPointEx(tileWidth:int, tileHeight:int, tx:int, ty:int):Point
+		{
+			//偶数行tile中心
+			var tileCenter:int = (tx * tileWidth) + tileWidth / 2;
+			// x象素  如果为奇数行加半个宽
+			var xPixel:int = tileCenter + (ty & 1) * tileWidth / 2;
+
+			// y象素
+			var yPixel:int = (ty + 1) * tileHeight / 2;
+
+			return new Point(xPixel, yPixel);
+		}
 
 		/**
 		 * 根据屏幕象素坐标取得网格的坐标
@@ -67,6 +81,8 @@ package com.map.utils
 		 */
 		public static function getTilePoint(tilePixelWidth:int, tilePixelHeight:int, mapPixelWidth:int, px:int, py:int):Point
 		{
+			return getTilePointEx(tilePixelWidth,tilePixelHeight,px,py);
+
 			var tileEdge:Number = Math.sqrt(tilePixelWidth * tilePixelWidth + tilePixelHeight * tilePixelHeight) / 2;
 			var tan:Number = tilePixelHeight / tilePixelWidth;
 			var sin:Number = (tilePixelHeight / 2) / tileEdge;
@@ -83,13 +99,44 @@ package com.map.utils
 
 //			var tempX:Number;
 //			var tempY:Number;
-//			
 //			tempX = py / tileHeight + px / tileWidth;
 //			tempY = py / tileHeight + mapPixelWidth / tileWidth - px / tileWidth;
 //			logger.output("getTilePoint", tempX, tempY, tx, ty);
 
 			return newPoint(tx, ty);
 		}
+
+		public static function getTilePointEx(tileWidth:int, tileHeight:int, px:int, py:int):Point
+		{
+			var xtile:int = 0;	//网格的x坐标
+			var ytile:int = 0;	//网格的y坐标
+
+			var cx:int, cy:int, rx:int, ry:int;
+			cx = int(px / tileWidth) * tileWidth + tileWidth / 2;	//计算出当前X所在的以tileWidth为宽的矩形的中心的X坐标
+			cy = int(py / tileHeight) * tileHeight + tileHeight / 2;//计算出当前Y所在的以tileHeight为高的矩形的中心的Y坐标
+
+			rx = (px - cx) * tileHeight / 2;
+			ry = (py - cy) * tileWidth / 2;
+
+			if (Math.abs(rx) + Math.abs(ry) <= tileWidth * tileHeight / 4)
+			{
+				//xtile = int(pixelPoint.x / tileWidth) * 2;
+				xtile = int(px / tileWidth);
+				ytile = int(py / tileHeight) * 2;
+			}
+			else
+			{
+				px = px - tileWidth / 2;
+				//xtile = int(pixelPoint.x / tileWidth) * 2 + 1;
+				xtile = int(px / tileWidth) + 1;
+
+				py = py - tileHeight / 2;
+				ytile = int(py / tileHeight) * 2 + 1;
+			}
+
+			return new Point(xtile - (ytile & 1), ytile);
+		}
+
 
 		public static function getWalkableSignMap(tilePixelWidth:int, tilePixelHeight:int):BitmapData
 		{

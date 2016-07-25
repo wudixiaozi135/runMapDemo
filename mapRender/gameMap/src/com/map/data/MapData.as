@@ -16,8 +16,8 @@ package com.map.data
 		}
 
 		//////////// 地图数据中定义的  /////////////////
-		public var mapTileWidth:int;		//地图网格宽度 
-		public var mapTileHeight:int;		//地图网格高度 
+		public var mapTileWidth:int;		//地图网格列
+		public var mapTileHeight:int;		//地图网格行
 		public var mapPixelWidth:int; 		//地图的像素宽
 		public var mapPixelHeight:int; 		//地图的像素高
 
@@ -35,7 +35,8 @@ package com.map.data
 
 		public function getWalkable(xtile:int, ytile:int):Boolean
 		{
-			return walkableArray ? walkableArray[ytile][xtile] : false;
+//			return walkableArray ? walkableArray[ytile][xtile] : false;
+			return walkableArray ? walkableArray[xtile][ytile] : false;
 		}
 
 		public function getIsSign(xtile:int, ytile:int):Boolean
@@ -258,40 +259,71 @@ package com.map.data
 			mapPixelHeight = bytes.readInt();
 			imgPixelWidth = bytes.readInt();
 			imgPixelHeight = bytes.readInt();
+
 			mapTileWidth = bytes.readShort();
 			mapTileHeight = bytes.readShort();
+
 			tilePixelWidth = bytes.readShort();
 			tilePixelHeight = bytes.readShort();
 
-			this.walkableArray.length = mapTileHeight;
-			this.isSign.length = mapTileHeight;
-			this.sign.length = mapTileHeight;
-			this.block.length = mapTileHeight;
-			for (var i:int = 0; i < mapTileHeight; i++)
+//			this.walkableArray.length = mapTileHeight;
+//			this.isSign.length = mapTileHeight;
+//			this.sign.length = mapTileHeight;
+//			this.block.length = mapTileHeight;
+//			for (var i:int = 0; i < mapTileHeight; i++)
+//			{
+//				this.walkableArray[i] = new Vector.<Boolean>();
+//				this.isSign[i] = new Vector.<Boolean>();
+//				this.sign[i] = new Vector.<Point>();
+//				this.block[i] = new Vector.<int>();
+//				this.walkableArray[i].length = mapTileWidth;
+//				this.isSign[i].length = mapTileWidth;
+//				this.sign[i].length = mapTileWidth;
+//				this.block[i].length = mapTileWidth;
+//			}
+
+			this.walkableArray.length = mapTileWidth;
+			for (var i:int = 0; i < mapTileWidth; i++)
 			{
-				this.walkableArray[i] = new Vector.<Boolean>();
-				this.isSign[i] = new Vector.<Boolean>();
-				this.sign[i] = new Vector.<Point>();
-				this.block[i] = new Vector.<int>();
-				this.walkableArray[i].length = mapTileWidth;
-				this.isSign[i].length = mapTileWidth;
-				this.sign[i].length = mapTileWidth;
-				this.block[i].length = mapTileWidth;
+				this.walkableArray[i] = new Vector.<Boolean>(mapTileHeight);
 			}
 
 			//读取每个网格是否可行走
 			var x:int;
 			var y:int;
 
-			while ((bytes.bytesAvailable > 0))
+//			var t1:int,t2:int;
+//			while ((bytes.bytesAvailable > 0))
+//			{
+//				y = bytes.readInt();
+//				x = bytes.readInt();
+//				isSign[y][x] = bytes.readBoolean();
+//				t1=bytes.readInt();
+//				t2=bytes.readInt();
+//				sign[y][x] = new Point(t2,t1);
+//				walkableArray[y][x] = true;
+//				(isSign[y][x] == true) && (block[y][x] = bytes.readInt());
+//			}
+
+
+//			for (var y:int = 0; y < data.layerData.gridRows; y++)
+//				for (var x:int = 0; x < data.layerData.gridColumns; x++)
+//					stream.writeBoolean((gridLayer[x] && gridLayer[x][y] != null) ? gridLayer[x][y] : true);
+
+
+			var sum:int = 0;
+			for (y = 0; y < mapTileHeight; y++)
 			{
-				x = bytes.readInt();
-				y = bytes.readInt();
-				isSign[y][x] = bytes.readBoolean();
-				sign[y][x] = new Point(bytes.readInt(), bytes.readInt());
-				walkableArray[y][x] = true;
-				(isSign[y][x] == true) && (block[y][x] = bytes.readInt());
+				for (x = 0; x < mapTileWidth; x++)
+				{
+					walkableArray[x][y] = bytes.readBoolean();
+					if (walkableArray[x][y])
+					{
+						sum++;
+					}
+				}
 			}
+			trace(sum);
 		}
 
 		public function drawMiniMap():Bitmap

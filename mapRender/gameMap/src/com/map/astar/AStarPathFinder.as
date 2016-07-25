@@ -250,7 +250,6 @@ package com.map.astar
 				{
 					if (isWalkable(checkX, checkY))
 					{
-
 						node = getNode(checkX, checkY);
 						expandSignNode = getSignNode(checkX, checkY);
 						if (!(expandSignNode.isInClose))

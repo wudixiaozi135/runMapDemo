@@ -4,7 +4,7 @@ package
 	import br.com.stimuli.loading.BulkProgressEvent;
 	import br.com.stimuli.loading.loadingtypes.BinaryItem;
 
-	import com.map.astar.AStarPixcelPathFinder;
+	import com.map.astarEx.AStar;
 	import com.map.consDef.MapLayerDef;
 	import com.map.data.MapBgImgInfo;
 	import com.map.data.MapData;
@@ -15,11 +15,13 @@ package
 	import com.map.player.datas.PlayerData;
 	import com.map.player.views.PlayerView;
 	import com.map.utils.MapCfgParse;
+	import com.map.utils.MapGridUtil;
 	import com.map.utils.TimerProvider;
 	import com.map.view.MapView;
 	import com.tx.mme.MmeAsset;
 
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
@@ -43,8 +45,8 @@ package
 		private var _mapView:MapView;
 		private var _mapData:MapData;
 		private var _switchMap:TextField;
-		private var _currentMapId:int = 30021;
-		private var _pathFinder:AStarPixcelPathFinder;
+		private var _currentMapId:int = 1;//30021带跳的地图
+		private var _pathFinder:AStar;
 		private var _paths:Array;
 
 		/**测试寻路玩家*/
@@ -53,6 +55,9 @@ package
 		private var version:String = "1.0.0.3";
 
 		private var _maps:Array = [10001, 10002, 10003, 10004, 10005];
+
+		private var _gridLayer:Sprite = new Sprite();
+		private var _gridLayerArr:Array;
 
 		public function GameMapDemo()
 		{
@@ -69,6 +74,11 @@ package
 		{
 			this._switchMap.x = (stage.stageWidth - this._switchMap.textWidth) * .5;
 			this._switchMap.y = 5;
+
+//			this.stage.addChild(_gridLayer);
+			_mapView.addChild(_gridLayer);
+			_gridLayer.mouseChildren = false;
+			_gridLayer.mouseEnabled = false;
 		}
 
 		private function onTextLink(ev:TextEvent):void
@@ -106,7 +116,7 @@ package
 			_mapView = new MapView();
 			addChild(_mapView);
 			_mapData = new MapData();
-			_pathFinder = new AStarPixcelPathFinder();
+			_pathFinder = new AStar();
 
 			loaderConfig(_currentMapId);
 
@@ -150,15 +160,34 @@ package
 			var element:BaseMapElement = this._testPlayer;
 
 			var point:Point = new Point(element.x, element.y);
+
+			var endP:Point = new Point(_mapView.mouseX, _mapView.mouseY);
+
+			var targetPixel:Point = MapGridUtil.getPixelPoint(_mapData.tilePixelWidth, _mapData.tilePixelHeight, _mapData.mapPixelWidth, endP.x, endP.y);
+			var targetPosition:Point = MapGridUtil.getTilePoint(_mapData.tilePixelWidth, _mapData.tilePixelHeight, _mapData.mapPixelWidth, endP.x, endP.y);
+			trace(targetPixel, targetPosition);
+
 			_paths = _pathFinder.findByPixcel(point, new Point(_mapView.mouseX, _mapView.mouseY));
-
 			_testPlayer.moveTo(_paths);
-		}
 
 
-		private function setXY(x:int, y:int):void
-		{
-			this._testPlayer.setXY(x, y);
+			if (GlobalData.isShowGrid)
+			{
+				for each (var arr:Array in _gridLayerArr)
+				{
+					for each (var temp:Bitmap in arr)
+					{
+						temp.visible = false;
+					}
+				}
+				resetMapGrid();
+				var tP:Point;
+				for each(var p:Point in _paths)
+				{
+					tP = MapGridUtil.getTilePointEx(_mapData.tilePixelWidth, _mapData.tilePixelHeight, p.x, p.y);
+					_gridLayerArr[tP.x][tP.y].visible = true;
+				}
+			}
 		}
 
 		private function loaderConfig(mapId:int):void
@@ -194,6 +223,7 @@ package
 			sceneMap[mapId]["alphaMap"] = "NarutoBeta1.0Build300";
 			sceneMap[mapId]["MapInfo"] = "NarutoBeta1.0Build300";
 
+			var poffix:String = ".cfg";
 			if (!GlobalData.isOnline)
 			{
 				sceneMap[mapId]["bg"] = "";
@@ -202,13 +232,14 @@ package
 				sceneMap[mapId]["sceneMap"] = "";
 				sceneMap[mapId]["alphaMap"] = "";
 				sceneMap[mapId]["MapInfo"] = "";
+				poffix = ".xml";
 			}
 
 			if (!bulk.get(bgPath))
 			{
 				paths.push({
 					id: bgPath,
-					url: StringUtil.substitute(url, sceneMap[mapId]["bg"]) + mapId + "/_scene_bg.cfg?version=" + version,
+					url: StringUtil.substitute(url, sceneMap[mapId]["bg"]) + mapId + "/_scene_bg" + poffix + "?version=" + version,
 					type: BulkLoader.TYPE_BINARY
 				});
 			}
@@ -216,7 +247,7 @@ package
 			{
 				paths.push({
 					id: mgPath,
-					url: StringUtil.substitute(url, sceneMap[mapId]["mg"]) + mapId + "/_scene_mg.cfg?version=" + version,
+					url: StringUtil.substitute(url, sceneMap[mapId]["mg"]) + mapId + "/_scene_mg" + poffix + "?version=" + version,
 					type: BulkLoader.TYPE_BINARY
 				});
 			}
@@ -224,7 +255,7 @@ package
 			{
 				paths.push({
 					id: fgPath,
-					url: StringUtil.substitute(url, sceneMap[mapId]["fg"]) + mapId + "/_scene_fg.cfg?version=" + version,
+					url: StringUtil.substitute(url, sceneMap[mapId]["fg"]) + mapId + "/_scene_fg" + poffix + "?version=" + version,
 					type: BulkLoader.TYPE_BINARY
 				});
 			}
@@ -280,6 +311,23 @@ package
 			return null;
 		}
 
+		private function resetMapGrid():void
+		{
+			var y:int;
+			var x:int;
+			for (y = 0; y < _mapData.mapTileHeight; y++)
+			{
+				for (x = 0; x < _mapData.mapTileWidth; x++)
+				{
+					if (_mapData.walkableArray[x][y])
+					{
+						continue;
+					}
+					_gridLayerArr[x][y].visible = true;
+				}
+			}
+		}
+
 		private function onComplete(event:BulkProgressEvent):void
 		{
 			if (event)
@@ -301,17 +349,25 @@ package
 			this._mapData.setData(mapDataBytes);
 			this._pathFinder.setMapData(_mapData);
 
+			if (GlobalData.isShowGrid)
+			{
+				//画地图格子
+				_gridLayerArr = drawGrid(64, 32, _mapData.mapTileHeight, _mapData.mapTileWidth, _gridLayer);
+				resetMapGrid();
+			}
 
 			//读取加载cfg格式的
 			var mapBgImgInfos:Dictionary;
 			var mapFgImgInfos:Dictionary;
 			var mapMgImgInfos:Dictionary;
 
-			if(GlobalData.isOnline){
-				mapBgImgInfos=bgbytes.readObject();
-				mapFgImgInfos=fgbytes.readObject();
-				mapMgImgInfos=mgbytes.readObject();
-			}else{
+			if (GlobalData.isOnline)
+			{
+				mapBgImgInfos = bgbytes.readObject();
+				mapFgImgInfos = fgbytes.readObject();
+				mapMgImgInfos = mgbytes.readObject();
+			} else
+			{
 				mapBgImgInfos = new Dictionary();
 				MapCfgParse.parseXML(new XML(bgbytes), mapBgImgInfos, MapBgImgInfo);
 
@@ -344,13 +400,14 @@ package
 			} else if (_currentMapId == 10004)
 			{
 				birthPosition.setTo(1065, 719);
-			}else if(_currentMapId==30021)
+			} else if (_currentMapId == 30021)
 			{
 				birthPosition.setTo(354, 400);
 			}
 			else
 			{
 				birthPosition.setTo(1065, 719);
+//				birthPosition.setTo(100,100);
 			}
 			_testPlayer.setXY(birthPosition.x, birthPosition.y);
 
@@ -359,6 +416,87 @@ package
 			this._mapView.cameraControl.setCenterPos(stage.stageWidth * .5, stage.stageHeight * .5);
 			this._mapView.cameraControl.setData(LayerManager.singleton.stage);
 			this._mapView.startup();
+		}
+
+		//其他
+		public static function drawGrid(gridWidth:int, gridHeight:int, rows:int, columns:int, gridLayer:Sprite):Array
+		{
+			var pt:Point;
+			var tmpUI:Sprite = new Sprite();
+			var bmdata:BitmapData = new BitmapData(gridWidth, gridHeight, true, 0x0); //单个不可走网格的bitmapdata,要创建完全透明的位图，fillcolor要设为非白色
+			var bm:Bitmap;
+			var gridArray:Array;
+
+			gridLayer.graphics.clear();
+			while (gridLayer.numChildren > 0)
+			{
+				gridLayer.removeChildAt(0);
+			}
+			drawSingleGrid(tmpUI, 0, 0, gridWidth, gridHeight, false); //单个不可走网格
+			bmdata.draw(tmpUI);
+			gridArray = new Array();
+			for (var x:int = 0; x < columns; x++)
+			{
+				gridArray[x] = new Array();
+				for (var y:int = 0; y < rows; y++)
+				{
+					bm = new Bitmap(bmdata);
+					pt = MapGridUtil.getPixelPointEx(gridWidth, gridHeight, x, y);
+					drawSingleGrid(gridLayer, pt.x - gridWidth / 2, pt.y - gridHeight / 2, gridWidth, gridHeight, true, MapGridUtil.getTilePointEx(gridWidth, gridHeight, pt.x, pt.y));
+					bm.x = pt.x - gridWidth / 2;
+					bm.y = pt.y - gridHeight / 2;
+					bm.visible = false;
+					gridLayer.addChild(bm);
+					gridArray[x][y] = bm;
+				}
+			}
+			//gridLayer.cacheAsBitmap = true;
+			return gridArray;
+		}
+
+		public static function drawSingleGrid(sp:Sprite, baseX:int, baseY:int, tilePixelWidth:int, tilePixelHeight:int, canWalkable:Boolean, pt:Point = null):void
+		{
+			var color:uint;
+
+			sp.graphics.moveTo(baseX, baseY);
+
+			color = (canWalkable) ? 0x0 : 0xff0000;
+
+			//外框
+			sp.graphics.lineStyle(1, color, 1);
+			sp.graphics.moveTo(baseX, baseY + tilePixelHeight / 2);
+			sp.graphics.lineTo(baseX + tilePixelWidth / 2, baseY);
+			sp.graphics.lineTo(baseX + tilePixelWidth, baseY + tilePixelHeight / 2);
+			sp.graphics.lineTo(baseX + tilePixelWidth / 2, baseY + tilePixelHeight);
+			sp.graphics.lineTo(baseX, baseY + tilePixelHeight / 2);
+
+			if (canWalkable && pt)
+			{
+				var tf:TextField = new TextField();
+				tf.mouseEnabled = false;
+				tf.autoSize = "left";
+				tf.text = pt.x + "," + pt.y;
+				sp.addChild(tf);
+				tf.x = baseX + (tilePixelWidth - tf.textWidth) * .5;
+				tf.y = baseY + (tilePixelHeight - tf.textHeight) * .5;
+			}
+
+			if (!canWalkable)
+			{
+				//里框
+				var hoff:Number = tilePixelHeight / 4;
+				var woff:Number = hoff * tilePixelWidth / tilePixelHeight;
+				sp.graphics.moveTo(baseX + woff, baseY + tilePixelHeight / 2);
+				sp.graphics.lineTo(baseX + tilePixelWidth / 2, baseY + hoff);
+				sp.graphics.lineTo(baseX + tilePixelWidth - woff, baseY + tilePixelHeight / 2);
+				sp.graphics.lineTo(baseX + tilePixelWidth / 2, baseY + tilePixelHeight - hoff);
+				sp.graphics.lineTo(baseX + woff, baseY + tilePixelHeight / 2);
+				//交叉线
+				sp.graphics.moveTo(baseX, baseY + tilePixelHeight / 2);
+				sp.graphics.lineTo(baseX + tilePixelWidth, baseY + tilePixelHeight / 2);
+				sp.graphics.moveTo(baseX + tilePixelWidth / 2, baseY);
+				sp.graphics.lineTo(baseX + tilePixelWidth / 2, baseY + tilePixelHeight);
+			}
 		}
 	}
 }

@@ -106,7 +106,6 @@ package com.map.controls
 
 				//显示寻路标志
 				this._mapView.showMoveTargetUI(_tempPoint.x - _mapView.moveTargetUi.width * .5, _tempPoint.y - _mapView.moveTargetUi.height * .5);
-
 				//用来测试寻路
 				this._mapView.dispatchEvent(new Event("testFindPath"));
 			}
