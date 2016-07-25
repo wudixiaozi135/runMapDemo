@@ -1,0 +1,25 @@
+<RoleNpcConfig>
+  <NPC id="0" roleId="" res="assets/role/npc/scene/npcres/NPC-小孩子.swf" direction="7" destPoint="15, 35" startImgX="3" endImgX="4" startImgY="2" endImgY="2" canMove="false" movePath="15, 37"/>
+  <NPC id="1" roleId="" res="assets/role/npc/scene/npcres/主角5.swf" direction="5" destPoint="21, 45" startImgX="5" endImgX="5" startImgY="2" endImgY="3" canMove="false" movePath="21, 47"/>
+  <NPC id="2" roleId="" res="assets/role/npc/scene/npcres/NPC-扫地大妈.swf" direction="0" destPoint="11, 41" startImgX="2" endImgX="3" startImgY="2" endImgY="2" canMove="false" movePath="11, 43"/>
+  <NPC id="3" roleId="" res="assets/role/npc/scene/npcres/壮汉5.swf" direction="5" destPoint="19, 50" startImgX="4" endImgX="5" startImgY="2" endImgY="3" canMove="false" movePath="19, 52"/>
+  <NPC id="4" roleId="" res="assets/role/npc/scene/npcres/NPC-老头.swf" direction="0" destPoint="13, 34" startImgX="3" endImgX="3" startImgY="1" endImgY="2" canMove="false" movePath="13, 36"/>
+  <NPC id="5" roleId="" res="assets/role/npc/scene/npcres/NPC遛狗男.swf" direction="0" destPoint="24, 39" startImgX="6" endImgX="6" startImgY="2" endImgY="2" canMove="false" movePath="24, 41"/>
+  <NPC id="6" roleId="" res="assets/role/npc/scene/npcres/NPC-狗.swf" direction="1" destPoint="25, 40" startImgX="6" endImgX="6" startImgY="2" endImgY="2" canMove="false" movePath="25, 42"/>
+  <NPC id="7" roleId="" res="assets/role/npc/scene/npcres/NPC-牛.swf" direction="7" destPoint="31, 17" startImgX="7" endImgX="8" startImgY="0" endImgY="1" canMove="false" movePath="31, 19"/>
+  <NPC id="8" roleId="" res="assets/role/npc/scene/npcres/NPC-斗篷男.swf" direction="7" destPoint="30, 19" startImgX="7" endImgX="7" startImgY="1" endImgY="1" canMove="false" movePath="30, 21"/>
+  <NPC id="9" roleId="" res="assets/role/npc/scene/npcres/阵法.swf" direction="0" destPoint="37, 9" startImgX="8" endImgX="10" startImgY="0" endImgY="1" canMove="false" movePath="38, 8"/>
+  <NPC id="10" roleId="" res="assets/role/npc/scene/npcres/叹号.swf" direction="0" destPoint="30, 9" startImgX="7" endImgX="7" startImgY="0" endImgY="0" canMove="false" movePath="30, 11"/>
+  <NPC id="11" roleId="" res="assets/role/npc/scene/npcres/叹号.swf" direction="0" destPoint="24, 29" startImgX="6" endImgX="6" startImgY="1" endImgY="1" canMove="false" movePath="24, 31"/>
+  <NPC id="12" roleId="" res="assets/role/npc/scene/npcres/壮汉4.swf" direction="0" destPoint="26, 33" startImgX="6" endImgX="7" startImgY="1" endImgY="2" canMove="false" movePath="26, 35"/>
+  <NPC id="13" roleId="" res="assets/role/npc/scene/npcres/B猫.swf" direction="2" destPoint="18, 65" startImgX="4" endImgX="5" startImgY="3" endImgY="4" canMove="false" movePath="18, 67"/>
+  <NPC id="14" roleId="" res="assets/role/npc/scene/npcres/zhujue2.swf" direction="2" destPoint="21, 68" startImgX="5" endImgX="5" startImgY="4" endImgY="4" canMove="false" movePath="21, 70"/>
+  <NPC id="15" roleId="" res="assets/role/npc/scene/npcres/zhujue3.swf" direction="7" destPoint="39, 38" startImgX="9" endImgX="9" startImgY="2" endImgY="2" canMove="false" movePath="39, 40"/>
+  <NPC id="16" roleId="" res="assets/role/npc/scene/npcres/主角11.swf" direction="4" destPoint="19, 72" startImgX="4" endImgX="4" startImgY="4" endImgY="4" canMove="false" movePath="19, 74"/>
+  <NPC id="17" roleId="" res="assets/role/npc/scene/npcres/叹号.swf" direction="0" destPoint="21, 58" startImgX="5" endImgX="5" startImgY="3" endImgY="3" canMove="false" movePath="21, 60"/>
+  <NPC id="18" roleId="" res="assets/role/npc/scene/npcres/主角4.swf" direction="7" destPoint="40, 36" startImgX="10" endImgX="10" startImgY="2" endImgY="2" canMove="false" movePath="40, 38"/>
+  <NPC id="19" roleId="" res="assets/role/npc/scene/npcres/NPC-人猿.swf" direction="3" destPoint="42, 42" startImgX="10" endImgX="10" startImgY="2" endImgY="3" canMove="false" movePath="42, 44"/>
+  <NPC id="20" roleId="" res="assets/role/npc/scene/npcres/叹号.swf" direction="0" destPoint="41, 31" startImgX="10" endImgX="10" startImgY="1" endImgY="2" canMove="false" movePath="41, 33"/>
+  <NPC id="21" roleId="" res="assets/role/npc/scene/npcres/叹号.swf" direction="0" destPoint="15, 29" startImgX="3" endImgX="4" startImgY="1" endImgY="1" canMove="false" movePath="15, 31"/>
+  <NPC id="22" roleId="" res="assets/role/npc/scene/npcres/10000101_outdoor.swf" direction="5" destPoint="4, 83" startImgX="1" endImgX="1" startImgY="5" endImgY="5" canMove="false" movePath="4, 85"/>
+</RoleNpcConfig>

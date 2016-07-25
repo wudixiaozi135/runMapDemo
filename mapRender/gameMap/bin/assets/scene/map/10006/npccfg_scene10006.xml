@@ -1,0 +1,5 @@
+<RoleNpcConfig>
+  <NPC id="0" roleId="" res="assets/role/npc/scene/npcres/A猫.swf" direction="0" destPoint="14, 31" startImgX="3" endImgX="4" startImgY="1" endImgY="2" canMove="false" movePath="14, 33"/>
+  <NPC id="1" roleId="" res="assets/role/npc/scene/npcres/B猫.swf" direction="0" destPoint="6, 18" startImgX="1" endImgX="1" startImgY="0" endImgY="1" canMove="false" movePath="6, 20"/>
+  <NPC id="2" roleId="" res="assets/role/npc/scene/npcres/NPC-小孩子.swf" direction="0" destPoint="8, 21" startImgX="2" endImgX="2" startImgY="1" endImgY="1" canMove="false" movePath="8, 23"/>
+</RoleNpcConfig>
