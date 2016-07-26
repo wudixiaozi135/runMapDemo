@@ -857,7 +857,7 @@ package tx.sce.controller
 		private function getLibraryXmlByName(name:String):XML
 		{
 			var str:String = name;  //这里超奇怪，一定要弄一个中间变量才能取得到
-			return data.libraryData.libXml.item.(@name == str)[0];
+			return data.libraryData.libXml..item.(@name == str)[0];
 		}
 		
 		private function setPicObstacles(xml:XML, updateExist:Boolean):void
