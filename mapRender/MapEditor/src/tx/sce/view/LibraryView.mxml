@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009"
-		 xmlns:s="library://ns.adobe.com/flex/spark"
-		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 width="100%" height="80%" dropShadowVisible="false" title="素材库">
-	<fx:Declarations>
-		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
-	</fx:Declarations>
-	<mx:VDividedBox resizeToContent="false" horizontalAlign="center" verticalAlign="middle" width="100%" height="100%" liveDragging="true">
-		<s:SWFLoader id="prevImg" width="100%" height="40%" horizontalAlign="center" verticalAlign="middle"/>
-		<mx:Tree id="tree" width="100%" height="60%"></mx:Tree>
-	</mx:VDividedBox>
+         xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:mx="library://ns.adobe.com/flex/mx"
+         width="100%" height="80%" dropShadowVisible="false" title="素材库">
+    <fx:Declarations>
+        <!-- 将非可视元素（例如服务、值对象）放在此处 -->
+    </fx:Declarations>
+    <mx:VDividedBox resizeToContent="false" horizontalAlign="center" verticalAlign="middle" width="100%" height="100%"
+                    liveDragging="true">
+        <mx:Box width="100%" height="40%" horizontalAlign="center" verticalAlign="middle">
+            <s:SWFLoader id="prevImg"/>
+        </mx:Box>
+        <mx:Tree id="tree" width="100%" height="60%"></mx:Tree>
+    </mx:VDividedBox>
 </s:Panel>

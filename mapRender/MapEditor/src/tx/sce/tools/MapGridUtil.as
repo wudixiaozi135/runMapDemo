@@ -5,7 +5,8 @@ package tx.sce.tools
 	import flash.display.DisplayObject;
 	import flash.display.Shape;
 	import flash.geom.Point;
-	
+	import flash.text.TextField;
+
 	import mx.core.UIComponent;
 	
 	public class MapGridUtil
@@ -221,7 +222,7 @@ package tx.sce.tools
 				{
 					bm = new Bitmap(bmdata);
 					pt = MapGridUtil.getPixelPoint(gridWidth, gridHeight, x, y);
-					drawSingleGrid(gridLayer, pt.x - gridWidth / 2, pt.y - gridHeight / 2, gridWidth, gridHeight, true);
+					drawSingleGrid(gridLayer, pt.x - gridWidth / 2, pt.y - gridHeight / 2, gridWidth, gridHeight, true,getTilePoint(gridWidth,gridHeight,pt.x,pt.y));
 					bm.x = pt.x - gridWidth / 2;
 					bm.y = pt.y - gridHeight / 2;
 					bm.visible = false;
@@ -233,7 +234,7 @@ package tx.sce.tools
 			return gridArray;
 		}
 		
-		public static function drawSingleGrid(sp:UIComponent, baseX:int, baseY:int, tilePixelWidth:int, tilePixelHeight:int, canWalkable:Boolean):void
+		public static function drawSingleGrid(sp:UIComponent, baseX:int, baseY:int, tilePixelWidth:int, tilePixelHeight:int, canWalkable:Boolean,pt:Point=null):void
 		{
 			var color:uint;
 			
@@ -248,6 +249,19 @@ package tx.sce.tools
 			sp.graphics.lineTo(baseX + tilePixelWidth,baseY + tilePixelHeight/2);
 			sp.graphics.lineTo(baseX + tilePixelWidth/2,baseY + tilePixelHeight);
 			sp.graphics.lineTo(baseX,baseY + tilePixelHeight/2);
+
+//			方便显示网格位置
+//			if (canWalkable&&pt)
+//			{
+//				var tf:TextField = new TextField();
+//				tf.mouseEnabled = false;
+//				tf.autoSize = "left";
+//				tf.text=pt.x+","+pt.y;
+//				sp.addChild(tf);
+//				tf.x = baseX+(tilePixelWidth-tf.textWidth)*.5;
+//				tf.y = baseY+(tilePixelHeight-tf.textHeight)*.5;
+//			}
+
 			if (!canWalkable)
 			{
 				//里框

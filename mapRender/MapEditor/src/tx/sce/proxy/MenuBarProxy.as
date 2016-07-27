@@ -12,6 +12,7 @@ package tx.sce.proxy
 	import mx.managers.PopUpManager;
 	
 	import tx.sce.command.Command;
+	import tx.sce.data.GlobalData;
 	import tx.sce.tools.Global;
 	import tx.sce.tools.MyInputWindow;
 	import tx.sce.updateMsg.UpdateMsg;
@@ -355,6 +356,8 @@ package tx.sce.proxy
 		
 		private function preview():void
 		{
+			Alert.show("此功能暂未实现！");
+			return;
 			Alert.show("如果是第一次预览或者上次导出之后内容有修改，请先导出场景,继续预览？","提示",Alert.YES|Alert.NO,app,onAlertClose);
 		}
 		
@@ -362,8 +365,12 @@ package tx.sce.proxy
 		{
 			if (evt.detail == Alert.YES)
 			{
-				var file:File = File.applicationDirectory.resolvePath("ext/naruto/entry.swf");
-				file.openWithDefaultApplication();
+				if(GlobalData.tempDir)
+				{
+					//实际没有导出过这个文件，暂屏蔽此功能
+					var file:File = GlobalData.tempDir.resolvePath("ext/naruto/entry.swf");
+					file.openWithDefaultApplication();
+				}
 			}
 		}
 	}

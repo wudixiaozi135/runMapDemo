@@ -6,11 +6,10 @@ package tx.sce.view
 	import LibCore.mme.data.LayerData;
 	import LibCore.mme.data.MmeData;
 	import LibCore.mme.events.MmeAssetRenderEvent;
-
+	
 	import flash.display.DisplayObject;
 	import flash.geom.Point;
-
-
+	
 	public class NpcRender extends MmeAssetRender
 	{
 		public static const maxIdleIndex:int = 10;  //假设可能的idle_xx序号最大不超过10

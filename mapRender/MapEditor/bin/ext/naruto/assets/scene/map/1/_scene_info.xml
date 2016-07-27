@@ -1,5 +1,0 @@
-<SceneInfo>
-  <link name="plugin.scene.sceneMap.10006" missionType="1" url="assets/scene/map/10006/sceneMap.png" byte="0" key=""/>
-  <link name="plugin.scene.miniMap.10006" missionType="1" url="assets/scene/map/10006/miniMap.png" byte="0" key=""/>
-  <link name="plugin.scene.defaultMap.10006" missionType="1" url="assets/scene/map/10006/defaultMap.png" byte="0" key=""/>
-</SceneInfo>

@@ -43,6 +43,7 @@ package tx.sce.data
 				layersArr[info.name] = new Array();
 				layersXml.appendChild(<layer name={info.name} label={info.label} priority={info.priority} canSee="true" locked="false" isBranch="true"/>);
 			}
+			GlobalData.layerData=this;
 		}
 		
 	}

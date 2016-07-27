@@ -3,9 +3,9 @@
 					   xmlns:s="library://ns.adobe.com/flex/spark"
 					   xmlns:mx="library://ns.adobe.com/flex/mx"
 					   width="1108" height="678"
-					   title="地图编辑器 v1.0.0"
+					   title="地图编辑器 v1.0.1"
 					   showStatusBar="false"
-					   creationComplete="onCreate()" >
+					   creationComplete="onCreate()">
 	<fx:Style source="MapEditor.css"/>
 	
 	<fx:Script>
@@ -24,7 +24,7 @@
 			/**
 			 * 地图编辑器
 			 * @author	tencent, Fictiony
-			 * @version	2016/7/18
+			 * @version	2016/7/22
 			 */	
 			private var dataCollect:DataCollect;
 			
@@ -58,7 +58,6 @@
 				editAreaProxy = new EditAreaProxy(this);
 				layersProxy = new LayersProxy(this);
 				itemEditProxy = new ItemEditProxy(this);
-				
 				//Proxy
 				libraryProxy.linkToManager(ctrlManager);
 				menuBarProxy.linkToManager(ctrlManager);
@@ -74,10 +73,13 @@
 		]]>
 	</fx:Script>
 	
-	<mx:HDividedBox left="0" right="0" top="0" bottom="0" liveDragging="true">
-		<mx:VDividedBox id="leftBox" width="80%" height="100%" liveDragging="true">
+	<mx:HDividedBox height="100%" left="0" right="0" top="0" bottom="0" liveDragging="true">
+		<mx:VDividedBox id="leftBox" width="80%" height="97%" liveDragging="true">
 		</mx:VDividedBox>
 		<mx:VDividedBox id="rightBox" width="20%" height="100%" liveDragging="true">
 		</mx:VDividedBox>
 	</mx:HDividedBox>
+	<mx:HBox width="80%" height="3%" bottom="0" horizontalAlign="right">
+		<mx:Label id="statusLabel" height="100%" paddingRight="10"></mx:Label>
+	</mx:HBox>
 </s:WindowedApplication>

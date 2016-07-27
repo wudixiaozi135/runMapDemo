@@ -2,16 +2,21 @@ package tx.sce.controller
 {
 	import LibCore.mme.events.MmeAssetRenderEvent;
 
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
+
 	import flash.display.DisplayObject;
 	import flash.display.Loader;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.filesystem.File;
+	import flash.geom.Matrix;
 	import flash.net.URLRequest;
-	
+	import flash.utils.setTimeout;
+
 	import mx.controls.Alert;
 	import mx.events.CloseEvent;
-	
+
 	import tx.sce.command.Command;
 	import tx.sce.data.DataCollect;
 	import tx.sce.data.LibraryData;
@@ -19,76 +24,75 @@ package tx.sce.controller
 	import tx.sce.updateMsg.UpdateMsg;
 	import tx.sce.view.NpcRender;
 
-	
 	public class LibraryController extends Controller
-	{				
+	{
 		private var loadedPic:DisplayObject;
 		private var loadPicXml:XML;
 		private var loadForPreview:Boolean = false;
 		private var loadForEdit:Boolean = false;
 		private const LOAD_PIC_READY:String = "load_pic_ready";
-		
+
 		public function LibraryController(dt:DataCollect)
 		{
 			super(dt);
 		}
-			
+
 		override protected function doCommand(cmd:Command):void
 		{
 			var msg:UpdateMsg;
 			var xml:XML;
-			
+
 			switch (cmd.type)
 			{
 				case Command.NEW_PROJECT:
 					data.libraryData = new LibraryData();
 					this.dispatchMsg(new UpdateMsg(UpdateMsg.SHOW_NEW_LIBRARY_VIEW));
 					break;
-				
+
 				case Command.CREATE_FROM_FILE:
 					createFromFile();
 					this.dispatchMsg(new UpdateMsg(UpdateMsg.SHOW_NEW_LIBRARY_VIEW));
 					break;
-				
+
 				case Command.ADD_FILES_TO_LIBRARY:
 					addFilesToLib(cmd);
 					updateTreeSource();
 					break;
-				
+
 				case Command.NEW_FOLDER:
 					doNewFolder(cmd);
 					updateTreeSource();
 					break;
-				
+
 				case Command.PREVIEW_PIC:
-					addEventListener(LOAD_PIC_READY,onPicLoaded);
+					addEventListener(LOAD_PIC_READY, onPicLoaded);
 					loadForPreview = true;
 					loadPic(cmd.commandData.target as XML);
 					break;
-				
+
 				case Command.DEL_FILES_OR_FOLDERS:
 					delItems(cmd);
 					break;
-				
+
 				case Command.RENAME_FOLDER:
 					xml = this.getXmlById(cmd.commandData.targetId);
 					cmd.commandData.oldname = String(xml.@name);
 					xml.@name = String(cmd.commandData.name);
 					break;
-				
+
 				case Command.EDIT_LIBRARY_ITEM:
 					//editLibraryItem(cmd);
-					addEventListener(LOAD_PIC_READY,onPicLoaded);
+					addEventListener(LOAD_PIC_READY, onPicLoaded);
 					loadPicXml = cmd.commandData.xml as XML;
 					loadForEdit = true;
 					loadPic(loadPicXml);
 					break;
-				
+
 				case Command.CHANGE_LIBRARY_ITEM_ORDER:
 					data.libraryData.libXml = cmd.commandData.newXml;
 					updateTreeSource(true);
 					break;
-				
+
 				case Command.CLOSE_PROJECT:
 					if (data.libraryData)
 					{
@@ -99,7 +103,7 @@ package tx.sce.controller
 					break;
 			}
 		}
-		
+
 		override protected function undoCommand(cmd:Command):void
 		{
 			var xml:XML;
@@ -120,14 +124,14 @@ package tx.sce.controller
 				case Command.DEL_FILES_OR_FOLDERS:
 					undoDel(cmd);
 					break;
-				
+
 				case Command.CHANGE_LIBRARY_ITEM_ORDER:
 					data.libraryData.libXml = cmd.commandData.oldXml;
 					updateTreeSource(true);
 					break;
 			}
 		}
-		
+
 		private function addFilesToLib(cmd:Command):void
 		{
 			var target:XML = this.getXmlById(cmd.commandData.targetId);
@@ -136,50 +140,51 @@ package tx.sce.controller
 			var zip:MyZip = data.libraryData.picZip;
 			for each(var file:File in files)
 			{
-				if(zip.getFileCount()>0 && zip.getFileByName(file.name))
+				if (zip.getFileCount() > 0 && zip.getFileByName(file.name))
 				{
 					exists.push(file.name);
 				}
 			}
-			var func:Function = function():void
+			var func:Function = function ():void
 			{
-				var itemParent:XML = (target == null)? data.libraryData.libXml:target;
+				var itemParent:XML = (target == null) ? data.libraryData.libXml : target;
 				var pathArr:Array = new Array();
 				for each(file in files)
-				{   
-					if(exists.indexOf(file.name)!=-1)
+				{
+					if (exists.indexOf(file.name) != -1)
 					{
-						files.splice(files.indexOf(file),1);
+						files.splice(files.indexOf(file), 1);
 						continue;
 					}
 					pathArr.push(file.nativePath);
-					if (!cmd.commandData.hasOwnProperty("idArr") || (cmd.commandData.idArr as Array).length <files.length)
+					if (!cmd.commandData.hasOwnProperty("idArr") || (cmd.commandData.idArr as Array).length < files.length)
 					{
 						if (!cmd.commandData.hasOwnProperty("idArr"))
 							cmd.commandData.idArr = new Array();
-						cmd.commandData.idArr.push(data.libraryData.libXml.@idCount++);					
+						cmd.commandData.idArr.push(data.libraryData.libXml.@idCount++);
 					}
 					itemParent.appendChild
-						(new XML("<item id='"+(cmd.commandData.idArr[files.indexOf(file)])+"' name='"+file.name+"' isBranch='false' "+"path='"+file.nativePath+"' />"));
+					(new XML("<item id='" + (cmd.commandData.idArr[files.indexOf(file)]) + "' name='" + file.name + "' isBranch='false' " + "path='" + file.nativePath + "' />"));
 					//trace("idCount:"+data.libraryData.libXml.@idCount);
 
 				}
 				addToZipFile(pathArr);
 			}
-			if(exists.length>0)
+			if (exists.length > 0)
 			{
-				Alert.show("文件已存在：\n"+exists.join("\n")+"\n是否忽略？","提示",Alert.YES|Alert.CANCEL,null,function(ce:CloseEvent):void{
-					if(ce.detail == Alert.YES)
+				Alert.show("文件已存在：\n" + exists.join("\n") + "\n是否忽略？", "提示", Alert.YES | Alert.CANCEL, null, function (ce:CloseEvent):void
+				{
+					if (ce.detail == Alert.YES)
 					{
 						func();
 					}
 				});
-			}else
+			} else
 			{
 				func();
-			}			
+			}
 		}
-		
+
 		private function addToZipFile(arr:Array):void
 		{
 			var file:File;
@@ -189,16 +194,16 @@ package tx.sce.controller
 				data.libraryData.picZip.addFile(file);
 			}
 		}
-		
+
 		private function doNewFolder(cmd:Command):void
 		{
 			var target:XML = this.getXmlById(cmd.commandData.targetId);
 			if (!cmd.commandData.hasOwnProperty("id"))
 				cmd.commandData.id = data.libraryData.libXml.@idCount++;
-			target.appendChild(new XML("<item id='"+(cmd.commandData.id)+"' name='"+cmd.commandData.name+"' isBranch='true'/>"));
-			trace("idCount:"+data.libraryData.libXml.@idCount);
+			target.appendChild(new XML("<item id='" + (cmd.commandData.id) + "' name='" + cmd.commandData.name + "' isBranch='true'/>"));
+			trace("idCount:" + data.libraryData.libXml.@idCount);
 		}
-		
+
 		private function updateTreeSource(haveTo:Boolean = false):void
 		{
 			//首次往库中添加元素要更新tree的显示源以绑定数据源。
@@ -206,28 +211,30 @@ package tx.sce.controller
 			{
 				data.libraryData.isNewLibrary = false;
 				var msg:UpdateMsg = new UpdateMsg(UpdateMsg.SET_TREE_SOURCE);
-				msg.msgData = {libXml:data.libraryData.libXml};
+				msg.msgData = {libXml: data.libraryData.libXml};
 				this.dispatchMsg(msg);
 			}
 		}
-		
+
 		private function loadPic(target:XML):void
 		{
-			if(target && String(target.@isBranch)!="true")
+			var loader:Loader;
+			var sp:Sprite=new Sprite();
+			var render:NpcRender;
+			if (target && String(target.@isBranch) != "true")
 			{
 				var file:File = data.libraryData.picZip.getFileByName(target.@name);
 				if (file.extension == "swf")
 				{
-					var render:NpcRender = new NpcRender();
-					var sp:Sprite = new Sprite();
-					render.addEventListener(MmeAssetRenderEvent.READY,onloaded);
+					render = new NpcRender();
+					render.addEventListener(MmeAssetRenderEvent.READY, onloaded);
 					render.loadUrl(file.nativePath);
 					sp.addChild(render);
 				}
 				else
 				{
-					var loader:Loader = new Loader();
-					loader.contentLoaderInfo.addEventListener(Event.COMPLETE,onloaded);
+					loader = new Loader();
+					loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onloaded);
 					loader.load(new URLRequest(file.nativePath));
 				}
 			}
@@ -236,24 +243,51 @@ package tx.sce.controller
 				loadedPic = null;
 				dispatchEvent(new Event(LOAD_PIC_READY));
 			}
-			
+
 			function onloaded(evt:Event):void
 			{
 				if (evt.type == Event.COMPLETE)  //表示是pic，因为如果是render的话事件类型是MmeAssetRenderEvent.READY
 				{
-					loadedPic = loader;
+					var bmp:Bitmap=loader.content as Bitmap;
+					adjustSizeEx(bmp);
+					sp.addChild(bmp);
+					loadedPic = sp;
 				}
 				else
 				{
-					loadedPic = sp;
-					render.play("idle_0",0,true);
+					render.play("idle_0", 0, true);
 					render.x = Math.abs(render.topLeft.x);
-					render.y = Math.abs(render.topLeft.y);
+					var topLeft:int = Math.abs(render.topLeft.y);
+					render.y = 2 * topLeft;
+					if (topLeft > render.bottomRight.y && topLeft > 10 + render.height * .5)//校正不规则资源原点位置
+					{
+						render.y = topLeft;
+					}
+					adjustSizeEx(render);
+					loadedPic = sp;
 				}
 				dispatchEvent(new Event(LOAD_PIC_READY));
 			}
 		}
-		
+
+		private function adjustSizeEx(content:DisplayObject):void
+		{
+			var box:Object = {width: 260, height: 170};
+			if (content)
+			{
+				if (content.width < box.width && content.height < box.height)
+				{
+					return;
+				}
+				var px:Number = box.width / content.width;
+				var py:Number = box.height / content.height;
+				var scale:Number = px > py ? py : px;
+				var matrix:Matrix = content.transform.matrix;
+				matrix.scale(scale, scale);
+				content.transform.matrix = matrix;
+			}
+		}
+
 		private function onPicLoaded(evt:Event):void
 		{
 			var msg:UpdateMsg;
@@ -262,7 +296,7 @@ package tx.sce.controller
 				loadForPreview = false;
 				data.libraryData.previewPic = loadedPic;
 				msg = new UpdateMsg(UpdateMsg.SET_PREVIEW_PIC);
-				msg.msgData = {bitmap:data.libraryData.previewPic};
+				msg.msgData = {bitmap: data.libraryData.previewPic};
 				dispatchMsg(msg);
 				return;
 			}
@@ -270,12 +304,17 @@ package tx.sce.controller
 			{
 				loadForEdit = false;
 				msg = new UpdateMsg(UpdateMsg.EDIT_LIBRARY_ITEM);
-				msg.msgData = {xml:loadPicXml, pic:loadedPic, gridWidth:data.layerData.gridWidth, gridHeight:data.layerData.gridHeight};
+				msg.msgData = {
+					xml: loadPicXml,
+					pic: loadedPic,
+					gridWidth: data.layerData.gridWidth,
+					gridHeight: data.layerData.gridHeight
+				};
 				dispatchMsg(msg);
 				return;
 			}
 		}
-		
+
 		private function delItems(cmd:Command):void
 		{
 			var items:Array = cmd.commandData.items;
@@ -299,7 +338,7 @@ package tx.sce.controller
 				{
 					delete xmllist[0];
 				}
-				if (String(item.@isBranch) == "true") 
+				if (String(item.@isBranch) == "true")
 				{
 					xmllist = item..item.(String(@isBranch) != "true");
 					for each (var tmpxml:XML in xmllist)
@@ -312,7 +351,7 @@ package tx.sce.controller
 				else
 				{
 					var count:int = data.libraryData.picZip.getFileCount();
-					for (var i:int = 0; i<count; i++)
+					for (var i:int = 0; i < count; i++)
 					{
 						if (data.libraryData.picZip.getFileAt(i).name == item.@name)
 						{
@@ -327,44 +366,44 @@ package tx.sce.controller
 				cmd.commandData.pathArr = new Array();
 				for each (item in items)
 				{
-					if (String(item.@isBranch) != "true") 
+					if (String(item.@isBranch) != "true")
 					{
 						cmd.commandData.pathArr.push(String(item.@path));
 					}
 				}
 			}
 		}
-		
+
 		private function createFromFile():void
 		{
 			var newZip:MyZip = new MyZip();
 			var len:int = data.projectData.dataZip.getFileCount();
 			var xmlFile:File = data.projectData.dataZip.getFileByName("library.xml");
-			xmlFile.addEventListener(Event.COMPLETE,onLoaded);
+			xmlFile.addEventListener(Event.COMPLETE, onLoaded);
 			xmlFile.load();
-			
+
 			for (var i:int = 0; i < len; i++)
 			{
 				var file:File = data.projectData.dataZip.getFileAt(i);
 				if (file.name == "library.xml" || file.name == "sceneXml.xml")
 				{
 					continue;
-				}				
+				}
 				newZip.addFile(file);
 			}
-			data.libraryData = new LibraryData(null,newZip);		
-			
+			data.libraryData = new LibraryData(null, newZip);
+
 			function onLoaded(evt:Event):void
 			{
 				var newXml:XML;
 				newXml = new XML((evt.target as File).data);
 				data.libraryData.libXml = newXml;
-				if (data.libraryData.libXml.item.length() > 0) 
+				if (data.libraryData.libXml.item.length() > 0)
 					updateTreeSource();
 				dispatchMsg(new UpdateMsg(UpdateMsg.LIBRARY_DATA_READY));
 			}
 		}
-						
+
 		private function undoAddFiles(idArr:Array):void
 		{
 			var xmlArr:Array = new Array();
@@ -376,10 +415,10 @@ package tx.sce.controller
 				xmlArr.push(xmllist[0] as XML);
 			}
 			cmd = new Command(Command.DEL_FILES_OR_FOLDERS);
-			cmd.commandData = {items:xmlArr};
+			cmd.commandData = {items: xmlArr};
 			delItems(cmd);
 		}
-				
+
 		private function getXmlById(id:int):XML
 		{
 			if (id == -1) return data.libraryData.libXml;
@@ -387,38 +426,38 @@ package tx.sce.controller
 			var xml:XML = xmllist[0];
 			return xml;
 		}
-		
+
 		private function undoDel(cmd:Command):void
 		{
 			var items:Array = cmd.commandData.items;
 			var parentIdArr:Array = cmd.commandData.parentIdArr;
 			var pathArr:Array = cmd.commandData.pathArr;
 			var xml:XML;
-			for (var i:int=0; i<items.length; i++)
+			for (var i:int = 0; i < items.length; i++)
 			{
-				xml=getXmlById(parentIdArr[i]);
-				if ( xml && !getXmlById(items[i].@id) )
+				xml = getXmlById(parentIdArr[i]);
+				if (xml && !getXmlById(items[i].@id))
 				{
 					xml.appendChild(items[i]);
 				}
 			}
 			this.addToZipFile(pathArr);
 		}
-		
+
 		/*private function editLibraryItem(cmd:Command):void
-		{
-			addEventListener("preViewPic_Ready",onPicReady);
-			
-			function onPicReady(evt:Event):void
-			{
-				removeEventListener("preViewPic_Ready",onPicReady);
-				var msg:UpdateMsg;
-				msg = new UpdateMsg(UpdateMsg.EDIT_LIBRARY_ITEM);
-				msg.msgData = {xml:cmd.commandData.xml, pic:data.libraryData.previewPic};
-				dispatchMsg(msg);
-			}
-		}*/
-		
+		 {
+		 addEventListener("preViewPic_Ready",onPicReady);
+
+		 function onPicReady(evt:Event):void
+		 {
+		 removeEventListener("preViewPic_Ready",onPicReady);
+		 var msg:UpdateMsg;
+		 msg = new UpdateMsg(UpdateMsg.EDIT_LIBRARY_ITEM);
+		 msg.msgData = {xml:cmd.commandData.xml, pic:data.libraryData.previewPic};
+		 dispatchMsg(msg);
+		 }
+		 }*/
+
 
 	}
 }
