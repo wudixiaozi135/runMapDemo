@@ -2,6 +2,7 @@
 {
 	import com.map.data.MapData;
 	import com.map.utils.MapGridUtil;
+
 	import flash.geom.Point;
 
 	public class AStar
@@ -255,15 +256,32 @@
 			var endNode:ANode = _grid.getNode(endPosX, endPosY);
 			var replacer:ANode;
 
-			if (endNode.walkable == false)
+
+			if (endNode && endNode.walkable == false)
 			{
 				replacer = _grid.findReplacer(startNode, endNode);
 				if (replacer)
 				{
 					endPosX = replacer.x;
 					endPosY = replacer.y;
+					trace("replace: ", replacer.x, replacer.y);
+				}
+			} else
+			{
+				if (_grid.hasBarrier(startPosX, startPosY, endPosX, endPosY))
+				{
+					var diffX:int = Math.abs(endPoint.x - beginPoint.x);
+					var diffY:int = Math.abs(endPoint.y - beginPoint.y);
+
+					var temp:Point = _grid.findRoundPoint(startPosX, startPosY, endPosX, endPosY, diffX > diffY ? 1 : 2);
+					if (temp)
+					{
+						endPosX = temp.x;
+						endPosY = temp.y;
+					}
 				}
 			}
+
 			_grid.setStartNode(startPosX, startPosY);
 			_grid.setEndNode(endPosX, endPosY);
 

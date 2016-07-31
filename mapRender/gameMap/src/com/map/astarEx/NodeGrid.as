@@ -188,6 +188,144 @@ package com.map.astarEx
 			return false;
 		}
 
+		public function findRoundPoint(startX:int, startY:int, endX:int, endY:int, type:int = 1):Point
+		{
+			var point:Point = new Point();
+
+			var candidate:Point = new Point();
+			var flag:Boolean = false;
+
+			var endNode:ANode;
+
+
+			if (type == 1)//水平
+			{
+				if (startX < endX)
+				{
+					while (endY && endX)
+					{
+						if (endY % 2 == 0)
+						{
+							endX--;
+						}
+						endY--;
+						endNode = _nodes[endX][endY];
+						if (!endNode)
+							return null;
+						if (!endNode.walkable)//false
+						{
+							flag = true;
+						} else//true
+						{
+							if (flag)
+							{
+								candidate.setTo(endNode.x, endNode.y);
+								if (!hasBarrier(startX, startY, candidate.x, candidate.y))
+								{
+									point.setTo(candidate.x, candidate.y);
+									return point;
+								}
+								flag = false;
+							}
+						}
+					}
+				} else
+				{
+					while (endY < numRows-1 && endX < numCols-1)
+					{
+						if (endY % 2 == 0)
+						{
+							endX++;
+						}
+						endY++;
+						endNode = _nodes[endX][endY];
+						if (!endNode)
+							return null;
+						if (!endNode.walkable)//false
+						{
+							flag = true;
+						} else//true
+						{
+							if (flag)
+							{
+								candidate.setTo(endNode.x, endNode.y);
+								if (!hasBarrier(startX, startY, candidate.x, candidate.y))
+								{
+									point.setTo(candidate.x, candidate.y);
+									return point;
+								}
+								flag = false;
+							}
+						}
+					}
+				}
+
+			} else
+			{
+				if (startY < endY)
+				{
+					while (endY && endX<numCols-1)
+					{
+						if (endY % 2 == 0)
+						{
+							endX++;
+						}
+						endY--;
+						endNode = _nodes[endX][endY];
+						if (!endNode)
+							return null;
+						if (!endNode.walkable)//false
+						{
+							flag = true;
+						} else//true
+						{
+							if (flag)
+							{
+								candidate.setTo(endNode.x, endNode.y);
+								if (!hasBarrier(startX, startY, candidate.x, candidate.y))
+								{
+									point.setTo(candidate.x, candidate.y);
+									return point;
+								}
+								flag = false;
+							}
+						}
+					}
+				} else
+				{
+					while (endY < numRows-1 && endX )
+					{
+						if (endY % 2 == 0)
+						{
+							endX--;
+						}
+						endY++;
+						endNode = _nodes[endX][endY];
+						if (!endNode)
+							return null;
+						if (!endNode.walkable)//false
+						{
+							flag = true;
+						} else//true
+						{
+							if (flag)
+							{
+								candidate.setTo(endNode.x, endNode.y);
+								if (!hasBarrier(startX, startY, candidate.x, candidate.y))
+								{
+									point.setTo(candidate.x, candidate.y);
+									return point;
+								}
+								flag = false;
+							}
+						}
+					}
+				}
+			}
+
+			return null;
+		}
+
 		/**
 		 * 得到一个点下的所有节点
 		 * @param xPos        点的横向位置
