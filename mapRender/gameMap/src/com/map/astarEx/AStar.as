@@ -7,22 +7,16 @@
 
 	public class AStar
 	{
-		//		private var _open:Array = [];
 		private var _open:Binary;
-		//		private var _closed:Array;
-		private var _closed:Array;
+		private var _closed:Vector.<ANode>;
 		private var _grid:NodeGrid;
 		private var _endNode:ANode;
 		private var _startNode:ANode;
-		private var _path:Array;
-		//		private var _heuristic:Function = manhattan;
-		//		private var _heuristic:Function = euclidian;
+		private var _path:Vector.<ANode>;
 		private var _heuristic:Function = diagonal;
 		private var _straightCost:Number = 1.0;
 		private var _diagCost:Number = Math.SQRT2;
-
-		private var _floydPath:Array;
-
+		private var _floydPath:Vector.<ANode>;
 		private var mapData:MapData;
 
 		public function AStar()
@@ -33,7 +27,7 @@
 		{
 			_grid = grid;
 			_open = new Binary("f");
-			_closed = new Array();
+			_closed = new Vector.<ANode>();
 
 			_startNode = _grid.startNode;
 			_endNode = _grid.endNode;
@@ -47,9 +41,8 @@
 
 		public function search():Boolean
 		{
-
 			//异步运算。当上一次遍历超出最大允许值后停止遍历，下一次从
-			//上次暂停处开始继续遍历		
+			//上次暂停处开始继续遍历
 			var node:ANode = _startNode;
 
 			while (node != _endNode)
@@ -58,7 +51,6 @@
 				var endX:int = _grid.numCols - 1 < node.x + 1 ? _grid.numCols - 1 : node.x + 1;
 				var startY:int = 0 > node.y - 1 ? 0 : node.y - 1;
 				var endY:int = _grid.numRows - 1 < node.y + 1 ? _grid.numRows - 1 : node.y + 1;
-
 
 				for (var i:int = startX; i <= endX; i++)
 				{
@@ -107,16 +99,10 @@
 				_closed.push(node);
 				if (_open.length == 0)
 				{
-					trace("no path found");
-
 					return false
 				}
-
 				node = _open.shift() as ANode;
-
 			}
-			buildPath();
-
 			return true;
 		}
 
@@ -175,7 +161,7 @@
 
 		private function buildPath():void
 		{
-			_path = new Array();
+			_path = new Vector.<ANode>();
 			var node:ANode = _endNode;
 			_path.push(node);
 
@@ -184,7 +170,6 @@
 				node = node.parent;
 				_path.unshift(node);
 			}
-
 		}
 
 		private function floydVector(target:ANode, n1:ANode, n2:ANode):void
@@ -224,14 +209,12 @@
 			return _diagCost * diag + _straightCost * (straight - 2 * diag);
 		}
 
-		//---------------------------------------get/set functions-----------------------------//
-
-		public function get path():Array
+		public function get path():Vector.<ANode>
 		{
 			return _path;
 		}
 
-		public function get floydPath():Array
+		public function get floydPath():Vector.<ANode>
 		{
 			return _floydPath;
 		}
@@ -244,66 +227,78 @@
 		 */
 		public function findByPixcel(beginPoint:Point, endPoint:Point):Array
 		{
-			var beginTilePoint:Point = MapGridUtil.getTilePoint(mapData.tilePixelWidth, mapData.tilePixelHeight, mapData.mapPixelWidth, beginPoint.x, beginPoint.y);
-			var endTilePoint:Point = MapGridUtil.getTilePoint(mapData.tilePixelWidth, mapData.tilePixelHeight, mapData.mapPixelWidth, endPoint.x, endPoint.y);
+			var startTile:Point = MapGridUtil.getTilePoint(mapData.tilePixelWidth, mapData.tilePixelHeight, mapData.mapPixelWidth, beginPoint.x, beginPoint.y);
+			var endTile:Point = MapGridUtil.getTilePoint(mapData.tilePixelWidth, mapData.tilePixelHeight, mapData.mapPixelWidth, endPoint.x, endPoint.y);
 
-			var startPosX:int = beginTilePoint.x;
-			var startPosY:int = beginTilePoint.y;
-			var endPosX:int = endTilePoint.x;
-			var endPosY:int = endTilePoint.y;
-
-			var startNode:ANode = _grid.getNode(startPosX, startPosY);
-			var endNode:ANode = _grid.getNode(endPosX, endPosY);
-			var replacer:ANode;
-
+			var startNode:ANode = _grid.getNode(startTile.x, startTile.y);
+			var endNode:ANode = _grid.getNode(endTile.x, endTile.y);
 
 			if (endNode && endNode.walkable == false)
 			{
-				replacer = _grid.findReplacer(startNode, endNode);
+				var replacer:ANode = _grid.findReplacer(startNode, endNode);
 				if (replacer)
 				{
-					endPosX = replacer.x;
-					endPosY = replacer.y;
-					trace("replace: ", replacer.x, replacer.y);
-				}
-			} else
-			{
-				if (_grid.hasBarrier(startPosX, startPosY, endPosX, endPosY))
-				{
-					var diffX:int = Math.abs(endPoint.x - beginPoint.x);
-					var diffY:int = Math.abs(endPoint.y - beginPoint.y);
-
-					var temp:Point = _grid.findRoundPoint(startPosX, startPosY, endPosX, endPosY, diffX > diffY ? 1 : 2);
-					if (temp)
-					{
-						endPosX = temp.x;
-						endPosY = temp.y;
-					}
+					endNode = replacer;
 				}
 			}
-
-			_grid.setStartNode(startPosX, startPosY);
-			_grid.setEndNode(endPosX, endPosY);
+			_grid.setStartNode(startNode.x, startNode.y);
+			_grid.setEndNode(endNode.x, endNode.y);
 
 			if (findPath(_grid))
 			{
-				//得到平滑路径
-				floyd();
-				//在路径中去掉起点节点，避免玩家对象走回头路
-				floydPath.shift();
-
-				var data:Array = floydPath;
-				var tempArr:Array = [];
-				if (data && data.length > 0)
+				return optimizePath();
+			} else
+			{
+				if (_closed && _closed.length > 0)
 				{
-					data.forEach(function (element:ANode, index:int, arr:Array):void
+					var currNode:ANode = findNearPoint(_closed, endNode.x, endNode.y);
+					if (!currNode)
 					{
-						tempArr.push(MapGridUtil.getPixelPoint(mapData.tilePixelWidth, mapData.tilePixelHeight, mapData.mapPixelWidth, element.x, element.y));
-					});
+						return null;
+					}
+					_closed.length = 0;
+					_endNode = currNode;
+					return optimizePath();
 				}
-				return tempArr;
 			}
 			return null;
+		}
+
+		private function optimizePath():Array
+		{
+			//生成路径
+			buildPath();
+
+			//得到平滑路径
+			floyd();
+			//在路径中去掉起点节点，避免玩家对象走回头路
+			floydPath.shift();
+			var data:Vector.<ANode> = floydPath;
+			var paths:Array = [];
+
+			data.forEach(function (element:ANode, index:int, arr:Vector.<ANode>):void
+			{
+				paths.push(MapGridUtil.getPixelPoint(mapData.tilePixelWidth, mapData.tilePixelHeight, mapData.mapPixelWidth, element.x, element.y));
+			});
+			return paths;
+		}
+
+		private function findNearPoint(list:Vector.<ANode>, x:int, y:int):ANode
+		{
+			var result:ANode = null;
+			var minDistance:int = int.MAX_VALUE;
+
+			for each (var node:ANode in list)
+			{
+				var dist:int = Math.sqrt(Math.abs(node.x - x) * Math.abs(node.x - x) + Math.abs(node.y - y) * Math.abs(node.y - y));
+
+				if (dist < minDistance)
+				{
+					minDistance = dist;
+					result = node;
+				}
+			}
+			return result;
 		}
 
 		/**

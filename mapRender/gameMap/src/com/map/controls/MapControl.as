@@ -347,8 +347,11 @@ package com.map.controls
 					mapSwfVector[i] = mme = new MapMme(info, _layers[info.subLayerIndex + 1]);
 				}
 				mme.transform.matrix = info.matrix;
-				mme.x = info.imgX * mapData.imgPixelWidth + info.offsetX;
-				mme.y = info.imgY * mapData.imgPixelHeight + info.offsetY;
+//				mme.x = info.imgX * mapData.imgPixelWidth + info.offsetX;
+//				mme.y = info.imgY * mapData.imgPixelHeight + info.offsetY;
+
+				mme.x=info.offsetX;
+				mme.y=info.offsetY;
 				mme.inViewpoint();
 			}
 		}

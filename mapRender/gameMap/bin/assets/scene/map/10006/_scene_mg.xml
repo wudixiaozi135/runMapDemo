@@ -1,3 +1,5 @@
 <SceneMiddlegroundConfig>
-  <imgList/>
+  <imgList>
+    <NPC id="0" imgX="1" imgY="1" offsetX="576" offsetY="384" matrix="1,0,0,1" alpha="1" subLayerIndex="1" startFrame="2" url="assets/scene/map/10006/ImgItem/A猫.swf"/>
+  </imgList>
 </SceneMiddlegroundConfig>

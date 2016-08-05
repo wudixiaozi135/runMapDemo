@@ -4,6 +4,8 @@ package
 	import br.com.stimuli.loading.BulkProgressEvent;
 	import br.com.stimuli.loading.loadingtypes.BinaryItem;
 
+	import com.map.astarEx.ANode;
+
 	import com.map.astarEx.AStar;
 	import com.map.consDef.MapLayerDef;
 	import com.map.data.MapBgImgInfo;
@@ -45,7 +47,7 @@ package
 		private var _mapView:MapView;
 		private var _mapData:MapData;
 		private var _switchMap:TextField;
-		private var _currentMapId:int = 1;//30021带跳的地图
+		private var _currentMapId:int = 2;//30021带跳的地图
 		private var _pathFinder:AStar;
 		private var _paths:Array;
 
